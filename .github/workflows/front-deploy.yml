@@ -25,7 +25,9 @@ jobs:
 
       - name: move repository
         run: cd frontend
-
+      - name: move repository
+        run: ls
+        
       - name: Npm install
         run: npm install
 
