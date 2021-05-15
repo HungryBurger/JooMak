@@ -10,6 +10,8 @@ jobs:
   deploy:
     name: Build, Deploy to S3 bucket
     runs-on: [ubuntu-latest]
+    env:
+      working-directory: ./frontend
 
     strategy:
       matrix:
@@ -22,16 +24,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Find Currenct Location
-        run: pwd
-      
-      - name: move repository
-        run: echo "cd frontend"
-        
-      - name: Find Currenct Location
-        run: pwd
-        
+          
       - name: Npm install
         run: npm install
 
