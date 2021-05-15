@@ -1,43 +1,43 @@
-  name: Deploy to Production
-    
-  on:
-    push:
-      branches:
-        - master
+name: Deploy to Production
 
-  jobs:
-    deploy:
-      name: Build, Deploy to S3 bucket
-      runs-on: [ubuntu-latest]
+on:
+  push:
+    branches:
+      - master
 
-      strategy:
-        matrix:
-          node-version: [12.16.x]
+jobs:
+  deploy:
+    name: Build, Deploy to S3 bucket
+    runs-on: [ubuntu-latest]
 
-      steps:
-        - uses: actions/checkout@v2
+    strategy:
+      matrix:
+        node-version: [12.16.x]
 
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v1
-          with:
-            node-version: ${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v2
 
-        - name: move repository
-          run: cd frontend
-          
-        - name: Npm install
-          run: npm install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-        - name: Build
-          run: npm run build
+      - name: move repository
+        run: cd frontend
 
-        - name: Transfer to S3 for serving static
-          uses: jakejarvis/s3-sync-action@master
-          with:
-            args: --acl public-read --follow-symlinks --delete
-          env:
-            AWS_S3_BUCKET: order-web-project
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_IAM_MANAGER_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_IAM_MANAGER_ACCESS_KEY }}
-            AWS_REGION: ap-northeast-2
-            SOURCE_DIR: 'frontend/dist'
+      - name: Npm install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Transfer to S3 for serving static
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: order-web-project
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_IAM_MANAGER_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_IAM_MANAGER_ACCESS_KEY }}
+          AWS_REGION: ap-northeast-2
+          SOURCE_DIR: 'frontend/dist'
