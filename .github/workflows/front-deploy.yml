@@ -27,9 +27,11 @@ jobs:
           
       - name: Npm install
         run: npm install
+        working-directory: ${{ env.working-directory }}
 
       - name: Build
         run: npm run build
+        working-directory: ${{ env.working-directory }}
 
       - name: Transfer to S3 for serving static
         uses: jakejarvis/s3-sync-action@master
