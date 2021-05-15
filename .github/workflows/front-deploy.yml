@@ -27,7 +27,7 @@ jobs:
         run: pwd
       
       - name: move repository
-        run: cd frontend
+        run: echo "cd frontend"
         
       - name: Find Currenct Location
         run: pwd
