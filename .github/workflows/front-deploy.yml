@@ -23,10 +23,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Find Currenct Location
+        run: pwd
+      
       - name: move repository
-        run: cd frontend
-      - name: move repository
-        run: ls
+        run: cd /frontend
+        
+      - name: Find Currenct Location
+        run: pwd
         
       - name: Npm install
         run: npm install
