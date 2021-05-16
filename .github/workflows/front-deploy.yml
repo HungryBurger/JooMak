@@ -42,4 +42,4 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_IAM_MANAGER_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_IAM_MANAGER_ACCESS_KEY }}
           AWS_REGION: ap-northeast-2
-          SOURCE_DIR: 'frontend/dist'
+          SOURCE_DIR: './frontend/dist'
