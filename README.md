@@ -1,35 +1,50 @@
 # JooMak
+# Introduce
 간편 배달 웹 서비스 개발
 
-# Introduce
-간편 웹 서비스 개발
 
-# Technique
-- SpringBoot
-- JPA Hibernate
+# Main Technique
+  - Spring Boot
+  - JPA
+  - Vue
+  - AWS
 
 # Member
 ### Front End
-- 이경호 : UI/UX & 화면설계
-- 박정우 : UI/UX & 화면설계
-- 송문정 : UI/UX & 화면설계
+- 이경호(skyhoring@gmail.com)
+  <br>> 역할 : 기획 & UI/UX  <br>
+  
+- 박정우(park96100331@gmail.com)
+  <br>> 역할 : 기획 & UI/UX <br>
+  
+- 송문정(songvely17@gmail.com)
+  <br>> 역할 : 기획 & UI/UX <br>
 
 ### Back End
-- 주형진 : 주문 & 아키텍처
-- 조영선 : 상품
-- 이혜원 : 상품
-- 이기환 : 회원
-- 조송이 : 회원
-- 최예슬 : 주문
+- 주형진(hjjooace24@gmail.com)
+  <br>> 역할 : 주문 & 아키텍처<br>
+  
+- 최예슬(seulshine@gmail.com)
+  <br>> 역할 : 주문<br>
+  
+- 조송이(fishsong2@gmail.com)
+  <br>> 역할 : 회원<br>
+  
+- 이기환(lgh95m@gamil.com)
+  <br>> 역할 : 회원<br>
+
+- 조영선(whdudtjs5283@naver.com)
+ <br>> 역할 : 상품<br>
+
+- 이혜원(sdiverhyewon0103@gmail.com)
+ <br>> 역할 : 상품<br>
+
 
 ### Designer
 - 남상범
 
-# Architecture
 
 ## OverView
-![image](https://user-images.githubusercontent.com/75158094/122678391-a17cda80-d221-11eb-9f63-0f95261dcfcc.png)
-
 
 ## Used Tech in Front End
 ![image](https://user-images.githubusercontent.com/75158094/122678435-d7ba5a00-d221-11eb-9edb-9bd06e777dbc.png)
@@ -40,7 +55,9 @@
 
 
 # Page Structure
-![image](https://user-images.githubusercontent.com/75158094/122678670-bdcd4700-d222-11eb-8751-60ea9eb338e4.png)
+![image](https://user-images.githubusercontent.com/75158094/126065725-af939d58-be0d-4572-a0a9-4b870b091e42.png)
+
+
 
 
 # ERD
