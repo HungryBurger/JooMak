@@ -9,6 +9,8 @@
 export default {
   computed: {
     commonData() {
+      console.log("git test");
+      console.log("git test2");
       return this.$store.state.common.commonData;
     },
   },
