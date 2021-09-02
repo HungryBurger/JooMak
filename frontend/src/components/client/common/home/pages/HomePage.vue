@@ -1,10 +1,17 @@
 <template>
-  <div id="homePage">홈페이지 입니다</div>
+  <div id="homePage">
+    <span>홈페이지 입니다</span><br />
+    <span>{{ commonData }}</span>
+  </div>
 </template>
 
 <script>
 export default {
-  computed: {},
+  computed: {
+    commonData() {
+      return this.$store.state.common.commonData;
+    },
+  },
   methods: {},
 };
 </script>
