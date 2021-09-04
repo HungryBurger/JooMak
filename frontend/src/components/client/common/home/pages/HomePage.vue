@@ -6,11 +6,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   computed: {
-    commonData() {
-      return this.$store.state.common.commonData;
-    },
+    ...mapState("common", ["commonData"]),
+
+    // commonData() {
+    //   return this.$store.state.common.commonData;
+    // },
   },
   methods: {},
 };

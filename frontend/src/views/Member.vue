@@ -21,8 +21,8 @@ export default {
     LoginPage,
     MemberEntryPage,
   },
-  data() {
-    return {};
-  },
+  // created() {
+  //   console.log(this.currentMode);
+  // },
 };
 </script>
