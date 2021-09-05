@@ -32,15 +32,24 @@
         >
         <span>|</span>
         <router-link
+          v-if="currentAddress"
           to="/cart"
           class="header_top_right-elem"
           @click="outStoreListPage('cartPage')"
           :class="{ 'on-click-nav-li': currentPage === 'cartPage' }"
           >장바구니</router-link
         >
+        <a
+          v-else-if="!currentAddress"
+          to="/cart"
+          class="header_top_right-elem"
+          @click="checkAddressConfigSelection"
+          :class="{ 'on-click-nav-li': currentPage === 'cartPage' }"
+          >장바구니</a
+        >
       </div>
     </div>
-    <div class="header_bottom">
+    <div class="header_bottom" v-if="currentAddress">
       <!-- v-for로 카테고리 li 반복 -->
       <router-link
         v-for="category in categories"
@@ -60,6 +69,18 @@
       </router-link>
       -->
     </div>
+    <!-- fake nav -->
+    <div class="header_bottom" v-else-if="!currentAddress">
+      <a
+        v-for="category in categories"
+        :key="category.en"
+        :to="`/store-list/${category.en}`"
+        @click.prevent="onClickCategory(category.en, 'storeListPage')"
+        :class="{ 'on-click-nav-li': currentCategory === category.en }"
+      >
+        {{ category.ko }}
+      </a>
+    </div>
   </div>
 </template>
 
@@ -73,6 +94,7 @@ export default {
   },
   computed: {
     ...mapState("common", ["onHome", "onLogin", "currentPage"]),
+    ...mapState("member", ["currentAddress"]),
     ...mapState("product", ["categories", "currentCategory"]),
   },
   methods: {
@@ -90,6 +112,11 @@ export default {
       this.$store.commit("product/setCurrentCategory", category);
     },
     onClickCategory(category, pageName) {
+      if (!this.currentAddress) {
+        alert("먼저 주소를 설정해 주세요");
+        return;
+      }
+
       if (this.currentPage !== "storeListPage") {
         this.$store.commit("common/setCurrentPage", pageName);
       }
@@ -110,6 +137,13 @@ export default {
       this.$store.commit("common/setCurrentPage", pageName);
       this.outHome();
       this.initializeCategory();
+    },
+
+    checkAddressConfigSelection() {
+      if (!this.currentAddress) {
+        alert("먼저 주소를 설정해 주세요");
+        return;
+      }
     },
   },
 };
@@ -174,6 +208,9 @@ a.header_top_right-elem:hover {
 .header_top_right-elem:last-child {
   margin-right: 0px;
 }
+.header_top_right a {
+  cursor: pointer;
+}
 
 .header_bottom {
   box-sizing: border-box;
@@ -185,6 +222,7 @@ a.header_top_right-elem:hover {
   height: 4.5vh;
 }
 .header_bottom > a {
+  cursor: pointer;
   position: relative;
   display: flex;
   justify-content: center;
@@ -201,8 +239,8 @@ a.header_top_right-elem:hover {
 .header_bottom > a:hover::after {
   position: absolute;
   content: "";
-  width: 80%;
-  height: 5px;
+  width: 60%;
+  height: 4px;
   background-color: white;
   bottom: -0.5vh;
 }
@@ -214,20 +252,20 @@ a.on-click-nav-li {
 .header_bottom .on-click-nav-li::after {
   position: absolute;
   content: "";
-  width: 80%;
-  height: 5px;
+  width: 60%;
+  height: 4px;
   background-color: white;
   bottom: -0.5vh;
 }
 .header_bottom > a:hover::after {
   position: absolute;
   content: "";
-  width: 80%;
-  height: 5px;
+  width: 60%;
+  height: 4px;
   background-color: white;
   bottom: -0.5vh;
 }
-.header_bottom .dessert {
-  width: 15%;
+.header_bottom a:nth-last-child(2) {
+  width: 17%;
 }
 </style>

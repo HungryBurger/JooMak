@@ -1,7 +1,11 @@
 export const member = {
   namespaced: true,
-  state: () => ({}),
+  state: () => ({
+    currentAddress: "서울특별시 강남구 논현동 123-45",
+  }),
   getters: {},
   mutations: {},
-  actions: {},
+  actions: {
+    setCurrentAddress(state) {},
+  },
 };
