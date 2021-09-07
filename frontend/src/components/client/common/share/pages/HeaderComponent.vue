@@ -93,6 +93,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { TOGGLE_ON_HOME } from "@/store/modules/common.js";
 import AddressConfig from "../components/AddressConfig.vue";
 
 export default {
@@ -107,12 +108,12 @@ export default {
   methods: {
     inHome() {
       if (!this.onHome) {
-        this.$store.commit("common/toggleOnHome");
+        this.$store.commit(`common/${TOGGLE_ON_HOME}`);
       }
     },
     outHome() {
       if (this.onHome) {
-        this.$store.commit("common/toggleOnHome");
+        this.$store.commit(`common/${TOGGLE_ON_HOME}`);
       }
     },
     setCategory(category) {
