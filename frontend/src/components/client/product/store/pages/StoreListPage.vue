@@ -16,6 +16,7 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
+import { SET_CURRENT_PAGE } from "@/store/modules/common";
 
 export default {
   data() {
@@ -66,7 +67,7 @@ export default {
   },
   methods: {
     changePage(pageName, idx) {
-      this.$store.commit("common/setCurrentPage", pageName);
+      this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
       this.read(idx);
     },
     read(idx) {

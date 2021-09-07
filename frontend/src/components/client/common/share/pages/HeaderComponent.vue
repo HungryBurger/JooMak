@@ -93,7 +93,8 @@
 
 <script>
 import { mapState } from "vuex";
-import { TOGGLE_ON_HOME } from "@/store/modules/common.js";
+import { TOGGLE_ON_HOME, SET_CURRENT_PAGE } from "@/store/modules/common.js";
+import { SET_CURRENT_CATEGORY } from "@/store/modules/product.js";
 import AddressConfig from "../components/AddressConfig.vue";
 
 export default {
@@ -117,7 +118,7 @@ export default {
       }
     },
     setCategory(category) {
-      this.$store.commit("product/setCurrentCategory", category);
+      this.$store.commit(`product/${SET_CURRENT_CATEGORY}`, category);
     },
     onClickCategory(category, pageName) {
       if (!this.currentAddress) {
@@ -126,23 +127,23 @@ export default {
       }
 
       if (this.currentPage !== "storeListPage") {
-        this.$store.commit("common/setCurrentPage", pageName);
+        this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
       }
       this.outHome();
       this.setCategory(category);
     },
 
     initializeCategory() {
-      this.$store.commit("product/setCurrentCategory", "");
+      this.$store.commit(`product/${SET_CURRENT_CATEGORY}`, "");
     },
 
     goHome(pageName) {
-      this.$store.commit("common/setCurrentPage", pageName);
+      this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
       this.inHome();
       this.initializeCategory();
     },
     outStoreListPage(pageName) {
-      this.$store.commit("common/setCurrentPage", pageName);
+      this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
       this.outHome();
       this.initializeCategory();
     },

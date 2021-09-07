@@ -1,3 +1,5 @@
+export const SET_CURRENT_CATEGORY = "SET_CURRENT_CATEGORY";
+
 export const product = {
   namespaced: true,
   state: () => ({
@@ -18,7 +20,7 @@ export const product = {
   }),
   getters: {},
   mutations: {
-    setCurrentCategory(state, category) {
+    [SET_CURRENT_CATEGORY](state, category) {
       state.currentCategory = category;
     },
   },
