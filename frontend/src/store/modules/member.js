@@ -1,3 +1,5 @@
+export const SET_CURRENT_ADDRESS = "SET_CURRENT_ADDRESS";
+
 export const member = {
   namespaced: true,
   state: () => ({
@@ -6,6 +8,6 @@ export const member = {
   getters: {},
   mutations: {},
   actions: {
-    setCurrentAddress(state) {},
+    [SET_CURRENT_ADDRESS](state) {},
   },
 };

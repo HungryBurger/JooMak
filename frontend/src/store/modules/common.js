@@ -1,3 +1,6 @@
+export const TOGGLE_ON_HOME = "TOGGLE_ON_HOME";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+
 export const common = {
   namespaced: true,
   state: () => ({
@@ -8,10 +11,10 @@ export const common = {
   }),
   getters: {},
   mutations: {
-    toggleOnHome(state) {
+    [TOGGLE_ON_HOME](state) {
       state.onHome = state.onHome == true ? false : true;
     },
-    setCurrentPage(state, pageName) {
+    [SET_CURRENT_PAGE](state, pageName) {
       state.currentPage = pageName;
     },
   },
