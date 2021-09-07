@@ -1,6 +1,11 @@
 <template>
   <header-component></header-component>
-  <router-view />
+  <main
+    id="main"
+    :class="{ 'padding-for-sticky': currentPage !== 'storeDetailPage' }"
+  >
+    <router-view />
+  </main>
   <footer-component></footer-component>
 </template>
 
@@ -8,33 +13,21 @@
 import "./assets/styles/css/style.css";
 import HeaderComponent from "./components/client/common/share/pages/HeaderComponent.vue";
 import FooterComponent from "./components/client/common/share/pages/FooterComponent.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
     HeaderComponent,
     FooterComponent,
   },
+  computed: {
+    ...mapState("common", ["currentPage"]),
+  },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#main.padding-for-sticky {
+  padding-top: 12vh;
 }
 </style>

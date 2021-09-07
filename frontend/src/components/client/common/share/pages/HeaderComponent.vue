@@ -1,5 +1,12 @@
 <template>
-  <div id="header" :class="{ 'on-home': onHome, 'out-home': !onHome }">
+  <div
+    id="header"
+    :class="{
+      'on-home': onHome,
+      'out-home': !onHome,
+      sticky: currentPage !== 'storeDetailPage',
+    }"
+  >
     <div class="header_top">
       <div class="header_top_left">
         <router-link to="/" @click="goHome('homePage')">
@@ -160,6 +167,11 @@ export default {
   height: 12vh;
   background-color: #ffc463;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.12);
+}
+#header.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .on-home,
 .on-home a {

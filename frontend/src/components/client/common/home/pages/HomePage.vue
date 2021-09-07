@@ -23,7 +23,7 @@ export default {
 <style scoped>
 #homePage {
   width: 500px;
-  height: 300px;
+  height: 5000px;
   background-color: gray;
 }
 </style>
