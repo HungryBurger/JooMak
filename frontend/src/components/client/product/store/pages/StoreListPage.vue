@@ -4,7 +4,7 @@
     <p>현재 {{ currentCategory }} 메뉴를 보고 있습니다</p>
     <div v-for="store in storesInfoByCategory" :key="store.idx">
       <router-link :to="`/store/${store.idx}`">
-        <div @click="read(store.idx)">
+        <div @click="changePage('storeDetailPage', store.idx)">
           <span>{{ store.img }} </span>
           <span>{{ store.storeName }}</span>
         </div>
@@ -15,12 +15,15 @@
 
 <script>
 import axios from "axios";
+import { mapState } from "vuex";
+import { SET_CURRENT_PAGE } from "@/store/modules/common";
 
 export default {
   data() {
     return {};
   },
   computed: {
+    ...mapState("common", ["currentPage"]),
     currentCategory() {
       return this.$route.params.food;
     },
@@ -63,6 +66,10 @@ export default {
     },
   },
   methods: {
+    changePage(pageName, idx) {
+      this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
+      this.read(idx);
+    },
     read(idx) {
       axios
         .get("https://reqres.in/api/users?page=" + idx)

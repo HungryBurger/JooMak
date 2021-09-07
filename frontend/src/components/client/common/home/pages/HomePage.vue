@@ -6,11 +6,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   computed: {
-    commonData() {
-      return this.$store.state.common.commonData;
-    },
+    ...mapState("common", ["commonData"]),
+
+    // commonData() {
+    //   return this.$store.state.common.commonData;
+    // },
   },
   methods: {},
 };
@@ -19,7 +23,7 @@ export default {
 <style scoped>
 #homePage {
   width: 500px;
-  height: 300px;
+  height: 5000px;
   background-color: gray;
 }
 </style>
