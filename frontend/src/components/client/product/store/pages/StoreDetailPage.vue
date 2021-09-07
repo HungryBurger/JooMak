@@ -64,7 +64,7 @@ export default {
 <style scoped>
 #storeDetailPage {
   width: 500px;
-  height: 300px;
+  height: 5000px;
   background-color: yellow;
 }
 #store-detail-page-nav {
