@@ -24,8 +24,8 @@ const routes = [
   // 회원 공통
   {
     path: "/member/:mode",
-    name: "Member",
-    component: () => import("@/views/Member.vue"),
+    name: "MemberPage",
+    component: () => import("@/views/MemberPage.vue"),
   },
   // 마이 페이지 공통
   {
