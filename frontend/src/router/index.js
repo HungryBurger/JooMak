@@ -40,8 +40,7 @@ const routes = [
   {
     path: "/store/:idx",
     name: "StoreDetailPage",
-    component: () =>
-      import("../components/client/product/store/pages/StoreDetailPage.vue"),
+    component: () => import("@/views/StoreDetailPage.vue"),
   },
 
   /* 주문 */
