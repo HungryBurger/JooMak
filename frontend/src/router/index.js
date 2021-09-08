@@ -9,7 +9,6 @@ const routes = [
     name: "HomePage",
     component: HomePage,
   },
-
   // about 페이지
   {
     path: "/about",
@@ -22,10 +21,17 @@ const routes = [
   },
 
   /* 회원 */
+  // 회원 공통
   {
     path: "/member/:mode",
     name: "Member",
     component: () => import("@/views/Member.vue"),
+  },
+  // 마이 페이지 공통
+  {
+    path: "/my-page/:mode",
+    name: "MyPage",
+    component: () => import("@/views/MyPage.vue"),
   },
 
   /* 상품 */
@@ -35,7 +41,6 @@ const routes = [
     name: "StoreListPage",
     component: () => import("@/views/StoreListPage.vue"),
   },
-
   // 매장 상세 페이지
   {
     path: "/store/:idx",
@@ -44,6 +49,12 @@ const routes = [
   },
 
   /* 주문 */
+  // 주문 & 결제 페이지
+  {
+    path: "/order",
+    name: "OrderPage",
+    component: () => import("@/views/OrderPage.vue"),
+  },
   // 주문 현황 페이지
   {
     path: "/order-status",
