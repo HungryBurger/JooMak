@@ -18,16 +18,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ "../components/client/common/aboutProject/pages/AboutPage.vue"
-      ),
+      import(/* webpackChunkName: "about" */ "@/views/AboutPage.vue"),
   },
 
   /* 회원 */
   {
     path: "/member/:mode",
     name: "Member",
-    component: () => import("../views/Member.vue"),
+    component: () => import("@/views/Member.vue"),
   },
 
   /* 상품 */
@@ -35,8 +33,7 @@ const routes = [
   {
     path: "/store-list/:food",
     name: "StoreListPage",
-    component: () =>
-      import("../components/client/product/store/pages/StoreListPage.vue"),
+    component: () => import("@/views/StoreListPage.vue"),
   },
 
   // 매장 상세 페이지
