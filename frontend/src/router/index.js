@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePage from "../components/client/common/home/pages/HomePage.vue";
+import HomePage from "@/views/HomePage.vue";
 
 const routes = [
   /* 공통 */
@@ -9,7 +9,6 @@ const routes = [
     name: "HomePage",
     component: HomePage,
   },
-
   // about 페이지
   {
     path: "/about",
@@ -18,16 +17,21 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(
-        /* webpackChunkName: "about" */ "../components/client/common/aboutProject/pages/AboutPage.vue"
-      ),
+      import(/* webpackChunkName: "about" */ "@/views/AboutPage.vue"),
   },
 
   /* 회원 */
+  // 회원 공통
   {
     path: "/member/:mode",
-    name: "Member",
-    component: () => import("../views/Member.vue"),
+    name: "MemberPage",
+    component: () => import("@/views/MemberPage.vue"),
+  },
+  // 마이 페이지 공통
+  {
+    path: "/my-page/:mode",
+    name: "MyPage",
+    component: () => import("@/views/MyPage.vue"),
   },
 
   /* 상품 */
@@ -35,31 +39,33 @@ const routes = [
   {
     path: "/store-list/:food",
     name: "StoreListPage",
-    component: () =>
-      import("../components/client/product/store/pages/StoreListPage.vue"),
+    component: () => import("@/views/StoreListPage.vue"),
   },
-
   // 매장 상세 페이지
   {
     path: "/store/:idx",
     name: "StoreDetailPage",
-    component: () =>
-      import("../components/client/product/store/pages/StoreDetailPage.vue"),
+    component: () => import("@/views/StoreDetailPage.vue"),
   },
 
   /* 주문 */
+  // 주문 & 결제 페이지
+  {
+    path: "/order",
+    name: "OrderPage",
+    component: () => import("@/views/OrderPage.vue"),
+  },
   // 주문 현황 페이지
   {
     path: "/order-status",
     name: "OrderStatusPage",
-    component: () =>
-      import("../components/client/order/pages/OrderStatusPage.vue"),
+    component: () => import("@/views/OrderStatusPage.vue"),
   },
   // 장바구니 페이지
   {
     path: "/cart",
     name: "CartPage",
-    component: () => import("../components/client/order/pages/CartPage.vue"),
+    component: () => import("@/views/CartPage.vue"),
   },
 ];
 

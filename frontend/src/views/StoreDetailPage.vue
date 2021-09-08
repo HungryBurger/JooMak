@@ -21,9 +21,9 @@
 
 <script>
 import axios from "axios";
-import StoreDetailPageMenuSelectTab from "./StoreDetailPageMenuSelectTab.vue";
-import StoreDetailPageStoreIntroTab from "./StoreDetailPageStoreIntroTab.vue";
-import StoreDetailPageStoreReviewTab from "./StoreDetailPageStoreReviewTab.vue";
+import StoreDetailPageMenuSelectTab from "@/components/client/product/store/pages/StoreDetailPageMenuSelectTab.vue";
+import StoreDetailPageStoreIntroTab from "@/components/client/product/store/pages/StoreDetailPageStoreIntroTab.vue";
+import StoreDetailPageStoreReviewTab from "@/components/client/product/store/pages/StoreDetailPageStoreReviewTab.vue";
 
 export default {
   components: {
