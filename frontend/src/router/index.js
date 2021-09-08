@@ -48,14 +48,13 @@ const routes = [
   {
     path: "/order-status",
     name: "OrderStatusPage",
-    component: () =>
-      import("../components/client/order/pages/OrderStatusPage.vue"),
+    component: () => import("@/views/OrderStatusPage.vue"),
   },
   // 장바구니 페이지
   {
     path: "/cart",
     name: "CartPage",
-    component: () => import("../components/client/order/pages/CartPage.vue"),
+    component: () => import("@/views/CartPage.vue"),
   },
 ];
 
