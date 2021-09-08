@@ -1,0 +1,31 @@
+/* Font-정선동강체 */
+@font-face {
+  font-family: "JSDongkang";
+  font-weight: 500;
+  src: url("../fonts/JSDongkang-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "JSDongkang";
+  font-weight: 700;
+  src: url("../fonts/JSDongkang-Bold.ttf") format("truetype");
+}
+
+* {
+  font-family: "JSDongkang", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: #292929;
+}
+a:-webkit-any-link {
+  text-decoration: none;
+  color: #292929;
+}
