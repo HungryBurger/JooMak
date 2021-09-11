@@ -18,7 +18,19 @@ export const product = {
     ],
     currentCategory: "",
   }),
-  getters: {},
+  getters: {
+    homeCategories: (state) => {
+      let categories = [];
+      categories = categories.concat(state.categories);
+      let homeCategories = [];
+      for (let i = 0; i < state.categories.length / 3; i++) {
+        // 4번 반복
+        let currentHomeCategories = categories.splice(0, 3);
+        homeCategories.push(currentHomeCategories);
+      }
+      return homeCategories;
+    },
+  },
   mutations: {
     [SET_CURRENT_CATEGORY](state, category) {
       state.currentCategory = category;

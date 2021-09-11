@@ -170,6 +170,10 @@ export default {
   background-color: #ffc463;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.12);
 }
+#header.on-home {
+  background-color: transparent;
+  box-shadow: none;
+}
 #header.sticky {
   position: fixed;
   top: 0;

@@ -2,7 +2,10 @@
   <header-component></header-component>
   <main
     id="main"
-    :class="{ 'padding-for-sticky': currentPage !== 'storeDetailPage' }"
+    :class="{
+      'padding-for-sticky': currentPage !== 'storeDetailPage',
+      'on-home': onHome,
+    }"
   >
     <router-view />
   </main>
@@ -21,7 +24,7 @@ export default {
     FooterComponent,
   },
   computed: {
-    ...mapState("common", ["currentPage"]),
+    ...mapState("common", ["currentPage", "onHome"]),
   },
 };
 </script>
@@ -29,5 +32,11 @@ export default {
 <style>
 #main.padding-for-sticky {
   padding-top: 12vh;
+}
+#main.padding-for-sticky.on-home {
+  padding-top: 0;
+}
+#main.on-home + #footer {
+  margin-top: 100vh;
 }
 </style>
