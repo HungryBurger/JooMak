@@ -16,6 +16,47 @@
       }"
     >
       <div class="home_background-img">
+        <div id="home_category-wrap">
+          <home-page-category
+            v-for="(category, index) in threeHomeCategories"
+            :key="index"
+            :category="category"
+            :categoryIndex="index"
+          ></home-page-category>
+        </div>
+        <div id="home_side-nav-wrap">
+          <div
+            class="home_side-nav_li"
+            :class="{ 'on-click-side-nav': currentHomeCoords === 'morning' }"
+            @click="onClickSideNav('morning')"
+          >
+            한식&nbsp;&nbsp;/&nbsp;&nbsp;양식&nbsp;&nbsp;/&nbsp;&nbsp;일식
+          </div>
+          <div
+            class="home_side-nav_li"
+            :class="{ 'on-click-side-nav': currentHomeCoords === 'afternoon' }"
+            @click="onClickSideNav('afternoon')"
+          >
+            중식&nbsp;&nbsp;/&nbsp;&nbsp;분식&nbsp;&nbsp;/&nbsp;&nbsp;족발
+          </div>
+          <div
+            class="home_side-nav_li"
+            :class="{ 'on-click-side-nav': currentHomeCoords === 'evening' }"
+            @click="onClickSideNav('evening')"
+          >
+            치킨&nbsp;&nbsp;/&nbsp;&nbsp;피자&nbsp;&nbsp;/&nbsp;&nbsp;버거
+          </div>
+          <div
+            class="home_side-nav_li"
+            :class="{
+              'on-click-side-nav':
+                currentHomeCoords === 'night' || currentHomeCoords === 'footer',
+            }"
+            @click="onClickSideNav('night')"
+          >
+            디저트&커피&nbsp;&nbsp;/&nbsp;&nbsp;야식
+          </div>
+        </div>
         <div id="home_deco-line">
           <div
             class="home_deco-line_left"
@@ -39,11 +80,36 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import { SET_CURRENT_HOME_COORDS } from "@/store/modules/common.js";
+import HomePageCategory from "@/components/client/common/home/components/HomePageCategory.vue";
 
 export default {
+  components: {
+    HomePageCategory,
+  },
   computed: {
     ...mapState("common", ["currentHomeCoords"]),
     ...mapGetters("product", ["homeCategories"]),
+    threeHomeCategories() {
+      let index = 0;
+      switch (this.currentHomeCoords) {
+        case "morning":
+          index = 0;
+          break;
+        case "afternoon":
+          index = 1;
+          break;
+        case "evening":
+          index = 2;
+          break;
+        case "night":
+          index = 3;
+          break;
+        default:
+          index = 3;
+          break;
+      }
+      return this.homeCategories[index];
+    },
   },
   methods: {
     // scrollY 위치에 따라 currentHomeCoords 변경
@@ -76,10 +142,29 @@ export default {
       }
       console.log(this.currentHomeCoords);
     },
+    onClickSideNav(pageName) {
+      switch (pageName) {
+        case "morning":
+          scrollTo(0, 0);
+          return;
+        case "afternoon":
+          scrollTo(0, window.innerHeight);
+          return;
+        case "evening":
+          scrollTo(0, window.innerHeight * 2);
+          return;
+        case "night":
+          scrollTo(0, window.innerHeight * 3);
+          return;
+      }
+    },
   },
   mounted() {
-    console.log(this.homeCategories);
+    console.log(this.threeHomeCategories);
     window.addEventListener("scroll", this.onScroll);
+  },
+  updated() {
+    console.log(this.threeHomeCategories);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
@@ -103,10 +188,10 @@ export default {
 }
 
 .home_background-img {
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  position: relative;
   width: 100%;
   height: 100%;
   background: url("../assets/images/home_night.png");
@@ -114,6 +199,62 @@ export default {
   background-repeat: no-repeat;
   background-position: bottom -220px right 0;
 }
+
+#home_category-wrap {
+  z-index: 5;
+  width: 55vw;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3vw;
+  justify-items: center;
+  align-items: center;
+}
+#home_side-nav-wrap {
+  font-size: 12px;
+  z-index: 50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  width: 13vw;
+  height: 72vh;
+  position: absolute;
+  right: 1.3%;
+}
+.home_side-nav_li {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 25%;
+  padding-right: 25%;
+}
+.home_side-nav_li:hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 30%;
+  width: 100%;
+  height: 1px;
+  border-bottom: 2px solid white;
+  margin-right: -25%;
+}
+.on-click-side-nav::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 30%;
+  width: 100%;
+  height: 1px;
+  border-bottom: 2px solid white;
+  margin-right: -25%;
+}
+
 #home_deco-line {
   border: 2px solid white;
   border-top: none;
@@ -154,8 +295,11 @@ export default {
 }
 
 .home_background-img > img {
-  padding-top: 12vh;
-  width: 87vw;
+  position: absolute;
+  top: 0;
+  left: 6.5vw;
+  padding-top: 6vh;
+  width: 85vw;
 }
 .sticky {
   position: fixed;

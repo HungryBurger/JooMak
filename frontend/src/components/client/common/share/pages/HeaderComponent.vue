@@ -240,6 +240,7 @@ a.header_top_right-elem:hover {
   height: 4.5vh;
 }
 .header_bottom > a {
+  font-size: 16px;
   cursor: pointer;
   position: relative;
   display: flex;
