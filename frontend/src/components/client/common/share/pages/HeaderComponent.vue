@@ -46,6 +46,7 @@
           :class="{ 'on-click-nav-li': currentPage === 'cartPage' }"
           >장바구니</router-link
         >
+        <!-- fake link -->
         <a
           v-else-if="!currentAddress"
           to="/cart"
@@ -67,14 +68,6 @@
       >
         {{ category.ko }}
       </router-link>
-      <!-- 
-      <router-link
-        to="/store-list/korean"
-        @click="onClickCategory('korean')"
-        :class="{ 'on-click-nav-li': currentCategory === 'korean' }">
-        한식
-      </router-link>
-      -->
     </div>
     <!-- fake nav -->
     <div class="header_bottom" v-else-if="!currentAddress">
@@ -141,6 +134,9 @@ export default {
       this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
       this.inHome();
       this.initializeCategory();
+      if (window.scrollY !== 0) {
+        scrollTo(0, 0);
+      }
     },
     outStoreListPage(pageName) {
       this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
@@ -169,6 +165,10 @@ export default {
   height: 12vh;
   background-color: #ffc463;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.12);
+}
+#header.on-home {
+  background-color: transparent;
+  box-shadow: none;
 }
 #header.sticky {
   position: fixed;
@@ -236,6 +236,7 @@ a.header_top_right-elem:hover {
   height: 4.5vh;
 }
 .header_bottom > a {
+  font-size: 16px;
   cursor: pointer;
   position: relative;
   display: flex;
