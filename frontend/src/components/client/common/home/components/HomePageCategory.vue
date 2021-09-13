@@ -1,18 +1,45 @@
 <template>
-  <div class="home-page_category" :data-category="category.en">
-    <div class="category_letter">
-      <img :src="letterPath" :alt="category.en + '_letter'" />
+  <router-link
+    v-if="currentAddress"
+    :to="`/store-list/${category.en}`"
+    @click="onClickCategory(category.en, 'storeListPage')"
+  >
+    <div class="home-page_category" :data-category="category.en">
+      <div class="category_letter">
+        <img :src="letterPath" :alt="category.en + '_letter'" />
+      </div>
+      <div class="category_image">
+        <img :src="imgPath" :alt="category.en + '_image'" />
+      </div>
     </div>
-    <div class="category_image">
-      <img :src="imgPath" :alt="category.en + '_image'" />
+  </router-link>
+
+  <!-- fake component -->
+  <a
+    v-else-if="!currentAddress"
+    @click="onClickCategory(category.en, 'storeListPage')"
+  >
+    <div class="home-page_category" :data-category="category.en">
+      <div class="category_letter">
+        <img :src="letterPath" :alt="category.en + '_letter'" />
+      </div>
+      <div class="category_image">
+        <img :src="imgPath" :alt="category.en + '_image'" />
+      </div>
     </div>
-  </div>
+  </a>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { TOGGLE_ON_HOME, SET_CURRENT_PAGE } from "@/store/modules/common.js";
+import { SET_CURRENT_CATEGORY } from "@/store/modules/product.js";
+
 export default {
   props: ["category", "categoryIndex"],
   computed: {
+    ...mapState("common", ["onHome", "currentPage"]),
+    ...mapState("member", ["currentAddress"]),
     letterPath() {
       return require(`@/assets/images/letter_${this.category.en}.svg`);
     },
@@ -20,13 +47,36 @@ export default {
       return require(`@/assets/images/home-img_${this.category.en}.png`);
     },
   },
-  mounted() {
-    console.log(this.category);
+  methods: {
+    outHome() {
+      if (this.onHome) {
+        this.$store.commit(`common/${TOGGLE_ON_HOME}`);
+      }
+    },
+    setCategory(category) {
+      this.$store.commit(`product/${SET_CURRENT_CATEGORY}`, category);
+    },
+    onClickCategory(category, pageName) {
+      if (!this.currentAddress) {
+        alert("먼저 주소를 설정해 주세요");
+        return;
+      }
+
+      if (this.currentPage !== "storeListPage") {
+        this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
+      }
+      this.outHome();
+      this.setCategory(category);
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
+a {
+  width: 100%;
+  height: 57vh;
+}
 .home-page_category {
   overflow: hidden;
   position: relative;
@@ -34,7 +84,7 @@ export default {
   /* margin: 20px; */
   /* width: 20vw; */
   width: 100%;
-  height: 57vh;
+  height: 100%;
   background-color: white;
   border-radius: 30px;
 }
