@@ -1,13 +1,14 @@
 export const TOGGLE_ON_HOME = "TOGGLE_ON_HOME";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_CURRENT_HOME_COORDS = "SET_CURRENT_HOME_COORDS";
 
 export const common = {
   namespaced: true,
   state: () => ({
-    commonData: "hihi 나는 common store에 있는 data야!",
     onHome: true,
     onLogin: false,
     currentPage: "homePage",
+    currentHomeCoords: "morning",
   }),
   getters: {},
   mutations: {
@@ -16,6 +17,9 @@ export const common = {
     },
     [SET_CURRENT_PAGE](state, pageName) {
       state.currentPage = pageName;
+    },
+    [SET_CURRENT_HOME_COORDS](state, coordsName) {
+      state.currentHomeCoords = coordsName;
     },
   },
   actions: {},
