@@ -153,10 +153,15 @@ export default {
 
     setCurrentCategoryAtLoad() {
       if (this.$route.name === "storeListPage") {
-        this.$store.commit(
-          `product/${SET_CURRENT_CATEGORY}`,
-          this.$route.params.food
-        );
+        if (!this.currentAddress) {
+          alert("홈 화면에서 주소를 먼저 설정해 주세요.");
+          this.$router.replace("/");
+        } else {
+          this.$store.commit(
+            `product/${SET_CURRENT_CATEGORY}`,
+            this.$route.params.food
+          );
+        }
       }
     },
   },
