@@ -51,5 +51,10 @@ export const common = {
       state.previewTab = tabName;
     },
   },
-  actions: {},
+  actions: {
+    // common
+    [SET_CURRENT_PAGE]({ commit }, pageName) {
+      commit(`${SET_CURRENT_PAGE}`, pageName);
+    },
+  },
 };

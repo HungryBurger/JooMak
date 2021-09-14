@@ -150,6 +150,26 @@ export default {
         return;
       }
     },
+
+    setCurrentCategoryAtLoad() {
+      if (this.$route.name === "storeListPage") {
+        this.$store.commit(
+          `product/${SET_CURRENT_CATEGORY}`,
+          this.$route.params.food
+        );
+      }
+    },
+  },
+  created() {
+    // 로드/리로드 이벤트 리스너 추가 : currentCategory 설정
+    window.addEventListener("load", this.setCurrentCategoryAtLoad);
+  },
+  updated() {
+    console.log("Header 업데이트됨");
+  },
+  beforeDestroy() {
+    // 로드/리로드 이벤트 리스너 해제 : currentCategory 설정
+    window.removeEventListener("load", this.setCurrentCategoryAtLoad);
   },
 };
 </script>
