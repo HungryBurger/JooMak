@@ -79,7 +79,10 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import { SET_CURRENT_HOME_COORDS } from "@/store/modules/common.js";
+import {
+  SET_ON_HOME,
+  SET_CURRENT_HOME_COORDS,
+} from "@/store/modules/common.js";
 import HomePageCategory from "@/components/client/common/home/components/HomePageCategory.vue";
 
 export default {
@@ -158,6 +161,9 @@ export default {
           return;
       }
     },
+  },
+  created() {
+    this.$store.commit(`common/${SET_ON_HOME}`, true);
   },
   mounted() {
     console.log(this.threeHomeCategories);

@@ -1,14 +1,20 @@
 <template>
   <div id="storeListPage">
-    <span>매장리스트 페이지입니다</span>
-    <p>현재 {{ currentCategory }} 메뉴를 보고 있습니다</p>
-    <div v-for="store in storesInfoByCategory" :key="store.idx">
-      <router-link :to="`/store/${store.idx}`">
-        <div @click="changePage('storeDetailPage', store.idx)">
-          <span>{{ store.img }} </span>
-          <span>{{ store.storeName }}</span>
+    <div id="scale-box"></div>
+    <store-list-page-store-preview-box></store-list-page-store-preview-box>
+    <div id="store-list-page_main-wrap">
+      <div id="store-list-page_main">
+        <span>매장리스트 페이지입니다</span>
+        <p>현재 {{ currentCategory }} 메뉴를 보고 있습니다</p>
+        <div v-for="store in storesInfoByCategory" :key="store.idx">
+          <router-link :to="`/store/${store.idx}`">
+            <div @click="changePage('storeDetailPage', store.idx)">
+              <span>{{ store.img }} </span>
+              <span>{{ store.storeName }}</span>
+            </div>
+          </router-link>
         </div>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -16,9 +22,13 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-import { SET_CURRENT_PAGE } from "@/store/modules/common";
+import { SET_CURRENT_PAGE, SET_ON_PREVIEW_BOX } from "@/store/modules/common";
+import StoreListPageStorePreviewBox from "@/components/client/product/store/pages/StoreListPageStorePreviewBox.vue";
 
 export default {
+  components: {
+    StoreListPageStorePreviewBox,
+  },
   data() {
     return {};
   },
@@ -82,13 +92,40 @@ export default {
         });
     },
   },
+  created() {
+    this.$store.commit(`common/${SET_ON_PREVIEW_BOX}`, true);
+  },
 };
 </script>
 
 <style scoped>
 #storeListPage {
-  width: 500px;
-  height: 300px;
-  background-color: thistle;
+  position: relative;
+  right: 28%;
+  overflow: hidden;
+  display: flex;
+  width: 128%;
+  height: 88vh;
+}
+#scale-box {
+  transition: all 0.7s;
+  width: 28%;
+  height: 100%;
+  background-color: blue;
+}
+
+#store-list-page_main-wrap {
+  display: flex;
+  justify-content: center;
+  transition: all 0.7s;
+  width: 72%;
+  height: 100%;
+  background-color: #fff0b1;
+}
+#store-list-page_main {
+  transition: all 0.7s;
+  width: 100%;
+  height: 100%;
+  background-color: white;
 }
 </style>
