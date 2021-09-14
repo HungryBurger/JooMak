@@ -1,6 +1,35 @@
 <template>
   <div id="store-preview-box">
-    <span>매장 미리보기 창 입니다</span>
+    <div id="store-preview-box_header">
+      <div
+        :class="{ 'on-info': previewTab === 'info' }"
+        @click="onClickPreviewTab('info')"
+      >
+        매장 정보
+      </div>
+      <div
+        :class="{ 'on-review': previewTab === 'review' }"
+        @click="onClickPreviewTab('review')"
+      >
+        리뷰
+      </div>
+    </div>
+    <div id="store-preview-box_main-wrap">
+      <div id="store-preview-box_main">
+        <div
+          class="store-preview-box_main-content"
+          v-if="previewTab === 'info'"
+        >
+          매장 정보 부분입니다
+        </div>
+        <div
+          class="store-preview-box_main-content"
+          v-else-if="previewTab === 'review'"
+        >
+          리뷰 미리보기 부분입니다
+        </div>
+      </div>
+    </div>
     <div
       id="preview_switch"
       @click="onClickPreviewSwitch"
@@ -22,13 +51,18 @@
 
 <script>
 import { mapState } from "vuex";
-import { SET_ON_PREVIEW_BOX } from "@/store/modules/common.js";
+import { SET_ON_PREVIEW_BOX, SET_PREVIEW_TAB } from "@/store/modules/common.js";
 
 export default {
   computed: {
-    ...mapState("common", ["onPreviewBox"]),
+    ...mapState("common", ["onPreviewBox", "previewTab"]),
   },
   methods: {
+    onClickPreviewTab(tabName) {
+      if (tabName !== this.previewTab) {
+        this.$store.commit(`common/${SET_PREVIEW_TAB}`, tabName);
+      }
+    },
     closePreviewBox() {
       const storeListPageMainWrap = document.querySelector(
         "#store-list-page_main-wrap"
@@ -67,6 +101,11 @@ export default {
       }
     },
   },
+  created() {
+    if (this.previewTab !== "info") {
+      this.$store.commit(`common/${SET_PREVIEW_TAB}`, "info");
+    }
+  },
 };
 </script>
 
@@ -78,11 +117,65 @@ export default {
   height: 100%;
   background-color: coral;
 }
+
+#store-preview-box_header {
+  display: flex;
+  width: 100%;
+  height: 9vh;
+  background-color: #ffe46a;
+}
+#store-preview-box_header > div {
+  cursor: pointer;
+  color: #858585;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+#store-preview-box_header > div.on-info {
+  background-color: #fff0b1;
+  color: #292929;
+  border-top-right-radius: 3vh;
+}
+#store-preview-box_header > div.on-review {
+  background-color: #fff0b1;
+  color: #292929;
+  border-top-left-radius: 3vh;
+}
+
+#store-preview-box_main-wrap {
+  box-sizing: border-box;
+  padding-top: 2.5vh;
+  padding-bottom: 2.5vh;
+  padding-left: 10px;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 79vh;
+  background-color: #fff0b1;
+}
+#store-preview-box_main-wrap:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#store-preview-box_main-wrap::-webkit-scrollbar {
+  width: 10px;
+  height: 100%;
+}
+#store-preview-box_main {
+  width: 25vw;
+  height: 120%;
+  background-color: #fff5eb;
+}
+
 #preview_switch {
   display: flex;
   align-items: center;
   position: absolute;
-  top: 39vh;
+  top: 41vh;
   right: 0;
   cursor: pointer;
   width: 3vh;

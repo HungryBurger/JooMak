@@ -8,6 +8,7 @@ export const SET_CURRENT_HOME_COORDS = "SET_CURRENT_HOME_COORDS";
 
 // storeListPage
 export const SET_ON_PREVIEW_BOX = "SET_ON_PREVIEW_BOX";
+export const SET_PREVIEW_TAB = "SET_PREVIEW_TAB";
 
 export const common = {
   namespaced: true,
@@ -22,6 +23,7 @@ export const common = {
 
     // storeListPage
     onPreviewBox: true,
+    previewTab: "info",
   }),
   getters: {},
   mutations: {
@@ -44,6 +46,9 @@ export const common = {
     // storeListPage
     [SET_ON_PREVIEW_BOX](state, boolean) {
       state.onPreviewBox = boolean;
+    },
+    [SET_PREVIEW_TAB](state, tabName) {
+      state.previewTab = tabName;
     },
   },
   actions: {},
