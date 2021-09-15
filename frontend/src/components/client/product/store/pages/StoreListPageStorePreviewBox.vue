@@ -102,6 +102,7 @@ export default {
     },
   },
   created() {
+    // previewTab = 'info'로 초기화
     if (this.previewTab !== "info") {
       this.$store.commit(`common/${SET_PREVIEW_TAB}`, "info");
     }

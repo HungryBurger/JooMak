@@ -17,6 +17,11 @@ export const product = {
       { en: "night-food", ko: "야식" },
     ],
     currentCategory: "",
+    recommendedTags: [
+      { name: "떡볶이", idx: 1 },
+      { name: "순대", idx: 2 },
+      { name: "튀김", idx: 3 },
+    ],
   }),
   getters: {
     homeCategories: (state) => {
