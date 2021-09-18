@@ -100,12 +100,48 @@ export default {
         this.$store.commit(`common/${SET_ON_PREVIEW_BOX}`, true);
       }
     },
+    resizePreviewLayout() {
+      const storeListPageMainWrap = document.querySelector(
+        "#store-list-page_main-wrap"
+      );
+      const storeListPageMain = document.querySelector("#store-list-page_main");
+      const scaleBox = document.querySelector("#scale-box");
+      const storePreviewBox = document.querySelector("#store-preview-box");
+
+      storeListPageMainWrap.style.transition = "none";
+      storeListPageMain.style.transition = "none";
+      scaleBox.style.transition = "none";
+      storePreviewBox.style.transition = "none";
+
+      // 미리보기 창 열려있을 때 resize
+      if (this.onPreviewBox) {
+        this.openPreviewBox();
+        storePreviewBox.style.width = `${document.body.offsetWidth * 0.28}px`;
+      }
+      // 미리보기 창 닫혀있을 때 resize
+      else {
+        this.closePreviewBox();
+      }
+
+      setTimeout(() => {
+        storeListPageMainWrap.style.transition = "all 0.7s";
+        storeListPageMain.style.transition = "all 0.7s";
+        scaleBox.style.transition = "all 0.7s";
+        storePreviewBox.style.transition = "all 0.7s";
+      }, 10);
+    },
   },
   created() {
     // previewTab = 'info'로 초기화
     if (this.previewTab !== "info") {
       this.$store.commit(`common/${SET_PREVIEW_TAB}`, "info");
     }
+  },
+  mounted() {
+    window.addEventListener("resize", this.resizePreviewLayout);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.resizePreviewLayout);
   },
 };
 </script>
