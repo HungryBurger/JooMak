@@ -1,8 +1,12 @@
 export const SET_CURRENT_CATEGORY = "SET_CURRENT_CATEGORY";
+export const ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM =
+  "ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM";
+export const SET_CURRENT_PAGE_NUM = "SET_CURRENT_PAGE_NUM";
 
 export const product = {
   namespaced: true,
   state: () => ({
+    /* 헤더 */
     categories: [
       { en: "korean", ko: "한식" },
       { en: "western", ko: "양식" },
@@ -17,11 +21,19 @@ export const product = {
       { en: "night-food", ko: "야식" },
     ],
     currentCategory: "",
+
+    /* 매장 리스트 페이지 */
     recommendedTags: [
       { name: "떡볶이", idx: 1 },
       { name: "순대", idx: 2 },
       { name: "튀김", idx: 3 },
     ],
+    // pagination
+    totalStoreNum: 1742,
+    storesPerPage: 30,
+    perPage: 10,
+    firstNumOfCurrentPageNum: 1,
+    currentPageNum: 3,
   }),
   getters: {
     homeCategories: (state) => {
@@ -39,6 +51,12 @@ export const product = {
   mutations: {
     [SET_CURRENT_CATEGORY](state, category) {
       state.currentCategory = category;
+    },
+    [ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM](state, perPage) {
+      state.firstNumOfCurrentPageNum += perPage;
+    },
+    [SET_CURRENT_PAGE_NUM](state, pageNum) {
+      state.currentPageNum = pageNum;
     },
   },
   actions: {},

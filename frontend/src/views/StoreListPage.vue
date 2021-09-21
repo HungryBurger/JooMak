@@ -95,6 +95,55 @@
         </div>
         <div id="store-list-page_main_bottom">
           <ul></ul>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination d-flex justify-content-center">
+              <!-- pagination prev btn -->
+              <li
+                class="page-item"
+                :class="{ disabled: firstNumOfCurrentPageNum === 1 }"
+              >
+                <a
+                  class="page-link page-link_arrow"
+                  href="#"
+                  aria-label="Previous"
+                  @click="onClickPrevBtn"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <!-- pagination pages -->
+              <li
+                class="page-item"
+                v-for="pageNum in getCurrentPageNums"
+                :class="{ active: currentPageNum === pageNum }"
+                :key="pageNum"
+              >
+                <a
+                  class="page-link"
+                  href="#"
+                  @click="onClickPageNum(pageNum)"
+                  >{{ pageNum }}</a
+                >
+              </li>
+              <!-- pagination next btn -->
+              <li
+                class="page-item"
+                :class="{
+                  disabled:
+                    firstNumOfCurrentPageNum === lastFirstNumOfCurrentPage,
+                }"
+              >
+                <a
+                  class="page-link page-link_arrow"
+                  href="#"
+                  aria-label="Next"
+                  @click="onClickNextBtn"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -110,6 +159,10 @@ import {
   TOGGLE_ON_CHOOSE_FILTER,
   SET_SELECTED_SEARCH_FILTER,
 } from "@/store/modules/common.js";
+import {
+  ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM,
+  SET_CURRENT_PAGE_NUM,
+} from "@/store/modules/product.js";
 import StoreListPageStorePreviewBox from "@/components/client/product/store/pages/StoreListPageStorePreviewBox.vue";
 
 export default {
@@ -128,7 +181,14 @@ export default {
       "selectedSearchFilter",
       "searchFilters",
     ]),
-    ...mapState("product", ["recommendedTags"]),
+    ...mapState("product", [
+      "recommendedTags",
+      "totalStoreNum",
+      "storesPerPage",
+      "perPage",
+      "firstNumOfCurrentPageNum",
+      "currentPageNum",
+    ]),
     currentCategory() {
       return this.$route.params.food;
     },
@@ -168,6 +228,31 @@ export default {
       }
 
       return stores;
+    },
+    getNumberOfPageByTotalStoreNum() {
+      const numberOfPage =
+        Math.floor(this.totalStoreNum / this.storesPerPage) + 1;
+      return numberOfPage;
+    },
+    getCurrentPageNums() {
+      const currentPageNums = [];
+      for (
+        let i = this.firstNumOfCurrentPageNum;
+        i < this.firstNumOfCurrentPageNum + this.perPage;
+        i++
+      ) {
+        currentPageNums.push(i);
+        if (i === this.getNumberOfPageByTotalStoreNum) break;
+      }
+
+      return currentPageNums;
+    },
+    lastFirstNumOfCurrentPage() {
+      const lastFirstNum =
+        this.getNumberOfPageByTotalStoreNum -
+        (this.getNumberOfPageByTotalStoreNum % this.perPage) +
+        1;
+      return lastFirstNum;
     },
   },
   methods: {
@@ -221,9 +306,45 @@ export default {
         });
       }
     },
+    onClickPrevBtn() {
+      if (this.firstNumOfCurrentPageNum !== 1) {
+        this.$store.commit(
+          `product/${ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM}`,
+          -this.perPage
+        );
+      }
+    },
+    onClickNextBtn() {
+      if (this.firstNumOfCurrentPageNum !== this.lastFirstNumOfCurrentPage) {
+        this.$store.commit(
+          `product/${ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM}`,
+          this.perPage
+        );
+      }
+    },
+    onClickPageNum(pageNum) {
+      this.$store.commit(`product/${SET_CURRENT_PAGE_NUM}`, pageNum);
+    },
   },
   created() {
+    // 미리보기 창 켜기
     this.$store.commit(`common/${SET_ON_PREVIEW_BOX}`, true);
+
+    // axios로 첫 페이지 매장 정보 불러오기
+    // axios
+    //   .get("https://reqres.in/api/users?page=" + idx)
+    //   .then((res) => {
+    //     console.log(res.data.data);
+    //     this.totalStoreNum = res.data.totalStoreNum;
+
+    //   })
+    //   .catch((err) => {
+    //     cosonle.log(err);
+    //   });
+  },
+  mounted() {
+    console.log("총 페이지 수 : " + this.getNumberOfPageByTotalStoreNum);
+    console.log("마지막 첫 번째 번호" + this.lastFirstNumOfCurrentPage);
   },
 };
 </script>
@@ -464,5 +585,36 @@ export default {
   width: 100%;
   height: 89%;
   background-color: burlywood;
+}
+
+#store-list-page_main .page-link {
+  box-sizing: content-box;
+  width: 1.6vw;
+  text-align: center;
+}
+#store-list-page_main .page-link:hover {
+  background-color: #fcfabe;
+  color: #292929;
+}
+#store-list-page_main .page-link:focus {
+  background-color: white;
+  box-shadow: 0 0 0 0.25rem rgb(253 235 13 / 25%);
+  color: white;
+}
+#store-list-page_main .page-link_arrow:focus {
+  color: #292929;
+}
+
+#store-list-page_main .page-item.active .page-link {
+  background-color: #ffdd1b;
+  border-color: white;
+}
+.page-link {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 </style>
