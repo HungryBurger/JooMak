@@ -93,8 +93,10 @@
             </div>
           </div>
         </div>
-        <div id="store-list-page_main_bottom">
+        <div id="store-list-page_main_middle">
           <ul></ul>
+        </div>
+        <div id="store-list-page_main_bottom">
           <nav aria-label="Page navigation example">
             <ul class="pagination d-flex justify-content-center">
               <!-- pagination prev btn -->
@@ -376,7 +378,7 @@ export default {
 #store-list-page_main {
   box-sizing: border-box;
   padding: 0 3vw;
-  padding-top: 3vh;
+  padding-top: 2vh;
   padding-bottom: 2vh;
   display: flex;
   flex-direction: column;
@@ -444,7 +446,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 50%;
-  height: 100%;
+  height: calc(100% + 2px);
 }
 #search-chart_mini_left {
   border: 1px solid #ffc463;
@@ -580,11 +582,35 @@ export default {
   color: white;
 }
 
-#store-list-page_main_bottom {
+#store-list-page_main_middle {
   box-sizing: border-box;
   width: 100%;
-  height: 89%;
+  height: 81%;
   background-color: burlywood;
+}
+#store-list-page_main_bottom {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 8%;
+}
+#store-list-page_main ul {
+  margin: 0;
+}
+#store-list-page_main nav,
+#store-list-page_main ul,
+#store-list-page_main li {
+  height: 100%;
+}
+#store-list-page_main li {
+  display: flex;
+  align-items: flex-end;
+}
+#store-list-page_main li > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
 }
 
 #store-list-page_main .page-link {
@@ -607,6 +633,9 @@ export default {
 
 #store-list-page_main .page-item.active .page-link {
   background-color: #ffdd1b;
+  border-color: #ffdd1b;
+}
+#store-list-page_main .page-item.active .page-link:focus {
   border-color: white;
 }
 .page-link {
