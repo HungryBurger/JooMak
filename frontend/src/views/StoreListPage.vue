@@ -4,16 +4,6 @@
     <store-list-page-store-preview-box></store-list-page-store-preview-box>
     <div id="store-list-page_main-wrap">
       <div id="store-list-page_main">
-        <!-- <span>매장리스트 페이지입니다</span>
-        <p>현재 {{ currentCategory }} 메뉴를 보고 있습니다</p>
-        <div v-for="store in storesInfoByCategory" :key="store.idx">
-          <router-link :to="`/store/${store.idx}`">
-            <div @click="changePage('storeDetailPage', store.idx)">
-              <span>{{ store.img }} </span>
-              <span>{{ store.storeName }}</span>
-            </div>
-          </router-link>
-        </div> -->
         <div id="store-list-page_main_top">
           <div id="recommendation-wrap">
             <div
@@ -94,7 +84,13 @@
           </div>
         </div>
         <div id="store-list-page_main_middle">
-          <ul></ul>
+          <ul>
+            <store-list-page-li
+              v-for="store in stores"
+              :key="store.idx"
+              :store="store"
+            ></store-list-page-li>
+          </ul>
         </div>
         <div id="store-list-page_main_bottom">
           <nav aria-label="Page navigation example">
@@ -166,10 +162,12 @@ import {
   SET_CURRENT_PAGE_NUM,
 } from "@/store/modules/product.js";
 import StoreListPageStorePreviewBox from "@/components/client/product/store/pages/StoreListPageStorePreviewBox.vue";
+import StoreListPageLi from "@/components/client/product/store/components/StoreListPageLi.vue";
 
 export default {
   components: {
     StoreListPageStorePreviewBox,
+    StoreListPageLi,
   },
   data() {
     return {
@@ -190,6 +188,7 @@ export default {
       "perPage",
       "firstNumOfCurrentPageNum",
       "currentPageNum",
+      "stores",
     ]),
     currentCategory() {
       return this.$route.params.food;
@@ -259,21 +258,6 @@ export default {
   },
   methods: {
     ...mapActions("common", [`${TOGGLE_ON_CHOOSE_FILTER}`]),
-    changePage(pageName, idx) {
-      this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
-      this.read(idx);
-    },
-    read(idx) {
-      axios
-        .get("https://reqres.in/api/users?page=" + idx)
-        .then((res) => {
-          console.log("매장리스트 페이지(미리보기창 용) axios 통신 성공");
-          console.log(res.data.data);
-        })
-        .catch((err) => {
-          cosonle.log(err);
-        });
-    },
     onClickFilter(selectedFilterObj) {
       this.$store.commit(
         `common/${SET_SELECTED_SEARCH_FILTER}`,
@@ -302,7 +286,8 @@ export default {
         this.TOGGLE_ON_CHOOSE_FILTER();
         const filterWrap = document.querySelector("#select-search-filter_wrap");
         const filters = document.querySelectorAll(".select-search-filter");
-        filterWrap.style.height = "600%";
+        filterWrap.style.height = `calc(${this.searchFilters.length *
+          100}% + ${this.searchFilters.length * 2}px)`;
         filters.forEach((filterDiv) => {
           filterDiv.style.transform = `translateY(0px)`;
         });
@@ -329,6 +314,10 @@ export default {
     },
   },
   created() {
+    if (this.currentPage !== "storeListPage") {
+      this.$store.commit(`common/${SET_CURRENT_PAGE}`, "storeListPage");
+    }
+    scrollTo(0, 0);
     // 미리보기 창 켜기
     this.$store.commit(`common/${SET_ON_PREVIEW_BOX}`, true);
 
@@ -544,6 +533,7 @@ export default {
   width: 80%;
 }
 #select-search-filter_wrap {
+  z-index: 20;
   overflow: hidden;
   transition: 0.7s;
   position: absolute;
@@ -551,7 +541,7 @@ export default {
   right: -1px;
   width: calc(100% + 2px);
   height: 0;
-  /* height: 600%; */
+  /* height: calc(600% + 12px); */
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -586,56 +576,67 @@ export default {
   box-sizing: border-box;
   width: 100%;
   height: 81%;
-  background-color: burlywood;
 }
+#store-list-page_main_middle ul {
+  list-style: none;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2vh 2vw;
+  /* justify-items: center; */
+  align-items: center;
+}
+
 #store-list-page_main_bottom {
   display: flex;
   justify-content: center;
   width: 100%;
   height: 8%;
 }
-#store-list-page_main ul {
+#store-list-page_main_bottom ul {
   margin: 0;
+  padding: 0;
 }
-#store-list-page_main nav,
-#store-list-page_main ul,
-#store-list-page_main li {
+#store-list-page_main_bottom nav,
+#store-list-page_main_bottom ul,
+#store-list-page_main_bottom li {
   height: 100%;
 }
-#store-list-page_main li {
+#store-list-page_main_bottom li {
   display: flex;
   align-items: flex-end;
 }
-#store-list-page_main li > a {
+#store-list-page_main_bottom li > a {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 40%;
 }
 
-#store-list-page_main .page-link {
+#store-list-page_main_bottom .page-link {
   box-sizing: content-box;
   width: 1.6vw;
   text-align: center;
 }
-#store-list-page_main .page-link:hover {
+#store-list-page_main_bottom .page-link:hover {
   background-color: #fcfabe;
-  color: #292929;
 }
-#store-list-page_main .page-link:focus {
+#store-list-page_main_bottom .page-link:focus {
   background-color: white;
   box-shadow: 0 0 0 0.25rem rgb(253 235 13 / 25%);
   color: white;
 }
-#store-list-page_main .page-link_arrow:focus {
+#store-list-page_main_bottom .page-link_arrow:focus {
   color: #292929;
 }
 
-#store-list-page_main .page-item.active .page-link {
+#store-list-page_main_bottom .page-item.active .page-link {
   background-color: #ffdd1b;
   border-color: #ffdd1b;
 }
-#store-list-page_main .page-item.active .page-link:focus {
+#store-list-page_main_bottom .page-item.active .page-link:focus {
   border-color: white;
 }
 .page-link {
