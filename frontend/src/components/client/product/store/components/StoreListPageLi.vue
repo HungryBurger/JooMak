@@ -1,6 +1,6 @@
 <template>
   <li class="store-list-page_li">
-    <div class="store-list-page_li_left">
+    <div class="store-list-page_li_left" @click="onClickLiLeft(store.idx)">
       <div class="li_logo_wrap">
         <img :src="store.logoImg" :alt="store.logoImgAlt" />
       </div>
@@ -47,6 +47,8 @@
 <script>
 import axios from "axios";
 import { SET_CURRENT_PAGE } from "@/store/modules/common.js";
+import { SET_PREVIEW_HOME } from "@/store/modules/product.js";
+import { mapActions } from "vuex";
 
 export default {
   props: ["store"],
@@ -87,6 +89,22 @@ export default {
     },
   },
   methods: {
+    ...mapActions("product", [`${SET_PREVIEW_HOME}`]),
+    // axios preview 정보 요청 함수
+    getPreviewHome(idx) {
+      axios
+        .get("https://reqres.in/api/users?page=" + idx) // 임시 url로 요청. 추후 수정 예정
+        .then((res) => {
+          console.log(res);
+          // this.SET_PREVIEW_HOME(res); // res를 store의 previewHome에 저장
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    onClickLiLeft(idx) {
+      this.getPreviewHome(idx);
+    },
     changePage(pageName, idx) {
       this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
       this.read(idx);

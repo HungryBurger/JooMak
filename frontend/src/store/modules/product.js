@@ -1,4 +1,6 @@
 export const SET_CURRENT_CATEGORY = "SET_CURRENT_CATEGORY";
+export const SET_PREVIEW_HOME = "SET_PREVIEW_HOME";
+export const TOGGLE_INTEREST_BOX = "TOGGLE_INTEREST_BOX";
 export const ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM =
   "ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM";
 export const SET_CURRENT_PAGE_NUM = "SET_CURRENT_PAGE_NUM";
@@ -28,12 +30,7 @@ export const product = {
       { name: "순대", idx: 2 },
       { name: "튀김", idx: 3 },
     ],
-    // pagination
-    totalStoreNum: 1742,
-    storesPerPage: 10,
-    perPage: 10,
-    firstNumOfCurrentPageNum: 1,
-    currentPageNum: 3,
+    // storeList
     stores: [
       {
         idx: 1,
@@ -136,6 +133,56 @@ export const product = {
         numberOfOwnerReview: 157,
       },
     ],
+    // store preview
+    // 미리보기 창 홈 탭
+    previewHome: {
+      idx: 1,
+      name: "동대문 엽기 떡볶이 - 부평점",
+      isInterested: false,
+      image: {
+        logoImg: "https://www.yupdduk.com/images/logo61.png",
+        logoImgAlt: "엽기떡볶이 로고",
+        previewImages: [
+          {
+            idx: 1,
+            img: require("@/assets/images/food1.jpg"),
+            imgAlt: "미리보기 이미지 1",
+          },
+          {
+            idx: 2,
+            img: require("@/assets/images/food2.jpg"),
+            imgAlt: "미리보기 이미지 2",
+          },
+          {
+            idx: 3,
+            img: require("@/assets/images/food3.jpg"),
+            imgAlt: "미리보기 이미지 3",
+          },
+          {
+            idx: 4,
+            img: require("@/assets/images/food4.jpg"),
+            imgAlt: "미리보기 이미지 4",
+          },
+        ],
+      },
+      numberOfReview: 271,
+      numberOfOwnerReview: 157,
+      totalOrder: 102843,
+      monthOrder: 3232,
+      businessHours: `월 ~ 금 : 11:00 ~ 22:00
+      토 : 13:00 ~ 20:00
+      일 : 정기휴무
+      브레이크 : 매일 15:00 ~ 16:00`,
+    },
+    // 미리보기 창 리뷰 탭
+    previewReview: [],
+
+    // pagination
+    totalStoreNum: 1742,
+    storesPerPage: 10,
+    perPage: 10,
+    firstNumOfCurrentPageNum: 1,
+    currentPageNum: 3,
   }),
   getters: {
     homeCategories: (state) => {
@@ -151,9 +198,22 @@ export const product = {
     },
   },
   mutations: {
+    /* 헤더 */
     [SET_CURRENT_CATEGORY](state, category) {
       state.currentCategory = category;
     },
+
+    /* 매장 리스트 페이지 */
+    // store preview
+    [SET_PREVIEW_HOME](state, obj) {
+      state.previewHome = obj;
+    },
+    [TOGGLE_INTEREST_BOX](state) {
+      state.previewHome.isInterested = state.previewHome.isInterested
+        ? false
+        : true;
+    },
+    // pagination
     [ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM](state, perPage) {
       state.firstNumOfCurrentPageNum += perPage;
     },
@@ -161,5 +221,15 @@ export const product = {
       state.currentPageNum = pageNum;
     },
   },
-  actions: {},
+  actions: {
+    /* 매장 리스트 페이지 */
+    //store preview
+    [SET_PREVIEW_HOME]({ commit }, obj) {
+      commit(`${SET_PREVIEW_HOME}`, obj);
+    },
+    [TOGGLE_INTEREST_BOX]({ commit }) {
+      commit(`${TOGGLE_INTEREST_BOX}`);
+      // axios 로직 추가 예정
+    },
+  },
 };
