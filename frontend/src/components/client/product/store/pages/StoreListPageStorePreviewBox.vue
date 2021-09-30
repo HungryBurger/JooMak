@@ -17,16 +17,103 @@
     <div id="store-preview-box_main-wrap">
       <div id="store-preview-box_main">
         <div
+          id="preview_home"
           class="store-preview-box_main-content"
           v-if="previewTab === 'info'"
         >
-          매장 정보 부분입니다
+          <div class="preview_home_top">
+            <h3>{{ previewHome.name }}</h3>
+            <div class="interest_box" @click="onClickInterestBox">
+              <img :src="isInterested" alt="관심 매장" />
+              <span>관심 매장</span>
+            </div>
+          </div>
+          <div class="preview_home_middle">
+            <div
+              class="preview_img_wrap"
+              v-for="previewImage in previewHome.image.previewImages"
+              :key="previewImage.idx"
+            >
+              <img :src="previewImage.img" :alt="previewImage.imgAlt" />
+            </div>
+            <div id="preview_logo_wrap">
+              <img
+                :src="previewHome.image.logoImg"
+                :alt="previewHome.image.logoImagAlt"
+              />
+            </div>
+          </div>
+          <div class="preview_home_bottom">
+            <store-list-page-preview-info-slot :slotInfo="slotInfo.review">
+              <div id="preview_slot_review">
+                <div>
+                  <span>주문자 리뷰</span><span>{{ numberOfReview }}</span>
+                </div>
+                <div>
+                  <span>사장님 댓글</span><span>{{ numberOfOwnerReview }}</span>
+                </div>
+              </div>
+            </store-list-page-preview-info-slot>
+            <hr />
+            <store-list-page-preview-info-slot :slotInfo="slotInfo.order">
+              <div id="preview_slot_order">
+                <div>
+                  <span>총 주문 횟수</span>
+                  <span>{{ totalOrder }}</span>
+                </div>
+                <div>
+                  <span>1달 간 주문 횟수</span>
+                  <span>{{ monthOrder }}</span>
+                </div>
+              </div>
+            </store-list-page-preview-info-slot>
+            <hr />
+            <store-list-page-preview-info-slot
+              :slotInfo="slotInfo.businessHours"
+            >
+              <div
+                id="preview_slot_business-hours"
+                v-html="businessHoursNextLine"
+              ></div>
+            </store-list-page-preview-info-slot>
+          </div>
         </div>
         <div
+          id="preview_review"
           class="store-preview-box_main-content"
           v-else-if="previewTab === 'review'"
         >
-          리뷰 미리보기 부분입니다
+          <div class="preview_review_top">
+            <h3>{{ previewReview.name }}</h3>
+            <router-link :to="`/store/${previewReview.idx}`">
+              <div id="all-review_btn">모든 리뷰</div>
+            </router-link>
+          </div>
+          <div class="preview_review_middle">
+            <div id="order_btn_wrap">
+              <span
+                class="order_btn"
+                :class="{ 'current-order': previewReview.order === 'newest' }"
+                @click="onClickOrderBtn('newest')"
+                >최신순</span
+              >
+              <span>|</span>
+              <span
+                class="order_btn"
+                :class="{ 'current-order': previewReview.order === 'like' }"
+                @click="onClickOrderBtn('like')"
+                >공감순</span
+              >
+            </div>
+            <span>{{ mentByOrder }}</span>
+          </div>
+          <div class="preview_review_bottom">
+            <store-list-page-preview-review-box
+              v-for="reviewInfo in previewReview.reviews"
+              :key="reviewInfo.idx"
+              :reviewInfo="reviewInfo"
+            ></store-list-page-preview-review-box>
+          </div>
         </div>
       </div>
     </div>
@@ -50,14 +137,92 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { SET_ON_PREVIEW_BOX, SET_PREVIEW_TAB } from "@/store/modules/common.js";
+import StoreListPagePreviewInfoSlot from "../components/StoreListPagePreviewInfoSlot.vue";
+import StoreListPagePreviewReviewBox from "../components/StoreListPagePreviewReviewBox.vue";
+import {
+  TOGGLE_INTEREST_BOX,
+  SET_PREVIEW_REVIEW_ORDER,
+} from "@/store/modules/product.js";
 
 export default {
+  components: {
+    StoreListPagePreviewInfoSlot,
+    StoreListPagePreviewReviewBox,
+  },
+  data() {
+    return {
+      slotInfo: {
+        review: {
+          title: "리뷰",
+          icon: require("@/assets/images/icon_preview_review.svg"),
+          iconAlt: "icon_preview_review",
+        },
+        order: {
+          title: "주문 횟수",
+          icon: require("@/assets/images/icon_preview_ordering-finger.svg"),
+          iconAlt: "icon_preview_order",
+        },
+        businessHours: {
+          title: "매장 영업 시간",
+          icon: require("@/assets/images/icon_preview_business-hours.svg"),
+          iconAlt: "icon_preview_business-hours",
+        },
+      },
+    };
+  },
   computed: {
     ...mapState("common", ["onPreviewBox", "previewTab"]),
+    ...mapState("product", ["previewHome", "previewReview"]),
+    /* 홈 탭 */
+    isInterested() {
+      if (!this.previewHome.isInterested) {
+        return require("@/assets/images/icon_heart_empty.svg");
+      } else {
+        return require("@/assets/images/icon_heart_full.svg");
+      }
+    },
+    numberOfReview() {
+      let num = this.previewHome.numberOfReview;
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    numberOfOwnerReview() {
+      let num = this.previewHome.numberOfOwnerReview;
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    totalOrder() {
+      let num = this.previewHome.totalOrder;
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    monthOrder() {
+      let num = this.previewHome.monthOrder;
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    businessHoursNextLine() {
+      return this.previewHome.businessHours.replaceAll("\n", "<br />");
+    },
+    /* 리뷰 탭 */
+    mentByOrder() {
+      switch (this.previewReview.order) {
+        case "newest":
+          return "가장 최근 10건의 리뷰만 표시됩니다.";
+        case "like":
+          return "최대 10건의 리뷰만 표시됩니다.";
+      }
+    },
   },
   methods: {
+    ...mapActions("product", [
+      `${TOGGLE_INTEREST_BOX}`,
+      `${SET_PREVIEW_REVIEW_ORDER}`,
+    ]),
+    scrollTopInStorePreviewBoxMainWrap() {
+      const storePreviewBoxMainWrap = document.querySelector(
+        "#store-preview-box_main-wrap"
+      );
+      storePreviewBoxMainWrap.scrollTo(0, 0);
+    },
     onClickPreviewTab(tabName) {
       if (tabName !== this.previewTab) {
         this.$store.commit(`common/${SET_PREVIEW_TAB}`, tabName);
@@ -129,6 +294,34 @@ export default {
         scaleBox.style.transition = "all 0.7s";
         storePreviewBox.style.transition = "all 0.7s";
       }, 10);
+
+      this.resizePreviewImgRatio();
+    },
+    onClickInterestBox() {
+      this.TOGGLE_INTEREST_BOX();
+    },
+    resizePreviewImgRatio() {
+      if (this.previewTab !== "info") return;
+      const previewImgWrap = document.querySelector(".preview_img_wrap");
+      const previewImgWrapRatio =
+        previewImgWrap.offsetWidth / previewImgWrap.offsetHeight;
+
+      const previewImgs = document.querySelectorAll(".preview_img_wrap > img");
+      previewImgs.forEach((img) => {
+        const imgRatio = img.naturalWidth / img.naturalHeight;
+        if (previewImgWrapRatio < imgRatio) {
+          img.style.height = "100%";
+          img.style.width = "auto";
+        } else {
+          img.style.width = "100%";
+          img.style.height = "auto";
+        }
+      });
+    },
+
+    /* 리뷰 탭 */
+    onClickOrderBtn(orderName) {
+      this.SET_PREVIEW_REVIEW_ORDER(orderName);
     },
   },
   created() {
@@ -138,10 +331,15 @@ export default {
     }
   },
   mounted() {
+    this.scrollTopInStorePreviewBoxMainWrap();
     window.addEventListener("resize", this.resizePreviewLayout);
+    this.resizePreviewImgRatio();
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.resizePreviewLayout);
+  },
+  updated() {
+    this.scrollTopInStorePreviewBoxMainWrap();
   },
 };
 </script>
@@ -197,15 +395,215 @@ export default {
 }
 #store-preview-box_main-wrap:hover::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
 }
 #store-preview-box_main-wrap::-webkit-scrollbar {
   width: 10px;
-  height: 100%;
+  background-color: transparent;
 }
 #store-preview-box_main {
+  padding: 4vh 3.5vh;
   width: 25vw;
-  height: 120%;
+  height: fit-content;
   background-color: #fff5eb;
+}
+
+/* 홈 탭 */
+#preview_home {
+  width: 100%;
+}
+.preview_home_top {
+  margin-bottom: 4vh;
+  display: flex;
+  justify-content: space-between;
+}
+.preview_home_top > h3,
+.preview_review_top > h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.preview_home_top .interest_box {
+  cursor: pointer;
+}
+.preview_home_top .interest_box > img {
+  height: 14px;
+  width: auto;
+  margin-right: 1vh;
+}
+
+.preview_home_middle {
+  margin-bottom: 4vh;
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 27vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1px;
+  grid-auto-rows: minmax(50%, 50%);
+  justify-items: center;
+  align-items: center;
+}
+.preview_img_wrap {
+  cursor: pointer;
+  overflow: hidden;
+  background: chocolate;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.preview_img_wrap > img {
+  width: 100%;
+  height: auto;
+}
+.preview_img_wrap:nth-child(4) {
+  position: relative;
+}
+.preview_img_wrap:nth-child(4)::before {
+  transition: 0.3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.preview_img_wrap:nth-child(4)::after {
+  transition: 0.3s;
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(50% - 1.5vh);
+  left: calc(50% - 1.5vh);
+  width: 3vh;
+  height: 3vh;
+  background: url("~@/assets/images/icon_plus_btn_gray.svg");
+  background-size: 100% 100%;
+}
+.preview_img_wrap:nth-child(4):hover::before {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.preview_img_wrap:nth-child(4):hover::after {
+  background: url("~@/assets/images/icon_plus_btn_white.svg");
+  background-size: 100% 100%;
+}
+#preview_logo_wrap {
+  border-radius: 10px;
+  padding: 0.5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  position: absolute;
+  top: calc(50% -5vh);
+  left: calc(50% - 5vh);
+  width: 10vh;
+  height: 10vh;
+}
+#preview_logo_wrap > img {
+  width: 100%;
+  height: auto;
+}
+
+.preview_home_bottom {
+  width: 100%;
+  height: fit-content;
+}
+.preview_home_bottom span {
+  font-size: 12px;
+}
+#preview_slot_review {
+  display: flex;
+  gap: 3vh;
+  justify-content: space-between;
+}
+#preview_slot_review > div {
+  display: flex;
+  gap: 2vh;
+}
+
+#preview_slot_order > div {
+  display: flex;
+  justify-content: space-between;
+}
+#preview_slot_order > div:first-child {
+  padding-bottom: 1vh;
+}
+#preview_slot_business-hours {
+  line-height: 2;
+}
+
+.preview_home_bottom hr {
+  background-color: #888;
+}
+
+/* 리뷰 탭 */
+.preview_review_top {
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: space-between;
+}
+.preview_review_top > a {
+  position: relative;
+  top: calc(10px - 2vh);
+}
+#all-review_btn {
+  transition: 0.3s;
+  font-size: 12px;
+  width: 5vw;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ff4c3c;
+  border-radius: 50px;
+  color: #ff4c3c;
+}
+.preview_review_middle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1vh;
+  padding-bottom: 1vh;
+}
+#order_btn_wrap {
+  display: flex;
+  gap: 2vh;
+}
+#store-preview-box .preview_review_middle .order_btn {
+  cursor: pointer;
+  color: #858585;
+}
+#store-preview-box .preview_review_middle .order_btn:hover {
+  color: #292929;
+}
+#store-preview-box .preview_review_middle #order_btn_wrap > span:nth-child(2) {
+  color: #cccccc;
+}
+#store-preview-box .preview_review_middle > span {
+  font-size: 12px;
+  color: #9e9e9e;
+}
+#store-preview-box .preview_review_middle .order_btn.current-order {
+  font-weight: bold;
+  color: #292929;
+}
+
+.preview_review_bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+#all-review_btn:hover {
+  background-color: #ff4c3c;
+  color: white;
 }
 
 #preview_switch {
