@@ -17,9 +17,9 @@
           </div>
         </div>
         <div class="li_info_bottom">
-          <span>리뷰&nbsp;&nbsp;{{ store.numberOfReview }}</span>
+          <span>리뷰&nbsp;&nbsp;{{ numberOfReview }}</span>
           <span>|</span>
-          <span>사장님 댓글&nbsp;&nbsp;{{ store.numberOfOwnerReview }}</span>
+          <span>사장님 댓글&nbsp;&nbsp;{{ numberOfOwnerReview }}</span>
         </div>
       </div>
     </div>
@@ -86,6 +86,14 @@ export default {
           alt: "in 40",
         };
       }
+    },
+    numberOfReview() {
+      let num = this.store.numberOfReview;
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    numberOfOwnerReview() {
+      let num = this.store.numberOfOwnerReview;
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
   methods: {
