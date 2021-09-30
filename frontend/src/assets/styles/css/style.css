@@ -30,3 +30,12 @@ a:-webkit-any-link {
   text-decoration: none;
   color: #292929;
 }
+*::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f1f1f1;
+}
+*::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
