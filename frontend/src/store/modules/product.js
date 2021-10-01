@@ -19,6 +19,10 @@ export const ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM =
   "ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM";
 export const SET_CURRENT_PAGE_NUM = "SET_CURRENT_PAGE_NUM";
 
+/* 매장 상세 페이지 */
+export const TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE =
+  "TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE";
+
 export const product = {
   namespaced: true,
   state: () => ({
@@ -252,6 +256,24 @@ export const product = {
     perPage: 10,
     firstNumOfCurrentPageNum: 1,
     currentPageNum: 3,
+
+    /* 매장 상세 페이지 */
+    // 상단 매장 정보 영역
+    storeSimpleInfo: {
+      idx: 3,
+      name: "KFC 부평시장역점",
+      isInterested: false,
+      starAverage: 4.8,
+      minOrderPrice: 15000,
+      notice: `이벤트 진행중! 자세한 내용은 [ 주막 소개 ] 공지를 참고하세요!`,
+      image: {
+        logoImg: require("@/assets/images/member_profile-img2.png"),
+        representativeImg: require("@/assets/images/detail-page_representative-img.png"),
+      },
+    },
+    // 메뉴 선택 탭
+    // 매장 소개 탭
+    // 리뷰 탭
   }),
   getters: {
     homeCategories: (state) => {
@@ -341,6 +363,13 @@ export const product = {
     [SET_CURRENT_PAGE_NUM](state, pageNum) {
       state.currentPageNum = pageNum;
     },
+
+    /* 매장 상세 페이지 */
+    [TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE](state) {
+      state.storeSimpleInfo.isInterested = state.storeSimpleInfo.isInterested
+        ? false
+        : true;
+    },
   },
   actions: {
     /* 매장 리스트 페이지 */
@@ -393,6 +422,12 @@ export const product = {
       // 비공감 btn 처리
       commit(PLUS_OR_MINUS_PREVIEW_HATE, reviewIdx);
       commit(TOGGLE_PREVIEW_HATE_BTN, reviewIdx);
+    },
+
+    /* 매장 상세 페이지 */
+    [TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE]({ commit }) {
+      // axios 비동기 로직 추가 예정 ( * isInterested 변화 )
+      commit(TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE);
     },
   },
 };

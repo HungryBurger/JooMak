@@ -170,9 +170,9 @@ export default {
     window.addEventListener("load", this.setCurrentCategoryAtLoad);
   },
   updated() {
-    console.log("Header 업데이트됨");
+    // console.log("Header 업데이트됨");
   },
-  beforeDestroy() {
+  beforeUnmount() {
     // 로드/리로드 이벤트 리스너 해제 : currentCategory 설정
     window.removeEventListener("load", this.setCurrentCategoryAtLoad);
   },
