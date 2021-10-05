@@ -272,6 +272,96 @@ export const product = {
       },
     },
     // 메뉴 선택 탭
+    products: {
+      idx: 3,
+      name: "KFC 부평시장역점",
+      allProducts: [
+        {
+          groupIdx: 1,
+          groupName: "박스",
+          products: [
+            {
+              productIdx: 1,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_box1.png"),
+              name: "블랙라벨폴인치즈버거 박스",
+              price: 11800,
+            },
+            {
+              productIdx: 2,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_box2.png"),
+              name: "핫통삼겹베이컨버거 박스",
+              price: 11500,
+            },
+            {
+              productIdx: 3,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_box3.png"),
+              name: "징거더블다운맥스 박스",
+              price: 11200,
+            },
+          ],
+        },
+        {
+          groupIdx: 2,
+          groupName: "세트",
+          products: [
+            {
+              productIdx: 1,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_set1.png"),
+              name: "베스트치킨버켓팩",
+              price: 23900,
+            },
+            {
+              productIdx: 2,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_set2.png"),
+              name: "베스트셀러팩",
+              price: 22900,
+            },
+            {
+              productIdx: 3,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_set3.png"),
+              name: "뉴스타팩",
+              price: 21900,
+            },
+            {
+              productIdx: 4,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_set4.png"),
+              name: "베스트혼닭팩",
+              price: 11900,
+            },
+          ],
+        },
+        {
+          groupIdx: 3,
+          groupName: "치킨",
+          products: [],
+        },
+        {
+          groupIdx: 4,
+          groupName: "버거",
+          products: [],
+        },
+        {
+          groupIdx: 5,
+          groupName: "인기",
+          products: [],
+        },
+        {
+          groupIdx: 6,
+          groupName: "음료",
+          products: [],
+        },
+        {
+          groupIdx: 7,
+          groupName: "스낵 & 사이드",
+          products: [],
+        },
+        {
+          groupIdx: 8,
+          groupName: "요일할인",
+          products: [],
+        },
+      ],
+    },
     // 매장 소개 탭
     // 리뷰 탭
   }),

@@ -181,6 +181,7 @@ export default {
 
 <style scoped>
 #header {
+  position: relative;
   z-index: 30;
   box-sizing: border-box;
   padding-top: 2vh;
