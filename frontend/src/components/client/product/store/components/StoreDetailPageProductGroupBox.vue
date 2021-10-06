@@ -37,6 +37,7 @@ export default {
 
 .detail-page_product-li_wrap {
   padding-left: 4vw;
+  padding-right: 4vw;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 4vh 5vw;

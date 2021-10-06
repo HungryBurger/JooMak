@@ -57,6 +57,7 @@ export default {
   width: calc(100% - 15vh);
   display: flex;
   justify-content: space-between;
+  gap: 2vh;
 }
 #store-detail-page_bottom .product-li_content_wrap .content_right {
   display: flex;

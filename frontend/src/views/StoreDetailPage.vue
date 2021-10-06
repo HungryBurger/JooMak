@@ -48,8 +48,12 @@
         <div v-if="tab === 'menu'" id="detail-page_menu-nav">
           <div
             class="detail-page_menu-nav_li_wrap"
-            v-for="product in products.allProducts"
+            :class="{
+              'current-product-group': currentProductGroup === productIndex,
+            }"
+            v-for="(product, productIndex) in products.allProducts"
             :key="product.groupIdx"
+            @click.stop="onClickMenuNav(productIndex)"
           >
             <div class="detail-page_menu-nav_li">
               {{ product.groupName }}
@@ -70,6 +74,9 @@
         :class="{ 'current-tab': tab === 'review' }"
       >
         나그네 생생리뷰
+      </div>
+      <div id="detail-page_scroll-top_btn" @click="onClickScrollTopBtn">
+        <img src="@/assets/images/icon_arrow-top.svg" alt="icon_arrow-top" />
       </div>
     </div>
     <div
@@ -114,6 +121,8 @@ export default {
     return {
       tab: "menu",
       navOnFixed: false,
+      currentProductGroup: 0,
+      arrayOfProductBoxAbsoluteTop: [],
     };
   },
   computed: {
@@ -139,12 +148,15 @@ export default {
   },
   methods: {
     ...mapActions("product", [`${TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE}`]),
+    /* 상단 매장 정보 영역 */
+    onClickInterestBox() {
+      this.TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE();
+    },
+
+    /* Nav */
     checkCurrentScrollY() {
       const storeDetailPageNav = document.querySelector(
         "#store-detail-page_nav"
-      );
-      const storeDetailPageBottom = document.querySelector(
-        "#store-detail-page_bottom"
       );
       if (window.scrollY >= window.innerHeight) {
         storeDetailPageNav.style.position = "fixed";
@@ -154,15 +166,64 @@ export default {
         this.navOnFixed = false;
       }
     },
-    onScroll() {
+    onScrollForNavTab() {
       this.checkCurrentScrollY();
-    },
-    onClickInterestBox() {
-      this.TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE();
     },
     onClickTab(clickedTab) {
+      scrollTo(0, window.innerHeight);
       this.tab = clickedTab;
       this.checkCurrentScrollY();
+    },
+    onClickMenuNav(productIndex) {
+      scrollTo(0, this.arrayOfProductBoxAbsoluteTop[productIndex] + 1); // 미세한 오차로 인해 1px을 더 이동
+    },
+    onClickScrollTopBtn() {
+      scrollTo(0, 0);
+    },
+
+    /* 메뉴 선택 탭 */
+    setArrayOfProductBoxAbsoluteTop() {
+      const absoluteTops = [];
+      const currentProductGroupBox = document.querySelectorAll(
+        ".product-group-box"
+      );
+      for (let i = 0; i < currentProductGroupBox.length; i++) {
+        let productBoxAbsoluteTop =
+          currentProductGroupBox[i].getBoundingClientRect().top +
+          window.pageYOffset;
+        const storeDetailPageNav = document.querySelector(
+          "#store-detail-page_nav"
+        );
+        const detailPageMenuNav = document.querySelector(
+          "#detail-page_menu-nav"
+        );
+        const navHeight =
+          storeDetailPageNav.offsetHeight + detailPageMenuNav.offsetHeight;
+        const viewportHeight = window.innerHeight;
+        absoluteTops.push(
+          productBoxAbsoluteTop - navHeight - viewportHeight * 0.05
+        );
+        // this.arrayOfProductBoxAbsoluteTop에 직접 push하지 않는 이유 :
+        // 만약 직접 push 한다면,
+        // resize 시 새로운 절대 좌표들이 갱신되지 않고 그 뒤에 push 되기만 할 것이기 때문
+      }
+      this.arrayOfProductBoxAbsoluteTop = absoluteTops;
+    },
+    onScrollForProductList() {
+      let currentProductBoxAbsoluteScrollY;
+      let nextProductBoxAbsoluteScrollY;
+      for (let i = 0; i < this.arrayOfProductBoxAbsoluteTop.length; i++) {
+        currentProductBoxAbsoluteScrollY = this.arrayOfProductBoxAbsoluteTop[i];
+        nextProductBoxAbsoluteScrollY = this.arrayOfProductBoxAbsoluteTop[
+          i + 1
+        ];
+        if (
+          window.scrollY >= currentProductBoxAbsoluteScrollY &&
+          window.scrollY < nextProductBoxAbsoluteScrollY
+        ) {
+          this.currentProductGroup = i;
+        }
+      }
     },
 
     read(idx) {
@@ -188,10 +249,19 @@ export default {
     // console.log("axios 테스트 2");
     this.read(this.$route.params.idx);
 
-    window.addEventListener("scroll", this.onScroll);
+    this.setArrayOfProductBoxAbsoluteTop(); // productBoxes에 모든 .product-group-box의 top 절대좌표 추가
+    window.addEventListener("resize", this.setArrayOfProductBoxAbsoluteTop);
+    window.addEventListener("resize", this.onScrollForProductList);
+
+    window.addEventListener("scroll", this.onScrollForNavTab);
+    window.addEventListener("scroll", this.onScrollForProductList);
   },
   beforeUnmount() {
-    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("scroll", this.onScrollForNavTab);
+    window.removeEventListener("scroll", this.onScrollForProductList);
+
+    window.removeEventListener("resize", this.setArrayOfProductBoxAbsoluteTop);
+    window.removeEventListener("resize", this.onScrollForProductList);
   },
 };
 </script>
@@ -331,7 +401,7 @@ export default {
   height: 100%;
   cursor: pointer;
 }
-#store-detail-page_nav .tab:nth-last-child(1) {
+#store-detail-page_nav .tab:nth-child(3) {
   border-right: none;
 }
 #store-detail-page_nav .tab.current-tab {
@@ -340,6 +410,26 @@ export default {
 }
 #store-detail-page_nav .tab:hover:not(.current-tab) {
   background-color: #efefef;
+}
+#detail-page_scroll-top_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  right: calc((100px + 4vw) / 2 - 5vh);
+  top: 80vh;
+  width: 10vh;
+  height: 10vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5vh;
+}
+#detail-page_scroll-top_btn > img {
+  height: 2.3vh;
+  width: auto;
+}
+#detail-page_scroll-top_btn:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 #detail-page_menu-nav {
   cursor: default;
@@ -391,6 +481,13 @@ export default {
   font-weight: bold;
 }
 .detail-page_menu-nav_li_wrap:hover .detail-page_menu-nav_li::after {
+  background-color: #ffdd1b;
+}
+.detail-page_menu-nav_li_wrap.current-product-group {
+  font-weight: bold;
+}
+.detail-page_menu-nav_li_wrap.current-product-group
+  .detail-page_menu-nav_li::after {
   background-color: #ffdd1b;
 }
 
