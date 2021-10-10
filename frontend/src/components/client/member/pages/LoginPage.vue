@@ -1,14 +1,18 @@
 <template>
   <div id="loginPage">
     <span>로그인 페이지입니다</span>
-      <button @click="openModal">열기</button>
+    <button @click="openModal">열기</button>
     <ModalComponent @close="closeModal" v-if="modal">
-      <template slot="header">
-        header
+      <template v-slot:header>
+        <h1>
+          custom header
+        </h1>
       </template>
-      <p>Vue.js Modal Window!</p>
-      <template slot="footer">
-        footer
+      <template v-slot:content>
+        custom content
+      </template>
+      <template v-slot:footer>
+        custom footer
       </template>
     </ModalComponent>
     <br />
@@ -17,21 +21,21 @@
 </template>
 
 <script>
-import ModalComponent from '@/components/client/common/share/pages/ModalComponent.vue'
+import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
 
 export default {
   components: { ModalComponent },
   data() {
     return {
-       modal:false,
+      modal: false,
     };
   },
   methods: {
-      openModal() {
-      this.modal = true
+    openModal() {
+      this.modal = true;
     },
     closeModal() {
-      this.modal = false
+      this.modal = false;
     },
   },
 };
