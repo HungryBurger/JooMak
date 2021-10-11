@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal_wrap">
     <div class="overlay" @click="$emit('close')"></div>
     <div class="modal-card">
       <header class="modal-header">
@@ -32,7 +32,7 @@ export default {};
 </script>
 
 <style scoped>
-.modal,
+.modal_wrap,
 .overlay {
   width: 100%;
   height: 100%;

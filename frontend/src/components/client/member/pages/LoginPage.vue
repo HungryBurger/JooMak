@@ -22,6 +22,7 @@
 
 <script>
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
+import { TOGGLE_ON_MODAL } from "@/store/modules/common.js";
 
 export default {
   components: { ModalComponent },
@@ -32,10 +33,12 @@ export default {
   },
   methods: {
     openModal() {
+      this.$store.commit(`common/${TOGGLE_ON_MODAL}`);
       this.modal = true;
     },
     closeModal() {
       this.modal = false;
+      this.$store.commit(`common/${TOGGLE_ON_MODAL}`);
     },
   },
 };
