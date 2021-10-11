@@ -3,6 +3,12 @@
 간편 배달 웹 서비스 개발
 
 
+[PRD]
+http://joomak-delivery.com/
+[DEV]
+http://dev-joomak-delivery.s3-website.ap-northeast-2.amazonaws.com/
+
+
 # Main Technique
   - Spring Boot
   - JPA
@@ -65,11 +71,13 @@
 
 # Schedule
 ### 2021 
-- 6 ~ 7월 : 사용자 페이지 기획 및 아키텍처 구성
-- 8 ~ 12월 : 사용자 페이지 개발
-- 1 ~ 2월 : 점주 페이지 기획
-- 2 ~ 6월 : 점주 페이지 개발 
-
+- 7 ~ 9월 : 사용자 페이지 기획 & 인프라 구성 & 아키텍처 구성(서버 구성)
+- 10 ~ 12월 : 사용자 페이지 개발 
+- 
+### 2022
+- 1 ~ 2월 : 사용자 페이지 개발
+- 3 ~ 4월 : 점주 페이지 기획
+- 5 ~ 8월 : 점주 페이지 개발
 
 
 
