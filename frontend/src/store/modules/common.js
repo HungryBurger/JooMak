@@ -1,6 +1,6 @@
 // common
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-export const TOGGLE_ON_MODAL = "TOGGLE_ON_MODAL";
+export const SET_ON_MODAL = "SET_ON_MODAL";
 
 // homePage
 export const TOGGLE_ON_HOME = "TOGGLE_ON_HOME";
@@ -45,8 +45,8 @@ export const common = {
     [SET_CURRENT_PAGE](state, pageName) {
       state.currentPage = pageName;
     },
-    [TOGGLE_ON_MODAL](state) {
-      state.onModal = state.onModal ? false : true;
+    [SET_ON_MODAL](state, boolean) {
+      state.onModal = boolean;
     },
 
     // homePage
