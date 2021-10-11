@@ -1,4 +1,4 @@
-name: Front End Deploy
+name: PRD Front End Deploy
 
 on:
   push:
