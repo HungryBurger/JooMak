@@ -6,13 +6,13 @@ const routes = [
   // 홈페이지
   {
     path: "/",
-    name: "HomePage",
+    name: "homePage",
     component: HomePage,
   },
   // about 페이지
   {
     path: "/about",
-    name: "AboutPage",
+    name: "aboutPage",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -24,13 +24,13 @@ const routes = [
   // 회원 공통
   {
     path: "/member/:mode",
-    name: "MemberPage",
+    name: "memberPage",
     component: () => import("@/views/MemberPage.vue"),
   },
   // 마이 페이지 공통
   {
     path: "/my-page/:mode",
-    name: "MyPage",
+    name: "myPage",
     component: () => import("@/views/MyPage.vue"),
   },
 
@@ -38,13 +38,13 @@ const routes = [
   // 매장 리스트 페이지
   {
     path: "/store-list/:food",
-    name: "StoreListPage",
+    name: "storeListPage",
     component: () => import("@/views/StoreListPage.vue"),
   },
   // 매장 상세 페이지
   {
     path: "/store/:idx",
-    name: "StoreDetailPage",
+    name: "storeDetailPage",
     component: () => import("@/views/StoreDetailPage.vue"),
   },
 
@@ -52,19 +52,19 @@ const routes = [
   // 주문 & 결제 페이지
   {
     path: "/order",
-    name: "OrderPage",
+    name: "orderPage",
     component: () => import("@/views/OrderPage.vue"),
   },
   // 주문 현황 페이지
   {
     path: "/order-status",
-    name: "OrderStatusPage",
+    name: "orderStatusPage",
     component: () => import("@/views/OrderStatusPage.vue"),
   },
   // 장바구니 페이지
   {
     path: "/cart",
-    name: "CartPage",
+    name: "cartPage",
     component: () => import("@/views/CartPage.vue"),
   },
 ];
