@@ -1,6 +1,6 @@
 <template>
   <div class="modal_wrap">
-    <div class="overlay" @click="$emit('close')"></div>
+    <div class="overlay" @click="closeModal"></div>
     <div class="modal-card">
       <header class="modal-header">
         <slot name="header">header</slot>
@@ -8,7 +8,7 @@
           id="icon_close"
           src="@/assets/images/icon_close.svg"
           alt="icon_close"
-          @click="$emit('close')"
+          @click="closeModal"
         />
       </header>
       <div class="modal-content">
@@ -19,7 +19,7 @@
       <footer class="modal-footer">
         <slot name="footer">
           footer
-          <button id="close-button" @click="$emit('close')">Close</button>
+          <button id="close-button" @click="closeModal">Close</button>
         </slot>
       </footer>
     </div>
@@ -28,20 +28,21 @@
 
 <script>
 import { mapState } from "vuex";
-import { TOGGLE_ON_MODAL } from "@/store/modules/common.js";
+import { SET_ON_MODAL } from "@/store/modules/common.js";
 
 export default {
   computed: {
     ...mapState("common", ["onModal"]),
   },
-  created() {
-    if (!this.onModal) {
-      this.$store.commit(`common/${TOGGLE_ON_MODAL}`);
-    }
+  methods: {
+    closeModal() {
+      this.$emit("close");
+      this.$store.commit(`common/${SET_ON_MODAL}`, false);
+    },
   },
   beforeUnmount() {
     if (this.onModal) {
-      this.$store.commit(`common/${TOGGLE_ON_MODAL}`);
+      this.$store.commit(`common/${SET_ON_MODAL}`, false);
     }
   },
 };
