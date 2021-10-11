@@ -1,10 +1,9 @@
 <template>
-  <div class="modal">
+  <div class="modal_wrap">
     <div class="overlay" @click="$emit('close')"></div>
     <div class="modal-card">
       <header class="modal-header">
         <slot name="header">header</slot>
-
         <img
           id="icon_close"
           src="@/assets/images/icon_close.svg"
@@ -28,11 +27,28 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+import { TOGGLE_ON_MODAL } from "@/store/modules/common.js";
+
+export default {
+  computed: {
+    ...mapState("common", ["onModal"]),
+  },
+  created() {
+    if (!this.onModal) {
+      this.$store.commit(`common/${TOGGLE_ON_MODAL}`);
+    }
+  },
+  beforeUnmount() {
+    if (this.onModal) {
+      this.$store.commit(`common/${TOGGLE_ON_MODAL}`);
+    }
+  },
+};
 </script>
 
 <style scoped>
-.modal,
+.modal_wrap,
 .overlay {
   width: 100%;
   height: 100%;

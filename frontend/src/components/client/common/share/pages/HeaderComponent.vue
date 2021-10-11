@@ -5,6 +5,7 @@
       'on-home': onHome,
       'out-home': !onHome,
       sticky: currentPage !== 'storeDetailPage',
+      'on-modal': onModal,
     }"
   >
     <div class="header_top">
@@ -95,7 +96,7 @@ export default {
     AddressConfig,
   },
   computed: {
-    ...mapState("common", ["onHome", "onLogin", "currentPage"]),
+    ...mapState("common", ["onHome", "onLogin", "currentPage", "onModal"]),
     ...mapState("member", ["currentAddress"]),
     ...mapState("product", ["categories", "currentCategory"]),
   },
@@ -200,6 +201,9 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+}
+#header.on-modal {
+  z-index: 0;
 }
 .on-home,
 .on-home a {
