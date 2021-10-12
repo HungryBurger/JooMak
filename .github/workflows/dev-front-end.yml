@@ -1,8 +1,8 @@
-name: PRD Front End Deploy
+name: DEV Front End Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   deploy:
@@ -34,7 +34,7 @@ jobs:
         with:
           args: --acl public-read --follow-symlinks --delete
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET_NAME }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_DEV_BUCKET_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_IAM_MANAGER_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_IAM_MANAGER_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_S3_REGION }}
