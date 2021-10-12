@@ -15,6 +15,10 @@ public class OptionGroup {
 	@JoinColumn(name = "menu_id")
 	private Menu menu;
 	
+	//옵션 매핑 필요하지 않을까?
+	@OneToMany(mappedBy = "option_id")
+	private List<Option> optionList;
+	
 	//옵션그룹명
 	private String optGrpNm;
 	
