@@ -76,7 +76,7 @@ public class Member2 {
 
     //등록일
     @Column(name = "sys_reg_at")
-    private int sysRegAt;
+    private localDateTime sysRegAt;
 
     //수정자
     @Column(name = "sys_upd_id")
@@ -96,6 +96,7 @@ public class Member2 {
 
     // 아래부터는 회원 번호로 연결되는 엔티티들인데... 어떻게 연결되는것인지...?
     @Embedded
+    @onetomany@ManyToOne 으로 설정.  + 패치전략
     private Address address;
 
     @Embedded
