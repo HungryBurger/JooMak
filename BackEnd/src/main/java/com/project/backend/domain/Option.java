@@ -8,7 +8,7 @@ public class Option {
 	@Id
 	@GeneratedValue
 	@Column(name = "opt_id")
-	private int id;
+	private int optId;
 	
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "opt_grp_id")
