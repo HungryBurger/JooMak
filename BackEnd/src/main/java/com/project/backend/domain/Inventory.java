@@ -16,7 +16,7 @@ import static javax.persistence.FetchType.LAZY;
 public class Inventory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue		// SEQ
     @Column(name = "inventory_id")
     private Long id;
     
