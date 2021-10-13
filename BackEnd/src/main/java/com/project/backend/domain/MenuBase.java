@@ -50,7 +50,7 @@ public class MenuBase {
 	
 	//매핑이 전부다 필요할 것 같아서 추가
 	//메뉴 조회시 옵션, 이미지, 재고 전부 가져와야하지 않을까?
-	//옵션그룹 매핑? 메뉴:옵션그룹 = 1:n ?
+	//옵션그룹 매핑? 메뉴:옵션그룹 = 1:n ? 양방향 ?
 	@OneToMany(mappedBy = "opt_grp_id")
 	private List<OptionGroup> optionGroupList;
 	//재고 매핑? 1:1 ?
