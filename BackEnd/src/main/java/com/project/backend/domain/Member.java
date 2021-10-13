@@ -10,19 +10,20 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@Table
+@Table(name = "Member")
 public class Member {
 
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
 
-    private String name;
+    @Column
+    private String parcelBasedAddressDetail;
+
 
     @Embedded
     private Address address;
 
-//    @OneToMany(mappedBy = "member") //읽기 전용이된다.
-//    private List<Order> orders = new ArrayList<>();
+
 
 }
