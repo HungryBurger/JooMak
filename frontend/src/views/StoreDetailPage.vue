@@ -78,6 +78,7 @@
       <div id="detail-page_scroll-top_btn" @click="onClickScrollTopBtn">
         <img src="@/assets/images/icon_arrow-top.svg" alt="icon_arrow-top" />
       </div>
+      <store-detail-page-menu-select-modal></store-detail-page-menu-select-modal>
     </div>
     <div
       id="store-detail-page_bottom"
@@ -107,6 +108,7 @@ import axios from "axios";
 import StoreDetailPageMenuSelectTab from "@/components/client/product/store/pages/StoreDetailPageMenuSelectTab.vue";
 import StoreDetailPageStoreIntroTab from "@/components/client/product/store/pages/StoreDetailPageStoreIntroTab.vue";
 import StoreDetailPageStoreReviewTab from "@/components/client/product/store/pages/StoreDetailPageStoreReviewTab.vue";
+import StoreDetailPageMenuSelectModal from "@/components/client/product/store/components/StoreDetailPageMenuSelectModal.vue";
 import { mapActions, mapState } from "vuex";
 import { SET_CURRENT_PAGE } from "@/store/modules/common.js";
 import { TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE } from "@/store/modules/product.js";
@@ -116,6 +118,7 @@ export default {
     StoreDetailPageMenuSelectTab,
     StoreDetailPageStoreIntroTab,
     StoreDetailPageStoreReviewTab,
+    StoreDetailPageMenuSelectModal,
   },
   data() {
     return {
@@ -508,4 +511,11 @@ export default {
 #store-detail-page_bottom.on-review-tab.nav-on-fixed {
   margin-top: 7vh;
 }
+
+/* #store-detail-page_nav .modal_card {
+  padding: 0;
+  min-height: 70vh;
+  width: 60%;
+  height: 80vh;
+} */
 </style>

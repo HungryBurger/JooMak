@@ -1,3 +1,6 @@
+/* storeDetailPage */
+import { SET_ON_MODAL } from "./common.js";
+
 export const SET_CURRENT_CATEGORY = "SET_CURRENT_CATEGORY";
 /* 매장 리스트 페이지 */
 // store preview
@@ -22,6 +25,9 @@ export const SET_CURRENT_PAGE_NUM = "SET_CURRENT_PAGE_NUM";
 /* 매장 상세 페이지 */
 export const TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE =
   "TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE";
+// 메뉴 선택 탭
+export const OPEN_MENU_SELECT_MODAL = "OPEN_MENU_SELECT_MODAL";
+export const SET_MODAL_SELECTED_PRODUCT = "SET_MODAL_SELECTED_PRODUCT";
 
 export const product = {
   namespaced: true,
@@ -281,18 +287,24 @@ export const product = {
           groupName: "박스",
           products: [
             {
+              storeIdx: 3,
+              groupIdx: 1,
               productIdx: 1,
               img: require("@/assets/images/detail-page_imgs/detail-page_food_box1.png"),
               name: "블랙라벨폴인치즈버거 박스",
               price: 11800,
             },
             {
+              storeIdx: 3,
+              groupIdx: 1,
               productIdx: 2,
               img: require("@/assets/images/detail-page_imgs/detail-page_food_box2.png"),
               name: "핫통삼겹베이컨버거 박스",
               price: 11500,
             },
             {
+              storeIdx: 3,
+              groupIdx: 1,
               productIdx: 3,
               img: require("@/assets/images/detail-page_imgs/detail-page_food_box3.png"),
               name: "징거더블다운맥스 박스",
@@ -305,24 +317,32 @@ export const product = {
           groupName: "세트",
           products: [
             {
+              storeIdx: 3,
+              groupIdx: 2,
               productIdx: 1,
               img: require("@/assets/images/detail-page_imgs/detail-page_food_set1.png"),
               name: "베스트치킨버켓팩",
               price: 23900,
             },
             {
+              storeIdx: 3,
+              groupIdx: 2,
               productIdx: 2,
               img: require("@/assets/images/detail-page_imgs/detail-page_food_set2.png"),
               name: "베스트셀러팩",
               price: 22900,
             },
             {
+              storeIdx: 3,
+              groupIdx: 2,
               productIdx: 3,
               img: require("@/assets/images/detail-page_imgs/detail-page_food_set3.png"),
               name: "뉴스타팩",
               price: 21900,
             },
             {
+              storeIdx: 3,
+              groupIdx: 2,
               productIdx: 4,
               img: require("@/assets/images/detail-page_imgs/detail-page_food_set4.png"),
               name: "베스트혼닭팩",
@@ -362,6 +382,22 @@ export const product = {
         },
       ],
     },
+
+    modalSelectedProduct: {
+      storeIdx: 0,
+      groupIdx: 0,
+      productIdx: 0,
+      img: "",
+      imgAlt: "",
+      name: "",
+      detailInfo: ``,
+      price: 0,
+      options: {
+        singleOptionGroup: [],
+        multiOptionGroup: [],
+      },
+    },
+
     // 매장 소개 탭
     // 리뷰 탭
   }),
@@ -460,6 +496,10 @@ export const product = {
         ? false
         : true;
     },
+    // 메뉴 선택 탭
+    [SET_MODAL_SELECTED_PRODUCT](state, productObj) {
+      state.modalSelectedProduct = productObj;
+    },
   },
   actions: {
     /* 매장 리스트 페이지 */
@@ -518,6 +558,116 @@ export const product = {
     [TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE]({ commit }) {
       // axios 비동기 로직 추가 예정 ( * isInterested 변화 )
       commit(TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE);
+    },
+    // 메뉴 선택 탭
+    [OPEN_MENU_SELECT_MODAL]({ commit }, productObj) {
+      const { storeIdx, groupIdx, productIdx, img, name, price } = productObj;
+      let modalSelectedProduct;
+      // Axios 로직 ...
+      // 임시 ( * Axios 대신 )
+      modalSelectedProduct = {
+        storeIdx: storeIdx,
+        groupIdx: groupIdx,
+        productIdx: productIdx,
+        img: img,
+        imgAlt: name,
+        name: name,
+        detailInfo: `${name}에 대한 상세 설명입니다.
+        Axios로 데이터를 받아올 예정입니다.
+        Axios로 데이터를 받아올 예정입니다.
+        Axios로 데이터를 받아올 예정입니다.
+        Axios로 데이터를 받아올 예정입니다.`,
+        price: price,
+        options: {
+          singleOptionGroup: [
+            {
+              optionGroupIdx: 1,
+              optionGroupName: "감자튀김 사이즈",
+              defaultOptionIdx: 1,
+              optionList: [
+                {
+                  optionIdx: 1,
+                  optionName: "M (미디움)",
+                  price: 0,
+                },
+                {
+                  optionIdx: 2,
+                  optionName: "L (라지)",
+                  price: 500,
+                },
+              ],
+            },
+            {
+              optionGroupIdx: 2,
+              optionGroupName: "음료 변경",
+              defaultOptionIdx: 1,
+              optionList: [
+                {
+                  optionIdx: 1,
+                  optionName: "코카콜라",
+                  price: 0,
+                },
+                {
+                  optionIdx: 2,
+                  optionName: "스프라이트",
+                  price: 500,
+                },
+                {
+                  optionIdx: 3,
+                  optionName: "환타 오렌지",
+                  price: 1000,
+                },
+              ],
+            },
+          ],
+          multiOptionGroup: [
+            {
+              optionGroupIdx: 1,
+              optionGroupName: "감자튀김 시즈닝",
+              optionList: [
+                {
+                  optionIdx: 1,
+                  optionName: "뿌링클",
+                  price: 500,
+                },
+                {
+                  optionIdx: 2,
+                  optionName: "핫 시즈닝",
+                  price: 500,
+                },
+                {
+                  optionIdx: 3,
+                  optionName: "바베큐 시즈닝",
+                  price: 1000,
+                },
+              ],
+            },
+          ],
+        },
+      };
+      commit(SET_MODAL_SELECTED_PRODUCT, modalSelectedProduct); // Axios 콜백 로직
+
+      // modal form 제작 ( * for 주문 or 장바구니 )
+      /*
+      modalSelectedProduct: {
+        storeIdx: 0,
+        groupIdx: 0,
+        productIdx: 0,
+        img: "",
+        imgAlt: "",
+        name: "",
+        detailInfo: ``,
+        price: 0,
+        options: {
+          singleOptionGroup: [],
+          multiOptionGroup: [],
+        },
+      },
+      */
+      
+      
+      // open modal
+      commit(`common/${SET_ON_MODAL}`, true, { root: true });
     },
   },
 };
