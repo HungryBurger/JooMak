@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="modal_right">
-        <!-- <menu-select-tab-modal-option-box
+        <menu-select-tab-modal-option-box
           v-for="singleOption in modalSelectedProduct.options.singleOptionGroup"
           :key="singleOption.optionGroupIdx"
           :singleOption="singleOption"
@@ -35,7 +35,7 @@
           v-for="multiOption in modalSelectedProduct.options.multiOptionGroup"
           :key="multiOption.optionGroupIdx"
           :multiOption="multiOption"
-        ></menu-select-tab-modal-option-box> -->
+        ></menu-select-tab-modal-option-box>
       </div>
     </template>
     <template v-slot:footer>
@@ -47,12 +47,12 @@
 <script>
 import { mapState } from "vuex";
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
-// import MenuSelectTabModalOptionBox from "./MenuSelectTabModalOptionBox.vue";
+import MenuSelectTabModalOptionBox from "./MenuSelectTabModalOptionBox.vue";
 
 export default {
   components: {
     ModalComponent,
-    // MenuSelectTabModalOptionBox,
+    MenuSelectTabModalOptionBox,
   },
   computed: {
     ...mapState("common", ["onModal"]),

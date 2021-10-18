@@ -128,7 +128,7 @@ a:-webkit-any-link {
   font-size: 18px;
 }
 
-/* #store-detail-page_nav .modal_right .option-box {
+#store-detail-page_nav .modal_right .option-box {
   text-align: start;
   width: 100%;
 }
@@ -183,4 +183,4 @@ a:-webkit-any-link {
   left: 0;
   width: 100%;
   height: 100%;
-} */
+}
