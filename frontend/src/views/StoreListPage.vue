@@ -334,8 +334,8 @@ export default {
     //   });
   },
   mounted() {
-    console.log("총 페이지 수 : " + this.getNumberOfPageByTotalStoreNum);
-    console.log("마지막 첫 번째 번호" + this.lastFirstNumOfCurrentPage);
+    // console.log("총 페이지 수 : " + this.getNumberOfPageByTotalStoreNum);
+    // console.log("마지막 첫 번째 번호" + this.lastFirstNumOfCurrentPage);
   },
 };
 </script>
