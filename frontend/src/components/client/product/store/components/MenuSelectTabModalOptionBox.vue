@@ -1,14 +1,14 @@
 <template>
-  <div class="option-box" :class="{ 'no-option': !option }">
+  <div class="option-box" :class="{ 'no-option': !optionGroup }">
     <div class="option-box_title">
       <span>
-        {{ option.optionGroupName }}
+        {{ optionGroup.optionGroupName }}
       </span>
     </div>
     <div class="option-box_content">
       <ul>
         <menu-select-tab-modal-option-box-li
-          v-for="optionInfo in option.optionList"
+          v-for="optionInfo in optionGroup.optionList"
           :key="optionInfo.optionIdx"
           :optionInfo="optionInfo"
           :singleOption="singleOption"
@@ -29,14 +29,14 @@ export default {
   },
   data() {
     return {
-      option: {},
+      optionGroup: {},
     };
   },
   created() {
     if (this.singleOption) {
-      this.option = this.singleOption;
+      this.optionGroup = this.singleOption;
     } else if (this.multiOption) {
-      this.option = this.multiOption;
+      this.optionGroup = this.multiOption;
     }
   },
 };

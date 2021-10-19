@@ -7,13 +7,13 @@
       <div class="modal_left">
         <div class="modal_img_wrap">
           <img
-            :src="modalSelectedProduct.img"
-            :alt="modalSelectedProduct.imgAlt"
+            :src="selectedProductBasicInfo.img"
+            :alt="selectedProductBasicInfo.imgAlt"
           />
         </div>
         <div class="modal_menu-info_box">
           <div class="modal_menu_title">
-            <h3 class="modal_menu_name">{{ modalSelectedProduct.name }}</h3>
+            <h3 class="modal_menu_name">{{ selectedProductBasicInfo.name }}</h3>
             <div
               class="modal_menu_detail-info"
               v-html="detailInfoNextLine"
@@ -27,12 +27,12 @@
       </div>
       <div class="modal_right">
         <menu-select-tab-modal-option-box
-          v-for="singleOption in modalSelectedProduct.options.singleOptionGroup"
+          v-for="singleOption in orderForm.options.singleOptionGroup"
           :key="singleOption.optionGroupIdx"
           :singleOption="singleOption"
         ></menu-select-tab-modal-option-box>
         <menu-select-tab-modal-option-box
-          v-for="multiOption in modalSelectedProduct.options.multiOptionGroup"
+          v-for="multiOption in orderForm.options.multiOptionGroup"
           :key="multiOption.optionGroupIdx"
           :multiOption="multiOption"
         ></menu-select-tab-modal-option-box>
@@ -56,12 +56,16 @@ export default {
   },
   computed: {
     ...mapState("common", ["onModal"]),
-    ...mapState("product", ["modalSelectedProduct"]),
+    ...mapState("product", ["selectedProductBasicInfo"]),
+    ...mapState("order", ["orderForm"]),
     detailInfoNextLine() {
-      return this.modalSelectedProduct.detailInfo.replaceAll("\n", "<br />");
+      return this.selectedProductBasicInfo.detailInfo.replaceAll(
+        "\n",
+        "<br />"
+      );
     },
     price() {
-      let num = this.modalSelectedProduct.price;
+      let num = this.selectedProductBasicInfo.price;
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },

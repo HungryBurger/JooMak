@@ -1,12 +1,35 @@
 <template>
   <li>
-    <div class="option_li">
+    <div
+      class="option_li"
+      @click="
+        onClickOptionLi({ optionInfo, singleOption, multiOption, orderForm })
+      "
+    >
       <div class="option_li_left">
         <div v-if="singleOption" class="check-box_wrap">
-          <img :src="imgPathSingleN" alt="unchecked" />
+          <img
+            v-if="optionInfo.onSelected"
+            :src="imgPathSingleY"
+            alt="checked"
+          />
+          <img
+            v-else-if="!optionInfo.onSelected"
+            :src="imgPathSingleN"
+            alt="unchecked"
+          />
         </div>
         <div v-else-if="multiOption" class="check-box_wrap">
-          <img :src="imgPathMultiN" alt="unchecked" />
+          <img
+            v-if="optionInfo.onSelected"
+            :src="imgPathMultiY"
+            alt="checked"
+          />
+          <img
+            v-else-if="!optionInfo.onSelected"
+            :src="imgPathMultiN"
+            alt="unchecked"
+          />
         </div>
         <span class="option_name">{{ optionInfo.optionName }}</span>
       </div>
@@ -18,11 +41,21 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+import { TOGGLE_OPTION_LI } from "@/store/modules/order.js";
+
 export default {
   props: ["optionInfo", "singleOption", "multiOption"],
   computed: {
+    ...mapState("order", ["orderForm"]),
+    imgPathSingleY() {
+      return require("@/assets/images/icon_check-only_y.svg");
+    },
     imgPathSingleN() {
       return require("@/assets/images/icon_check-only_n.svg");
+    },
+    imgPathMultiY() {
+      return require("@/assets/images/icon_check-multi_y.svg");
     },
     imgPathMultiN() {
       return require("@/assets/images/icon_check-multi_n.svg");
@@ -36,6 +69,18 @@ export default {
       }
     },
   },
+  methods: {
+    ...mapActions("order", [TOGGLE_OPTION_LI]),
+    onClickOptionLi({ optionInfo, singleOption, multiOption, orderForm }) {
+      this.TOGGLE_OPTION_LI({
+        optionInfo,
+        singleOption,
+        multiOption,
+        orderForm,
+      });
+    },
+  },
+  mounted() {},
 };
 </script>
 

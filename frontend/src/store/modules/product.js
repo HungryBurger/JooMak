@@ -1,5 +1,6 @@
 /* storeDetailPage */
 import { SET_ON_MODAL } from "./common.js";
+import { SET_ORDER_FORM } from "./order.js";
 
 export const SET_CURRENT_CATEGORY = "SET_CURRENT_CATEGORY";
 /* 매장 리스트 페이지 */
@@ -27,7 +28,8 @@ export const TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE =
   "TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE";
 // 메뉴 선택 탭
 export const OPEN_MENU_SELECT_MODAL = "OPEN_MENU_SELECT_MODAL";
-export const SET_MODAL_SELECTED_PRODUCT = "SET_MODAL_SELECTED_PRODUCT";
+export const SET_SELECTED_PRODUCT_BASIC_INFO =
+  "SET_SELECTED_PRODUCT_BASIC_INFO";
 
 export const product = {
   namespaced: true,
@@ -383,7 +385,7 @@ export const product = {
       ],
     },
 
-    modalSelectedProduct: {
+    selectedProductBasicInfo: {
       storeIdx: 0,
       groupIdx: 0,
       productIdx: 0,
@@ -497,8 +499,8 @@ export const product = {
         : true;
     },
     // 메뉴 선택 탭
-    [SET_MODAL_SELECTED_PRODUCT](state, productObj) {
-      state.modalSelectedProduct = productObj;
+    [SET_SELECTED_PRODUCT_BASIC_INFO](state, productObj) {
+      state.selectedProductBasicInfo = productObj;
     },
   },
   actions: {
@@ -562,10 +564,11 @@ export const product = {
     // 메뉴 선택 탭
     [OPEN_MENU_SELECT_MODAL]({ commit }, productObj) {
       const { storeIdx, groupIdx, productIdx, img, name, price } = productObj;
-      let modalSelectedProduct;
+      let selectedProductBasicInfo;
+      let orderForm;
       // Axios 로직 ...
       // 임시 ( * Axios 대신 )
-      modalSelectedProduct = {
+      selectedProductBasicInfo = {
         storeIdx: storeIdx,
         groupIdx: groupIdx,
         productIdx: productIdx,
@@ -578,6 +581,14 @@ export const product = {
         Axios로 데이터를 받아올 예정입니다.
         Axios로 데이터를 받아올 예정입니다.`,
         price: price,
+      };
+      // modal form 제작 ( * for 주문 or 장바구니 )
+      orderForm = {
+        storeIdx: 0,
+        groupIdx: 0,
+        productIdx: 0,
+        name: "",
+        price: 0,
         options: {
           singleOptionGroup: [
             {
@@ -589,11 +600,13 @@ export const product = {
                   optionIdx: 1,
                   optionName: "M (미디움)",
                   price: 0,
+                  onSelected: true,
                 },
                 {
                   optionIdx: 2,
                   optionName: "L (라지)",
                   price: 500,
+                  onSelected: false,
                 },
               ],
             },
@@ -606,16 +619,19 @@ export const product = {
                   optionIdx: 1,
                   optionName: "코카콜라",
                   price: 0,
+                  onSelected: true,
                 },
                 {
                   optionIdx: 2,
                   optionName: "스프라이트",
                   price: 500,
+                  onSelected: false,
                 },
                 {
                   optionIdx: 3,
                   optionName: "환타 오렌지",
                   price: 1000,
+                  onSelected: false,
                 },
               ],
             },
@@ -629,43 +645,31 @@ export const product = {
                   optionIdx: 1,
                   optionName: "뿌링클",
                   price: 500,
+                  onSelected: false,
                 },
                 {
                   optionIdx: 2,
                   optionName: "핫 시즈닝",
                   price: 500,
+                  onSelected: false,
                 },
                 {
                   optionIdx: 3,
                   optionName: "바베큐 시즈닝",
                   price: 1000,
+                  onSelected: false,
                 },
               ],
             },
           ],
         },
+        numberOfProduct: 1,
       };
-      commit(SET_MODAL_SELECTED_PRODUCT, modalSelectedProduct); // Axios 콜백 로직
+      // Axios 콜백 로직 start
+      commit(SET_SELECTED_PRODUCT_BASIC_INFO, selectedProductBasicInfo);
+      commit(`order/${SET_ORDER_FORM}`, orderForm, { root: true });
+      // Axios 콜백 로직 end
 
-      // modal form 제작 ( * for 주문 or 장바구니 )
-      /*
-      modalSelectedProduct: {
-        storeIdx: 0,
-        groupIdx: 0,
-        productIdx: 0,
-        img: "",
-        imgAlt: "",
-        name: "",
-        detailInfo: ``,
-        price: 0,
-        options: {
-          singleOptionGroup: [],
-          multiOptionGroup: [],
-        },
-      },
-      */
-      
-      
       // open modal
       commit(`common/${SET_ON_MODAL}`, true, { root: true });
     },
