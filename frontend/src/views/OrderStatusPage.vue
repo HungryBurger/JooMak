@@ -49,7 +49,7 @@
                 <span class="li_info_top">동대문 엽기 떡볶이-부평점</span>
               </div>
             </div>
-            <div class="d-grid gap-2 d-md-block">
+            <div class="btn-group">
               <button class="btn secondary-button btn-sm m-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -249,7 +249,9 @@ export default {};
 </script>
 
 <style>
-#order-status-page-wrap {
+#order-status-page {
+  /* background-color: #fff0b1; */
+  padding: 12px;
 }
 .spinner-grow {
   -webkit-animation: blink 0.8s ease-in-out infinite alternate;
@@ -316,9 +318,9 @@ h3 {
   text-align: center;
   padding-bottom: 24px;
 }
-#order-status-page {
+/* #order-status-page {
   margin: 36px;
-}
+} */
 h1 {
   padding-bottom: 40px;
   text-align: center;
@@ -333,8 +335,9 @@ h1 {
 #order-status-page-card {
   /* width: 80%; */
   margin: 12px 24px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #c4c4c4;
   border-radius: 10px;
+  /* background-color: #ffffcc; */
 }
 .stepper-item {
   position: relative;
@@ -413,7 +416,7 @@ h1 {
   cursor: pointer;
   display: flex;
   align-items: center;
-  /* width: 40%; */
+  width: 50%;
   height: 12vh;
   padding-left: 1vh;
   border: 1px solid #e0e0e0;
