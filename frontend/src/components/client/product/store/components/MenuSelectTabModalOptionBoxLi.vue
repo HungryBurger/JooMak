@@ -9,12 +9,12 @@
       <div class="option_li_left">
         <div v-if="singleOption" class="check-box_wrap">
           <img
-            v-if="optionInfo.onSelected"
+            v-if="optionGroup.selectedOptionIdx === optionInfo.optionIdx"
             :src="imgPathSingleY"
             alt="checked"
           />
           <img
-            v-else-if="!optionInfo.onSelected"
+            v-else-if="optionGroup.selectedOptionIdx !== optionInfo.optionIdx"
             :src="imgPathSingleN"
             alt="unchecked"
           />
@@ -45,7 +45,7 @@ import { mapActions, mapState } from "vuex";
 import { TOGGLE_OPTION_LI } from "@/store/modules/order.js";
 
 export default {
-  props: ["optionInfo", "singleOption", "multiOption"],
+  props: ["optionGroup", "optionInfo", "singleOption", "multiOption"],
   computed: {
     ...mapState("order", ["orderForm"]),
     imgPathSingleY() {

@@ -10,6 +10,7 @@
         <menu-select-tab-modal-option-box-li
           v-for="optionInfo in optionGroup.optionList"
           :key="optionInfo.optionIdx"
+          :optionGroup="optionGroup"
           :optionInfo="optionInfo"
           :singleOption="singleOption"
           :multiOption="multiOption"

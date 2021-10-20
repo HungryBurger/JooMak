@@ -1,7 +1,7 @@
 /* 매장 상세 페이지 */
 // 리뷰 탭 - Modal
 export const SET_ORDER_FORM = "SET_ORDER_FORM";
-export const TOGGLE_SINGLE_OPTION_LI = "TOGGLE_SINGLE_OPTION_LI";
+export const SET_SINGLE_OPTION_LI = "SET_SINGLE_OPTION_LI";
 export const TOGGLE_MULTI_OPTION_LI = "TOGGLE_MULTI_OPTION_LI";
 export const TOGGLE_OPTION_LI = "TOGGLE_OPTION_LI";
 
@@ -19,7 +19,7 @@ export const order = {
           {
             optionGroupIdx: 1,
             optionGroupName: "감자튀김 사이즈",
-            defaultOptionIdx: 1,
+            selectedOptionIdx: 1,
             optionList: [
               {
                 optionIdx: 1,
@@ -36,7 +36,7 @@ export const order = {
           {
             optionGroupIdx: 2,
             optionGroupName: "음료 변경",
-            defaultOptionIdx: 1,
+            selectedOptionIdx: 1,
             optionList: [
               {
                 optionIdx: 1,
@@ -88,13 +88,10 @@ export const order = {
     [SET_ORDER_FORM](state, orderForm) {
       state.orderForm = orderForm;
     },
-    [TOGGLE_SINGLE_OPTION_LI](state, { optionGroupIndex, optionIndex }) {
-      state.orderForm.options.singleOptionGroup[optionGroupIndex].optionList[
-        optionIndex
-      ].onSelected = state.orderForm.options.singleOptionGroup[optionGroupIndex]
-        .optionList[optionIndex].onSelected
-        ? false
-        : true;
+    [SET_SINGLE_OPTION_LI](state, { optionGroupIndex, optionIdx }) {
+      state.orderForm.options.singleOptionGroup[
+        optionGroupIndex
+      ].selectedOptionIdx = optionIdx;
     },
     [TOGGLE_MULTI_OPTION_LI](state, { optionGroupIndex, optionIndex }) {
       state.orderForm.options.multiOptionGroup[optionGroupIndex].optionList[
@@ -113,7 +110,7 @@ export const order = {
       if (singleOption) {
         const singleOptionGroup = orderForm.options.singleOptionGroup;
         let optionGroupIndex;
-        let optionIndex;
+        let optionIdx = optionInfo.optionIdx;
         // optionGroupIndex 찾기
         for (let i = 0; i < singleOptionGroup.length; i++) {
           if (
@@ -123,15 +120,7 @@ export const order = {
             break;
           }
         }
-        // optionIndex 찾기
-        for (let i = 0; i < singleOption.optionList.length; i++) {
-          if (singleOption.optionList[i].optionIdx === optionInfo.optionIdx) {
-            optionIndex = i;
-            break;
-          }
-        }
-
-        commit(TOGGLE_SINGLE_OPTION_LI, { optionGroupIndex, optionIndex });
+        commit(SET_SINGLE_OPTION_LI, { optionGroupIndex, optionIdx });
       } else if (multiOption) {
         const multiOptionGroup = orderForm.options.multiOptionGroup;
         let optionGroupIndex;

@@ -584,54 +584,49 @@ export const product = {
       };
       // modal form 제작 ( * for 주문 or 장바구니 )
       orderForm = {
-        storeIdx: 0,
-        groupIdx: 0,
-        productIdx: 0,
-        name: "",
-        price: 0,
+        storeIdx: storeIdx,
+        groupIdx: groupIdx,
+        productIdx: productIdx,
+        name: name,
+        price: price,
         options: {
           singleOptionGroup: [
             {
               optionGroupIdx: 1,
               optionGroupName: "감자튀김 사이즈",
-              defaultOptionIdx: 1,
+              selectedOptionIdx: 1,
               optionList: [
                 {
                   optionIdx: 1,
                   optionName: "M (미디움)",
                   price: 0,
-                  onSelected: true,
                 },
                 {
                   optionIdx: 2,
                   optionName: "L (라지)",
                   price: 500,
-                  onSelected: false,
                 },
               ],
             },
             {
               optionGroupIdx: 2,
               optionGroupName: "음료 변경",
-              defaultOptionIdx: 1,
+              selectedOptionIdx: 1,
               optionList: [
                 {
                   optionIdx: 1,
                   optionName: "코카콜라",
                   price: 0,
-                  onSelected: true,
                 },
                 {
                   optionIdx: 2,
                   optionName: "스프라이트",
                   price: 500,
-                  onSelected: false,
                 },
                 {
                   optionIdx: 3,
                   optionName: "환타 오렌지",
                   price: 1000,
-                  onSelected: false,
                 },
               ],
             },
