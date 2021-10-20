@@ -184,3 +184,47 @@ a:-webkit-any-link {
   width: 100%;
   height: 100%;
 }
+#store-detail-page_nav .modal_right .input-number-box_area {
+  width: 100%;
+  padding: 0 5vh;
+}
+#store-detail-page_nav .modal_right .input-number-box_wrap {
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  padding: 5vh 0;
+}
+#store-detail-page_nav .modal_right .input-number-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3vh;
+  width: 100%;
+}
+#store-detail-page_nav .modal_right .number_btn {
+  cursor: pointer;
+  height: 4vh;
+  width: 10vh;
+}
+#store-detail-page_nav .modal_right .number_btn > svg {
+  width: 100%;
+  height: 100%;
+}
+#store-detail-page_nav .modal_right .number_btn > svg > circle,
+#store-detail-page_nav .modal_right .number_btn > svg > rect {
+  transition: 0.4s;
+}
+#store-detail-page_nav .modal_right .number_minus:hover > svg > circle {
+  fill: #ffdd1b;
+}
+#store-detail-page_nav .modal_right .number_minus:hover > svg > rect {
+  fill: white;
+}
+#store-detail-page_nav .modal_right .number_plus:hover > svg > circle {
+  fill: #ffdd1b;
+}
+#store-detail-page_nav .modal_right .number_plus:hover > svg > rect {
+  fill: white;
+}
+#store-detail-page_nav .modal_right .input-number {
+  font-weight: bold;
+}

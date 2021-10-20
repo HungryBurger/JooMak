@@ -36,6 +36,73 @@
           :key="multiOption.optionGroupIdx"
           :multiOption="multiOption"
         ></menu-select-tab-modal-option-box>
+        <div class="input-number-box_area">
+          <div class="input-number-box_wrap">
+            <div class="input-number-box">
+              <div class="number_minus number_btn" @click="onClickMinusBtn">
+                <svg
+                  width="50"
+                  height="50"
+                  viewBox="0 0 50 50"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="25"
+                    cy="25"
+                    r="22.5"
+                    fill="white"
+                    stroke="#FFDD1B"
+                    stroke-width="5"
+                  />
+                  <rect
+                    x="15"
+                    y="22"
+                    width="20"
+                    height="6"
+                    rx="3"
+                    fill="#FFDD1C"
+                  />
+                </svg>
+              </div>
+              <span class="input-number">{{ orderForm.numberOfProduct }}</span>
+              <div class="number_plus number_btn" @click="onClickPlusBtn">
+                <svg
+                  width="50"
+                  height="50"
+                  viewBox="0 0 50 50"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="25"
+                    cy="25"
+                    r="22.5"
+                    fill="white"
+                    stroke="#FFDD1B"
+                    stroke-width="5"
+                  />
+                  <rect
+                    x="15"
+                    y="22"
+                    width="20"
+                    height="6"
+                    rx="3"
+                    fill="#FFDD1C"
+                  />
+                  <rect
+                    x="22"
+                    y="15"
+                    width="6"
+                    height="20"
+                    rx="3"
+                    fill="#FFDD1C"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </template>
     <template v-slot:footer>
@@ -45,9 +112,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
 import MenuSelectTabModalOptionBox from "./MenuSelectTabModalOptionBox.vue";
+import { MINUS_PRODUCT_NUM, PLUS_PRODUCT_NUM } from "@/store/modules/order.js";
 
 export default {
   components: {
@@ -70,8 +138,15 @@ export default {
     },
   },
   methods: {
+    ...mapActions("order", [MINUS_PRODUCT_NUM, PLUS_PRODUCT_NUM]),
     closeModal() {
       console.log("close event 발생");
+    },
+    onClickMinusBtn() {
+      this.MINUS_PRODUCT_NUM();
+    },
+    onClickPlusBtn() {
+      this.PLUS_PRODUCT_NUM();
     },
   },
 };

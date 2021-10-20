@@ -656,6 +656,48 @@ export const product = {
                 },
               ],
             },
+            {
+              optionGroupIdx: 2,
+              optionGroupName: "패티 옵션",
+              optionList: [
+                {
+                  optionIdx: 1,
+                  optionName: "양상추 빼기",
+                  price: 0,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 2,
+                  optionName: "토마토 빼기",
+                  price: 0,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 3,
+                  optionName: "치즈 추가",
+                  price: 500,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 4,
+                  optionName: "베이컨 추가",
+                  price: 1000,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 5,
+                  optionName: "고기 패티 추가",
+                  price: 1000,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 6,
+                  optionName: "치킨 패티 추가",
+                  price: 1500,
+                  onSelected: false,
+                },
+              ],
+            },
           ],
         },
         numberOfProduct: 1,

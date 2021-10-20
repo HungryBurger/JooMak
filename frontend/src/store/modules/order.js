@@ -4,6 +4,8 @@ export const SET_ORDER_FORM = "SET_ORDER_FORM";
 export const SET_SINGLE_OPTION_LI = "SET_SINGLE_OPTION_LI";
 export const TOGGLE_MULTI_OPTION_LI = "TOGGLE_MULTI_OPTION_LI";
 export const TOGGLE_OPTION_LI = "TOGGLE_OPTION_LI";
+export const MINUS_PRODUCT_NUM = "MINUS_PRODUCT_NUM";
+export const PLUS_PRODUCT_NUM = "PLUS_PRODUCT_NUM";
 
 export const order = {
   namespaced: true,
@@ -101,6 +103,16 @@ export const order = {
         ? false
         : true;
     },
+    [MINUS_PRODUCT_NUM](state) {
+      if (state.orderForm.numberOfProduct > 1) {
+        state.orderForm.numberOfProduct--;
+      }
+    },
+    [PLUS_PRODUCT_NUM](state) {
+      if (state.orderForm.numberOfProduct < 15) {
+        state.orderForm.numberOfProduct++;
+      }
+    },
   },
   actions: {
     [TOGGLE_OPTION_LI](
@@ -142,6 +154,18 @@ export const order = {
           }
         }
         commit(TOGGLE_MULTI_OPTION_LI, { optionGroupIndex, optionIndex });
+      }
+    },
+    [MINUS_PRODUCT_NUM]({ state, commit }) {
+      if (state.orderForm.numberOfProduct > 1) {
+        commit(MINUS_PRODUCT_NUM);
+      }
+    },
+    [PLUS_PRODUCT_NUM]({ state, commit }) {
+      if (state.orderForm.numberOfProduct < 15) {
+        commit(PLUS_PRODUCT_NUM);
+      } else {
+        alert("선택하신 옵션으로 한 번에 최대 15개 주문 가능합니다.");
       }
     },
   },
