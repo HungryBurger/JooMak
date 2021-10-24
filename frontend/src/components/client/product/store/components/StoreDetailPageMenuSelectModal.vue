@@ -5,7 +5,7 @@
     </template>
     <template v-slot:content>
       <div class="modal_left">
-        <div class="modal_img_wrap">
+        <div class="modal_img_wrap" @wheel.prevent>
           <img
             :src="selectedProductBasicInfo.img"
             :alt="selectedProductBasicInfo.imgAlt"
@@ -13,13 +13,16 @@
         </div>
         <div class="modal_menu-info_box">
           <div class="modal_menu_title">
-            <h3 class="modal_menu_name">{{ selectedProductBasicInfo.name }}</h3>
+            <h3 class="modal_menu_name" @wheel.prevent>
+              {{ selectedProductBasicInfo.name }}
+            </h3>
+
             <div
               class="modal_menu_detail-info"
               v-html="detailInfoNextLine"
             ></div>
           </div>
-          <div class="modal_menu_price">
+          <div class="modal_menu_price" @wheel.prevent>
             기본&nbsp;&nbsp;&nbsp;&nbsp;<span>{{ price }}</span
             >&nbsp;&nbsp;원
           </div>
@@ -145,6 +148,14 @@
             </div>
           </div>
         </div>
+        <div class="link-box">
+          <router-link to="/cart">
+            <div class="link_cart" @click="onClickCartLink">보따리에 담기</div>
+          </router-link>
+          <router-link to="/order">
+            <div class="link_order" @click="onClickOrderLink">바로 주문</div>
+          </router-link>
+        </div>
       </div>
     </template>
     <template v-slot:footer>
@@ -200,6 +211,15 @@ export default {
     },
     onClickPlusBtn() {
       this.PLUS_PRODUCT_NUM();
+    },
+    onClickCartLink() {
+      console.log("보따리 btn 클릭");
+      // Axios post 로직
+      // this.orderForm 이용
+    },
+    onClickOrderLink() {
+      console.log("바로 주문 btn 클릭");
+      // this.orderForm 이용
     },
   },
 };

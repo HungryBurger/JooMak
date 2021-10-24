@@ -333,3 +333,34 @@ a:-webkit-any-link {
   > span {
   font-weight: bold;
 }
+
+#store-detail-page_nav .modal_right .link-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+#store-detail-page_nav .modal_right .link-box > a {
+  width: 50%;
+}
+#store-detail-page_nav .modal_right .link-box > a > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  font-weight: bold;
+  color: white;
+}
+#store-detail-page_nav .modal_right .link-box .link_cart {
+  background-color: #ffdd1b;
+}
+#store-detail-page_nav .modal_right .link-box .link_cart:hover {
+  background-color: #ffe552;
+}
+#store-detail-page_nav .modal_right .link-box .link_order {
+  background-color: #ff4c3c;
+}
+#store-detail-page_nav .modal_right .link-box .link_order:hover {
+  background-color: #ff5e50;
+}
