@@ -85,7 +85,37 @@ export const order = {
       numberOfProduct: 1,
     },
   }),
-  getters: {},
+  getters: {
+    orderFormPrice(state) {
+      let price = state.orderForm.price;
+      const singleOptionGroup = state.orderForm.options.singleOptionGroup;
+      const multiOptionGroup = state.orderForm.options.multiOptionGroup;
+
+      // singleOptionGroup
+      for (let i = 0; i < singleOptionGroup.length; i++) {
+        const selectedOptionObj = singleOptionGroup[i].optionList.filter(
+          (optionObj) =>
+            optionObj.optionIdx === singleOptionGroup[i].selectedOptionIdx
+        )[0];
+        price += selectedOptionObj.price;
+      }
+
+      // multiOptionGroup
+      for (let i = 0; i < multiOptionGroup.length; i++) {
+        const selectedOptionObjList = multiOptionGroup[i].optionList.filter(
+          (optionObj) => optionObj.onSelected
+        );
+        for (let j = 0; j < selectedOptionObjList.length; j++) {
+          price += selectedOptionObjList[j].price;
+        }
+      }
+
+      return price;
+    },
+    orderFormTotalPrice(state, getters) {
+      return getters.orderFormPrice * state.orderForm.numberOfProduct;
+    },
+  },
   mutations: {
     [SET_ORDER_FORM](state, orderForm) {
       state.orderForm = orderForm;

@@ -103,6 +103,48 @@
             </div>
           </div>
         </div>
+        <div class="option-box">
+          <div class="option-box_title">
+            <span>
+              선택한 옵션
+            </span>
+          </div>
+          <div class="option-box_content selected-option">
+            <ul>
+              <li>
+                <span>{{ orderForm.name }}</span>
+                <span>{{ productPrice }}</span>
+              </li>
+              <selected-single-option-li
+                v-for="singleOption in orderForm.options.singleOptionGroup"
+                :key="singleOption.optionGroupIdx"
+                :singleOption="singleOption"
+              ></selected-single-option-li>
+              <selected-multi-option-li
+                v-for="multiOption in orderForm.options.multiOptionGroup"
+                :key="multiOption.optionGroupIdx"
+                :multiOption="multiOption"
+              ></selected-multi-option-li>
+            </ul>
+            <div class="selected-option_price">
+              <number-with-comma-span
+                :num="orderFormPrice"
+                textBack="&nbsp;원"
+              ></number-with-comma-span>
+            </div>
+            <div class="selected-option_number">
+              <span>수량</span>
+              <span>x {{ orderForm.numberOfProduct }}</span>
+            </div>
+            <div class="selected-option_total-price">
+              <number-with-comma-span
+                :num="orderFormTotalPrice"
+                textFront="총&nbsp;&nbsp;"
+                textBack="&nbsp;원"
+              ></number-with-comma-span>
+            </div>
+          </div>
+        </div>
       </div>
     </template>
     <template v-slot:footer>
@@ -112,20 +154,27 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
 import MenuSelectTabModalOptionBox from "./MenuSelectTabModalOptionBox.vue";
+import SelectedSingleOptionLi from "./SelectedSingleOptionLi.vue";
+import SelectedMultiOptionLi from "./SelectedMultiOptionLi.vue";
+import NumberWithCommaSpan from "@/components/client/common/share/components/NumberWithCommaSpan.vue";
 import { MINUS_PRODUCT_NUM, PLUS_PRODUCT_NUM } from "@/store/modules/order.js";
 
 export default {
   components: {
     ModalComponent,
     MenuSelectTabModalOptionBox,
+    SelectedSingleOptionLi,
+    SelectedMultiOptionLi,
+    NumberWithCommaSpan,
   },
   computed: {
     ...mapState("common", ["onModal"]),
     ...mapState("product", ["selectedProductBasicInfo"]),
     ...mapState("order", ["orderForm"]),
+    ...mapGetters("order", ["orderFormPrice", "orderFormTotalPrice"]),
     detailInfoNextLine() {
       return this.selectedProductBasicInfo.detailInfo.replaceAll(
         "\n",
@@ -134,6 +183,10 @@ export default {
     },
     price() {
       let num = this.selectedProductBasicInfo.price;
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    productPrice() {
+      let num = this.orderForm.price;
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },

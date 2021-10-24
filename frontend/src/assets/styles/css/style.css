@@ -200,6 +200,9 @@ a:-webkit-any-link {
   gap: 3vh;
   width: 100%;
 }
+#store-detail-page_nav .modal_right .input-number-box .input-number {
+  width: 3vh;
+}
 #store-detail-page_nav .modal_right .number_btn {
   cursor: pointer;
   height: 4vh;
@@ -226,5 +229,107 @@ a:-webkit-any-link {
   fill: white;
 }
 #store-detail-page_nav .modal_right .input-number {
+  font-weight: bold;
+}
+
+#store-detail-page_nav .modal_right .option-box_content.selected-option {
+  padding: 0 5vh;
+}
+#store-detail-page_nav .modal_right .option-box_content.selected-option > ul {
+  width: 100%;
+  padding-bottom: 1.5vh;
+  border-bottom: 1px solid #e0e0e0;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > ul
+  > li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5vh 0;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > ul
+  > li.selected-multi-option_li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5vh;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > ul
+  > li.selected-multi-option_li.no-multi-option {
+  display: none;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > ul
+  > li.selected-multi-option_li
+  > ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 2vh;
+  gap: 1.5vh;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > ul
+  > li.selected-multi-option_li
+  > ul
+  > li {
+  width: 100%;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > ul
+  > li.selected-multi-option_li
+  > ul
+  > li
+  > div {
+  display: flex;
+  justify-content: space-between;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > .selected-option_price {
+  display: flex;
+  justify-content: flex-end;
+  padding: 3vh 0;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > .selected-option_number {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 3vh;
+  border-bottom: 1px solid #e0e0e0;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > .selected-option_total-price {
+  display: flex;
+  justify-content: flex-end;
+  padding: 3vh 0;
+}
+#store-detail-page_nav
+  .modal_right
+  .option-box_content.selected-option
+  > .selected-option_total-price
+  > span {
   font-weight: bold;
 }
