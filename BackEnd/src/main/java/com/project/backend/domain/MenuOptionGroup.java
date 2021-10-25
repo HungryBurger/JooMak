@@ -19,7 +19,7 @@ public class OptionGroup {
 	@Id
 	@GeneratedValue
 	@Column(name = "opt_grp_id")
-	private Long optGrpId;
+	private Long id;
 	
 	@Embedded
 	@ManyToOne(fatch = LAZY)

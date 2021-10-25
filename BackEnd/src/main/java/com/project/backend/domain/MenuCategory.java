@@ -18,15 +18,13 @@ public class MenuCategory {
 	@Id
 	@GeneratedValue
 	@Column(name = "menu_category_id")
-	private Long menuCategoryId;
+	private Long id;
 	
-	//메뉴ID로 매핑해줘야하는 것 아닐지? - ERD 테이블에 없음
-	//일단 추가
 	@OneToMany(mappedBy = "menu_id")
 	private List<Menu> menuList;
 
 	//매장 : 메뉴 = 1:n ?
-	@Embedded //?
+	@Embedded
 	@ManyToOne(fetch = LAZY)
     @JoinColumn(name = "store_id")
     private Store store;

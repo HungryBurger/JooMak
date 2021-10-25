@@ -18,7 +18,7 @@ public class MenuImage {
 	@Id
 	@GeneratedValue
 	@Column(name = "menu_img_id")
-	private int menuImgId;
+	private Long id;
 	
 	//이미지 : 메뉴 = 1:1 ?
 	@Embedded

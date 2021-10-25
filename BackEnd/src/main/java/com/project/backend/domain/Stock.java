@@ -13,25 +13,23 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @Setter
 @Table
-public class Inventory {
-	
-	///inventory -> Stock?
+public class Stock {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "inventory_id")
-	private Long inventoryId;
+	@Column(name = "stock_id")
+	private Long id;
 	
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "menu_id")
 	private MenuBase menubase;
 	
 	//재고수량
-	@Column(name = "inventory_quantity")
-	private int inventoryQuantity;
+	@Column(name = "stock_quantity")
+	private int stockQuantity;
 	//안전재고
-	@Column(name = "safety_inventory")
-	private int safetyInventory;
+	@Column(name = "safety_stock")
+	private int safetyStock;
 	
 	//등록자
 	@Column(name = "sys_reg_id")
