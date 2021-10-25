@@ -18,17 +18,17 @@ public class MenuOptionDetail {
 	@Id
 	@GeneratedValue
 	@Column(name = "opt_id")
-	private int optId;
+	private Long id;
 	
 	@Embedded
-	@ManyToOne(fetch = LAZY) // 양방향을 하려고 OneToMany, ManyToOne을 하긴 했는데..
+	@ManyToOne(fetch = LAZY)
 	//양방향이어야 하는지 ?
 	@JoinColumn(name = "opt_grp_id")
 	private MenuOptionGroup menuOptionGroup;
 	
 	//옵션명
 	@Column(name = "opt_nm")
-	private int optNm;  //string이 아닌 int?
+	private String optNm;
 	//옵션가격
 	@Column(name = "opt_price")
 	private String optPrice;

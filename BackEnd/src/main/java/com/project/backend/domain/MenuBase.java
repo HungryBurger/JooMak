@@ -16,11 +16,10 @@ import static javax.persistence.FetchType.LAZY;
 @Table
 public class MenuBase {
 	
-	//id가 우린 전부 Long인데, String으로 하지 않아도 될지?
 	@Id
 	@GeneratedValue
 	@Column(name = "menu_id")
-	private Long menuId;
+	private Long id;
 	
 	//메뉴명
 	@Column(name = "menu_nm")
@@ -29,10 +28,7 @@ public class MenuBase {
 	@Column(name = "menu_code")
 	private String menuCode;
 	
-	//매장 : 메뉴 = 1:n ?
-	//메뉴 카테고리가 매장과 1:n이면 메뉴 : 카테고리 = 1:n인데, 매장을 menubase에서 매핑이 필요?
-	@Embedded	// 컬럼을 하나의 객체로 사용하기 // 필수 ?
-	@ManyToOne(fetch = LAZY)	// 단방향 ?
+	@Embedded	// 컬럼을 하나의 객체로 사용하기
     @JoinColumn(name = "store_id")
     private Store store;
 	
@@ -43,19 +39,17 @@ public class MenuBase {
 	private int price;
 	
 	//메뉴그룹ID
-	@Embedded	// 컬럼을 하나의 객체로 사용하기
+	@Embedded
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "menu_grp_id")
 	private MenuGroup menugroup;
 	
-	//매핑이 전부다 필요할 것 같아서 추가
-	//메뉴 조회시 옵션, 이미지, 재고 전부 가져와야하지 않을까?
-	//옵션그룹 매핑? 메뉴:옵션그룹 = 1:n ?
+	//옵션그룹 매핑? 메뉴:옵션그룹 = 1:n ? 양방향 ?
 	@OneToMany(mappedBy = "opt_grp_id")
-	private List<OptionGroup> optionGroupList;
+	private List<MenuOptionGroup> optionGroupList;
 	//재고 매핑? 1:1 ?
 	@OneToOne(fetch = LAZY, cascade = Cascade)
-	private Inventory inventory;
+	private Stock stock;
 	//메뉴 이미지 매핑? 1:1 ?
 	@OneToOne(fetch = LAZY, cascade = Cascade)
 	private MenuImage menuImage;
@@ -93,13 +87,13 @@ public class MenuBase {
 	@Column(name = "sales_end_at")
     private LocalDateTime salesEndAt;
 	
-	//태그뱃지 - 태그 개수 여러개? 일 경우? 
+	//태그뱃지 
 	@Column(name = "tag_badge")
 	private String tagBadge;
 	//사용여부
 	@Column(name = "use_yn")
 	private String useYn;
-	//삭제여부 - tinytext?
+	//삭제여부
 	@Column(name = "delYn")
 	private String delYn;
 	
