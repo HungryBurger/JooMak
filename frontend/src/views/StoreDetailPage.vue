@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 #storeDetailPage {
-  width: 500px;
+  width: 100%;
   height: 5000px;
   background-color: yellow;
 }
