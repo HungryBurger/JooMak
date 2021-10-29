@@ -7,7 +7,5 @@ import javax.persistence.Embeddable;
 public class Address {
     private String zipcode;
 
-    private String roadaddress;
-
     private String cityName;
 }
