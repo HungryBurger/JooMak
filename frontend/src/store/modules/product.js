@@ -1,3 +1,7 @@
+/* storeDetailPage */
+import { SET_ON_MODAL } from "./common.js";
+import { SET_ORDER_FORM } from "./order.js";
+
 export const SET_CURRENT_CATEGORY = "SET_CURRENT_CATEGORY";
 /* 매장 리스트 페이지 */
 // store preview
@@ -18,6 +22,14 @@ export const CLICK_PREVIEW_HATE_BTN = "CLICK_PREVIEW_HATE_BTN";
 export const ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM =
   "ALTER_FIRST_NUMBER_OF_CURRENT_PAGE_NUM";
 export const SET_CURRENT_PAGE_NUM = "SET_CURRENT_PAGE_NUM";
+
+/* 매장 상세 페이지 */
+export const TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE =
+  "TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE";
+// 메뉴 선택 탭
+export const OPEN_MENU_SELECT_MODAL = "OPEN_MENU_SELECT_MODAL";
+export const SET_SELECTED_PRODUCT_BASIC_INFO =
+  "SET_SELECTED_PRODUCT_BASIC_INFO";
 
 export const product = {
   namespaced: true,
@@ -252,6 +264,144 @@ export const product = {
     perPage: 10,
     firstNumOfCurrentPageNum: 1,
     currentPageNum: 3,
+
+    /* 매장 상세 페이지 */
+    // 상단 매장 정보 영역
+    storeSimpleInfo: {
+      idx: 3,
+      name: "KFC 부평시장역점",
+      isInterested: false,
+      starAverage: 4.8,
+      minOrderPrice: 15000,
+      notice: `이벤트 진행중! 자세한 내용은 [ 주막 소개 ] 공지를 참고하세요!`,
+      image: {
+        logoImg: require("@/assets/images/member_profile-img2.png"),
+        representativeImg: require("@/assets/images/detail-page_representative-img.png"),
+      },
+    },
+    // 메뉴 선택 탭
+    products: {
+      idx: 3,
+      name: "KFC 부평시장역점",
+      allProducts: [
+        {
+          groupIdx: 1,
+          groupName: "박스",
+          products: [
+            {
+              storeIdx: 3,
+              groupIdx: 1,
+              productIdx: 1,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_box1.png"),
+              name: "블랙라벨폴인치즈버거 박스",
+              price: 11800,
+            },
+            {
+              storeIdx: 3,
+              groupIdx: 1,
+              productIdx: 2,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_box2.png"),
+              name: "핫통삼겹베이컨버거 박스",
+              price: 11500,
+            },
+            {
+              storeIdx: 3,
+              groupIdx: 1,
+              productIdx: 3,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_box3.png"),
+              name: "징거더블다운맥스 박스",
+              price: 11200,
+            },
+          ],
+        },
+        {
+          groupIdx: 2,
+          groupName: "세트",
+          products: [
+            {
+              storeIdx: 3,
+              groupIdx: 2,
+              productIdx: 1,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_set1.png"),
+              name: "베스트치킨버켓팩",
+              price: 23900,
+            },
+            {
+              storeIdx: 3,
+              groupIdx: 2,
+              productIdx: 2,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_set2.png"),
+              name: "베스트셀러팩",
+              price: 22900,
+            },
+            {
+              storeIdx: 3,
+              groupIdx: 2,
+              productIdx: 3,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_set3.png"),
+              name: "뉴스타팩",
+              price: 21900,
+            },
+            {
+              storeIdx: 3,
+              groupIdx: 2,
+              productIdx: 4,
+              img: require("@/assets/images/detail-page_imgs/detail-page_food_set4.png"),
+              name: "베스트혼닭팩",
+              price: 11900,
+            },
+          ],
+        },
+        {
+          groupIdx: 3,
+          groupName: "치킨",
+          products: [],
+        },
+        {
+          groupIdx: 4,
+          groupName: "버거",
+          products: [],
+        },
+        {
+          groupIdx: 5,
+          groupName: "인기",
+          products: [],
+        },
+        {
+          groupIdx: 6,
+          groupName: "음료",
+          products: [],
+        },
+        {
+          groupIdx: 7,
+          groupName: "스낵 & 사이드",
+          products: [],
+        },
+        {
+          groupIdx: 8,
+          groupName: "요일할인",
+          products: [],
+        },
+      ],
+    },
+
+    selectedProductBasicInfo: {
+      storeIdx: 0,
+      groupIdx: 0,
+      productIdx: 0,
+      img: "",
+      imgAlt: "",
+      name: "",
+      detailInfo: ``,
+      price: 0,
+      options: {
+        singleOptionGroup: [],
+        multiOptionGroup: [],
+      },
+    },
+
+    // 매장 소개 탭
+    // 리뷰 탭
   }),
   getters: {
     homeCategories: (state) => {
@@ -341,6 +491,17 @@ export const product = {
     [SET_CURRENT_PAGE_NUM](state, pageNum) {
       state.currentPageNum = pageNum;
     },
+
+    /* 매장 상세 페이지 */
+    [TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE](state) {
+      state.storeSimpleInfo.isInterested = state.storeSimpleInfo.isInterested
+        ? false
+        : true;
+    },
+    // 메뉴 선택 탭
+    [SET_SELECTED_PRODUCT_BASIC_INFO](state, productObj) {
+      state.selectedProductBasicInfo = productObj;
+    },
   },
   actions: {
     /* 매장 리스트 페이지 */
@@ -393,6 +554,161 @@ export const product = {
       // 비공감 btn 처리
       commit(PLUS_OR_MINUS_PREVIEW_HATE, reviewIdx);
       commit(TOGGLE_PREVIEW_HATE_BTN, reviewIdx);
+    },
+
+    /* 매장 상세 페이지 */
+    [TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE]({ commit }) {
+      // axios 비동기 로직 추가 예정 ( * isInterested 변화 )
+      commit(TOGGLE_INTEREST_BOX_STORE_DETAIL_PAGE);
+    },
+    // 메뉴 선택 탭
+    [OPEN_MENU_SELECT_MODAL]({ commit }, productObj) {
+      const { storeIdx, groupIdx, productIdx, img, name, price } = productObj;
+      let selectedProductBasicInfo;
+      let orderForm;
+      // Axios 로직 ...
+      // 임시 ( * Axios 대신 )
+      selectedProductBasicInfo = {
+        storeIdx: storeIdx,
+        groupIdx: groupIdx,
+        productIdx: productIdx,
+        img: img,
+        imgAlt: name,
+        name: name,
+        detailInfo: `${name}에 대한 상세 설명입니다.
+        Axios로 데이터를 받아올 예정입니다.
+        Axios로 데이터를 받아올 예정입니다.
+        Axios로 데이터를 받아올 예정입니다.
+        Axios로 데이터를 받아올 예정입니다.`,
+        price: price,
+      };
+      // modal form 제작 ( * for 주문 or 장바구니 )
+      orderForm = {
+        storeIdx: storeIdx,
+        groupIdx: groupIdx,
+        productIdx: productIdx,
+        name: name,
+        price: price,
+        options: {
+          singleOptionGroup: [
+            {
+              optionGroupIdx: 1,
+              optionGroupName: "감자튀김 사이즈",
+              selectedOptionIdx: 1,
+              optionList: [
+                {
+                  optionIdx: 1,
+                  optionName: "M (미디움)",
+                  price: 0,
+                },
+                {
+                  optionIdx: 2,
+                  optionName: "L (라지)",
+                  price: 500,
+                },
+              ],
+            },
+            {
+              optionGroupIdx: 2,
+              optionGroupName: "음료 변경",
+              selectedOptionIdx: 1,
+              optionList: [
+                {
+                  optionIdx: 1,
+                  optionName: "코카콜라",
+                  price: 0,
+                },
+                {
+                  optionIdx: 2,
+                  optionName: "스프라이트",
+                  price: 500,
+                },
+                {
+                  optionIdx: 3,
+                  optionName: "환타 오렌지",
+                  price: 1000,
+                },
+              ],
+            },
+          ],
+          multiOptionGroup: [
+            {
+              optionGroupIdx: 1,
+              optionGroupName: "감자튀김 시즈닝",
+              optionList: [
+                {
+                  optionIdx: 1,
+                  optionName: "뿌링클",
+                  price: 500,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 2,
+                  optionName: "핫 시즈닝",
+                  price: 500,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 3,
+                  optionName: "바베큐 시즈닝",
+                  price: 1000,
+                  onSelected: false,
+                },
+              ],
+            },
+            {
+              optionGroupIdx: 2,
+              optionGroupName: "패티 옵션",
+              optionList: [
+                {
+                  optionIdx: 1,
+                  optionName: "양상추 빼기",
+                  price: 0,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 2,
+                  optionName: "토마토 빼기",
+                  price: 0,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 3,
+                  optionName: "치즈 추가",
+                  price: 500,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 4,
+                  optionName: "베이컨 추가",
+                  price: 1000,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 5,
+                  optionName: "고기 패티 추가",
+                  price: 1000,
+                  onSelected: false,
+                },
+                {
+                  optionIdx: 6,
+                  optionName: "치킨 패티 추가",
+                  price: 1500,
+                  onSelected: false,
+                },
+              ],
+            },
+          ],
+        },
+        numberOfProduct: 1,
+      };
+      // Axios 콜백 로직 start
+      commit(SET_SELECTED_PRODUCT_BASIC_INFO, selectedProductBasicInfo);
+      commit(`order/${SET_ORDER_FORM}`, orderForm, { root: true });
+      // Axios 콜백 로직 end
+
+      // open modal
+      commit(`common/${SET_ON_MODAL}`, true, { root: true });
     },
   },
 };
