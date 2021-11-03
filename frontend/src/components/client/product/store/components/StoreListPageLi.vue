@@ -121,8 +121,8 @@ export default {
       axios
         .get("https://reqres.in/api/users?page=" + idx)
         .then((res) => {
-          console.log("매장리스트 페이지(미리보기창 용) axios 통신 성공");
-          console.log(res.data.data);
+          // console.log("매장리스트 페이지(미리보기창 용) axios 통신 성공");
+          // console.log(res.data.data);
         })
         .catch((err) => {
           cosonle.log(err);

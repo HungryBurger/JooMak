@@ -61,14 +61,14 @@ export default {
     setCurrentPageByRoute() {
       const currentPage = this.getCurrentPageByRoute();
       this.SET_CURRENT_PAGE(currentPage);
-      console.log("load : " + this.currentPage);
+      // console.log("load : " + this.currentPage);
     },
   },
   created() {
     // 로드/리로드 이벤트 리스너 추가 : currentPage 설정
     window.addEventListener("load", this.setCurrentPageByRoute);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     // 로드/리로드 이벤트 리스너 해제 : currentPage 설정
     window.removeEventListener("load", this.setCurrentPageByRoute);
   },

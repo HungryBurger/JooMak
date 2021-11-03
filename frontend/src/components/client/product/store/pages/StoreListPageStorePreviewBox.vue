@@ -335,7 +335,7 @@ export default {
     window.addEventListener("resize", this.resizePreviewLayout);
     this.resizePreviewImgRatio();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener("resize", this.resizePreviewLayout);
   },
   updated() {
