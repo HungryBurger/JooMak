@@ -242,7 +242,7 @@ export default {
   box-sizing: border-box;
   width: 100%;
   height: 25%;
-  padding-right: 25%;
+  padding-right: 27%;
 }
 .home_side-nav_li:hover::after {
   content: "";
