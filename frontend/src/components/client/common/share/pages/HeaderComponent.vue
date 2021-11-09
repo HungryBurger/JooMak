@@ -5,6 +5,7 @@
       'on-home': onHome,
       'out-home': !onHome,
       sticky: currentPage !== 'storeDetailPage',
+      'on-modal': onModal,
     }"
   >
     <div class="header_top">
@@ -95,7 +96,7 @@ export default {
     AddressConfig,
   },
   computed: {
-    ...mapState("common", ["onHome", "onLogin", "currentPage"]),
+    ...mapState("common", ["onHome", "onLogin", "currentPage", "onModal"]),
     ...mapState("member", ["currentAddress"]),
     ...mapState("product", ["categories", "currentCategory"]),
   },
@@ -150,13 +151,39 @@ export default {
         return;
       }
     },
+
+    setCurrentCategoryAtLoad() {
+      if (this.$route.name === "storeListPage") {
+        if (!this.currentAddress) {
+          alert("홈 화면에서 주소를 먼저 설정해 주세요.");
+          this.$router.replace("/");
+        } else {
+          this.$store.commit(
+            `product/${SET_CURRENT_CATEGORY}`,
+            this.$route.params.food
+          );
+        }
+      }
+    },
+  },
+  created() {
+    // 로드/리로드 이벤트 리스너 추가 : currentCategory 설정
+    window.addEventListener("load", this.setCurrentCategoryAtLoad);
+  },
+  updated() {
+    // console.log("Header 업데이트됨");
+  },
+  beforeUnmount() {
+    // 로드/리로드 이벤트 리스너 해제 : currentCategory 설정
+    window.removeEventListener("load", this.setCurrentCategoryAtLoad);
   },
 };
 </script>
 
 <style scoped>
 #header {
-  z-index: 10;
+  position: relative;
+  z-index: 30;
   box-sizing: border-box;
   padding-top: 2vh;
   padding-bottom: 0.5vh;
@@ -174,6 +201,9 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+}
+#header.on-modal {
+  z-index: 0;
 }
 .on-home,
 .on-home a {
