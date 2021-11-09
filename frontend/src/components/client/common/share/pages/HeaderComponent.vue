@@ -87,7 +87,11 @@
 
 <script>
 import { mapState } from "vuex";
-import { TOGGLE_ON_HOME, SET_CURRENT_PAGE } from "@/store/modules/common.js";
+import {
+  TOGGLE_ON_HOME,
+  SET_CURRENT_PAGE,
+  SET_CURRENT_HOME_COORDS,
+} from "@/store/modules/common.js";
 import { SET_CURRENT_CATEGORY } from "@/store/modules/product.js";
 import AddressConfig from "../components/AddressConfig.vue";
 
@@ -132,6 +136,9 @@ export default {
     },
 
     goHome(pageName) {
+      if (this.currentPage !== "homePage") {
+        this.$store.commit(`common/${SET_CURRENT_HOME_COORDS}`, "morning");
+      }
       this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
       this.inHome();
       this.initializeCategory();
