@@ -5,6 +5,7 @@ export const SET_ON_MODAL = "SET_ON_MODAL";
 // homePage
 export const TOGGLE_ON_HOME = "TOGGLE_ON_HOME";
 export const SET_ON_HOME = "SET_ON_HOME";
+export const SET_ON_MODAL_HOME_ALERT = "SET_ON_MODAL_HOME_ALERT";
 export const SET_CURRENT_HOME_COORDS = "SET_CURRENT_HOME_COORDS";
 
 // storeListPage
@@ -23,6 +24,7 @@ export const common = {
 
     // homePage
     onHome: false,
+    onModalHomeAlert: false,
     currentHomeCoords: "morning",
 
     // storeListPage
@@ -55,6 +57,9 @@ export const common = {
     },
     [SET_ON_HOME](state, boolean) {
       state.onHome = boolean;
+    },
+    [SET_ON_MODAL_HOME_ALERT](state, boolean) {
+      state.onModalHomeAlert = boolean;
     },
     [SET_CURRENT_HOME_COORDS](state, coordsName) {
       state.currentHomeCoords = coordsName;

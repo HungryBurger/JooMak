@@ -102,11 +102,11 @@ export default {
 .modal_card {
   overflow-y: overlay;
   position: relative;
-  min-width: 40vw;
+  min-width: 30vw;
   max-width: 80vw;
   padding: 20px;
   background-color: white;
-  min-height: 80vh;
+  min-height: 40vh;
   max-height: 90vh;
   z-index: 10;
   opacity: 1;

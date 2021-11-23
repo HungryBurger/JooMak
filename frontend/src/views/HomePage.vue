@@ -8,6 +8,8 @@
       night: currentHomeCoords === 'night',
     }"
   >
+    <address-config-request-modal></address-config-request-modal>
+    <address-config-modal></address-config-modal>
     <div id="div-for-off-sticky" v-if="currentHomeCoords === 'footer'"></div>
     <div
       class="home_background-color"
@@ -84,10 +86,14 @@ import {
   SET_ON_HOME,
   SET_CURRENT_HOME_COORDS,
 } from "@/store/modules/common.js";
+import AddressConfigRequestModal from "@/components/client/common/home/pages/AddressConfigRequestModal.vue";
+import AddressConfigModal from "@/components/client/common/home/pages/AddressConfigModal.vue";
 import HomePageCategory from "@/components/client/common/home/components/HomePageCategory.vue";
 
 export default {
   components: {
+    AddressConfigRequestModal,
+    AddressConfigModal,
     HomePageCategory,
   },
   computed: {

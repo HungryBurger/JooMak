@@ -32,7 +32,11 @@
 
 <script>
 import { mapState } from "vuex";
-import { TOGGLE_ON_HOME, SET_CURRENT_PAGE } from "@/store/modules/common.js";
+import {
+  TOGGLE_ON_HOME,
+  SET_CURRENT_PAGE,
+  SET_ON_MODAL_HOME_ALERT,
+} from "@/store/modules/common.js";
 import { SET_CURRENT_CATEGORY } from "@/store/modules/product.js";
 
 export default {
@@ -58,7 +62,8 @@ export default {
     },
     onClickCategory(category, pageName) {
       if (!this.currentAddress) {
-        alert("먼저 주소를 설정해 주세요");
+        // alert("먼저 주소를 설정해 주세요");
+        this.$store.commit(`common/${SET_ON_MODAL_HOME_ALERT}`, true);
         return;
       }
 

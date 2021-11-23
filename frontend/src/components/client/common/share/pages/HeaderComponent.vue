@@ -210,7 +210,10 @@ export default {
   left: 0;
 }
 #header.on-modal {
-  z-index: 0;
+  z-index: 10;
+}
+#header a {
+  text-decoration: none;
 }
 .on-home,
 .on-home a {
