@@ -20,6 +20,7 @@
       </div>
       <div class="header_top_middle">
         <address-config></address-config>
+        <address-config-request-modal></address-config-request-modal>
       </div>
       <div class="header_top_right">
         <router-link
@@ -94,10 +95,12 @@ import {
 } from "@/store/modules/common.js";
 import { SET_CURRENT_CATEGORY } from "@/store/modules/product.js";
 import AddressConfig from "../components/AddressConfig.vue";
+import AddressConfigRequestModal from "@/components/client/common/home/pages/AddressConfigRequestModal.vue";
 
 export default {
   components: {
     AddressConfig,
+    AddressConfigRequestModal,
   },
   computed: {
     ...mapState("common", ["onHome", "onLogin", "currentPage", "onModal"]),

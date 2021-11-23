@@ -8,7 +8,6 @@
       night: currentHomeCoords === 'night',
     }"
   >
-    <address-config-request-modal></address-config-request-modal>
     <address-config-modal></address-config-modal>
     <div id="div-for-off-sticky" v-if="currentHomeCoords === 'footer'"></div>
     <div

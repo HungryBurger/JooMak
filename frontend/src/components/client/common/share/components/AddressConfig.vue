@@ -74,6 +74,7 @@ export default {
   background-color: white;
 }
 #address-config-component.on-modal-home-alert {
+  position: relative;
   z-index: 150;
 }
 .address-config_left,
