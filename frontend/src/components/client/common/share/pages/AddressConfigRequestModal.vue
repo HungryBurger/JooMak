@@ -2,7 +2,7 @@
   <modal-component
     v-if="onAddressConfigRequestModal"
     @close="closeModal"
-    class="modal_home_alert"
+    class="address-config-request_modal"
     @wheel.prevent
   >
     <template v-slot:header>
