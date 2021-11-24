@@ -1,5 +1,9 @@
 <template>
-  <div id="address-config-component" @click="onClickAddressConfigComponent">
+  <div
+    id="address-config-component"
+    @click="onClickAddressConfigComponent"
+    :class="{ 'on-modal-home-alert': onAddressConfigRequestModal }"
+  >
     <div
       class="address-config_left"
       :class="{ 'on-home': onHome, 'out-home': !onHome }"
@@ -40,7 +44,7 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("common", ["onHome"]),
+    ...mapState("common", ["onHome", "onAddressConfigRequestModal"]),
     ...mapState("member", ["currentAddress"]),
     selectedAddress() {
       if (!this.currentAddress) return "주소를 설정해 주세요.";
@@ -68,6 +72,10 @@ export default {
   width: 100%;
   height: 30px;
   background-color: white;
+}
+#address-config-component.on-modal-home-alert {
+  position: relative;
+  z-index: 150;
 }
 .address-config_left,
 .address-config_middle,
