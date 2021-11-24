@@ -41,7 +41,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
+import { OPEN_ADDRESS_CONFIG_MODAL } from "@/store/modules/common.js";
 export default {
   computed: {
     ...mapState("common", ["onHome", "onAddressConfigRequestModal"]),
@@ -52,12 +53,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions("common", [`${OPEN_ADDRESS_CONFIG_MODAL}`]),
     onClickAddressConfigComponent() {
-      if (this.onHome) {
-        // 주소 설정 Modal 열기
-      } else if (!this.onHome) {
-        alert("주소는 홈 화면에서 설정할 수 있습니다.");
-      }
+      this.OPEN_ADDRESS_CONFIG_MODAL();
     },
   },
 };
