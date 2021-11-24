@@ -90,8 +90,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import {
+  SET_ON_MODAL_HOME_ALERT,
+  OPEN_ADDRESS_CONFIG_REQUEST_MODAL,
+  CLOSE_ADDRESS_CONFIG_REQUEST_MODAL,
   TOGGLE_ON_HOME,
   SET_CURRENT_PAGE,
   SET_CURRENT_HOME_COORDS,
@@ -117,6 +120,10 @@ export default {
     ...mapState("product", ["categories", "currentCategory"]),
   },
   methods: {
+    ...mapActions("common", [
+      `${OPEN_ADDRESS_CONFIG_REQUEST_MODAL}`,
+      `${CLOSE_ADDRESS_CONFIG_REQUEST_MODAL}`,
+    ]),
     inHome() {
       if (!this.onHome) {
         this.$store.commit(`common/${TOGGLE_ON_HOME}`);
@@ -132,7 +139,7 @@ export default {
     },
     onClickCategory(category, pageName) {
       if (!this.currentAddress) {
-        alert("먼저 주소를 설정해 주세요");
+        this.$store.commit(`common/${SET_ON_MODAL_HOME_ALERT}`, true);
         return;
       }
 
@@ -166,16 +173,20 @@ export default {
 
     checkAddressConfigSelection() {
       if (!this.currentAddress) {
-        alert("먼저 주소를 설정해 주세요");
+        this.$store.commit(`common/${SET_ON_MODAL_HOME_ALERT}`, true);
         return;
       }
     },
 
     setCurrentCategoryAtLoad() {
-      if (this.$route.name === "storeListPage") {
+      console.log(this.$route.name);
+      if (
+        this.$route.name !== "homePage" &&
+        this.$route.name !== "memberPage" &&
+        this.$route.name !== "orderStatusPage"
+      ) {
         if (!this.currentAddress) {
-          alert("홈 화면에서 주소를 먼저 설정해 주세요.");
-          this.$router.replace("/");
+          this.OPEN_ADDRESS_CONFIG_REQUEST_MODAL();
         } else {
           this.$store.commit(
             `product/${SET_CURRENT_CATEGORY}`,

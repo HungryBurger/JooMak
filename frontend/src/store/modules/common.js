@@ -1,11 +1,17 @@
+import router from "@/router";
+
 // common
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_ON_MODAL = "SET_ON_MODAL";
+export const SET_ON_MODAL_HOME_ALERT = "SET_ON_MODAL_HOME_ALERT";
+export const OPEN_ADDRESS_CONFIG_REQUEST_MODAL =
+  "OPEN_ADDRESS_CONFIG_REQUEST_MODAL";
+export const CLOSE_ADDRESS_CONFIG_REQUEST_MODAL =
+  "CLOSE_ADDRESS_CONFIG_REQUEST_MODAL";
 
 // homePage
 export const TOGGLE_ON_HOME = "TOGGLE_ON_HOME";
 export const SET_ON_HOME = "SET_ON_HOME";
-export const SET_ON_MODAL_HOME_ALERT = "SET_ON_MODAL_HOME_ALERT";
 export const SET_CURRENT_HOME_COORDS = "SET_CURRENT_HOME_COORDS";
 
 // storeListPage
@@ -21,10 +27,10 @@ export const common = {
     onLogin: false,
     currentPage: "homePage",
     onModal: false,
+    onModalHomeAlert: false,
 
     // homePage
     onHome: false,
-    onModalHomeAlert: false,
     currentHomeCoords: "morning",
 
     // storeListPage
@@ -50,6 +56,9 @@ export const common = {
     [SET_ON_MODAL](state, boolean) {
       state.onModal = boolean;
     },
+    [SET_ON_MODAL_HOME_ALERT](state, boolean) {
+      state.onModalHomeAlert = boolean;
+    },
 
     // homePage
     [TOGGLE_ON_HOME](state) {
@@ -57,9 +66,6 @@ export const common = {
     },
     [SET_ON_HOME](state, boolean) {
       state.onHome = boolean;
-    },
-    [SET_ON_MODAL_HOME_ALERT](state, boolean) {
-      state.onModalHomeAlert = boolean;
     },
     [SET_CURRENT_HOME_COORDS](state, coordsName) {
       state.currentHomeCoords = coordsName;
@@ -86,6 +92,17 @@ export const common = {
     },
     [TOGGLE_ON_CHOOSE_FILTER]({ commit }) {
       commit(`${TOGGLE_ON_CHOOSE_FILTER}`);
+    },
+    [OPEN_ADDRESS_CONFIG_REQUEST_MODAL]({ state, commit }) {
+      if (state.currentPage !== "homePage") {
+        commit(SET_ON_MODAL_HOME_ALERT, true);
+      }
+    },
+    [CLOSE_ADDRESS_CONFIG_REQUEST_MODAL]({ state, commit }) {
+      commit(SET_ON_MODAL_HOME_ALERT, false);
+      if (state.currentPage !== "homePage") {
+        router.replace("/");
+      }
     },
   },
 };

@@ -91,7 +91,13 @@ a:-webkit-any-link {
   bottom: 3vh;
   right: 3vh;
 }
+@keyframes shaking-arrow {
+  100% {
+    transform: translate3d(50%, 0, 0);
+  }
+}
 #header .header_top_middle .alert-arrow_wrap {
+  animation: shaking-arrow 1s ease-in-out infinite alternate;
   z-index: 150;
   position: absolute;
   left: -100px;

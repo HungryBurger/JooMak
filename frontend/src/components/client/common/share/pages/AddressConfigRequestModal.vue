@@ -3,6 +3,7 @@
     v-if="onModalHomeAlert"
     @close="closeModal"
     class="modal_home_alert"
+    @wheel.prevent
   >
     <template v-slot:header>
       <div class="no-use"></div>
@@ -30,8 +31,8 @@
 
 <script>
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
-import { mapState } from "vuex";
-import { SET_ON_MODAL_HOME_ALERT } from "@/store/modules/common.js";
+import { mapActions, mapState } from "vuex";
+import { CLOSE_ADDRESS_CONFIG_REQUEST_MODAL } from "@/store/modules/common.js";
 
 export default {
   components: {
@@ -41,8 +42,9 @@ export default {
     ...mapState("common", ["onModalHomeAlert"]),
   },
   methods: {
+    ...mapActions("common", [`${CLOSE_ADDRESS_CONFIG_REQUEST_MODAL}`]),
     closeModal() {
-      this.$store.commit(`common/${SET_ON_MODAL_HOME_ALERT}`, false);
+      this.CLOSE_ADDRESS_CONFIG_REQUEST_MODAL();
     },
   },
 };
