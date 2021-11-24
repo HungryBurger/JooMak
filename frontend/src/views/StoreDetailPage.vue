@@ -40,7 +40,7 @@
     </div>
     <div
       id="store-detail-page_nav"
-      :class="{ 'on-alert-modal': onModalHomeAlert }"
+      :class="{ 'on-alert-modal': onAddressConfigRequestModal }"
     >
       <div
         class="tab"
@@ -132,7 +132,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("common", ["currentPage", "onModalHomeAlert"]),
+    ...mapState("common", ["currentPage", "onAddressConfigRequestModal"]),
     ...mapState("product", ["storeSimpleInfo", "products"]),
     imageIsInterestedPath() {
       if (!this.storeSimpleInfo.isInterested) {

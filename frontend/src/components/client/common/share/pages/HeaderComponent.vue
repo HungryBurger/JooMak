@@ -19,7 +19,7 @@
         </router-link>
       </div>
       <div class="header_top_middle">
-        <div v-if="onModalHomeAlert" class="alert-arrow_wrap">
+        <div v-if="onAddressConfigRequestModal" class="alert-arrow_wrap">
           <img src="@/assets/images/icon_arrow-right.svg" alt="arrow-right" />
         </div>
         <address-config></address-config>
@@ -92,7 +92,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import {
-  SET_ON_MODAL_HOME_ALERT,
+  SET_ON_ADDRESS_CONFIG_REQUEST_MODAL,
   OPEN_ADDRESS_CONFIG_REQUEST_MODAL,
   CLOSE_ADDRESS_CONFIG_REQUEST_MODAL,
   TOGGLE_ON_HOME,
@@ -114,7 +114,7 @@ export default {
       "onLogin",
       "currentPage",
       "onModal",
-      "onModalHomeAlert",
+      "onAddressConfigRequestModal",
     ]),
     ...mapState("member", ["currentAddress"]),
     ...mapState("product", ["categories", "currentCategory"]),
@@ -139,7 +139,10 @@ export default {
     },
     onClickCategory(category, pageName) {
       if (!this.currentAddress) {
-        this.$store.commit(`common/${SET_ON_MODAL_HOME_ALERT}`, true);
+        this.$store.commit(
+          `common/${SET_ON_ADDRESS_CONFIG_REQUEST_MODAL}`,
+          true
+        );
         return;
       }
 
@@ -173,7 +176,10 @@ export default {
 
     checkAddressConfigSelection() {
       if (!this.currentAddress) {
-        this.$store.commit(`common/${SET_ON_MODAL_HOME_ALERT}`, true);
+        this.$store.commit(
+          `common/${SET_ON_ADDRESS_CONFIG_REQUEST_MODAL}`,
+          true
+        );
         return;
       }
     },

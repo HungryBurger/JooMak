@@ -1,6 +1,6 @@
 <template>
   <modal-component
-    v-if="onModalHomeAlert"
+    v-if="onAddressConfigRequestModal"
     @close="closeModal"
     class="modal_home_alert"
     @wheel.prevent
@@ -39,7 +39,7 @@ export default {
     ModalComponent,
   },
   computed: {
-    ...mapState("common", ["onModalHomeAlert"]),
+    ...mapState("common", ["onAddressConfigRequestModal"]),
   },
   methods: {
     ...mapActions("common", [`${CLOSE_ADDRESS_CONFIG_REQUEST_MODAL}`]),
