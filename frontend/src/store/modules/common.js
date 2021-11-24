@@ -1,6 +1,14 @@
+import router from "@/router";
+
 // common
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_ON_MODAL = "SET_ON_MODAL";
+export const SET_ON_ADDRESS_CONFIG_REQUEST_MODAL =
+  "SET_ON_ADDRESS_CONFIG_REQUEST_MODAL";
+export const OPEN_ADDRESS_CONFIG_REQUEST_MODAL =
+  "OPEN_ADDRESS_CONFIG_REQUEST_MODAL";
+export const CLOSE_ADDRESS_CONFIG_REQUEST_MODAL =
+  "CLOSE_ADDRESS_CONFIG_REQUEST_MODAL";
 
 // homePage
 export const TOGGLE_ON_HOME = "TOGGLE_ON_HOME";
@@ -20,6 +28,7 @@ export const common = {
     onLogin: false,
     currentPage: "homePage",
     onModal: false,
+    onAddressConfigRequestModal: false,
 
     // homePage
     onHome: false,
@@ -47,6 +56,9 @@ export const common = {
     },
     [SET_ON_MODAL](state, boolean) {
       state.onModal = boolean;
+    },
+    [SET_ON_ADDRESS_CONFIG_REQUEST_MODAL](state, boolean) {
+      state.onAddressConfigRequestModal = boolean;
     },
 
     // homePage
@@ -81,6 +93,17 @@ export const common = {
     },
     [TOGGLE_ON_CHOOSE_FILTER]({ commit }) {
       commit(`${TOGGLE_ON_CHOOSE_FILTER}`);
+    },
+    [OPEN_ADDRESS_CONFIG_REQUEST_MODAL]({ state, commit }) {
+      if (state.currentPage !== "homePage") {
+        commit(SET_ON_ADDRESS_CONFIG_REQUEST_MODAL, true);
+      }
+    },
+    [CLOSE_ADDRESS_CONFIG_REQUEST_MODAL]({ state, commit }) {
+      commit(SET_ON_ADDRESS_CONFIG_REQUEST_MODAL, false);
+      if (state.currentPage !== "homePage") {
+        router.replace("/");
+      }
     },
   },
 };
