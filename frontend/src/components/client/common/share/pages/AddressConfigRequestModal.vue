@@ -18,7 +18,12 @@
       </div>
     </template>
     <template v-slot:footer>
-      <div class="no-use"></div>
+      <div
+        @click="closeModal"
+        class="modal_alert-confirm_btn d-flex justify-content-center align-items-center"
+      >
+        확인
+      </div>
     </template>
   </modal-component>
 </template>

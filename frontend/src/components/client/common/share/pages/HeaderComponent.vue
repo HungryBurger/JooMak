@@ -19,6 +19,9 @@
         </router-link>
       </div>
       <div class="header_top_middle">
+        <div v-if="onModalHomeAlert" class="alert-arrow_wrap">
+          <img src="@/assets/images/icon_arrow-right.svg" alt="arrow-right" />
+        </div>
         <address-config></address-config>
         <address-config-request-modal></address-config-request-modal>
       </div>
@@ -95,7 +98,7 @@ import {
 } from "@/store/modules/common.js";
 import { SET_CURRENT_CATEGORY } from "@/store/modules/product.js";
 import AddressConfig from "../components/AddressConfig.vue";
-import AddressConfigRequestModal from "@/components/client/common/home/pages/AddressConfigRequestModal.vue";
+import AddressConfigRequestModal from "@/components/client/common/share/pages/AddressConfigRequestModal.vue";
 
 export default {
   components: {
@@ -103,7 +106,13 @@ export default {
     AddressConfigRequestModal,
   },
   computed: {
-    ...mapState("common", ["onHome", "onLogin", "currentPage", "onModal"]),
+    ...mapState("common", [
+      "onHome",
+      "onLogin",
+      "currentPage",
+      "onModal",
+      "onModalHomeAlert",
+    ]),
     ...mapState("member", ["currentAddress"]),
     ...mapState("product", ["categories", "currentCategory"]),
   },
@@ -242,6 +251,9 @@ export default {
 .main-logo {
   width: 65px;
   height: auto;
+}
+.header_top_middle {
+  position: relative;
 }
 .header_top_right {
   display: flex;
