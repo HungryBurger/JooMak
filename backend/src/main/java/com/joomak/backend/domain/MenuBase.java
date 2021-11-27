@@ -1,28 +1,23 @@
-package com.joomak.backend.domain;
+package com.project.backend.domain;
 
-
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
+
 @Entity		// JPA
 @Getter
 @Setter
-@Embeddable
+@Embeddable	// @Embedded 대상일 경우 필요
 @Table
 public class MenuBase {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "menu_id")
     private Long id;
     
@@ -32,9 +27,10 @@ public class MenuBase {
     @Column(name = "menu_code")
     private String menu_code;
 
-//    @Embedded
-//    @JoinColumn(name = "store_id")
-//    private Store store;
+    @Embedded	// 컬럼을 하나의 객체로 사용하기
+    @ManyToOne(fetch = LAZY)	// 단방향인지 확인 필요
+    @JoinColumn(name = "store_id")
+    private Store store;
     
     @Enumerated(EnumType.STRING)
     private MenuStatus menuStatus;

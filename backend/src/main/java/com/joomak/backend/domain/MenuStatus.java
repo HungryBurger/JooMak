@@ -1,5 +1,5 @@
-package com.joomak.backend.domain;
+package com.project.backend.domain;
 
 public enum MenuStatus {
-    FORSALE, NOSTOCK
+    FOR SALE, NO INVENTORY
 }

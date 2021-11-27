@@ -1,16 +1,13 @@
-package com.joomak.backend.domain;
+package com.project.backend.domain;
 
-
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -18,13 +15,14 @@ import lombok.Setter;
 @Table
 public class MenuCategory {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "menu_category_id")
     private Long id;
     
-//    @Embedded
-//    @JoinColumn(name = "store_id")
-//    private Store store;
+    @Embedded
+    @JoinColumn(name = "store_id")
+    private Store store;
     
     @Column(name = "menu_category_nm")
     private String menuCategoryNm;

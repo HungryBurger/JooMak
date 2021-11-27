@@ -1,18 +1,13 @@
-package com.joomak.backend.domain;
+package com.project.backend.domain;
 
-
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -20,7 +15,8 @@ import lombok.Setter;
 @Table
 public class MenuOptionDetail {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "opt_id")
     private Long id;
     
