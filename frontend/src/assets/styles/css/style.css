@@ -152,10 +152,40 @@ a:-webkit-any-link {
 }
 
 #homePage .address-config_modal .modal_content .section_content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
   text-align: start;
   padding-left: 3vw;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   color: #292929;
+}
+
+#homePage .address-config_modal .modal_content .section_content .address-name {
+  font-weight: bold;
+}
+#homePage
+  .address-config_modal
+  .modal_content
+  .section_content
+  .selected-address {
+  position: relative;
+  padding-left: 10px;
+}
+#homePage
+  .address-config_modal
+  .modal_content
+  .section_content
+  .selected-address::after {
+  position: absolute;
+  content: "";
+  display: block;
+  left: 0;
+  bottom: -6px;
+  width: 150%;
+  height: 1px;
+  background-color: #ffc463;
 }
 
 /* storeDetailPage */

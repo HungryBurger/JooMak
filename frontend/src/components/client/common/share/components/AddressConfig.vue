@@ -41,15 +41,15 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 import { OPEN_ADDRESS_CONFIG_MODAL } from "@/store/modules/common.js";
 export default {
   computed: {
     ...mapState("common", ["onHome", "onAddressConfigRequestModal"]),
-    ...mapState("member", ["currentAddress"]),
+    ...mapGetters("member", ["currentAddressObj"]),
     selectedAddress() {
-      if (!this.currentAddress) return "주소를 설정해 주세요.";
-      else return this.currentAddress;
+      if (!this.currentAddressObj) return "주소를 설정해 주세요.";
+      else return this.currentAddressObj.addressMain;
     },
   },
   methods: {

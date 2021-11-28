@@ -44,7 +44,7 @@
         >
         <span>|</span>
         <router-link
-          v-if="currentAddress"
+          v-if="currentAddressObj"
           to="/cart"
           class="header_top_right-elem"
           @click="outStoreListPage('cartPage')"
@@ -53,7 +53,7 @@
         >
         <!-- fake link -->
         <a
-          v-else-if="!currentAddress"
+          v-else-if="!currentAddressObj"
           to="/cart"
           class="header_top_right-elem"
           @click="checkAddressConfigSelection"
@@ -62,7 +62,7 @@
         >
       </div>
     </div>
-    <div class="header_bottom" v-if="currentAddress">
+    <div class="header_bottom" v-if="currentAddressObj">
       <!-- v-for로 카테고리 li 반복 -->
       <router-link
         v-for="category in categories"
@@ -75,7 +75,7 @@
       </router-link>
     </div>
     <!-- fake nav -->
-    <div class="header_bottom" v-else-if="!currentAddress">
+    <div class="header_bottom" v-else-if="!currentAddressObj">
       <a
         v-for="category in categories"
         :key="category.en"
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 import {
   SET_ON_ADDRESS_CONFIG_REQUEST_MODAL,
   OPEN_ADDRESS_CONFIG_REQUEST_MODAL,
@@ -116,8 +116,8 @@ export default {
       "onModal",
       "onAddressConfigRequestModal",
     ]),
-    ...mapState("member", ["currentAddress"]),
     ...mapState("product", ["categories", "currentCategory"]),
+    ...mapGetters("member", ["currentAddressObj"]),
   },
   methods: {
     ...mapActions("common", [
@@ -138,7 +138,7 @@ export default {
       this.$store.commit(`product/${SET_CURRENT_CATEGORY}`, category);
     },
     onClickCategory(category, pageName) {
-      if (!this.currentAddress) {
+      if (!this.currentAddressObj) {
         this.$store.commit(
           `common/${SET_ON_ADDRESS_CONFIG_REQUEST_MODAL}`,
           true
@@ -175,7 +175,7 @@ export default {
     },
 
     checkAddressConfigSelection() {
-      if (!this.currentAddress) {
+      if (!this.currentAddressObj) {
         this.$store.commit(
           `common/${SET_ON_ADDRESS_CONFIG_REQUEST_MODAL}`,
           true
@@ -191,7 +191,7 @@ export default {
         this.$route.name !== "memberPage" &&
         this.$route.name !== "orderStatusPage"
       ) {
-        if (!this.currentAddress) {
+        if (!this.currentAddressObj) {
           this.OPEN_ADDRESS_CONFIG_REQUEST_MODAL();
         } else {
           this.$store.commit(
