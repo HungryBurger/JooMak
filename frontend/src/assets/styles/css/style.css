@@ -108,6 +108,56 @@ a:-webkit-any-link {
   width: auto;
 }
 
+/* homePage */
+#homePage .address-config_modal #icon_close_wrap {
+  top: 4vh;
+  right: 4vh;
+}
+#homePage .address-config_modal .modal_card {
+  width: 50vw;
+  height: 85vh;
+  padding: 0;
+}
+#homePage .address-config_modal .modal_content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 30px;
+}
+#homePage .address-config_modal .modal_content::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 1px;
+  left: 29px;
+  height: 100%;
+  background-color: #ffc463;
+}
+#homePage .address-config_modal .modal_content h3 {
+  margin: 0;
+  padding: 30px 0;
+  color: #292929;
+  font-weight: bold;
+  font-size: 18px;
+}
+#homePage .address-config_modal .modal_content .section_title {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  padding-left: 3vw;
+  width: 15vw;
+  height: 5vh;
+  background-color: #ffc463;
+  color: #292929;
+}
+
+#homePage .address-config_modal .modal_content .section_content {
+  text-align: start;
+  padding-left: 3vw;
+  padding-bottom: 20px;
+  color: #292929;
+}
+
 /* storeDetailPage */
 #store-detail-page_nav .modal_card {
   color: #292929;
