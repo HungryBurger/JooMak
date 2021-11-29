@@ -3,6 +3,10 @@
 REPOSITORY=/var/lib/jenkins/workspace/joomak-backend # (1)
 PROJECT_NAME=backend
 
+echo "> Build 파일 권한 추가"
+
+chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/
+
 echo "> Build 파일 복사"
 
 cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
