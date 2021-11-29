@@ -22,6 +22,16 @@
       </div>
       <br />
       <div class="section_title">주소 목록</div>
+      <table>
+        <th>현재 주소</th>
+        <th>주소명</th>
+        <th colspan="3">주소</th>
+        <address-list-tr
+          v-for="addressObj in addressList"
+          :key="addressObj.idx"
+          :addressObj="addressObj"
+        ></address-list-tr>
+      </table>
     </template>
     <template v-slot:footer>
       <div class="no-use"></div>
@@ -31,15 +41,18 @@
 
 <script>
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
+import AddressListTr from "@/components/client/common/home/components/AddressListTr.vue";
 import { mapGetters, mapState } from "vuex";
 import { SET_ON_ADDRESS_CONFIG_MODAL } from "@/store/modules/common.js";
 
 export default {
   components: {
     ModalComponent,
+    AddressListTr,
   },
   computed: {
     ...mapState("common", ["onAddressConfigModal"]),
+    ...mapState("member", ["addressList"]),
     ...mapGetters("member", ["currentAddressObj"]),
   },
   methods: {

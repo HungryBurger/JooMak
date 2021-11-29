@@ -20,7 +20,7 @@ export const member = {
       },
       {
         idx: 3,
-        selected: true,
+        selected: false,
         name: "사무실",
         addressMain: "서울특별시 송파구 잠실동 765-43",
         addressDetail: "L타워 4602호",
