@@ -32,6 +32,7 @@
           :addressObj="addressObj"
         ></address-list-tr>
       </table>
+      <div class="div-for-padding"></div>
     </template>
     <template v-slot:footer>
       <div class="no-use"></div>
@@ -44,6 +45,7 @@ import ModalComponent from "@/components/client/common/share/pages/ModalComponen
 import AddressListTr from "@/components/client/common/home/components/AddressListTr.vue";
 import { mapGetters, mapState } from "vuex";
 import { SET_ON_ADDRESS_CONFIG_MODAL } from "@/store/modules/common.js";
+import { SET_CHANGE_MODE } from "@/store/modules/member.js";
 
 export default {
   components: {
@@ -57,6 +59,15 @@ export default {
   },
   methods: {
     closeModal() {
+      for (let i = 0; i < this.addressList.length; i++) {
+        if (this.addressList[i].changeMode === true) {
+          this.$store.commit(`member/${SET_CHANGE_MODE}`, {
+            index: i,
+            boolean: false,
+          });
+          break;
+        }
+      }
       this.$store.commit(`common/${SET_ON_ADDRESS_CONFIG_MODAL}`, false);
     },
   },
