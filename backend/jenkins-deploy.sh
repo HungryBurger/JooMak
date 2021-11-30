@@ -5,7 +5,8 @@ PROJECT_NAME=backend
 
 echo "> Build 파일 권한 추가"
 
-chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/
+chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar
+chmod +x $REPOSITORY/$PROJECT_NAME
 
 echo "> Build 파일 복사"
 
@@ -30,3 +31,4 @@ echo "> 새 애플리케이션 배포"
 JAR_NAME=$(ls -tr $REPOSITORY/ | grep *.jar | tail -n 1) # (8)
 
 echo "> JAR Name: $JAR_NAME"
+nohup java -jar $REPOSITORY/$JAR_NAME &
