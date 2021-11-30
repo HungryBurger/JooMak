@@ -8,6 +8,40 @@
       <div class="no-use"></div>
     </template>
     <template v-slot:content>
+      <modal-component
+        v-if="onCurrentAddressConfigModal"
+        @close="closeCurrentAddressConfigModal"
+        class="current-address-config_modal"
+      >
+        <template v-slot:header>
+          <div class="no-use"></div>
+        </template>
+        <template v-slot:content>
+          <div class="text_wrap">
+            <div class="icon_wrap">
+              <img :src="iconAlertPath" alt="icon_alert" />
+            </div>
+            <span class="fw-bold">이 주소를 현재 주소로 설정하시겠어요?</span>
+          </div>
+        </template>
+
+        <template v-slot:footer>
+          <div class="btn_wrap">
+            <div
+              @click="onClickConfirmBtn"
+              class="btn confirm_btn d-flex justify-content-center align-items-center"
+            >
+              확인
+            </div>
+            <div
+              @click="closeCurrentAddressConfigModal"
+              class="btn cancel_btn d-flex justify-content-center align-items-center"
+            >
+              취소
+            </div>
+          </div>
+        </template>
+      </modal-component>
       <h3>배달지 설정</h3>
       <div class="section_title">현재 주소</div>
       <div v-if="!currentAddressObj" class="section_content">
@@ -30,6 +64,7 @@
           v-for="addressObj in addressList"
           :key="addressObj.idx"
           :addressObj="addressObj"
+          @open-modal="openCurrentAddressConfigModal"
         ></address-list-tr>
       </table>
       <div class="div-for-padding"></div>
@@ -43,21 +78,39 @@
 <script>
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
 import AddressListTr from "@/components/client/common/home/components/AddressListTr.vue";
-import { mapGetters, mapState } from "vuex";
-import { SET_ON_ADDRESS_CONFIG_MODAL } from "@/store/modules/common.js";
-import { SET_CHANGE_MODE } from "@/store/modules/member.js";
+import { mapActions, mapGetters, mapState } from "vuex";
+import {
+  SET_ON_ADDRESS_CONFIG_MODAL,
+  SET_ON_CURRENT_ADDRESS_CONFIG_MODAL,
+} from "@/store/modules/common.js";
+import {
+  SET_CHANGE_MODE,
+  SET_ADDRESS_SELECTED,
+} from "@/store/modules/member.js";
 
 export default {
   components: {
     ModalComponent,
     AddressListTr,
   },
+  data() {
+    return {
+      currentAddressIdxCandidate: -1,
+    };
+  },
   computed: {
-    ...mapState("common", ["onAddressConfigModal"]),
+    ...mapState("common", [
+      "onAddressConfigModal",
+      "onCurrentAddressConfigModal",
+    ]),
     ...mapState("member", ["addressList"]),
     ...mapGetters("member", ["currentAddressObj"]),
+    iconAlertPath() {
+      return require("@/assets/images/icon_home_alert.svg");
+    },
   },
   methods: {
+    ...mapActions("member", [`${SET_ADDRESS_SELECTED}`]),
     closeModal() {
       for (let i = 0; i < this.addressList.length; i++) {
         if (this.addressList[i].changeMode === true) {
@@ -69,6 +122,19 @@ export default {
         }
       }
       this.$store.commit(`common/${SET_ON_ADDRESS_CONFIG_MODAL}`, false);
+    },
+    openCurrentAddressConfigModal(idx) {
+      this.$store.commit(`common/${SET_ON_CURRENT_ADDRESS_CONFIG_MODAL}`, true);
+      this.currentAddressIdxCandidate = idx;
+    },
+    closeCurrentAddressConfigModal() {
+      this.$store.commit(
+        `common/${SET_ON_CURRENT_ADDRESS_CONFIG_MODAL}`,
+        false
+      );
+    },
+    onClickConfirmBtn() {
+      this.SET_ADDRESS_SELECTED(this.currentAddressIdxCandidate);
     },
   },
 };

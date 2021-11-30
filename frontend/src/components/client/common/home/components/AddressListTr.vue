@@ -92,6 +92,7 @@ import { SET_ADDRESS_DETAIL, SET_CHANGE_MODE } from "@/store/modules/member.js";
 
 export default {
   props: ["addressObj"],
+  emits: ["open-modal"],
   data() {
     return {
       input: this.addressObj.addressDetail,
@@ -106,7 +107,8 @@ export default {
   methods: {
     ...mapActions("member", [`${SET_CHANGE_MODE}`]),
     onClickCheckBoxBtn(idx) {
-      //open Modal
+      // 상위 컴포넌트로 이벤트 발생
+      this.$emit("open-modal", idx);
     },
     onClickConfirmBtn(idx) {
       // 0) 상세주소를 입력해 주세요

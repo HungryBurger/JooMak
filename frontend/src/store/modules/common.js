@@ -16,6 +16,8 @@ export const SET_ON_HOME = "SET_ON_HOME";
 export const SET_CURRENT_HOME_COORDS = "SET_CURRENT_HOME_COORDS";
 export const OPEN_ADDRESS_CONFIG_MODAL = "OPEN_ADDRESS_CONFIG_MODAL";
 export const SET_ON_ADDRESS_CONFIG_MODAL = "SET_ON_ADDRESS_CONFIG_MODAL";
+export const SET_ON_CURRENT_ADDRESS_CONFIG_MODAL =
+  "SET_ON_CURRENT_ADDRESS_CONFIG_MODAL";
 
 // storeListPage
 export const SET_ON_PREVIEW_BOX = "SET_ON_PREVIEW_BOX";
@@ -36,6 +38,7 @@ export const common = {
     onHome: false,
     currentHomeCoords: "morning",
     onAddressConfigModal: false,
+    onCurrentAddressConfigModal: false,
 
     // storeListPage
     onPreviewBox: true,
@@ -76,6 +79,9 @@ export const common = {
     },
     [SET_ON_ADDRESS_CONFIG_MODAL](state, boolean) {
       state.onAddressConfigModal = boolean;
+    },
+    [SET_ON_CURRENT_ADDRESS_CONFIG_MODAL](state, boolean) {
+      state.onCurrentAddressConfigModal = boolean;
     },
 
     // storeListPage
