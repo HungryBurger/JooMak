@@ -2,6 +2,7 @@
 
 REPOSITORY=/var/lib/jenkins/workspace/joomak-backend # (1)
 PROJECT_NAME=backend
+JAR_NAME = backend-0.0.1-SNAPSHOT.jar
 
 echo "> Build 파일 권한 추가"
 
@@ -27,8 +28,6 @@ else
 fi
 
 echo "> 새 애플리케이션 배포"
-
-JAR_NAME=$(ls -tr $REPOSITORY/ | grep *.jar | tail -n 1) # (8)
 
 echo "> JAR Name: $JAR_NAME"
 nohup java -jar $REPOSITORY/$JAR_NAME &
