@@ -28,9 +28,5 @@ else
 fi
 
 echo "> 새 애플리케이션 배포"
-
 echo "> JAR Name: $JAR_NAME"
 nohup java -jar $REPOSITORY/$JAR_NAME &
-
-
-nohup java -jar /var/lib/jenkins/workspace/joomak-backend/backend-0.0.1-SNAPSHOT.jar &
