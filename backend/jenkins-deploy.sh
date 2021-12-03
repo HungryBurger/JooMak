@@ -10,7 +10,6 @@ chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar
 chmod +x $REPOSITORY/$PROJECT_NAME
 
 echo "> Build 파일 복사"
-
 cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
@@ -28,5 +27,8 @@ else
 fi
 
 echo "> 새 애플리케이션 배포"
+
+JAR_NAME=$(ls -tr $REPOSITORY/ | grep *.jar | tail -n 1) # (8)
+
 echo "> JAR Name: $JAR_NAME"
 nohup java -jar $REPOSITORY/$JAR_NAME &
