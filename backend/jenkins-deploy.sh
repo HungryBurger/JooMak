@@ -16,7 +16,7 @@ echo "> 현재 위치"
 pwd
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
-CURRENT_PID=$(pgrep -f ${PROJECT_NAME}*.jar) # (6)
+CURRENT_PID=$(pgrep -f ${PROJECT_NAME}) # (6)
 
 echo "> 현재 구동중인 애플리케이션 pid: $CURRENT_PID"
 
