@@ -6,8 +6,8 @@ JAR_NAME=backend-0.0.1-SNAPSHOT.jar
 
 echo "> Build 파일 권한 추가"
 
-chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar
-chmod +x $REPOSITORY/$PROJECT_NAME
+sudo chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar
+sudo chmod +x $REPOSITORY/$PROJECT_NAME
 
 echo "> Build 파일 복사"
 cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
