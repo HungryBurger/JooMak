@@ -10,7 +10,7 @@ sudo chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar
 sudo chmod +x $REPOSITORY/$PROJECT_NAME
 
 echo "> Build 파일 복사"
-cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
+sudo cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
