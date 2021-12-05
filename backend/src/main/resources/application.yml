@@ -1,0 +1,15 @@
+spring :
+
+  jpa :
+    hibernate :
+      ddl-auto : create
+    properties :
+      hibernate :
+        show_sql: true
+        format_sql : true
+
+
+logging:
+  level:
+    org.hiberbate.SQL: debug
+    org.hibernate.type: trace
