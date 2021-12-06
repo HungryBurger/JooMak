@@ -6,239 +6,266 @@
           주문 현황
         </h3>
       </div>
-      <div id="order-status-page-card" class="row justify-content-center">
-        <div class="row mt-3">
-          <span class="col-4">2021-09-29 오후 02:41 </span>
-          <span class="col-4 blinking"> 음식 준비중 . . .</span>
-        </div>
-
-        <div class="col-10 stepper-wrapper">
-          <div class="stepper-item completed">
-            <div class="step-counter">
-              1
-            </div>
-            <div class="step-name">접수 대기</div>
-          </div>
-          <div class="stepper-item completed">
-            <div class="step-counter">2</div>
-            <div class="step-name">주문 접수</div>
-          </div>
-          <div class="stepper-item active">
-            <div class="step-counter">
-              3
-              <!-- <div class="spinner-grow active-spinner " role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div> -->
-            </div>
-            <div class="step-name">배달 접수</div>
-          </div>
-          <div class="stepper-item">
-            <div class="step-counter">4</div>
-            <div class="step-name">배달 완료</div>
+      <div
+        id="order-status-page-card"
+        class="row justify-content-center w-75 mx-auto my-3"
+      >
+        <div class="col-3 mx-auto my-auto">
+          <div class="row justify-content-center ">
+            <span class="col-6 text-center my-3 "> 2021-09-29 </span
+            ><span class="col-6 text-center my-3 fw-bold fs-5"
+              >오후 02:41
+            </span>
+            <img
+              id="order-reception"
+              src="@/assets/images/order_reception.png"
+            />
+            <span class="blinking my-3"> 음식 준비중 . . .</span>
           </div>
         </div>
-
-        <!-- <div class="col-6 order-status-card"> -->
-        <li class="col-9 order-status-page_li">
-          <div class="order-status-page_li_left">
-            <div class="li_logo_wrap">
-              <img src="https://www.yupdduk.com/images/logo61.png" />
+        <div class="col-8 mx-auto my-auto">
+          <div class="mt-4 stepper-wrapper">
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                1
+              </div>
+              <div class="step-name">접수 대기</div>
             </div>
-            <div class="li_info_wrap">
-              <div class="li_info_middle">
-                <span class="li_info_top">동대문 엽기 떡볶이-부평점</span>
+            <div class="stepper-item completed">
+              <div class="step-counter">2</div>
+              <div class="step-name">주문 접수</div>
+            </div>
+            <div class="stepper-item active">
+              <div class="step-counter">
+                3
+              </div>
+              <div class="step-name">배달 접수</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">4</div>
+              <div class="step-name">배달 완료</div>
+            </div>
+          </div>
+
+          <li class="order-status-page_li">
+            <div class="order-status-page_li_left">
+              <div class="li_logo_wrap">
+                <img src="https://www.yupdduk.com/images/logo61.png" />
+              </div>
+              <div class="li_info_wrap">
+                <div class="li_info_middle">
+                  <span class="li_info_top">동대문 엽기 떡볶이-부평점</span>
+                </div>
+              </div>
+              <div class="btn-group">
+                <button class="btn secondary-button btn-sm m-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-shop"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"
+                    />
+                  </svg>
+                  가게 정보 보기
+                </button>
+                <button class="btn secondary-button btn-sm m-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-cart-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                    />
+                  </svg>
+                  주문 상세 보기
+                </button>
               </div>
             </div>
-            <div class="btn-group">
-              <button class="btn secondary-button btn-sm m-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-shop"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"
-                  />
-                </svg>
-                가게 정보 보기
-              </button>
-              <button class="btn secondary-button btn-sm m-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-cart-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                  />
-                </svg>
-                주문 상세 보기
-              </button>
-            </div>
-          </div>
-        </li>
+          </li>
+        </div>
       </div>
-      <div id="order-status-page-card" class="row justify-content-center">
-        <div class="row mt-3">
-          <span class="col-4">2021-09-29 오후 02:41 </span>
-          <span class="col-4 blinking">음식 준비중 . . .</span>
-        </div>
-
-        <div class="col-10 stepper-wrapper">
-          <div class="stepper-item completed">
-            <div class="step-counter">
-              1
-            </div>
-            <div class="step-name">접수 대기</div>
-          </div>
-          <div class="stepper-item completed">
-            <div class="step-counter">2</div>
-            <div class="step-name">주문 접수</div>
-          </div>
-          <div class="stepper-item active">
-            <div class="step-counter">
-              3
-              <!-- <div class="spinner-grow active-spinner " role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div> -->
-            </div>
-            <div class="step-name">배달 접수</div>
-          </div>
-          <div class="stepper-item">
-            <div class="step-counter">4</div>
-            <div class="step-name">배달 완료</div>
+      <div
+        id="order-status-page-card"
+        class="row justify-content-center w-75 mx-auto my-3"
+      >
+        <div class="col-3 mx-auto my-auto">
+          <div class="row justify-content-center ">
+            <span class="col-6 text-center my-3"> 2021-09-29 </span
+            ><span class="col-6 text-center my-3 fw-bold fs-5"
+              >오후 02:41
+            </span>
+            <img
+              id="order-reception"
+              src="@/assets/images/delievery_reception.png"
+            />
+            <span class="blinking my-3"> 배달중 . . .</span>
           </div>
         </div>
-
-        <!-- <div class="col-6 order-status-card"> -->
-        <li class="col-9 order-status-page_li">
-          <div class="order-status-page_li_left">
-            <div class="li_logo_wrap">
-              <img src="https://www.yupdduk.com/images/logo61.png" />
+        <div class="col-8 mx-auto my-auto">
+          <div class="mt-4 stepper-wrapper">
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                1
+              </div>
+              <div class="step-name">접수 대기</div>
             </div>
-            <div class="li_info_wrap">
-              <div class="li_info_middle">
-                <span class="li_info_top">동대문 엽기 떡볶이-부평점</span>
+            <div class="stepper-item completed">
+              <div class="step-counter">2</div>
+              <div class="step-name">주문 접수</div>
+            </div>
+            <div class="stepper-item active">
+              <div class="step-counter">
+                3
+              </div>
+              <div class="step-name">배달 접수</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">4</div>
+              <div class="step-name">배달 완료</div>
+            </div>
+          </div>
+
+          <li class="order-status-page_li">
+            <div class="order-status-page_li_left">
+              <div class="li_logo_wrap">
+                <img src="https://www.yupdduk.com/images/logo61.png" />
+              </div>
+              <div class="li_info_wrap">
+                <div class="li_info_middle">
+                  <span class="li_info_top">동대문 엽기 떡볶이-부평점</span>
+                </div>
+              </div>
+              <div class="btn-group">
+                <button class="btn secondary-button btn-sm m-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-shop"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"
+                    />
+                  </svg>
+                  가게 정보 보기
+                </button>
+                <button class="btn secondary-button btn-sm m-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-cart-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                    />
+                  </svg>
+                  주문 상세 보기
+                </button>
               </div>
             </div>
-            <div class="d-grid gap-2 d-md-block">
-              <button class="btn secondary-button btn-sm m-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-shop"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"
-                  />
-                </svg>
-                가게 정보 보기
-              </button>
-              <button class="btn secondary-button btn-sm m-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-cart-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                  />
-                </svg>
-                주문 상세 보기
-              </button>
-            </div>
-          </div>
-        </li>
+          </li>
+        </div>
       </div>
-      <div id="order-status-page-card" class="row justify-content-center">
-        <div class="row mt-3">
-          <span class="col-4">2021-09-29 오후 02:41 </span>
-          <span class="col-4 blinking">음식 준비중 . . .</span>
-        </div>
-
-        <div class="col-10 stepper-wrapper">
-          <div class="stepper-item completed">
-            <div class="step-counter">
-              1
-            </div>
-            <div class="step-name">접수 대기</div>
-          </div>
-          <div class="stepper-item completed">
-            <div class="step-counter">2</div>
-            <div class="step-name">주문 접수</div>
-          </div>
-          <div class="stepper-item active">
-            <div class="step-counter">
-              3
-              <!-- <div class="spinner-grow active-spinner " role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div> -->
-            </div>
-            <div class="step-name">배달 접수</div>
-          </div>
-          <div class="stepper-item">
-            <div class="step-counter">4</div>
-            <div class="step-name">배달 완료</div>
+      <div
+        id="order-status-page-card"
+        class="row justify-content-center w-75 mx-auto my-3"
+      >
+        <div class="col-3 mx-auto my-auto">
+          <div class="row justify-content-center ">
+            <span class="col-6 text-center my-3"> 2021-09-29 </span
+            ><span class="col-6 text-center my-3 fw-bold fs-5"
+              >오후 02:41
+            </span>
+            <img
+              id="order-reception"
+              src="@/assets/images/delievery_done.png"
+            />
+            <span class="blinking my-3"> 배달 완료 . . .</span>
           </div>
         </div>
-
-        <!-- <div class="col-6 order-status-card"> -->
-        <li class="col-9 order-status-page_li">
-          <div class="order-status-page_li_left">
-            <div class="li_logo_wrap">
-              <img src="https://www.yupdduk.com/images/logo61.png" />
+        <div class="col-8 mx-auto my-auto">
+          <div class="mt-4 stepper-wrapper">
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                1
+              </div>
+              <div class="step-name">접수 대기</div>
             </div>
-            <div class="li_info_wrap">
-              <div class="li_info_middle">
-                <span class="li_info_top">동대문 엽기 떡볶이-부평점</span>
+            <div class="stepper-item completed">
+              <div class="step-counter">2</div>
+              <div class="step-name">주문 접수</div>
+            </div>
+            <div class="stepper-item active">
+              <div class="step-counter">
+                3
+              </div>
+              <div class="step-name">배달 접수</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">4</div>
+              <div class="step-name">배달 완료</div>
+            </div>
+          </div>
+
+          <li class="order-status-page_li">
+            <div class="order-status-page_li_left">
+              <div class="li_logo_wrap">
+                <img src="https://www.yupdduk.com/images/logo61.png" />
+              </div>
+              <div class="li_info_wrap">
+                <div class="li_info_middle">
+                  <span class="li_info_top">동대문 엽기 떡볶이-부평점</span>
+                </div>
+              </div>
+              <div class="btn-group">
+                <button class="btn secondary-button btn-sm m-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-shop"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"
+                    />
+                  </svg>
+                  가게 정보 보기
+                </button>
+                <button class="btn secondary-button btn-sm m-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-cart-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                    />
+                  </svg>
+                  주문 상세 보기
+                </button>
               </div>
             </div>
-            <div class="d-grid gap-2 d-md-block">
-              <button class="btn secondary-button btn-sm m-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-shop"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"
-                  />
-                </svg>
-                가게 정보 보기
-              </button>
-              <button class="btn secondary-button btn-sm m-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-cart-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                  />
-                </svg>
-                주문 상세 보기
-              </button>
-            </div>
-          </div>
-        </li>
+          </li>
+        </div>
       </div>
     </div>
   </div>
@@ -249,6 +276,9 @@ export default {};
 </script>
 
 <style>
+#order-reception {
+  /* width: 60%; */
+}
 #order-status-page {
   /* background-color: #fff0b1; */
   padding: 12px;
@@ -293,9 +323,13 @@ export default {};
 .secondary-button {
   /* width: 200px; */
   background: #ffffff;
-  border: 2px solid #ffc463;
+  border: 2px solid #ffdd1b;
   color: #828282;
   margin-right: 12px;
+}
+.secondary-button:hover {
+  background: #ffdd1b;
+  color: #ffffff;
 }
 .order-status-wrap {
   /* z-index: 1; */
@@ -316,7 +350,7 @@ h3 {
 }
 .title {
   text-align: center;
-  padding-bottom: 24px;
+  padding: 24px 0px;
 }
 /* #order-status-page {
   margin: 36px;
@@ -334,8 +368,8 @@ h1 {
 }
 #order-status-page-card {
   /* width: 80%; */
-  margin: 12px 24px;
-  border: 1px solid #c4c4c4;
+  /* margin: 24px 122px; */
+  border: 1px solid #ffdd1b;
   border-radius: 10px;
   /* background-color: #ffffcc; */
 }
@@ -416,7 +450,7 @@ h1 {
   cursor: pointer;
   display: flex;
   align-items: center;
-  width: 50%;
+  /* width: 50%; */
   height: 12vh;
   padding-left: 1vh;
   border: 1px solid #e0e0e0;
