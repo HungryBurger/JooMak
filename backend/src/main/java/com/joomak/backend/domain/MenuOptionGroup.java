@@ -17,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Embeddable
+
 @Table
 public class MenuOptionGroup {
 
@@ -28,10 +28,10 @@ public class MenuOptionGroup {
 //    @Embedded
 //    @JoinColumn(name = "store_id")
 //    private Store store;
-
-    @Embedded
-    @Column(name = "menu_id")
-    private MenuBase menu;
+//
+//    @Embedded
+//    @Column(name = "menu_id")
+//    private MenuBase menu;
 
     @Column(name = "opt_grp_nm")
     private String optGrpNm;

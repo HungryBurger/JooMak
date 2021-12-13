@@ -24,9 +24,9 @@ public class MenuOptionDetail {
     @Column(name = "opt_id")
     private Long id;
 
-    @Embedded
-    @JoinColumn(name = "opt_grp_id")
-    private MenuOptionGroup menuOptionGroup;
+//    @Embedded
+//    @JoinColumn(name = "opt_grp_id")
+//    private MenuOptionGroup menuOptionGroup;
 
     @Column(name = "opt_nm")
     private int optNm;

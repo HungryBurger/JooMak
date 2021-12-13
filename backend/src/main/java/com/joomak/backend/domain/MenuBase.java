@@ -18,7 +18,6 @@ import lombok.Setter;
 @Entity		// JPA
 @Getter
 @Setter
-@Embeddable
 @Table
 public class MenuBase {
 

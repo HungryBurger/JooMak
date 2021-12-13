@@ -24,9 +24,9 @@ public class Stock {
     @Column(name = "stock_id")
     private Long id;
 
-    @Embedded
-    @JoinColumn(name = "menu_id")
-    private MenuBase menu;
+//    @Embedded
+//    @JoinColumn(name = "menu_id")
+//    private MenuBase menu;
 
     @Column(name = "stock_quantity")
     private int stockQuantity;
