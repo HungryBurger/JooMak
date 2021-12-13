@@ -30,7 +30,7 @@ fi
 
 echo "> 새 애플리케이션 배포"
 
-JAR_NAME=$(ls -tr $REPOSITORY/ | grep 'backend-0.0.1' | tail -n 1) # (8)
+JAR_NAME=$ls -tr /var/lib/jenkins/workspace/joomak-backend/ | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1 # (8)
 
 echo "> JAR Name: $JAR_NAME"
 nohup java -jar $REPOSITORY/$JAR_NAME &
