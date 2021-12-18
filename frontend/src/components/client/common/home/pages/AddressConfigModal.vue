@@ -46,7 +46,7 @@
           v-for="addressObj in addressList"
           :key="addressObj.idx"
           :addressObj="addressObj"
-          @open-modal="openConfirmAddressConfig"
+          @open-modal-address-config="openConfirmAddressConfig"
           @open-modal-delete-address="openConfirmDeleteAddress"
         ></address-list-tr>
       </table>
