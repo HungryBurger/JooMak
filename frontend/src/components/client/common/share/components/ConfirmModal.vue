@@ -62,11 +62,7 @@ export default {
   },
   methods: {
     closeConfirmModal() {
-      if (this.condition) {
-        // 조건 false
-      } else {
-        this.$store.commit(`common/${SET_ON_CONFIRM_MODAL}`, false);
-      }
+      this.$store.commit(`common/${SET_ON_CONFIRM_MODAL}`, false);
     },
     onClickConfirmBtn() {
       this.$emit("confirm-yes");
