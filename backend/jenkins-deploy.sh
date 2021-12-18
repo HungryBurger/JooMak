@@ -32,7 +32,7 @@ echo "> JAR Name: $JAR_NAME"
 JAR_NAME=$(ls -tr /var/lib/jenkins/workspace/joomak-backend/ | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1) # (8)
 
 echo "> nohup 초기화"
-cp /dev/null nohup.out
+sudo cp /dev/null nohup.out
 
 echo "nohup java -jar $REPOSITORY/$JAR_NAME 1>/dev/null 2>&1 &"
 nohup java -jar $REPOSITORY/$JAR_NAME 1>/dev/null 2>&1 &
