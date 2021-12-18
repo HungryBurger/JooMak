@@ -17,7 +17,12 @@
       />
 
       <!-- 주소삭제 confirm modal -->
-      <!-- <ConfirmModal /> -->
+      <ConfirmModal
+        message="이 주소를 주소록에서 삭제하시겠어요?"
+        :condition="confirmDeleteAddress"
+        @confirm-yes="confirmYesDeleteAddress"
+        @confirm-no="confirmNoDeleteAddress"
+      />
 
       <h3>배달지 설정</h3>
       <div class="section_title">현재 주소</div>
@@ -42,6 +47,7 @@
           :key="addressObj.idx"
           :addressObj="addressObj"
           @open-modal="openConfirmAddressConfig"
+          @open-modal-delete-address="openConfirmDeleteAddress"
         ></address-list-tr>
       </table>
       <div class="div-for-padding"></div>
@@ -75,8 +81,10 @@ export default {
   data() {
     return {
       currentAddressIdxCandidate: -1,
+      deleteCandidate: -1,
+
       confirmAddressConfig: false,
-      // confirmADeleteAddress: false,
+      confirmDeleteAddress: false,
     };
   },
   computed: {
@@ -101,6 +109,7 @@ export default {
       }
       this.$store.commit(`common/${SET_ON_ADDRESS_CONFIG_MODAL}`, false);
     },
+    // 주소설정 confirm modal
     openConfirmAddressConfig(idx) {
       this.confirmAddressConfig = true;
       this.currentAddressIdxCandidate = idx;
@@ -112,6 +121,19 @@ export default {
     confirmNoAddressConfig() {
       this.currentAddressIdxCandidate = -1;
       this.confirmAddressConfig = false;
+    },
+    // 주소삭제 confirm modal
+    openConfirmDeleteAddress(idx) {
+      this.confirmDeleteAddress = true;
+      this.deleteCandidate = idx;
+    },
+    confirmYesDeleteAddress() {
+      // 주소 삭제 로직 삽입 예정 ( * vuex actions 사용 예정 )
+      this.confirmDeleteAddress = false;
+      alert("주소가 삭제되었습니다.");
+    },
+    confirmNoDeleteAddress() {
+      this.confirmDeleteAddress = false;
     },
   },
 };

@@ -68,7 +68,7 @@
       </div>
     </td>
     <td class="close_td">
-      <div class="icon_close_wrap">
+      <div class="icon_close_wrap" @click="onClickDeleteBtn(addressObj.idx)">
         <svg
           width="20"
           height="20"
@@ -167,6 +167,9 @@ export default {
         }
       }
       this.SET_CHANGE_MODE({ indexToCancel, indexToEdit });
+    },
+    onClickDeleteBtn(idx) {
+      this.$emit("open-modal-delete-address", idx);
     },
   },
 };
