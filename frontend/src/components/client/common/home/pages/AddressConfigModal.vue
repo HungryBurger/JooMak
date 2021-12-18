@@ -8,40 +8,12 @@
       <div class="no-use"></div>
     </template>
     <template v-slot:content>
-      <modal-component
-        v-if="onCurrentAddressConfigModal"
-        @close="closeCurrentAddressConfigModal"
-        class="current-address-config_modal"
-      >
-        <template v-slot:header>
-          <div class="no-use"></div>
-        </template>
-        <template v-slot:content>
-          <div class="text_wrap">
-            <div class="icon_wrap">
-              <img :src="iconAlertPath" alt="icon_alert" />
-            </div>
-            <span class="fw-bold">이 주소를 현재 주소로 설정하시겠어요?</span>
-          </div>
-        </template>
+      <ConfirmModal
+        message="이 주소를 현재 주소로 설정하시겠어요?"
+        @confirm-yes="confirmYes"
+        @confirm-no="confirmNo"
+      />
 
-        <template v-slot:footer>
-          <div class="btn_wrap">
-            <div
-              @click="onClickConfirmBtn"
-              class="btn confirm_btn d-flex justify-content-center align-items-center"
-            >
-              확인
-            </div>
-            <div
-              @click="closeCurrentAddressConfigModal"
-              class="btn cancel_btn d-flex justify-content-center align-items-center"
-            >
-              취소
-            </div>
-          </div>
-        </template>
-      </modal-component>
       <h3>배달지 설정</h3>
       <div class="section_title">현재 주소</div>
       <div v-if="!currentAddressObj" class="section_content">
@@ -64,7 +36,7 @@
           v-for="addressObj in addressList"
           :key="addressObj.idx"
           :addressObj="addressObj"
-          @open-modal="openCurrentAddressConfigModal"
+          @open-modal="openConfirmModal"
         ></address-list-tr>
       </table>
       <div class="div-for-padding"></div>
@@ -77,11 +49,12 @@
 
 <script>
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
+import ConfirmModal from "@/components/client/common/share/components/ConfirmModal.vue";
 import AddressListTr from "@/components/client/common/home/components/AddressListTr.vue";
 import { mapActions, mapGetters, mapState } from "vuex";
 import {
+  SET_ON_CONFIRM_MODAL,
   SET_ON_ADDRESS_CONFIG_MODAL,
-  SET_ON_CURRENT_ADDRESS_CONFIG_MODAL,
 } from "@/store/modules/common.js";
 import {
   SET_CHANGE_MODE,
@@ -91,6 +64,7 @@ import {
 export default {
   components: {
     ModalComponent,
+    ConfirmModal,
     AddressListTr,
   },
   data() {
@@ -99,10 +73,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("common", [
-      "onAddressConfigModal",
-      "onCurrentAddressConfigModal",
-    ]),
+    ...mapState("common", ["onAddressConfigModal"]),
     ...mapState("member", ["addressList"]),
     ...mapGetters("member", ["currentAddressObj"]),
     iconAlertPath() {
@@ -123,18 +94,15 @@ export default {
       }
       this.$store.commit(`common/${SET_ON_ADDRESS_CONFIG_MODAL}`, false);
     },
-    openCurrentAddressConfigModal(idx) {
-      this.$store.commit(`common/${SET_ON_CURRENT_ADDRESS_CONFIG_MODAL}`, true);
+    openConfirmModal(idx) {
+      this.$store.commit(`common/${SET_ON_CONFIRM_MODAL}`, true);
       this.currentAddressIdxCandidate = idx;
     },
-    closeCurrentAddressConfigModal() {
-      this.$store.commit(
-        `common/${SET_ON_CURRENT_ADDRESS_CONFIG_MODAL}`,
-        false
-      );
-    },
-    onClickConfirmBtn() {
+    confirmYes() {
       this.SET_ADDRESS_SELECTED(this.currentAddressIdxCandidate);
+    },
+    confirmNo() {
+      this.currentAddressIdxCandidate = -1;
     },
   },
 };

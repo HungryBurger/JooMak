@@ -1,5 +1,3 @@
-import { SET_ON_CURRENT_ADDRESS_CONFIG_MODAL } from "./common.js";
-
 export const SET_ADDRESS_DETAIL = "SET_ADDRESS_DETAIL";
 export const SET_CHANGE_MODE = "SET_CHANGE_MODE";
 export const SET_ADDRESS_SELECTED = "SET_ADDRESS_SELECTED";
@@ -92,11 +90,6 @@ export const member = {
           break;
         }
       }
-
-      // 3. Modal 닫기
-      commit(`common/${SET_ON_CURRENT_ADDRESS_CONFIG_MODAL}`, false, {
-        root: true,
-      });
     },
   },
 };
