@@ -8,11 +8,16 @@
       <div class="no-use"></div>
     </template>
     <template v-slot:content>
+      <!-- 주소설정 confirm modal -->
       <ConfirmModal
         message="이 주소를 현재 주소로 설정하시겠어요?"
-        @confirm-yes="confirmYes"
-        @confirm-no="confirmNo"
+        :condition="confirmAddressConfig"
+        @confirm-yes="confirmYesAddressConfig"
+        @confirm-no="confirmNoAddressConfig"
       />
+
+      <!-- 주소삭제 confirm modal -->
+      <!-- <ConfirmModal /> -->
 
       <h3>배달지 설정</h3>
       <div class="section_title">현재 주소</div>
@@ -36,7 +41,7 @@
           v-for="addressObj in addressList"
           :key="addressObj.idx"
           :addressObj="addressObj"
-          @open-modal="openConfirmModal"
+          @open-modal="openConfirmAddressConfig"
         ></address-list-tr>
       </table>
       <div class="div-for-padding"></div>
@@ -70,6 +75,8 @@ export default {
   data() {
     return {
       currentAddressIdxCandidate: -1,
+      confirmAddressConfig: false,
+      // confirmADeleteAddress: false,
     };
   },
   computed: {
@@ -94,15 +101,17 @@ export default {
       }
       this.$store.commit(`common/${SET_ON_ADDRESS_CONFIG_MODAL}`, false);
     },
-    openConfirmModal(idx) {
-      this.$store.commit(`common/${SET_ON_CONFIRM_MODAL}`, true);
+    openConfirmAddressConfig(idx) {
+      this.confirmAddressConfig = true;
       this.currentAddressIdxCandidate = idx;
     },
-    confirmYes() {
+    confirmYesAddressConfig() {
       this.SET_ADDRESS_SELECTED(this.currentAddressIdxCandidate);
+      this.confirmAddressConfig = false;
     },
-    confirmNo() {
+    confirmNoAddressConfig() {
       this.currentAddressIdxCandidate = -1;
+      this.confirmAddressConfig = false;
     },
   },
 };
