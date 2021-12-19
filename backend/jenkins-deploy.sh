@@ -35,4 +35,4 @@ echo "> nohup 초기화"
 sudo cp /dev/null nohup.out
 
 echo "nohup java -jar $REPOSITORY/$JAR_NAME 1>/dev/null 2>&1 &"
-nohup java -jar $REPOSITORY/$JAR_NAME 1>/dev/null 2>&1 &
+nohup java -jar $REPOSITORY/$JAR_NAME > /dev/null 2> /dev/null < /dev/null &
