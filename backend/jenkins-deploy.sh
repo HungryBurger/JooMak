@@ -28,8 +28,8 @@ else
 fi
 
 echo "> 새 애플리케이션 배포"
-echo "> JAR Name: $JAR_NAME"
 JAR_NAME=$(ls -tr /var/lib/jenkins/workspace/joomak-backend/ | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1) # (8)
+echo "> JAR Name: $JAR_NAME"
 
 echo "> nohup 초기화"
 sudo cp /dev/null nohup.out
