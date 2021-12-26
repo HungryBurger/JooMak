@@ -19,6 +19,11 @@ sudo chmod +x $REPOSITORY/$PROJECT_NAME
 echo "> Build 파일 복사"
 sudo cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
 
+
+echo "> 파일 빌드"
+sudo chmod +x gradlew
+./gradlew clean build --stacktrace
+
 echo "> 현재 위치"
 pwd
 echo "> 현재 구동중인 애플리케이션 pid 확인"
@@ -36,9 +41,8 @@ else
 fi
 
 echo "> 새 애플리케이션 배포"
-JAR_NAME=$(ls -tr ${REPOSITORY}/${PROJECT_NAME}/ | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1) # (8)
+JAR_NAME=$(ls -tr ${REPOSITORY} | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1) # (8)
 echo "> JAR Name: $JAR_NAME"
-
 echo "> nohup 초기화"
 sudo cp /dev/null nohup.out
 
