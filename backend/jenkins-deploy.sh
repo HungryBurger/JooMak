@@ -36,7 +36,7 @@ if [ -z "$CURRENT_PID" ]; then # (7)
     echo "> 현재 구동 중인 애플리케이션이 없으므로 종료하지 않습니다."
 else
     echo "> kill -15 $CURRENT_PID"
-    kill -15 $CURRENT_PID
+    sudo kill -15 $CURRENT_PID
     sleep 5
 fi
 
@@ -46,5 +46,7 @@ echo "> JAR Name: $JAR_NAME"
 echo "> nohup 초기화"
 sudo cp /dev/null nohup.out
 
-echo "nohup java -jar $REPOSITORY/$PROJECT_NAME/$JAR_NAME 2>&1 &"
-nohup java -jar $REPOSITORY/$PROJECT_NAME/$JAR_NAME 2>&1 &
+echo "nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &"
+nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &
+
+
