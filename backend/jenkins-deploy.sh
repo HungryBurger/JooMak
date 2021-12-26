@@ -22,7 +22,7 @@ sudo cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
 
 echo "> 파일 빌드"
 sudo chmod +x gradlew
-./gradlew stop
+./gradlew --stop
 ./gradlew clean build --stacktrace
 
 echo "> 현재 위치"
