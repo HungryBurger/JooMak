@@ -16,14 +16,13 @@ echo "> Build 파일 권한 추가"
 sudo chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar
 sudo chmod +x $REPOSITORY/$PROJECT_NAME
 
-echo "> Build 파일 복사"
-sudo cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
-
-
 echo "> 파일 빌드"
 sudo chmod +x gradlew
 ./gradlew --stop
 ./gradlew clean build --stacktrace
+
+echo "> Build 파일 복사"
+sudo cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
 
 echo "> 현재 위치"
 pwd
@@ -46,6 +45,9 @@ JAR_NAME=$(ls -tr ${REPOSITORY} | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1)
 echo "> JAR Name: $JAR_NAME"
 echo "> nohup 초기화"
 sudo cp /dev/null nohup.out
+
+echo "nohup파일 삭제"
+rm -f home/ec2-user/nohup.out
 
 echo "nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &"
 nohup java -jar \
