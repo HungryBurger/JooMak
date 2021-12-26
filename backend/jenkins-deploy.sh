@@ -1,10 +1,18 @@
 #!/bin/bash
 
-REPOSITORY=/var/lib/jenkins/workspace/joomak-backend # (1)
+REPOSITORY=/home/ec2-user/app/step1/JooMak # (1)
 PROJECT_NAME=backend
 
-echo "> Build 파일 권한 추가"
+cd $REPOSITORY/
+pwd $REPOSITORY
 
+echo "> Git Pull"
+git pull
+
+echo "> backend 경로 이동"
+cd backend
+
+echo "> Build 파일 권한 추가"
 sudo chmod +x $REPOSITORY/$PROJECT_NAME/build/libs/*.jar
 sudo chmod +x $REPOSITORY/$PROJECT_NAME
 
@@ -28,11 +36,11 @@ else
 fi
 
 echo "> 새 애플리케이션 배포"
-JAR_NAME=$(ls -tr /var/lib/jenkins/workspace/joomak-backend/ | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1) # (8)
+JAR_NAME=$(ls -tr ${REPOSITORY}/${PROJECT_NAME}/ | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1) # (8)
 echo "> JAR Name: $JAR_NAME"
 
 echo "> nohup 초기화"
 sudo cp /dev/null nohup.out
 
-echo "nohup java -jar $REPOSITORY/$JAR_NAME 1>/dev/null 2>&1 &"
-nohup java -jar $REPOSITORY/$JAR_NAME > /dev/null 2> /dev/null < /dev/null &
+echo "nohup java -jar $REPOSITORY/$PROJECT_NAME/$JAR_NAME 2>&1 &"
+nohup java -jar $REPOSITORY/$PROJECT_NAME/$JAR_NAME 2>&1 &
