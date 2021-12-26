@@ -22,6 +22,7 @@ sudo cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/ # (5)
 
 echo "> 파일 빌드"
 sudo chmod +x gradlew
+./gradlew stop
 ./gradlew clean build --stacktrace
 
 echo "> 현재 위치"
@@ -47,6 +48,10 @@ echo "> nohup 초기화"
 sudo cp /dev/null nohup.out
 
 echo "nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &"
-nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &
+nohup java -jar \
+        -Dspring.config.location=classpath:/application.yml,/home/ec2-user/app/application-real-db.yml\
+        -Dspring.profiles.active=real\
+        $REPOSITORY/$JAR_NAME 2>&1 &
+$REPOSITORY/$JAR_NAME 2>&1 &
 
 
