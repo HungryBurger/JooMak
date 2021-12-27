@@ -52,7 +52,7 @@ rm -f home/ec2-user/nohup.out
 echo "nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &"
 nohup java -jar \
         -Dspring.config.location=classpath:/application.yml,/home/ec2-user/app/application-real-db.yml\
-        -Dspring.profiles.active=prod \
+        -Dspring.profiles.active=real \
         $REPOSITORY/$JAR_NAME 2>&1 &
 
 

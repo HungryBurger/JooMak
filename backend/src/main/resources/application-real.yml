@@ -1,10 +1,4 @@
 spring :
-  config:
-    activate:
-      on-profile: "prod"
-  profiles:
-    include: real-db
-
   jpa :
     hibernate :
       ddl-auto : create
@@ -15,6 +9,8 @@ spring :
 
   session:
     store-type: jdbc
+  profiles:
+    include: real-db
 
 logging:
   level:
