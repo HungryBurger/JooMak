@@ -47,7 +47,7 @@ echo "> nohup 초기화"
 sudo cp /dev/null nohup.out
 
 echo "nohup파일 삭제"
-rm -f home/ec2-user/nohup.out
+rm -f /home/ec2-user/nohup.out
 
 echo "nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &"
 nohup java -jar \
