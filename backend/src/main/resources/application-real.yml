@@ -4,11 +4,15 @@ spring :
       ddl-auto : create
     properties :
       hibernate :
-        dialect : org.hibernate.dialect.MySQL5InnoDBDialect
         show_sql: true
         format_sql : true
+
   session:
     store-type: jdbc
+  profiles:
+    include: real-db
+  config:
+    use-legacy-processing: true
 
 logging:
   level:
