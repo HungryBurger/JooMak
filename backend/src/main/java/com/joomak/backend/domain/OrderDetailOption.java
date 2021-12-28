@@ -16,6 +16,10 @@ public class OrderDetailOption {
     @Column(name = "order_dtl_option")
     private String id;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "order_dtl_id")
+    private OrderDetail orderDetail; //주문
+
     private int opt_id; // 옵션 id
 
     //등록일
