@@ -1,7 +1,6 @@
 spring :
-
   datasource:
-    url: jdbc:h2:~/joomak
+    url: jdbc:h2:~/joomakt;AUTO_SERVER=true
     username : sa
     password:
     driver-class-name: org.h2.Driver

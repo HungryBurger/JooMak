@@ -31,10 +31,6 @@ public class MenuBase {
     @Column(name = "menu_code")
     private String menu_code;
 
-//    @Embedded
-//    @JoinColumn(name = "store_id")
-//    private Store store;
-
     @Enumerated(EnumType.STRING)
     private MenuStatus menuStatus;
 
