@@ -15,6 +15,7 @@
         </div>
         <span class="fw-bold">{{ message }}</span>
       </div>
+      <slot name="content"></slot>
     </template>
 
     <template v-slot:footer>
