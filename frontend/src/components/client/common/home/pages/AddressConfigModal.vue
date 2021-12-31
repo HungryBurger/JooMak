@@ -206,8 +206,9 @@ export default {
       this.confirmDeleteAddress = true;
       this.deleteCandidate = idx;
     },
-    confirmYesDeleteAddress() {
+    async confirmYesDeleteAddress() {
       // 주소 삭제 로직 삽입 예정 ( * vuex actions 사용 예정 )
+      // await this.$axios.post(url, param);
       this.confirmDeleteAddress = false;
       alert("주소가 삭제되었습니다.");
     },
