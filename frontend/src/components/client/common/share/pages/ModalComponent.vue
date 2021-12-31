@@ -76,6 +76,7 @@ export default {
   cursor: pointer;
 }
 #icon_close_wrap {
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -2,7 +2,7 @@
   <modal-component
     v-if="onAddressConfigRequestModal"
     @close="closeModal"
-    class="modal_home_alert"
+    class="address-config-request_modal"
     @wheel.prevent
   >
     <template v-slot:header>
@@ -20,7 +20,7 @@
     </template>
     <template v-slot:footer>
       <div
-        @click="closeModal"
+        @click="onClickConfirmBtn"
         class="modal_alert-confirm_btn d-flex justify-content-center align-items-center"
       >
         확인
@@ -32,19 +32,32 @@
 <script>
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
 import { mapActions, mapState } from "vuex";
-import { CLOSE_ADDRESS_CONFIG_REQUEST_MODAL } from "@/store/modules/common.js";
+import {
+  CLOSE_ADDRESS_CONFIG_REQUEST_MODAL,
+  OPEN_ADDRESS_CONFIG_MODAL,
+} from "@/store/modules/common.js";
 
 export default {
   components: {
     ModalComponent,
   },
   computed: {
-    ...mapState("common", ["onAddressConfigRequestModal"]),
+    ...mapState("common", ["currentPage", "onAddressConfigRequestModal"]),
   },
   methods: {
-    ...mapActions("common", [`${CLOSE_ADDRESS_CONFIG_REQUEST_MODAL}`]),
+    ...mapActions("common", [
+      `${CLOSE_ADDRESS_CONFIG_REQUEST_MODAL}`,
+      `${OPEN_ADDRESS_CONFIG_MODAL}`,
+    ]),
     closeModal() {
       this.CLOSE_ADDRESS_CONFIG_REQUEST_MODAL();
+    },
+    onClickConfirmBtn() {
+      if (this.currentPage === "homePage") {
+        this.OPEN_ADDRESS_CONFIG_MODAL();
+      } else {
+        this.closeModal();
+      }
     },
   },
 };
