@@ -145,6 +145,8 @@ export default {
       confirmAddressAdd: false,
 
       addressAdd: {
+        responseData: {},
+
         name: "",
         addressMain: "",
         addressDetail: "",
@@ -213,7 +215,25 @@ export default {
       this.confirmDeleteAddress = false;
     },
     // 주소추가 confirm modal
-    confirmYesAddressAdd() {
+    async confirmYesAddressAdd() {
+      // validation
+      const { name, addressMain } = this.addressAdd;
+      if (name.trim() === "" || name === undefined || name === null) {
+        alert("주소명을 입력해 주세요.");
+        return;
+      }
+      if (
+        addressMain.trim() === "" ||
+        addressMain === undefined ||
+        addressMain === null
+      ) {
+        alert("주소를 등록해 주세요.");
+        return;
+      }
+
+      // axios 로직
+      // this.addressAdd.responseData = await this.$axios.post();
+
       this.confirmAddressAdd = false;
     },
     confirmNoAddressAdd() {
