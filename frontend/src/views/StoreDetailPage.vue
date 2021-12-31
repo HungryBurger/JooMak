@@ -107,7 +107,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import StoreDetailPageMenuSelectTab from "@/components/client/product/store/pages/StoreDetailPageMenuSelectTab.vue";
 import StoreDetailPageStoreIntroTab from "@/components/client/product/store/pages/StoreDetailPageStoreIntroTab.vue";
 import StoreDetailPageStoreReviewTab from "@/components/client/product/store/pages/StoreDetailPageStoreReviewTab.vue";
@@ -233,14 +232,14 @@ export default {
     },
 
     read(idx) {
-      axios
+      this.$axios
         .get("https://reqres.in/api/users?page=" + idx)
         .then((res) => {
-          // console.log("메뉴선택 페이지(매장 상세정보 열람용) axios 통신 성공");
-          // console.log(res.data.data);
+          console.log("메뉴선택 페이지(매장 상세정보 열람용) axios 통신 성공");
+          console.log(res.data.data);
         })
         .catch((err) => {
-          cosonle.log(err);
+          console.log(err);
         });
     },
   },
