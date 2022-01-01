@@ -174,7 +174,11 @@ import MenuSelectTabModalOptionBox from "./MenuSelectTabModalOptionBox.vue";
 import SelectedSingleOptionLi from "./SelectedSingleOptionLi.vue";
 import SelectedMultiOptionLi from "./SelectedMultiOptionLi.vue";
 import NumberWithCommaSpan from "@/components/client/common/share/components/NumberWithCommaSpan.vue";
-import { MINUS_PRODUCT_NUM, PLUS_PRODUCT_NUM } from "@/store/modules/order.js";
+import {
+  MINUS_PRODUCT_NUM,
+  PLUS_PRODUCT_NUM,
+  SET_ORDER_FORM,
+} from "@/store/modules/order.js";
 
 export default {
   components: {
@@ -208,7 +212,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions("order", [MINUS_PRODUCT_NUM, PLUS_PRODUCT_NUM]),
+    ...mapActions("order", [
+      MINUS_PRODUCT_NUM,
+      PLUS_PRODUCT_NUM,
+      SET_ORDER_FORM,
+    ]),
     closeModal() {
       console.log("close event 발생");
     },
@@ -224,8 +232,10 @@ export default {
       // this.selectedItemForm 이용
     },
     onClickOrderLink() {
-      console.log("바로 주문 btn 클릭");
-      // this.selectedItemForm 이용
+      let orderList = [];
+      Object.assign(this.selectedItemForm, { selected: true });
+      orderList.push(this.selectedItemForm);
+      this.SET_ORDER_FORM(orderList);
     },
   },
 };

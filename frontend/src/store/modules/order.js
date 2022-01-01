@@ -7,9 +7,15 @@ export const TOGGLE_OPTION_LI = "TOGGLE_OPTION_LI";
 export const MINUS_PRODUCT_NUM = "MINUS_PRODUCT_NUM";
 export const PLUS_PRODUCT_NUM = "PLUS_PRODUCT_NUM";
 
+/* 주문 페이지 */
+export const INIT_ORDER_FORM = "INIT_ORDER_FORM";
+export const ADD_ORDER_FORM = "ADD_ORDER_FORM";
+export const SET_ORDER_FORM = "SET_ORDER_FORM"; // actions
+
 export const order = {
   namespaced: true,
   state: () => ({
+    // 매장 상세 페이지
     selectedItemForm: {
       storeIdx: 0,
       groupIdx: 0,
@@ -84,6 +90,9 @@ export const order = {
       },
       numberOfProduct: 1,
     },
+
+    // 주문 페이지
+    orderForm: [],
   }),
   getters: {
     selectedItemFormPrice(state) {
@@ -120,6 +129,7 @@ export const order = {
     },
   },
   mutations: {
+    // 매장 상세 페이지
     [SET_SELECTED_ITEM_FORM](state, selectedItemForm) {
       state.selectedItemForm = selectedItemForm;
     },
@@ -145,6 +155,14 @@ export const order = {
       if (state.selectedItemForm.numberOfProduct < 15) {
         state.selectedItemForm.numberOfProduct++;
       }
+    },
+
+    // 주문 페이지
+    [INIT_ORDER_FORM](state) {
+      state.orderForm = [];
+    },
+    [ADD_ORDER_FORM](state, orderForm) {
+      state.orderForm.push(orderForm);
     },
   },
   actions: {
@@ -199,6 +217,17 @@ export const order = {
         commit(PLUS_PRODUCT_NUM);
       } else {
         alert("선택하신 옵션으로 한 번에 최대 15개 주문 가능합니다.");
+      }
+    },
+    [SET_ORDER_FORM]({ commit }, orderFormList) {
+      // orderForm 초기화
+      commit(INIT_ORDER_FORM);
+
+      // 주문선택된 item만 push
+      for (let i = 0; i < orderFormList.length; i++) {
+        if (orderFormList[i].selected === true) {
+          commit(ADD_ORDER_FORM, orderFormList[i]);
+        }
       }
     },
   },
