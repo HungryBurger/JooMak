@@ -177,7 +177,7 @@ import NumberWithCommaSpan from "@/components/client/common/share/components/Num
 import {
   MINUS_PRODUCT_NUM,
   PLUS_PRODUCT_NUM,
-  SET_ORDER_FORM,
+  SET_ORDER_FORM_LIST,
 } from "@/store/modules/order.js";
 
 export default {
@@ -215,7 +215,7 @@ export default {
     ...mapActions("order", [
       MINUS_PRODUCT_NUM,
       PLUS_PRODUCT_NUM,
-      SET_ORDER_FORM,
+      SET_ORDER_FORM_LIST,
     ]),
     closeModal() {
       console.log("close event 발생");
@@ -232,10 +232,10 @@ export default {
       // this.selectedItemForm 이용
     },
     onClickOrderLink() {
-      let orderList = [];
+      let orderFormList = [];
       Object.assign(this.selectedItemForm, { selected: true });
-      orderList.push(this.selectedItemForm);
-      this.SET_ORDER_FORM(orderList);
+      orderFormList.push(this.selectedItemForm);
+      this.SET_ORDER_FORM_LIST(orderFormList);
     },
   },
 };
