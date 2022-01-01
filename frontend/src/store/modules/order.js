@@ -1,6 +1,6 @@
 /* 매장 상세 페이지 */
 // 리뷰 탭 - Modal
-export const SET_ORDER_FORM = "SET_ORDER_FORM";
+export const SET_SELECTED_ITEM_FORM = "SET_SELECTED_ITEM_FORM";
 export const SET_SINGLE_OPTION_LI = "SET_SINGLE_OPTION_LI";
 export const TOGGLE_MULTI_OPTION_LI = "TOGGLE_MULTI_OPTION_LI";
 export const TOGGLE_OPTION_LI = "TOGGLE_OPTION_LI";
@@ -10,7 +10,7 @@ export const PLUS_PRODUCT_NUM = "PLUS_PRODUCT_NUM";
 export const order = {
   namespaced: true,
   state: () => ({
-    orderForm: {
+    selectedItemForm: {
       storeIdx: 0,
       groupIdx: 0,
       productIdx: 0,
@@ -86,10 +86,11 @@ export const order = {
     },
   }),
   getters: {
-    orderFormPrice(state) {
-      let price = state.orderForm.price;
-      const singleOptionGroup = state.orderForm.options.singleOptionGroup;
-      const multiOptionGroup = state.orderForm.options.multiOptionGroup;
+    selectedItemFormPrice(state) {
+      let price = state.selectedItemForm.price;
+      const singleOptionGroup =
+        state.selectedItemForm.options.singleOptionGroup;
+      const multiOptionGroup = state.selectedItemForm.options.multiOptionGroup;
 
       // singleOptionGroup
       for (let i = 0; i < singleOptionGroup.length; i++) {
@@ -112,45 +113,47 @@ export const order = {
 
       return price;
     },
-    orderFormTotalPrice(state, getters) {
-      return getters.orderFormPrice * state.orderForm.numberOfProduct;
+    selectedItemFormTotalPrice(state, getters) {
+      return (
+        getters.selectedItemFormPrice * state.selectedItemForm.numberOfProduct
+      );
     },
   },
   mutations: {
-    [SET_ORDER_FORM](state, orderForm) {
-      state.orderForm = orderForm;
+    [SET_SELECTED_ITEM_FORM](state, selectedItemForm) {
+      state.selectedItemForm = selectedItemForm;
     },
     [SET_SINGLE_OPTION_LI](state, { optionGroupIndex, optionIdx }) {
-      state.orderForm.options.singleOptionGroup[
+      state.selectedItemForm.options.singleOptionGroup[
         optionGroupIndex
       ].selectedOptionIdx = optionIdx;
     },
     [TOGGLE_MULTI_OPTION_LI](state, { optionGroupIndex, optionIndex }) {
-      state.orderForm.options.multiOptionGroup[optionGroupIndex].optionList[
-        optionIndex
-      ].onSelected = state.orderForm.options.multiOptionGroup[optionGroupIndex]
-        .optionList[optionIndex].onSelected
+      state.selectedItemForm.options.multiOptionGroup[
+        optionGroupIndex
+      ].optionList[optionIndex].onSelected = state.selectedItemForm.options
+        .multiOptionGroup[optionGroupIndex].optionList[optionIndex].onSelected
         ? false
         : true;
     },
     [MINUS_PRODUCT_NUM](state) {
-      if (state.orderForm.numberOfProduct > 1) {
-        state.orderForm.numberOfProduct--;
+      if (state.selectedItemForm.numberOfProduct > 1) {
+        state.selectedItemForm.numberOfProduct--;
       }
     },
     [PLUS_PRODUCT_NUM](state) {
-      if (state.orderForm.numberOfProduct < 15) {
-        state.orderForm.numberOfProduct++;
+      if (state.selectedItemForm.numberOfProduct < 15) {
+        state.selectedItemForm.numberOfProduct++;
       }
     },
   },
   actions: {
     [TOGGLE_OPTION_LI](
       { state, commit },
-      { optionInfo, singleOption, multiOption, orderForm }
+      { optionInfo, singleOption, multiOption, selectedItemForm }
     ) {
       if (singleOption) {
-        const singleOptionGroup = orderForm.options.singleOptionGroup;
+        const singleOptionGroup = selectedItemForm.options.singleOptionGroup;
         let optionGroupIndex;
         let optionIdx = optionInfo.optionIdx;
         // optionGroupIndex 찾기
@@ -164,7 +167,7 @@ export const order = {
         }
         commit(SET_SINGLE_OPTION_LI, { optionGroupIndex, optionIdx });
       } else if (multiOption) {
-        const multiOptionGroup = orderForm.options.multiOptionGroup;
+        const multiOptionGroup = selectedItemForm.options.multiOptionGroup;
         let optionGroupIndex;
         let optionIndex;
         // optionGroupIndex 찾기
@@ -187,12 +190,12 @@ export const order = {
       }
     },
     [MINUS_PRODUCT_NUM]({ state, commit }) {
-      if (state.orderForm.numberOfProduct > 1) {
+      if (state.selectedItemForm.numberOfProduct > 1) {
         commit(MINUS_PRODUCT_NUM);
       }
     },
     [PLUS_PRODUCT_NUM]({ state, commit }) {
-      if (state.orderForm.numberOfProduct < 15) {
+      if (state.selectedItemForm.numberOfProduct < 15) {
         commit(PLUS_PRODUCT_NUM);
       } else {
         alert("선택하신 옵션으로 한 번에 최대 15개 주문 가능합니다.");

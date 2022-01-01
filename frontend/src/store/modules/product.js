@@ -1,6 +1,6 @@
 /* storeDetailPage */
 import { SET_ON_MODAL } from "./common.js";
-import { SET_ORDER_FORM } from "./order.js";
+import { SET_SELECTED_ITEM_FORM } from "./order.js";
 
 export const SET_CURRENT_CATEGORY = "SET_CURRENT_CATEGORY";
 /* 매장 리스트 페이지 */
@@ -565,7 +565,7 @@ export const product = {
     [OPEN_MENU_SELECT_MODAL]({ commit }, productObj) {
       const { storeIdx, groupIdx, productIdx, img, name, price } = productObj;
       let selectedProductBasicInfo;
-      let orderForm;
+      let selectedItemForm;
       // Axios 로직 ...
       // 임시 ( * Axios 대신 )
       selectedProductBasicInfo = {
@@ -583,7 +583,7 @@ export const product = {
         price: price,
       };
       // modal form 제작 ( * for 주문 or 장바구니 )
-      orderForm = {
+      selectedItemForm = {
         storeIdx: storeIdx,
         groupIdx: groupIdx,
         productIdx: productIdx,
@@ -704,7 +704,9 @@ export const product = {
       };
       // Axios 콜백 로직 start
       commit(SET_SELECTED_PRODUCT_BASIC_INFO, selectedProductBasicInfo);
-      commit(`order/${SET_ORDER_FORM}`, orderForm, { root: true });
+      commit(`order/${SET_SELECTED_ITEM_FORM}`, selectedItemForm, {
+        root: true,
+      });
       // Axios 콜백 로직 end
 
       // open modal
