@@ -871,3 +871,270 @@ a:-webkit-any-link {
 #store-detail-page_nav .modal_right .link-box .link_order:hover {
   background-color: #ff5e50;
 }
+
+/* orderPage */
+#orderPage {
+  width: 100%;
+}
+
+#orderPage header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffdd1b;
+  width: 100%;
+  height: 23vh;
+}
+#orderPage header h3 {
+  z-index: 10;
+  font-weight: bold;
+  margin: 0;
+}
+#orderPage header img {
+  position: absolute;
+  right: 0;
+}
+#orderPage header .icon_joomak {
+  transform: translate3d(0, 1vh, 0);
+  height: 18vh;
+  width: auto;
+}
+@keyframes go-out-joomo {
+  0% {
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    transform: translate3d(-10vh, 4vh, 0);
+  }
+  50% {
+    transform: translate3d(-10vh, 4vh, 0);
+  }
+  100% {
+    transform: translate3d(-20vh, 4vh, 0);
+    opacity: 1;
+  }
+}
+@keyframes moving-joomo {
+  0% {
+    transform: translate3d(-20vh, 4vh, 0);
+    opacity: 1;
+  }
+  10% {
+    transform: translate3d(-40vh, 4vh, 0);
+    opacity: 1;
+  }
+  11% {
+    transform: scaleX(-1) translate3d(40vh, 4vh, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scaleX(-1) translate3d(10vh, 4vh, 0);
+    opacity: 1;
+  }
+  21% {
+    transform: translate3d(-10vh, 4vh, 0);
+    opacity: 1;
+  }
+  30% {
+    transform: translate3d(-40vh, 4vh, 0);
+    opacity: 1;
+  }
+  31% {
+    transform: scaleX(-1) translate3d(40vh, 4vh, 0);
+    opacity: 1;
+  }
+  40% {
+    transform: scaleX(-1) translate3d(10vh, 4vh, 0);
+    opacity: 1;
+  }
+  41% {
+    transform: translate3d(-10vh, 4vh, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(-40vh, 4vh, 0);
+    opacity: 1;
+  }
+  51% {
+    transform: scaleX(-1) translate3d(40vh, 4vh, 0);
+    opacity: 1;
+  }
+  60% {
+    transform: scaleX(-1) translate3d(10vh, 4vh, 0);
+    opacity: 1;
+  }
+  61% {
+    transform: translate3d(-10vh, 4vh, 0);
+    opacity: 1;
+  }
+  70% {
+    transform: translate3d(-40vh, 4vh, 0);
+    opacity: 1;
+  }
+  71% {
+    transform: scaleX(-1) translate3d(40vh, 4vh, 0);
+    opacity: 1;
+  }
+  80% {
+    transform: scaleX(-1) translate3d(10vh, 4vh, 0);
+    opacity: 1;
+  }
+  81% {
+    transform: translate3d(-10vh, 4vh, 0);
+    opacity: 1;
+  }
+  85% {
+    transform: translate3d(-15vh, 4vh, 0);
+    opacity: 1;
+  }
+  86% {
+    transform: scaleX(-1) translate3d(15vh, 4vh, 0);
+    opacity: 1;
+  }
+  90% {
+    transform: scaleX(-1) translate3d(10vh, 4vh, 0);
+    opacity: 1;
+  }
+  95% {
+    transform: scaleX(-1) translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(-1) translate3d(0, 0, 0);
+    opacity: 0;
+  }
+}
+#orderPage header .icon_joomo {
+  animation-fill-mode: forwards;
+  animation-name: go-out-joomo, moving-joomo;
+  animation-delay: 0s, 10s;
+  animation-duration: 10s, 20s;
+  animation-iteration-count: infinite;
+  opacity: 0;
+  right: 10vh;
+  height: 14vh;
+  width: auto;
+}
+
+@keyframes wearing-hat {
+  25% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  45% {
+    transform: translate3d(0, 5vh, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(0, 5vh, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-10vh, 5vh, 0);
+    opacity: 1;
+  }
+}
+@keyframes moving-hat {
+  0% {
+    transform: translate3d(-10vh, 5vh, 0);
+    opacity: 1;
+  }
+  10% {
+    transform: translate3d(-30vh, 5vh, 0);
+    opacity: 1;
+  }
+  11% {
+    transform: scaleX(-1) translate3d(36vh, 5vh, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scaleX(-1) translate3d(6vh, 5vh, 0);
+    opacity: 1;
+  }
+  21% {
+    transform: translate3d(0, 5vh, 0);
+    opacity: 1;
+  }
+  30% {
+    transform: translate3d(-30vh, 5vh, 0);
+    opacity: 1;
+  }
+  31% {
+    transform: scaleX(-1) translate3d(36vh, 5vh, 0);
+    opacity: 1;
+  }
+  40% {
+    transform: scaleX(-1) translate3d(6vh, 5vh, 0);
+    opacity: 1;
+  }
+  41% {
+    transform: translate3d(0, 5vh, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(-30vh, 5vh, 0);
+    opacity: 1;
+  }
+  51% {
+    transform: scaleX(-1) translate3d(36vh, 5vh, 0);
+    opacity: 1;
+  }
+  60% {
+    transform: scaleX(-1) translate3d(6vh, 5vh, 0);
+    opacity: 1;
+  }
+  61% {
+    transform: translate3d(0, 5vh, 0);
+    opacity: 1;
+  }
+  70% {
+    transform: translate3d(-30vh, 5vh, 0);
+    opacity: 1;
+  }
+  71% {
+    transform: scaleX(-1) translate3d(36vh, 5vh, 0);
+    opacity: 1;
+  }
+  80% {
+    transform: scaleX(-1) translate3d(6vh, 5vh, 0);
+    opacity: 1;
+  }
+  81% {
+    transform: translate3d(0, 5vh, 0);
+    opacity: 1;
+  }
+  85% {
+    transform: translate3d(-5vh, 5vh, 0);
+    opacity: 1;
+  }
+  86% {
+    transform: scaleX(-1) translate3d(11vh, 5vh, 0);
+    opacity: 1;
+  }
+  90% {
+    transform: scaleX(-1) translate3d(6vh, 5vh, 0);
+    opacity: 1;
+  }
+  95% {
+    transform: scaleX(-1) translate3d(-4vh, 1vh, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(-1) translate3d(-4vh, 1vh, 0);
+    opacity: 0;
+  }
+}
+#orderPage header .icon_chef-hat {
+  animation-fill-mode: forwards;
+  animation-name: wearing-hat, moving-hat;
+  animation-delay: 0s, 10s;
+  animation-duration: 10s, 20s;
+  animation-iteration-count: infinite;
+  opacity: 0;
+  right: 20vh;
+  bottom: 15vh;
+  height: 7vh;
+}
