@@ -1,7 +1,7 @@
 spring :
   jpa :
     hibernate :
-      ddl-auto : create
+      ddl-auto : validate
     properties :
       hibernate :
         show_sql: true
@@ -11,8 +11,6 @@ spring :
     store-type: jdbc
   profiles:
     include: real-db
-  config:
-    use-legacy-processing: true
 
 logging:
   level:
