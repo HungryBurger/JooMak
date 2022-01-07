@@ -1,6 +1,6 @@
+server:
+  port: 9000
 spring :
-  server:
-    port: 9000
   jpa :
     hibernate :
       ddl-auto : validate
