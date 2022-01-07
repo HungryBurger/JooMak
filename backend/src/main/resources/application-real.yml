@@ -1,4 +1,6 @@
 spring :
+  server:
+    port: 9000
   jpa :
     hibernate :
       ddl-auto : validate
@@ -6,10 +8,13 @@ spring :
       hibernate :
         show_sql: true
         format_sql : true
-
   session:
     store-type: jdbc
   profiles:
     include: real-db
   config:
     use-legacy-processing: true
+logging:
+  level:
+    org.hiberbate.SQL: debug
+    org.hibernate.type: trace
