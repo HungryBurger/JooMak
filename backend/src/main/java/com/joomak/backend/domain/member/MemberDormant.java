@@ -8,5 +8,8 @@ public class MemberDormant {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "memberDormantId")
     private Long id;
+    
+    @Embedded
+    private SystemInfo systemInfo;
 
 }

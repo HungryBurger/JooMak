@@ -51,11 +51,6 @@ public class Member {
 
     private LocalDateTime pwChangeAt;
 
-    private LocalDateTime sysRegAt;
-
-    private LocalDateTime sysUpdAt;
-
-    private LocalDateTime sysRegId;
-
-    private LocalDateTime sysUpdId;
+    @Embedded
+    private SystemInfo systemInfo;
 }

@@ -10,14 +10,32 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class MemberDeliveryAddress {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="mbr_dlv_adr_id")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "mbr_id")
     private Member member;
+
+    private String parcelBasedAddress;
+
+    private String parcelBasedAddressDetail;
+
+    private String roadBasedAddress;
+
+    private String roadBasedAddressDetail;
+
+    private String postCode;
+
+    private char isMainDeliveryAddress;
+
+    @Embedded
+    private SystemInfo systemInfo;
+
+
 
 }
 
