@@ -9,10 +9,6 @@ jobs:
     name: Build, Deploy to S3 bucket
     runs-on: [ubuntu-latest]
 
-    strategy:
-      matrix:
-        node-version: [12.16.x]
-
     steps:
       - uses: actions/checkout@v2
       
@@ -24,7 +20,17 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
         working-directory: ./backend
+        shell: bash
 
       - name: Build
         run: ./gradlew clean build
         working-directory: ./backend
+        shell: bash
+        
+        #codedeploy를 하기 위해서는 S3를 거쳐야하는데 옮겨주기 위해서 압축 파일을 만들어주고 옮긴다.
+      - name: make zip file
+        run: zip -qq -r ./$GITHUB_SHA.zip .
+        shell: bash
+        working-directory: ./backend
+        
+     
