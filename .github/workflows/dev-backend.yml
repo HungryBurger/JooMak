@@ -43,5 +43,5 @@ jobs:
       
       # 배포할 zip 파일을 s3에 업로드
       - name: Upload to S3
-        run: aws s3 cp --region ${{ secrets.AWS_S3_REGION }} ./$GITHUB_SHA.zip s3://${{ secret.AWS_S3_DEV_BACKEND_BUCKET_NAME }}/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://joomak-backend-jar/$PROJECT_NAME/$GITHUB_SHA.zip
         working-directory: ./backend
