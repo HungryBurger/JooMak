@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name ="memberBase")
+@Table(name = "memberBase")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,18 @@ public class Member {
     private String name;
 
     @Column(name = "mbr_stat_cd")
-    private int state;
+    @Enumerated(EnumType.STRING)
+    private MemberState memberState; //normal, standby ,banned, secession, dormant
+
+    @Enumerated(EnumType.STRING)
+    private Grade grade; //bronze, silver, gold, platinum, diamond
 
     @Column(name = "login_id")
     private String login_id;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "provider_id")
+    private Provider provider;
 
     private String nickName;
 
@@ -40,6 +48,8 @@ public class Member {
     private String profileImagePath;
 
     private int mobile;
+
+    private char bannedYn;
 
     private String password;
 

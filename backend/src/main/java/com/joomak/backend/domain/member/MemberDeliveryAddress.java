@@ -10,10 +10,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class MemberDeliveryAddress {
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "mbr_dlvr_addr")
     private Long id;
 
     @ManyToOne
@@ -34,8 +33,6 @@ public class MemberDeliveryAddress {
 
     @Embedded
     private SystemInfo systemInfo;
-
-
 
 }
 
