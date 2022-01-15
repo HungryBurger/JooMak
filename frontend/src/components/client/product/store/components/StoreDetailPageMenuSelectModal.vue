@@ -233,7 +233,10 @@ export default {
     },
     onClickOrderLink() {
       let orderFormList = [];
-      Object.assign(this.selectedItemForm, { selected: true });
+      Object.assign(this.selectedItemForm, {
+        selected: true,
+        img: this.selectedProductBasicInfo.img,
+      });
       orderFormList.push(this.selectedItemForm);
       this.SET_ORDER_FORM_LIST(orderFormList);
     },

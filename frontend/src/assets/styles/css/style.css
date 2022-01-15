@@ -189,7 +189,7 @@ a:-webkit-any-link {
   flex-direction: column;
   justify-content: center;
   gap: 1.4vh;
-  align-items: start;
+  align-items: flex-start;
 }
 .confirm_modal.address-add_modal .modal_content table td input {
   border: 1px solid #999 !important;
@@ -872,7 +872,7 @@ a:-webkit-any-link {
   background-color: #ff5e50;
 }
 
-/* orderPage */
+/* orderPage_s */
 #orderPage {
   width: 100%;
 }
@@ -1138,3 +1138,140 @@ a:-webkit-any-link {
   bottom: 15vh;
   height: 7vh;
 }
+
+#orderPage .content {
+  position: relative;
+  padding: 15vh 100px;
+  width: 100%;
+  height: fit-content;
+}
+#orderPage .content::before {
+  position: absolute;
+  top: 0;
+  left: 98px;
+  content: "";
+  display: block;
+  width: 2px;
+  height: 100%;
+  background-color: #ffdd1b;
+}
+#orderPage .content .group-box {
+  margin-bottom: 10vh;
+}
+
+#orderPage .content table {
+  width: 100%;
+  text-align: center;
+}
+#orderPage .content table ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#orderPage .content table tr {
+  width: 100%;
+}
+#orderPage .content table th {
+  padding: 15px 0;
+  font-weight: normal;
+  background-color: #fff7d3;
+}
+#orderPage .content table td {
+  padding: 15px;
+}
+#orderPage .content table th,
+#orderPage .content table td {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+#orderPage .content table.order_table td.img_th,
+#orderPage .content table.order_table td.img_td {
+  width: 15%;
+}
+#orderPage .content table.order_table td.img_td {
+  padding: 15px 0;
+  border-right: 1px solid #e0e0e0;
+}
+#orderPage .content table.order_table td.img_td img {
+  width: 100%;
+  height: auto;
+}
+
+#orderPage .content table.order_table td.option_td {
+  padding: 15px 1.5vw;
+}
+#orderPage .content table.order_table td.option_td * {
+  color: #7f7f7f;
+  text-align: start;
+  font-size: 12px;
+}
+#orderPage .content table.order_table td.option_td ul,
+#orderPage .content table.order_table td.option_td li {
+  width: 100%;
+}
+#orderPage .content table.order_table td.option_td li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1vh;
+}
+#orderPage .content table.order_table td.option_td span {
+  padding: 4px 0;
+}
+
+#orderPage .content table.order_table td.price_td {
+  text-align: end;
+}
+
+#orderPage .content table.order_table td.total_td {
+  padding: 20px 0;
+  padding-right: 20px;
+  text-align: end;
+}
+
+#orderPage .content table.address-info_table {
+  width: 80%;
+}
+#orderPage .content table.address-info_table td {
+  text-align: start;
+}
+#orderPage .content table.address-info_table td {
+  padding: 25px;
+}
+#orderPage .content table.address-info_table td.address-td > div > div {
+  margin-bottom: 20px;
+}
+#orderPage .content table.address-info_table td.address-td > div > input {
+  width: 60%;
+}
+
+#orderPage .content table.address-info_table td input {
+  padding: 10px;
+  height: 5vh;
+  border: 1px solid #999999;
+  border-radius: 5px;
+}
+#orderPage .content table.address-info_table td input:focus {
+  outline: none;
+}
+
+#orderPage .content table.address-info_table td.phone_td > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+#orderPage .content table.address-info_table td.phone_td input {
+  text-align: center;
+}
+#orderPage .content table.address-info_table td.phone_td input:nth-child(1) {
+  width: 60px;
+}
+#orderPage .content table.address-info_table td.phone_td input:nth-child(2) {
+  width: 80px;
+}
+#orderPage .content table.address-info_table td.phone_td input:nth-child(3) {
+  width: 80px;
+}
+/* orderPage_e */

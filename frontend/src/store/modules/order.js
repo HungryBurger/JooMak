@@ -127,6 +127,90 @@ export const order = {
         getters.selectedItemFormPrice * state.selectedItemForm.numberOfProduct
       );
     },
+    orderFormPrice: (state) => (orderForm) => {
+      let price = orderForm.price;
+      const singleOptionGroup = orderForm.options.singleOptionGroup;
+      const multiOptionGroup = orderForm.options.multiOptionGroup;
+
+      // singleOptionGroup
+      for (let i = 0; i < singleOptionGroup.length; i++) {
+        const selectedOptionObj = singleOptionGroup[i].optionList.filter(
+          (optionObj) =>
+            optionObj.optionIdx === singleOptionGroup[i].selectedOptionIdx
+        )[0];
+        price += selectedOptionObj.price;
+      }
+
+      // multiOptionGroup
+      for (let i = 0; i < multiOptionGroup.length; i++) {
+        const selectedOptionObjList = multiOptionGroup[i].optionList.filter(
+          (optionObj) => optionObj.onSelected
+        );
+        for (let j = 0; j < selectedOptionObjList.length; j++) {
+          price += selectedOptionObjList[j].price;
+        }
+      }
+
+      return price;
+    },
+    orderFormTotalPrice: (state) => (orderForm) => {
+      let price = orderForm.price;
+      const singleOptionGroup = orderForm.options.singleOptionGroup;
+      const multiOptionGroup = orderForm.options.multiOptionGroup;
+
+      // singleOptionGroup
+      for (let i = 0; i < singleOptionGroup.length; i++) {
+        const selectedOptionObj = singleOptionGroup[i].optionList.filter(
+          (optionObj) =>
+            optionObj.optionIdx === singleOptionGroup[i].selectedOptionIdx
+        )[0];
+        price += selectedOptionObj.price;
+      }
+
+      // multiOptionGroup
+      for (let i = 0; i < multiOptionGroup.length; i++) {
+        const selectedOptionObjList = multiOptionGroup[i].optionList.filter(
+          (optionObj) => optionObj.onSelected
+        );
+        for (let j = 0; j < selectedOptionObjList.length; j++) {
+          price += selectedOptionObjList[j].price;
+        }
+      }
+
+      return price * orderForm.numberOfProduct;
+    },
+    // 임시. 매우 반복되고 3중 for문임
+    orderFormListPrice: (state) => (orderFormList) => {
+      let sum = 0;
+      for (let a = 0; a < orderFormList.length; a++) {
+        let price = orderFormList[a].price;
+        const singleOptionGroup = orderFormList[a].options.singleOptionGroup;
+        const multiOptionGroup = orderFormList[a].options.multiOptionGroup;
+
+        // singleOptionGroup
+        for (let i = 0; i < singleOptionGroup.length; i++) {
+          const selectedOptionObj = singleOptionGroup[i].optionList.filter(
+            (optionObj) =>
+              optionObj.optionIdx === singleOptionGroup[i].selectedOptionIdx
+          )[0];
+          price += selectedOptionObj.price;
+        }
+
+        // multiOptionGroup
+        for (let i = 0; i < multiOptionGroup.length; i++) {
+          const selectedOptionObjList = multiOptionGroup[i].optionList.filter(
+            (optionObj) => optionObj.onSelected
+          );
+          for (let j = 0; j < selectedOptionObjList.length; j++) {
+            price += selectedOptionObjList[j].price;
+          }
+        }
+
+        sum += price * orderFormList[a].numberOfProduct;
+      }
+
+      return sum;
+    },
   },
   mutations: {
     // 매장 상세 페이지
