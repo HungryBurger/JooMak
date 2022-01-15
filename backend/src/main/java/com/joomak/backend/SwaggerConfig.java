@@ -2,50 +2,36 @@ package com.joomak.backend;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Configuration
-@EnableSwagger2
+@EnableWebMvc
 public class SwaggerConfig {
 
     @Bean
-    public Docket api(){
-        return new Docket(DocumentationType.SWAGGER_2)
-                .consumes(getConsumeContentTypes())
-                .produces(getProduceContentTypes())
-                .apiInfo(getApiInfo())
+    public Docket swaggerAPI(){
+        //Docket : swagger Bean
+        return new Docket(DocumentationType.OAS_30)
+                .useDefaultResponseMessages(true) //기본 응답 메시지 표시 여부
                 .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.ant("/*/**"))
-                .build();
-    }
-    private Set<String> getConsumeContentTypes(){
-        Set<String> consumes = new HashSet<>();
-        consumes.add("application/json;charset=UTF-8");
-        consumes.add("application/x-www-form-urlencoded");
-        return consumes;
+                .apis(RequestHandlerSelectors.basePackage("com.joomak.backend")) //swagger탐색 대상 패키지
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apiInfo());
     }
 
-    private Set<String> getProduceContentTypes(){
-        Set<String> produces = new HashSet<>();
-        produces.add("application/json;charset=UTF-8");
-        return produces;
-    }
-
-    private ApiInfo getApiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("API")
-                .description("SpringBoot With Swagger")
+                .title("JooMak Swagger")
+                .description("JooMak swagger")
                 .version("1.0")
                 .build();
     }
+
 }

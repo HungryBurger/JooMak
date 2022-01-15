@@ -18,7 +18,7 @@ sudo chmod +x $REPOSITORY/$PROJECT_NAME
 
 echo "> 파일 빌드"
 sudo chmod +x gradlew
-./gradlew --stop
+pkill -f '.*GradleDaemon.*'
 ./gradlew clean build --stacktrace
 
 echo "> Build 파일 복사"
@@ -43,8 +43,6 @@ fi
 echo "> 새 애플리케이션 배포"
 JAR_NAME=$(ls -tr ${REPOSITORY} | grep 'backend-0.0.1-SNAPSHOT.jar' | tail -n 1) # (8)
 echo "> JAR Name: $JAR_NAME"
-echo "> nohup 초기화"
-sudo cp /dev/null nohup.out
 
 echo "nohup파일 삭제"
 rm -f /home/ec2-user/nohup.out
