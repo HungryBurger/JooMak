@@ -1,6 +1,6 @@
 <template>
   <router-link
-    v-if="currentAddress"
+    v-if="currentAddressObj"
     :to="`/store-list/${category.en}`"
     @click="onClickCategory(category.en, 'storeListPage')"
   >
@@ -16,7 +16,7 @@
 
   <!-- fake component -->
   <a
-    v-else-if="!currentAddress"
+    v-else-if="!currentAddressObj"
     @click="onClickCategory(category.en, 'storeListPage')"
   >
     <div class="home-page_category" :data-category="category.en">
@@ -31,15 +31,19 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { TOGGLE_ON_HOME, SET_CURRENT_PAGE } from "@/store/modules/common.js";
+import { mapGetters, mapState } from "vuex";
+import {
+  TOGGLE_ON_HOME,
+  SET_CURRENT_PAGE,
+  SET_ON_ADDRESS_CONFIG_REQUEST_MODAL,
+} from "@/store/modules/common.js";
 import { SET_CURRENT_CATEGORY } from "@/store/modules/product.js";
 
 export default {
   props: ["category", "categoryIndex"],
   computed: {
     ...mapState("common", ["onHome", "currentPage"]),
-    ...mapState("member", ["currentAddress"]),
+    ...mapGetters("member", ["currentAddressObj"]),
     letterPath() {
       return require(`@/assets/images/letter_${this.category.en}.svg`);
     },
@@ -57,8 +61,12 @@ export default {
       this.$store.commit(`product/${SET_CURRENT_CATEGORY}`, category);
     },
     onClickCategory(category, pageName) {
-      if (!this.currentAddress) {
-        alert("먼저 주소를 설정해 주세요");
+      if (!this.currentAddressObj) {
+        // alert("먼저 주소를 설정해 주세요");
+        this.$store.commit(
+          `common/${SET_ON_ADDRESS_CONFIG_REQUEST_MODAL}`,
+          true
+        );
         return;
       }
 
