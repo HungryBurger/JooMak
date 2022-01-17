@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -32,17 +33,17 @@ public class Member extends BaseEntity {
 
     private String memberName;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private MemberState memberState; //normal, standby ,banned, secession, dormant
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private Grade grade; //bronze, silver, gold, platinum, diamond
 
     private String loginId;
 
     private String nickName;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private Position position; //USER, OWNER, ADMINISTRATOR
 
     private char snsLoginYn;
@@ -51,7 +52,7 @@ public class Member extends BaseEntity {
 
     private String email;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private Gender gender; //male female;
 
     private String profileImagePath;

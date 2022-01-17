@@ -1,6 +1,6 @@
 package com.joomak.backend.domain.member;
 
-import com.joomak.backend.domain.common.BaseEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,20 +16,26 @@ import static lombok.AccessLevel.PROTECTED;
 @SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
-public class StoreGoodsMapping extends BaseEntity {
+public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="storeGoodsId")
+    @Column(name="storeId")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "storeId")
-    private Store storeBase;
+    @JoinColumn(name="memberId")
+    private Member member;
 
-//    @ManyToOne
-//    @JoinColumn(name="goodsId")
-//    private Goods goods;
-//
+    private String storeName;
 
+    private Double grade;
+
+    private String previewStoreIntro;
+
+    private String businessHour;
+
+    private String mainComment;
+
+    private String subComment;
 }
