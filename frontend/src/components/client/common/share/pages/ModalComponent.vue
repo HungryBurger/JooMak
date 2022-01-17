@@ -1,26 +1,32 @@
 <template>
-  <div class="modal">
-    <div class="overlay" @click="$emit('close')"></div>
-    <div class="modal-card">
-      <header class="modal-header">
+  <div class="modal_wrap">
+    <div class="overlay" @click="closeModal" @wheel.prevent></div>
+    <div class="modal_card">
+      <header class="modal_header">
         <slot name="header">header</slot>
-
-        <img
-          id="icon_close"
-          src="@/assets/images/icon_close.svg"
-          alt="icon_close"
-          @click="$emit('close')"
-        />
+        <div id="icon_close_wrap" @click="closeModal">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="#999999"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 2.01429L17.9857 0L10 7.98571L2.01429 0L0 2.01429L7.98571 10L0 17.9857L2.01429 20L10 12.0143L17.9857 20L20 17.9857L12.0143 10L20 2.01429Z"
+            />
+          </svg>
+        </div>
       </header>
-      <div class="modal-content">
+      <div class="modal_content">
         <slot name="content">
           <h1>Content</h1>
         </slot>
       </div>
-      <footer class="modal-footer">
+      <footer class="modal_footer">
         <slot name="footer">
           footer
-          <button id="close-button" @click="$emit('close')">Close</button>
+          <button id="close-button" @click="closeModal">Close</button>
         </slot>
       </footer>
     </div>
@@ -28,11 +34,29 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+import { SET_ON_MODAL } from "@/store/modules/common.js";
+
+export default {
+  computed: {
+    ...mapState("common", ["onModal"]),
+  },
+  methods: {
+    closeModal() {
+      this.$emit("close");
+      this.$store.commit(`common/${SET_ON_MODAL}`, false);
+    },
+  },
+  beforeUnmount() {
+    if (this.onModal) {
+      this.$store.commit(`common/${SET_ON_MODAL}`, false);
+    }
+  },
+};
 </script>
 
 <style scoped>
-.modal,
+.modal_wrap,
 .overlay {
   width: 100%;
   height: 100%;
@@ -42,43 +66,70 @@ export default {};
   text-align: center;
   color: #828282;
 }
+.modal_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 #close-button {
   cursor: pointer;
 }
-#icon_close {
-  height: auto;
+#icon_close_wrap {
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 12px;
+  height: 12px;
   position: absolute;
   top: 12px;
   right: 12px;
-  color: #828282;
   cursor: pointer;
+}
+#icon_close_wrap > svg {
+  width: 100%;
+  height: 100%;
+  /* fill: #828282; */
+}
+#icon_close_wrap:hover > svg {
+  fill: #292929;
 }
 .overlay {
   opacity: 0.5;
   background-color: black;
 }
 
-.modal-card {
+.modal_card {
+  overflow-y: overlay;
   position: relative;
-  max-width: 50%;
-  margin: auto;
-  margin-top: 100px;
+  min-width: 30vw;
+  max-width: 80vw;
   padding: 20px;
   background-color: white;
-  min-height: 500px;
+  min-height: 40vh;
+  max-height: 90vh;
   z-index: 10;
   opacity: 1;
 }
-header {
-  border-bottom: 2px solid #9e9e9e;
+.modal_card::-webkit-scrollbar {
+  background-color: transparent;
 }
-footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  padding: 12px 0;
+header.modal_header {
+  width: 100%;
+}
+.modal_content {
+  width: 100%;
+}
+footer.modal_footer {
   width: 100%;
   /* border-top:1px solid; */
+}
+
+.modal_wrap .no-use {
+  display: none;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 </style>
