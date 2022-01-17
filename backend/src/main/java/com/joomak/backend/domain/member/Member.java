@@ -2,6 +2,9 @@ package com.joomak.backend.domain.member;
 
 
 import com.joomak.backend.domain.common.BaseEntity;
+import com.joomak.backend.domain.common.Gender;
+import com.joomak.backend.domain.common.Grade;
+import com.joomak.backend.domain.common.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +25,6 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
-@Table(name = "memberBase")
 //implements UserDetails
 public class Member extends BaseEntity {
 
@@ -44,7 +46,7 @@ public class Member extends BaseEntity {
     private String nickName;
 
     @Enumerated(STRING)
-    private Position position; //USER, OWNER, ADMINISTRATOR
+    private Role role;  //USER, OWNER, ADMINISTRATOR
 
     private char snsLoginYn;
 

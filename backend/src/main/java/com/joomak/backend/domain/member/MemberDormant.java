@@ -2,6 +2,8 @@ package com.joomak.backend.domain.member;
 
 
 import com.joomak.backend.domain.common.BaseEntity;
+import com.joomak.backend.domain.common.Gender;
+import com.joomak.backend.domain.common.Grade;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +23,6 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
-@Table(name = "memberBase")
 //implements UserDetails
 public class MemberDormant extends BaseEntity {
 

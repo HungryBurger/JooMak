@@ -25,4 +25,6 @@ public class Product extends BaseEntity {
 
     private String productName;
 
+
+
 }

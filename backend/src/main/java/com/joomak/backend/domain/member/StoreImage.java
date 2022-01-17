@@ -3,9 +3,9 @@ package com.joomak.backend.domain.member;
 import com.joomak.backend.domain.common.BaseEntity;
 import com.joomak.backend.domain.common.YorN;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
@@ -14,7 +14,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@SuperBuilder
+@Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
 public class StoreImage extends BaseEntity {

@@ -13,7 +13,6 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@SuperBuilder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
 public class StoreGoodsMapping extends BaseEntity {
