@@ -1,17 +1,18 @@
 package com.joomak.backend.domain.product;
 
-import com.joomak.backend.domain.common.MenuTypes;
+
+import com.joomak.backend.domain.common.BaseEntity;
+import com.joomak.backend.domain.common.YorN;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -19,18 +20,18 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
-public class Product {
+public class MenuImage extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "productId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "menuId")
     private Long id;
 
-    private String productName;
+    private int imgSequence;
 
-    @Enumerated
-    private MenuTypes types;
+    private String orginImageName;
 
-    private int stockCount;
+    private String imagePath;
 
-    private int safetyStockCount;
+    private YorN deleteYn;
+
 }

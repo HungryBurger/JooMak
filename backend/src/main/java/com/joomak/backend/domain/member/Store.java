@@ -36,4 +36,7 @@ public class Store {
     private String mainComment;
 
     private String subComment;
+
+    private int minOrderPrice;
+
 }

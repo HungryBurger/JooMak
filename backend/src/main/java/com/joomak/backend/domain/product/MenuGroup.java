@@ -1,15 +1,14 @@
 package com.joomak.backend.domain.product;
 
-import com.joomak.backend.domain.common.MenuTypes;
+import com.joomak.backend.domain.common.BaseEntity;
+import com.joomak.backend.domain.common.YorN;
+import com.joomak.backend.domain.member.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PACKAGE;
@@ -19,18 +18,21 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
-public class Product {
+public class MenuGroup extends BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "productId")
+    @Column(name = "menuId")
     private Long id;
 
-    private String productName;
+    @ManyToOne
+    @JoinColumn(name = "storeId")
+    private Store store;
 
-    @Enumerated
-    private MenuTypes types;
 
-    private int stockCount;
+    private String menuGroupDescription;
 
-    private int safetyStockCount;
+    private int menuGroupSequence;
+
+    private YorN deleteYn;
+
 }
