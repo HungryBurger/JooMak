@@ -7,7 +7,7 @@
       <img :src="iconChefHatPath" alt="icon_chef-hat" class="icon_chef-hat" />
     </header>
     <div class="content">
-      <GroupBox title="주문정보">
+      <GroupBox title="주문 정보">
         <template v-slot:content>
           <table class="order_table">
             <colgroup>
@@ -138,7 +138,7 @@
         </template>
       </GroupBox>
 
-      <GroupBox title="배달지정보">
+      <GroupBox title="배달지 정보">
         <template v-slot:content>
           <table class="address-info_table">
             <colgroup>
@@ -191,6 +191,93 @@
           </table>
         </template>
       </GroupBox>
+
+      <GroupBox title="요청 사항">
+        <template v-slot:content>
+          <div class="customer-request_box">
+            <div>
+              <div class="message_box owner">
+                <div>
+                  <img
+                    :src="iconFaceJoomoPath"
+                    alt="joomo-face"
+                    class="icon_face-joomo"
+                  />
+                  <span>사장님께</span>
+                </div>
+                <div class="dropdown">
+                  <button
+                    class="btn btn-warning dropdown-toggle"
+                    id="message-to-owner_dropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {{ selectedMessageToOwner }}
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="message-to-owner_dropdown"
+                  >
+                    <li
+                      v-for="(messageToOwner, i) in messageToOwnerList"
+                      :key="i"
+                    >
+                      <a
+                        class="dropdown-item"
+                        :data-message-owner="messageToOwner"
+                        @click="onClickMessageToOwner($event)"
+                        >{{ messageToOwner }}</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="message_box rider">
+                <div>
+                  <img
+                    :src="iconFaceRiderPath"
+                    alt="rider-face"
+                    class="icon_face-rider"
+                  />
+                  <span>라이더님께</span>
+                </div>
+                <div class="dropdown">
+                  <button
+                    class="btn btn-primary dropdown-toggle"
+                    id="message-to-rider_dropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {{ selectedMessageToRider }}
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="message-to-rider_dropdown"
+                  >
+                    <li
+                      v-for="(messageToRider, i) in messageToRiderList"
+                      :key="i"
+                    >
+                      <a
+                        class="dropdown-item"
+                        :data-message-rider="messageToRider"
+                        @click="onClickMessageToRider($event)"
+                        >{{ messageToRider }}</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" />
+                &nbsp;&nbsp;다음 주문에도 이 요청 사용하기
+              </label>
+            </div>
+          </div>
+        </template>
+      </GroupBox>
     </div>
   </div>
   <div v-else id="orderPage">
@@ -210,6 +297,22 @@ export default {
       phoneNum1: "",
       phoneNum2: "",
       phoneNum3: "",
+
+      selectedMessageToOwner: "선택 없음",
+      messageToOwnerList: [
+        "선택 없음",
+        "수저는 안주셔도 돼요.",
+        "사장님 부자되세요 ^-^ !!",
+        "맛있게 부탁드립니다!",
+      ],
+
+      selectedMessageToRider: "선택 없음",
+      messageToRiderList: [
+        "선택 없음",
+        "조심히 안전히 오세요!",
+        "빠른 배달 부탁드려요.",
+        "기사님 좋은하루 되세요~!!",
+      ],
     };
   },
   computed: {
@@ -228,6 +331,12 @@ export default {
     },
     iconChefHatPath() {
       return require("@/assets/images/icon_order_chef-hat.svg");
+    },
+    iconFaceJoomoPath() {
+      return require("@/assets/images/icon_face-joomo.svg");
+    },
+    iconFaceRiderPath() {
+      return require("@/assets/images/icon_face-rider.svg");
     },
   },
   created() {
@@ -258,6 +367,12 @@ export default {
           return;
         }
       }
+    },
+    onClickMessageToOwner(e) {
+      this.selectedMessageToOwner = e.target.dataset.messageOwner;
+    },
+    onClickMessageToRider(e) {
+      this.selectedMessageToRider = e.target.dataset.messageRider;
     },
   },
 };

@@ -1239,10 +1239,10 @@ a:-webkit-any-link {
 #orderPage .content table.address-info_table td {
   padding: 25px;
 }
-#orderPage .content table.address-info_table td.address-td > div > div {
+#orderPage .content table.address-info_table td.address_td > div > div {
   margin-bottom: 20px;
 }
-#orderPage .content table.address-info_table td.address-td > div > input {
+#orderPage .content table.address-info_table td.address_td > div > input {
   width: 60%;
 }
 
@@ -1274,4 +1274,90 @@ a:-webkit-any-link {
 #orderPage .content table.address-info_table td.phone_td input:nth-child(3) {
   width: 80px;
 }
+
+#orderPage .customer-request_box {
+  width: 100%;
+  height: fit-content;
+  padding: 50px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+#orderPage .customer-request_box > div:nth-child(1) {
+  margin-bottom: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5%;
+  align-items: center;
+}
+#orderPage .customer-request_box > div:nth-child(1) > .message_box {
+  width: 40%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+}
+#orderPage .customer-request_box .dropdown,
+#orderPage .customer-request_box .dropdown > button,
+#orderPage .customer-request_box .dropdown > ul,
+#orderPage .customer-request_box .dropdown > ul > li {
+  width: 100%;
+}
+#orderPage .customer-request_box img.icon_face-joomo {
+  margin-right: 20px;
+  width: 50px;
+  height: auto;
+}
+#orderPage .customer-request_box img.icon_face-rider {
+  margin-right: 20px;
+  width: 50px;
+  height: auto;
+}
+
+#orderPage .customer-request_box .dropdown > button.btn-warning {
+  background-color: white;
+}
+#orderPage .customer-request_box .dropdown > button.btn-primary {
+  background-color: white;
+  color: #292929;
+}
+#orderPage .customer-request_box .dropdown > button {
+  position: relative;
+}
+#orderPage .customer-request_box .dropdown > button::after {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+#orderPage .customer-request_box .dropdown a.dropdown-item {
+  transition: background-color 0.4s;
+}
+#orderPage
+  .customer-request_box
+  .message_box.owner
+  .dropdown
+  a.dropdown-item:hover {
+  background-color: #ffdd1b;
+  color: white;
+  font-weight: bold;
+}
+#orderPage
+  .customer-request_box
+  .message_box.rider
+  .dropdown
+  a.dropdown-item:hover {
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+}
+
+#orderPage .customer-request_box > div:nth-child(2) label {
+  cursor: pointer;
+}
+#orderPage .customer-request_box > div:nth-child(2) label:hover {
+  font-weight: bold;
+}
+
 /* orderPage_e */
