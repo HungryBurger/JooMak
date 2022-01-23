@@ -2,7 +2,6 @@ package com.joomak.backend.domain.member;
 
 import com.joomak.backend.domain.common.BaseEntity;
 import com.joomak.backend.domain.common.YorN;
-import com.joomak.backend.domain.order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,10 +37,6 @@ public class StoreReview extends BaseEntity {
     private LocalDateTime deleteAt;
 
     private YorN secretYn;
-
-    @ManyToOne
-    @JoinColumn(name = "orderNo")
-    private Order orderNo;
 
 
 }

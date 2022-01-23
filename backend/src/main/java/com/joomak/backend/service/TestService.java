@@ -11,7 +11,6 @@ public class TestService {
     public void test() {
 //        val now = LocalDateTimeUtil.convertFormat(LocalDateTime.now());
 //        var now2 = LocalDateTime.now().convertFormat();
-
 //val var의 차이
 //        val a = 1;
 //        a = 2;
