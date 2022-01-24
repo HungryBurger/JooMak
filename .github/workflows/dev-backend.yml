@@ -46,7 +46,7 @@ jobs:
       
       # 배포할 zip 파일을 s3에 업로드
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$build.zip s3://joomak-backend-jar/build.zip
+        run: aws s3 cp --region ${{ secrets.AWS_S3_REGION }} ./$build.zip s3://joomak-backend-jar/build.zip
         working-directory: ./backend
         
       - name: Code Deploy
