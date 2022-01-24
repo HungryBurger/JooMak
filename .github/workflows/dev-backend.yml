@@ -29,7 +29,7 @@ jobs:
         
         #codedeploy를 하기 위해서는 S3를 거쳐야하는데 옮겨주기 위해서 압축 파일을 만들어주고 옮긴다.
       - name: make zip file
-        run: zip -qq -r ./$GITHUB_SHA.zip .
+        run: zip -qq -r ./build.zip .
         shell: bash
         working-directory: ./backend
         
@@ -46,5 +46,8 @@ jobs:
       
       # 배포할 zip 파일을 s3에 업로드
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://joomak-backend-jar/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$build.zip s3://joomak-backend-jar/build.zip
         working-directory: ./backend
+        
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name joomak-webservice --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name joomak-webservice-group --s3-location bucket=joomak-backend-jar,bundleType=zip,key=server/build.zip
