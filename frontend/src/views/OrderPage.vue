@@ -14,8 +14,8 @@
               <col width="15%" />
               <col width="20%" />
               <col width="10%" />
-              <col width="30%" />
-              <col width="10%" />
+              <col width="25%" />
+              <col width="15%" />
               <col width="15%" />
             </colgroup>
 
@@ -278,6 +278,50 @@
           </div>
         </template>
       </GroupBox>
+
+      <GroupBox title="결제 수단 선택">
+        <template v-slot:content>
+          <div class="web-pay_wrap pay_wrap">
+            <div>
+              <img :src="iconWebPayPath" alt="icon_web-pay" />
+              <h4>웹 결제</h4>
+              <span>* 웹에서 미리 결제</span>
+            </div>
+            <div class="pay_box">
+              <div class="pay_btn danal">
+                <img :src="logoDanalPath" alt="logo_danal" />
+                <span>신용카드</span>
+              </div>
+              <div class="pay_btn naver-pay">
+                <img :src="logoNaverPayPath" alt="logo_naver-pay" />
+                <span>네이버페이</span>
+              </div>
+              <div class="pay_btn kakao-pay">
+                <img :src="logoKakaoPayPath" alt="logo_kakao-pay" />
+                <span>카카오페이</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="meet-pay_wrap pay_wrap">
+            <div>
+              <img :src="iconMeetPayPath" alt="icon_meet-pay" />
+              <h4>현장 결제</h4>
+              <span>* 음식 받고 직접 결제</span>
+            </div>
+            <div class="pay_box">
+              <div class="pay_btn credit-card">
+                <img :src="iconCreditCardPath" alt="icon_credit-card" />
+                <span>신용카드</span>
+              </div>
+              <div class="pay_btn dollar">
+                <img :src="iconDollarPath" alt="icon_dollar" />
+                <span>현금결제</span>
+              </div>
+            </div>
+          </div>
+        </template>
+      </GroupBox>
     </div>
   </div>
   <div v-else id="orderPage">
@@ -337,6 +381,27 @@ export default {
     },
     iconFaceRiderPath() {
       return require("@/assets/images/icon_face-rider.svg");
+    },
+    iconWebPayPath() {
+      return require("@/assets/images/icon_web-pay.png");
+    },
+    iconMeetPayPath() {
+      return require("@/assets/images/icon_meet-pay.png");
+    },
+    logoDanalPath() {
+      return require("@/assets/images/logo_danal.png");
+    },
+    logoNaverPayPath() {
+      return require("@/assets/images/logo_naver-pay.jpg");
+    },
+    logoKakaoPayPath() {
+      return require("@/assets/images/logo_kakao-pay.png");
+    },
+    iconCreditCardPath() {
+      return require("@/assets/images/icon_credit-card.png");
+    },
+    iconDollarPath() {
+      return require("@/assets/images/icon_dollar.png");
     },
   },
   created() {
