@@ -36,11 +36,14 @@ jobs:
         
         # AWS 서비스를 사용하기 위한 인증 과정 setting 안에 secrets값 등록
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
         env:
-          aws-access-key-id: ${{ secrets.AWS_S3_IAM_BACKEND_DEPLOY_ACCESS_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_S3_IAM_BACKEND_DEPLOY_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_S3_REGION }}
+          AWS_S3_BUCKET: joomak-backend-jar
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_IAM_BACKEND_DEPLOY_ACCESS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_IAM_BACKEND_DEPLOY_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_S3_REGION }}
       
       # 배포할 zip 파일을 s3에 업로드
       - name: Upload to S3
