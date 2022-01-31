@@ -51,4 +51,4 @@ jobs:
         working-directory: ./backend
         
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name joomak-webservice --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name joomak-webservice-group --s3-location bucket=joomak-backend-jar,bundleType=zip,key=server/build.zip
+        run: aws deploy create-deployment --application-name joomak-backend-deploy --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name 	joomak-backend-deploy-group --s3-location bucket=joomak-backend-jar,bundleType=zip,key=build.zip
