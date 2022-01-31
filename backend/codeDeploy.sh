@@ -27,8 +27,11 @@ echo "> JAR Name: $JAR_NAME"
 echo "nohup파일 삭제"
 rm -f $REPOSITORY/nohup.out
 
+echo "JAR 권한부여 $REPOSITORY/$JAR_NAME"
+sudo chmod +x $REPOSITORY/$JAR_NAME
+
 echo "Springboot 배포시작"
 nohup java -jar \
   -Dspring.config.location=classpath:/application.yml,/home/ec2-user/app/application-real-db.yml \
   -Dspring.profiles.active=real \
-  $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+  $REPOSITORY/$JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
