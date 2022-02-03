@@ -1,40 +1,39 @@
 package com.joomak.backend.domain.member;
 
 import com.joomak.backend.domain.common.BaseEntity;
-import lombok.*;
+import com.joomak.backend.domain.common.YorN;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
-
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
-public class MemberDeliveryAddress extends BaseEntity {
+public class StoreImage extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "memberDeliveryAddress")
+    @Column(name="storeImageId")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "memberId")
-    private Member member;
+    @JoinColumn(name="storeId")
+    private Store store;
 
-    private String parcelBasedAddress;
+    private int displaySeq;
 
-    private String parcelBasedAddressDetail;
+    private YorN displayYn;
 
-    private String roadBasedAddress;
+    private String storeMainImage;
 
-    private String roadBasedAddressDetail;
-
-    private String postCode;
-
-    private char isMainDeliveryAddress;
+    private String storeProfileImg;
 
 }
-
