@@ -32,6 +32,6 @@ sudo chmod +x $REPOSITORY/$JAR_NAME
 
 echo "Springboot 배포시작"
 nohup java -jar \
-  -Dspring.config.location=classpath:/application.yml,/home/ec2-user/app/application-real-db.yml \
+  -Dspring.config.location=classpath:/application.yml,/home/ec2-user/db_setting/application-real-db.yml \
   -Dspring.profiles.active=real \
   $REPOSITORY/$JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
