@@ -17,6 +17,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
+@Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = PROTECTED)
@@ -45,7 +46,7 @@ public class Menu extends BaseEntity {
     private MenuGroup menuGroup;
 
     //메뉴 구성
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "productId")
     private List<Product> menuComposition;
 

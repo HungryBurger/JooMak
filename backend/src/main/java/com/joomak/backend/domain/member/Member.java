@@ -8,14 +8,12 @@ import com.joomak.backend.domain.common.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PACKAGE;
-import static lombok.AccessLevel.PROTECTED;
 
 /**
  * UserDetails를 Entity에서 구현할지 새로운 DTO를 만들어 구현할 지 결정.
@@ -23,7 +21,6 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
 //implements UserDetails
 public class Member extends BaseEntity {
@@ -69,11 +66,14 @@ public class Member extends BaseEntity {
 
     private LocalDateTime loginFailCount;
 
+    public Member(){
+    }
+
     public Member updateNickName(String nickName) {
         this.nickName = nickName;
         return this;
     }
-    public Member updateMobile(String mobile){
+    public Member updateMobile(String mobile) {
         this.mobile = mobile;
         return this;
     }

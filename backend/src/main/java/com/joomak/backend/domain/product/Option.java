@@ -11,6 +11,7 @@ import javax.persistence.*;
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
+@Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = PROTECTED)

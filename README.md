@@ -3,7 +3,8 @@
 간편 배달 웹 서비스 개발
 
 # Motivation
-E-commerce 의 대표적인 배달 도메인 그리고 Spring Boot, JPA, Vue, JAVA11에 대한 이해도를 높이기 위함
+E-commerce 의 대표적인 배달 도메인에 대해 고찰해보고,
+Spring Boot, JPA, Vue, JAVA11에 대한 이해도를 높이기 위함
 
 [PRD 운영] <br>
 http://joomak-delivery.com/ <br>

@@ -1,35 +1,35 @@
-package com.joomak.backend.domain.product;
+package com.joomak.backend.domain.member;
 
 
 import com.joomak.backend.domain.common.BaseEntity;
-import com.joomak.backend.domain.common.YorN;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 import static lombok.AccessLevel.PACKAGE;
-import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor(access = PACKAGE)
-public class MenuImage extends BaseEntity {
+public class Requirement extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "menuId")
+    @Column(name ="requirementId")
     private Long id;
 
-    private int imgSequence;
+    @OneToOne
+    @JoinColumn(name ="requirement")
+    private Address address;
 
-    private String orginImageName;
+    //주인 요청사항
+    private String hostInquiry;
 
-    private String imagePath;
-
-    private YorN deleteYn;
+    //배달기사 요청사항
+    private String deliveryManInquiry;
 
 }
