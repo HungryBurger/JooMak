@@ -24,7 +24,7 @@ public class Requirement extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name ="requirement")
-    private Address address;
+    private MemberDeliveryAddress memberDeliveryAddress;
 
     //주인 요청사항
     private String hostInquiry;
