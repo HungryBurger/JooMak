@@ -10,6 +10,18 @@
   src: url("../fonts/JSDongkang-Bold.ttf") format("truetype");
 }
 
+/* Font-완도희망체 */
+@font-face {
+  font-family: "Wandohope";
+  font-weight: 500;
+  src: url("../fonts/WandohopeR.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Wandohope";
+  font-weight: 700;
+  src: url("../fonts/WandohopeB.ttf") format("truetype");
+}
+
 * {
   font-family: "JSDongkang", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
@@ -1428,3 +1440,212 @@ a:-webkit-any-link {
 }
 
 /* orderPage_e */
+
+/* cartPage_s */
+#cartPage_wrap {
+  width: 100%;
+  height: 88vh;
+}
+#cartPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#cartPage_wrap.off-item {
+  background-color: #fff0b1;
+  display: flex;
+  justify-content: center;
+}
+#cartPage_wrap.off-item #cartPage {
+  flex-direction: column;
+  position: relative;
+  width: 80%;
+  background-color: white;
+  overflow-x: hidden;
+}
+#cartPage_wrap.off-item #cartPage img#icon_cloud {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: auto;
+}
+#cartPage_wrap.off-item #cartPage > div {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cartPage_wrap.off-item #cartPage > div.top {
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1vh;
+  height: 30%;
+}
+#cartPage_wrap.off-item #cartPage h2 {
+  font-weight: bold;
+  position: relative;
+  margin-bottom: 30px;
+}
+@keyframes bouncing-bottari {
+  15% {
+    transform: translate3d(15px, -10px, 0);
+  }
+  30% {
+    transform: translate3d(15px, -5px, 0);
+  }
+  45% {
+    transform: translate3d(15px, -10px, 0);
+  }
+  60% {
+    transform: translate3d(15px, -5px, 0);
+  }
+  100% {
+    transform: translate3d(15px, -5px, 0);
+  }
+}
+#cartPage_wrap.off-item #cartPage h2 > img {
+  animation: bouncing-bottari 2.5s infinite;
+  height: 50px;
+  width: auto;
+  transform: translate3d(15px, -5px, 0);
+}
+#cartPage_wrap.off-item #cartPage h2 > span {
+  position: absolute;
+  left: calc(-1 * (20% / 2));
+  bottom: -10px;
+  display: block;
+  width: 120%;
+  height: 4px;
+  background-color: #ffdd1b;
+}
+#cartPage_wrap.off-item #cartPage h2 > span::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: black;
+}
+
+#cartPage_wrap.off-item #cartPage h4 {
+  font-family: "Wandohope";
+}
+
+#cartPage_wrap.off-item #cartPage > div.bottom {
+  top: 30%;
+  height: 70%;
+}
+#cartPage_wrap.off-item #cartPage > div.bottom img {
+  position: absolute;
+}
+#cartPage_wrap.off-item #cartPage > div.bottom img.icon_joomo-sad {
+  width: 15%;
+  height: auto;
+  right: 20%;
+  bottom: 8%;
+}
+@keyframes fade-in-bubble {
+  30%,
+  85% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade-in-dot1 {
+  40% {
+    opacity: 0;
+  }
+  50%,
+  85% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade-in-dot2 {
+  50% {
+    opacity: 0;
+  }
+  60%,
+  85% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade-in-dot3 {
+  60% {
+    opacity: 0;
+  }
+  70%,
+  85% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+#cartPage_wrap.off-item #cartPage > div.bottom svg.icon_thinking-bubble {
+  animation: fade-in-bubble 10s infinite;
+  opacity: 0;
+  position: absolute;
+  width: 30%;
+  height: auto;
+  right: 40%;
+  bottom: 40%;
+}
+#cartPage_wrap.off-item
+  #cartPage
+  > div.bottom
+  svg.icon_thinking-bubble
+  circle.dot {
+  opacity: 0;
+}
+#cartPage_wrap.off-item
+  #cartPage
+  > div.bottom
+  svg.icon_thinking-bubble
+  circle.dot1 {
+  animation: fade-in-dot1 10s infinite;
+}
+#cartPage_wrap.off-item
+  #cartPage
+  > div.bottom
+  svg.icon_thinking-bubble
+  circle.dot2 {
+  animation: fade-in-dot2 10s infinite;
+}
+#cartPage_wrap.off-item
+  #cartPage
+  > div.bottom
+  svg.icon_thinking-bubble
+  circle.dot3 {
+  animation: fade-in-dot3 10s infinite;
+}
+#cartPage_wrap.off-item #cartPage > div.bottom img.icon_joomak {
+  width: 20%;
+  height: auto;
+  right: 0;
+  bottom: 20%;
+}
+/* cartPage_e */
