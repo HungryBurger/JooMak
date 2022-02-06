@@ -34,7 +34,7 @@ public class OptionGroup {
 
     @ManyToOne
     @JoinColumn(name = "menuId")
-    private Menu menu;
+    private Product product;
 
     //옵션 그룹명
     private String optionGroupName;
