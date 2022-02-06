@@ -1,7 +1,10 @@
 package com.joomak.backend.domain.member;
 
 import com.joomak.backend.domain.common.BaseEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -17,7 +20,7 @@ import static lombok.AccessLevel.PROTECTED;
 public class MemberDeliveryAddress extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "memberDeliveryAddress")
+    @Column(name = "memberDeliveryAddressId")
     private Long id;
 
     @ManyToOne

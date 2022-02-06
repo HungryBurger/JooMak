@@ -8,6 +8,7 @@ import com.joomak.backend.domain.common.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ import static lombok.AccessLevel.PACKAGE;
 @Entity
 @Getter
 @Builder
+@ToString
 @AllArgsConstructor(access = PACKAGE)
 //implements UserDetails
 public class Member extends BaseEntity {
