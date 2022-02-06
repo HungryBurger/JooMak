@@ -23,7 +23,7 @@ class MemberRepositoryTest {
     @Autowired
     private MemberRepository memberRepository;
 
-    private Member testMember1;
+    private Member testMember1 = new Member();
 
     @Test
     void test() {
