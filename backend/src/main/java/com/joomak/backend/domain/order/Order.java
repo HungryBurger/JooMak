@@ -3,7 +3,7 @@ package com.joomak.backend.domain.order;
 import com.joomak.backend.domain.common.BaseEntity;
 import com.joomak.backend.domain.common.OrderStatus;
 import com.joomak.backend.domain.member.Member;
-import com.joomak.backend.domain.member.Product;
+import com.joomak.backend.domain.member.MemberDeliveryAddress;
 import com.joomak.backend.domain.member.Rider;
 import com.joomak.backend.domain.member.Store;
 import com.joomak.backend.domain.product.Review;
@@ -40,7 +40,11 @@ public class Order extends BaseEntity {
     private Review review;
 
     @OneToMany(mappedBy = "order")
-    private List<Product> product;
+    private List<OrderProductMapping> orderProductMappingList;
+
+    @OneToOne
+    @JoinColumn(name="memberDeliveryAddressId")
+    private MemberDeliveryAddress memberDeliveryAddress;
 
     @Enumerated
     private OrderStatus orderStatus;
