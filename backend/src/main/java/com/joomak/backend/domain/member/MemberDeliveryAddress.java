@@ -1,6 +1,7 @@
 package com.joomak.backend.domain.member;
 
 import com.joomak.backend.domain.common.BaseEntity;
+import com.joomak.backend.domain.common.YorN;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,7 +38,7 @@ public class MemberDeliveryAddress extends BaseEntity {
 
     private String postCode;
 
-    private char isMainDeliveryAddress;
+    private YorN isMainDeliveryAddress;
 
 }
 

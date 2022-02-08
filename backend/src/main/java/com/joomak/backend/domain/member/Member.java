@@ -1,14 +1,8 @@
 package com.joomak.backend.domain.member;
 
 
-import com.joomak.backend.domain.common.BaseEntity;
-import com.joomak.backend.domain.common.Gender;
-import com.joomak.backend.domain.common.Grade;
-import com.joomak.backend.domain.common.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import com.joomak.backend.domain.common.*;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,6 +17,7 @@ import static lombok.AccessLevel.PACKAGE;
 @Getter
 @Builder
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor(access = PACKAGE)
 //implements UserDetails
 public class Member extends BaseEntity {
@@ -47,7 +42,7 @@ public class Member extends BaseEntity {
     @Enumerated(STRING)
     private Role role;  //USER, OWNER, ADMINISTRATOR
 
-    private char snsLoginYn;
+    private YorN snsLoginYn;
 
     private LocalDateTime birth;
 
@@ -62,19 +57,17 @@ public class Member extends BaseEntity {
 
     private String uid;
 
-    private char bannedYn;
+    private YorN bannedYn;
 
     private String password;
 
     private LocalDateTime loginFailCount;
 
-    public Member(){
-    }
-
     public Member updateNickName(String nickName) {
         this.nickName = nickName;
         return this;
     }
+
     public Member updateMobile(String mobile) {
         this.mobile = mobile;
         return this;
