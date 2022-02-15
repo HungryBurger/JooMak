@@ -1,7 +1,110 @@
 <template>
   <div id="cartPage_wrap" :class="{ 'off-item': onItem === false }">
     <template v-if="onItem === true">
-      <div id="cartPage">카트에 물건있어요</div>
+      <div id="cartPage">
+        <div class="left">
+          <div class="top">
+            <h2>
+              주모의 보따리
+              <img :src="iconBottariClosePath" alt="icon_bottari-close" />
+              <span></span>
+            </h2>
+          </div>
+
+          <div class="bottom">
+            <div class="store">
+              <div>
+                <div class="img_wrap">
+                  <img
+                    :src="responseData.store.img"
+                    alt="장바구니 매장 이미지"
+                  />
+                </div>
+                <h4>{{ responseData.store.name }}</h4>
+              </div>
+              <router-link :to="`/store/${responseData.store.idx}`">
+                <button>이 매장에서 더 고르기</button>
+              </router-link>
+            </div>
+
+            <div class="product">
+              <div class="buttons">
+                <button
+                  class="select-all_btn"
+                  :class="{ on: selectCounter === cartList.length }"
+                  @click="onClickSelectAllBtn"
+                >
+                  전체 선택
+                </button>
+                <button
+                  class="select-del_btn"
+                  :class="{ on: selectCounter > 0 }"
+                  @click="onClickSelectDelBtn"
+                >
+                  선택 삭제
+                </button>
+              </div>
+
+              <ul>
+                <li
+                  v-for="(prt, i) in cartList"
+                  :key="i"
+                  :class="{ selected: prt.selected }"
+                  @click="onClickPrt(prt.productIdx)"
+                >
+                  <div class="check-box_wrap">
+                    <img
+                      v-if="prt.selected"
+                      :src="imgPathSingleY"
+                      alt="checked"
+                    />
+                    <img v-else :src="imgPathSingleN" alt="unchecked" />
+                  </div>
+                  <div class="prt-img_wrap">
+                    <img :src="prt.img" alt="prt.name" />
+                  </div>
+                  <div class="bold">{{ prt.name }}</div>
+                  <div></div>
+                  <div>
+                    <NumberWithCommaSpan
+                      class="bold"
+                      :num="prt.price"
+                      textBack="&nbsp;&nbsp;원"
+                    />
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="cart-page_scroll-top_btn" @click="onClickScrollTopBtn">
+            <img
+              src="@/assets/images/icon_arrow-top.svg"
+              alt="icon_arrow-top"
+            />
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="top">
+            <h5>선택 메뉴</h5>
+            <template v-if="selectCounter > 0">
+              hihi
+            </template>
+            <template v-else>
+              <span>선택하신 메뉴가 없습니다.</span>
+            </template>
+          </div>
+
+          <div
+            class="link_order"
+            @click="onClickOrderLink"
+            :class="{ on: selectCounter > 0 }"
+          >
+            선택상품 주문하기
+          </div>
+        </div>
+      </div>
     </template>
 
     <template v-else-if="onItem === false">
@@ -64,13 +167,38 @@
 </template>
 
 <script>
+import NumberWithCommaSpan from "../components/client/common/share/components/NumberWithCommaSpan.vue";
 export default {
+  components: { NumberWithCommaSpan },
   data() {
     return {
-      onItem: false,
+      responseData: {
+        store: {},
+        cartList: [],
+      },
+
+      cartList: [],
+      // onItem: true,
+
+      selectCounter: 0,
     };
   },
   computed: {
+    onItem() {
+      if (this.cartList.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+    imgPathSingleY() {
+      return require("@/assets/images/icon_check-only_y.svg");
+    },
+    imgPathSingleN() {
+      return require("@/assets/images/icon_check-only_n.svg");
+    },
+
     iconBottariClosePath() {
       return require("@/assets/images/icon_bottari-close.svg");
     },
@@ -84,7 +212,113 @@ export default {
       return require("@/assets/images/icon_cloud.svg");
     },
   },
+
+  created() {
+    // // axios post
+    // let res;
+    // this.cartList = res.cartList;
+
+    // 임시데이터
+    this.responseData.store = {
+      idx: 3,
+      name: "KFC 부평점",
+      img: require("@/assets/images/member_profile-img2.png"),
+    };
+    this.cartList = [
+      {
+        storeIdx: 3,
+        groupIdx: 1,
+        productIdx: 1,
+        img: require("@/assets/images/detail-page_imgs/detail-page_food_box1.png"),
+        name: "블랙라벨폴인치즈버거 박스",
+        price: 11800,
+      },
+      {
+        storeIdx: 3,
+        groupIdx: 1,
+        productIdx: 2,
+        img: require("@/assets/images/detail-page_imgs/detail-page_food_box2.png"),
+        name: "핫통삼겹베이컨버거 박스",
+        price: 11500,
+      },
+      {
+        storeIdx: 3,
+        groupIdx: 1,
+        productIdx: 3,
+        img: require("@/assets/images/detail-page_imgs/detail-page_food_box3.png"),
+        name: "징거더블다운맥스 박스",
+        price: 11200,
+      },
+    ];
+
+    // '선택' property 할당
+    this.cartList.forEach((e) => {
+      Object.assign(e, { selected: false });
+    });
+  },
+
+  methods: {
+    onClickSelectAllBtn() {
+      if (this.selectCounter !== this.cartList.length) {
+        this.cartList.forEach((e) => {
+          e.selected = true;
+        });
+        this.selectCounter = this.cartList.length;
+      } else {
+        this.cartList.forEach((e) => {
+          e.selected = false;
+        });
+        this.selectCounter = 0;
+      }
+    },
+    onClickSelectDelBtn() {
+      if (this.selectCounter === 0) {
+        alert("선택된 상품이 없습니다.");
+        return;
+      }
+
+      if (
+        confirm(
+          `선택된 ${this.selectCounter}개 상품을 장바구니에서 삭제하시겠습니까?`
+        )
+      ) {
+        // axios delete 처리
+        this.selectCounter = 0;
+
+        // 임시 (* 실제 axios 처리시 없어도 됨)
+        this.cartList.forEach((e) => {
+          e.selected = false;
+        });
+
+        alert("삭제되었습니다.");
+        return;
+      } else return;
+    },
+    onClickPrt(prtIdx) {
+      this.cartList.forEach((e) => {
+        if (e.productIdx === prtIdx) {
+          if (e.selected) {
+            e.selected = false;
+            this.selectCounter--;
+          } else {
+            e.selected = true;
+            this.selectCounter++;
+          }
+          return;
+        }
+      });
+    },
+    onClickScrollTopBtn() {
+      const leftDiv = document.querySelector("#cartPage > .left");
+      leftDiv.scrollTo(0, 0);
+
+      scrollTo(0, 0);
+    },
+    onClickOrderLink() {
+      if (this.selectCounter === 0) return;
+
+      this.$router.push({ name: "orderPage" });
+    },
+  },
 };
 </script>
-
-<style></style>
