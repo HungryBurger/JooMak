@@ -19,7 +19,11 @@
         </router-link>
       </div>
       <div class="header_top_middle">
+        <div v-if="onAddressConfigRequestModal" class="alert-arrow_wrap">
+          <img src="@/assets/images/icon_arrow-right.svg" alt="arrow-right" />
+        </div>
         <address-config></address-config>
+        <address-config-request-modal></address-config-request-modal>
       </div>
       <div class="header_top_right">
         <router-link
@@ -40,7 +44,7 @@
         >
         <span>|</span>
         <router-link
-          v-if="currentAddress"
+          v-if="currentAddressObj"
           to="/cart"
           class="header_top_right-elem"
           @click="outStoreListPage('cartPage')"
@@ -49,7 +53,7 @@
         >
         <!-- fake link -->
         <a
-          v-else-if="!currentAddress"
+          v-else-if="!currentAddressObj"
           to="/cart"
           class="header_top_right-elem"
           @click="checkAddressConfigSelection"
@@ -58,7 +62,7 @@
         >
       </div>
     </div>
-    <div class="header_bottom" v-if="currentAddress">
+    <div class="header_bottom" v-if="currentAddressObj">
       <!-- v-for로 카테고리 li 반복 -->
       <router-link
         v-for="category in categories"
@@ -71,7 +75,7 @@
       </router-link>
     </div>
     <!-- fake nav -->
-    <div class="header_bottom" v-else-if="!currentAddress">
+    <div class="header_bottom" v-else-if="!currentAddressObj">
       <a
         v-for="category in categories"
         :key="category.en"
@@ -86,21 +90,40 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { TOGGLE_ON_HOME, SET_CURRENT_PAGE } from "@/store/modules/common.js";
+import { mapActions, mapGetters, mapState } from "vuex";
+import {
+  SET_ON_ADDRESS_CONFIG_REQUEST_MODAL,
+  OPEN_ADDRESS_CONFIG_REQUEST_MODAL,
+  CLOSE_ADDRESS_CONFIG_REQUEST_MODAL,
+  TOGGLE_ON_HOME,
+  SET_CURRENT_PAGE,
+  SET_CURRENT_HOME_COORDS,
+} from "@/store/modules/common.js";
 import { SET_CURRENT_CATEGORY } from "@/store/modules/product.js";
 import AddressConfig from "../components/AddressConfig.vue";
+import AddressConfigRequestModal from "@/components/client/common/share/pages/AddressConfigRequestModal.vue";
 
 export default {
   components: {
     AddressConfig,
+    AddressConfigRequestModal,
   },
   computed: {
-    ...mapState("common", ["onHome", "onLogin", "currentPage", "onModal"]),
-    ...mapState("member", ["currentAddress"]),
+    ...mapState("common", [
+      "onHome",
+      "onLogin",
+      "currentPage",
+      "onModal",
+      "onAddressConfigRequestModal",
+    ]),
     ...mapState("product", ["categories", "currentCategory"]),
+    ...mapGetters("member", ["currentAddressObj"]),
   },
   methods: {
+    ...mapActions("common", [
+      `${OPEN_ADDRESS_CONFIG_REQUEST_MODAL}`,
+      `${CLOSE_ADDRESS_CONFIG_REQUEST_MODAL}`,
+    ]),
     inHome() {
       if (!this.onHome) {
         this.$store.commit(`common/${TOGGLE_ON_HOME}`);
@@ -115,8 +138,11 @@ export default {
       this.$store.commit(`product/${SET_CURRENT_CATEGORY}`, category);
     },
     onClickCategory(category, pageName) {
-      if (!this.currentAddress) {
-        alert("먼저 주소를 설정해 주세요");
+      if (!this.currentAddressObj) {
+        this.$store.commit(
+          `common/${SET_ON_ADDRESS_CONFIG_REQUEST_MODAL}`,
+          true
+        );
         return;
       }
 
@@ -132,6 +158,9 @@ export default {
     },
 
     goHome(pageName) {
+      if (this.currentPage !== "homePage") {
+        this.$store.commit(`common/${SET_CURRENT_HOME_COORDS}`, "morning");
+      }
       this.$store.commit(`common/${SET_CURRENT_PAGE}`, pageName);
       this.inHome();
       this.initializeCategory();
@@ -146,17 +175,24 @@ export default {
     },
 
     checkAddressConfigSelection() {
-      if (!this.currentAddress) {
-        alert("먼저 주소를 설정해 주세요");
+      if (!this.currentAddressObj) {
+        this.$store.commit(
+          `common/${SET_ON_ADDRESS_CONFIG_REQUEST_MODAL}`,
+          true
+        );
         return;
       }
     },
 
     setCurrentCategoryAtLoad() {
-      if (this.$route.name === "storeListPage") {
-        if (!this.currentAddress) {
-          alert("홈 화면에서 주소를 먼저 설정해 주세요.");
-          this.$router.replace("/");
+      console.log(this.$route.name);
+      if (
+        this.$route.name !== "homePage" &&
+        this.$route.name !== "memberPage" &&
+        this.$route.name !== "orderStatusPage"
+      ) {
+        if (!this.currentAddressObj) {
+          this.OPEN_ADDRESS_CONFIG_REQUEST_MODAL();
         } else {
           this.$store.commit(
             `product/${SET_CURRENT_CATEGORY}`,
@@ -203,7 +239,10 @@ export default {
   left: 0;
 }
 #header.on-modal {
-  z-index: 0;
+  z-index: 10;
+}
+#header a {
+  text-decoration: none;
 }
 .on-home,
 .on-home a {
@@ -229,6 +268,9 @@ export default {
 .main-logo {
   width: 65px;
   height: auto;
+}
+.header_top_middle {
+  position: relative;
 }
 .header_top_right {
   display: flex;
