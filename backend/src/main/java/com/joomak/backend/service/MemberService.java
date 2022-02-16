@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-
-import static com.joomak.backend.exception.ErrorMessage.ALREADY_EXISTS_MEMBER;
 
 @Slf4j
 @Service
@@ -28,13 +25,13 @@ public class MemberService {
         return memberRepository.findById(mbrId)
                 .orElseThrow();
     }
-
-    public void checkDuplicateEmail(String email) {
-        memberRepository.findByEmail(email)
-        .ifPresent((member) -> {
-            throw new RuntimeException(member.getEmail() + ALREADY_EXISTS_MEMBER.getErrorMessage());
-        });
-    }
+//
+//    public void checkDuplicateEmail(String email) {
+//        memberRepository.findByEmail(email)
+//        .ifPresent((member) -> {
+//            throw new RuntimeException(member.getEmail() + ALREADY_EXISTS_MEMBER.getErrorMessage());
+//        });
+//    }
 
     @Transactional
     public Member save(Member member) {
