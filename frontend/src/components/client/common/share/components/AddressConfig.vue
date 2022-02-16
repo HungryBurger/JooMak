@@ -1,5 +1,9 @@
 <template>
-  <div id="address-config-component" @click="onClickAddressConfigComponent">
+  <div
+    id="address-config-component"
+    @click="onClickAddressConfigComponent"
+    :class="{ 'on-modal-home-alert': onAddressConfigRequestModal }"
+  >
     <div
       class="address-config_left"
       :class="{ 'on-home': onHome, 'out-home': !onHome }"
@@ -37,23 +41,21 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
+import { OPEN_ADDRESS_CONFIG_MODAL } from "@/store/modules/common.js";
 export default {
   computed: {
-    ...mapState("common", ["onHome"]),
-    ...mapState("member", ["currentAddress"]),
+    ...mapState("common", ["onHome", "onAddressConfigRequestModal"]),
+    ...mapGetters("member", ["currentAddressObj"]),
     selectedAddress() {
-      if (!this.currentAddress) return "주소를 설정해 주세요.";
-      else return this.currentAddress;
+      if (!this.currentAddressObj) return "주소를 설정해 주세요.";
+      else return this.currentAddressObj.addressMain;
     },
   },
   methods: {
+    ...mapActions("common", [`${OPEN_ADDRESS_CONFIG_MODAL}`]),
     onClickAddressConfigComponent() {
-      if (this.onHome) {
-        // 주소 설정 Modal 열기
-      } else if (!this.onHome) {
-        alert("주소는 홈 화면에서 설정할 수 있습니다.");
-      }
+      this.OPEN_ADDRESS_CONFIG_MODAL();
     },
   },
 };
@@ -68,6 +70,10 @@ export default {
   width: 100%;
   height: 30px;
   background-color: white;
+}
+#address-config-component.on-modal-home-alert {
+  position: relative;
+  z-index: 150;
 }
 .address-config_left,
 .address-config_middle,
