@@ -36,13 +36,12 @@ public class Member extends BaseEntity {
     private Grade grade; //bronze, silver, gold, platinum, diamond
 
     private String loginId;
-
     private String nickName;
 
     @Enumerated(STRING)
     private Role role;  //USER, OWNER, ADMINISTRATOR
 
-    private YorN snsLoginYn;
+    private Boolean snsLoginYn;
 
     private LocalDateTime birth;
 
@@ -57,7 +56,7 @@ public class Member extends BaseEntity {
 
     private String uid;
 
-    private YorN bannedYn;
+    private Boolean bannedYn;
 
     private String password;
 

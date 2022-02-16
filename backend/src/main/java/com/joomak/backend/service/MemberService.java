@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static com.joomak.backend.exception.ErrorMessage.ALREADY_EXISTS_MEMBER;
 
@@ -20,13 +21,11 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public List<Member> findAll() {
-        List<Member> members = new ArrayList<>();
-        memberRepository.findAll().forEach(e -> members.add(e));
-        return members;
+        return new ArrayList<>(memberRepository.findAll());
     }
 
-    public Member findById(Long mbrNo) {
-        return memberRepository.findById(mbrNo)
+    public Member findById(Long mbrId) {
+        return memberRepository.findById(mbrId)
                 .orElseThrow();
     }
 

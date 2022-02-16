@@ -24,10 +24,4 @@ public class Rider extends BaseEntity {
     private String name;
 
     private String phoneNumber;
-
-    private String xPosition;
-
-    private String yPosition;
-
-    private String zPosition;
 }

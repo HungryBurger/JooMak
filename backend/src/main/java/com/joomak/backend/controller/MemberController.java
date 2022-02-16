@@ -4,12 +4,15 @@ package com.joomak.backend.controller;
 import com.joomak.backend.domain.member.Member;
 import com.joomak.backend.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +25,13 @@ public class MemberController {
         Member member = memberService.findById(memberId);
         return ResponseEntity.ok(member);
     }
+    // 모든 회원 조회
+    @GetMapping(value = "/members/getMemberAll", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<Member>> getAllMembers() {
+        List<Member> member = memberService.findAll();
+        return new ResponseEntity<List<Member>>(member, HttpStatus.OK);
+    }
+
     /**
      * HttpServletRequest가 아닌 Custom object를 파라미터로 받을것.
      */
