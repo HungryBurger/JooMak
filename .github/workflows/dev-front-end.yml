@@ -2,7 +2,7 @@ name: DEV Front End Deploy
 
 on:
   push:
-    branches: [ dev-front ]
+    branches: [ dev_front ]
 
 jobs:
   deploy:
