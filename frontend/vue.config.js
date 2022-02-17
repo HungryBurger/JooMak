@@ -8,4 +8,7 @@ module.exports = {
       },
     },
   },
+  devServer: {
+    proxy: "http://52.78.232.198:8080",
+  },
 };
