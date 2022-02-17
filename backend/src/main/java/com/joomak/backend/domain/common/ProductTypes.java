@@ -1,6 +1,6 @@
 package com.joomak.backend.domain.common;
 
-public enum MenuTypes {
+public enum ProductTypes {
     SET_MENU, SIGNLE, ONE_PLUS_ONE
 }
 

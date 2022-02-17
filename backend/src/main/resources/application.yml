@@ -9,12 +9,13 @@ spring :
     
   jpa :
     hibernate :
-      ddl-auto : create
+      ddl-auto : update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties :
       hibernate :
         show_sql: true
         format_sql : true
+    database-platform:
 
 

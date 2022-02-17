@@ -1,21 +1,27 @@
 package com.joomak.backend.domain.member;
 
+import com.joomak.backend.domain.common.BaseEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static lombok.AccessLevel.PACKAGE;
-import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = PROTECTED)
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor(access = PACKAGE)
-public class Product {
+public class Rider extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="productId")
-    private Long id;
+    @Column(name="riderId")
+    private String id;
+
+    private String name;
+
+    private String phoneNumber;
 }

@@ -1,37 +1,39 @@
-package com.joomak.backend.domain.product;
+package com.joomak.backend.domain.order;
 
 
 import com.joomak.backend.domain.common.BaseEntity;
-import com.joomak.backend.domain.common.YorN;
+import com.joomak.backend.domain.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
+@Entity
 @Getter
 @Builder
+@Table(name = "Orders")
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
-public class MenuImage extends BaseEntity {
+public class OrderProductMapping extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "menuId")
+    @Column(name = "orderProductMappingId")
     private Long id;
 
-    private int imgSequence;
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    private Order order;
 
-    private String orginImageName;
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
 
-    private String imagePath;
+    private int productCount;
 
-    private YorN deleteYn;
 
 }

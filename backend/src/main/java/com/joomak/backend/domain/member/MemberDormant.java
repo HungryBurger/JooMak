@@ -1,9 +1,7 @@
 package com.joomak.backend.domain.member;
 
 
-import com.joomak.backend.domain.common.BaseEntity;
-import com.joomak.backend.domain.common.Gender;
-import com.joomak.backend.domain.common.Grade;
+import com.joomak.backend.domain.common.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -31,25 +30,32 @@ public class MemberDormant extends BaseEntity {
     @Column(name = "memberDormantId")
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name ="memberId")
+    private Member member;
+
     private String memberName;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private MemberState memberState; //normal, standby ,banned, secession, dormant
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private Grade grade; //bronze, silver, gold, platinum, diamond
 
     private String loginId;
 
     private String nickName;
 
-    private char snsLoginYn;
+    @Enumerated(STRING)
+    private Role role;  //USER, OWNER, ADMINISTRATOR
+
+    private YorN snsLoginYn;
 
     private LocalDateTime birth;
 
     private String email;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private Gender gender; //male female;
 
     private String profileImagePath;
@@ -58,12 +64,11 @@ public class MemberDormant extends BaseEntity {
 
     private String uid;
 
-    private char bannedYn;
+    private YorN bannedYn;
 
     private String password;
 
     private LocalDateTime loginFailCount;
-
 //
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

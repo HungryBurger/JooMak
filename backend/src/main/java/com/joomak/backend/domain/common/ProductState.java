@@ -1,5 +1,5 @@
 package com.joomak.backend.domain.common;
 
-public enum MenuState {
+public enum ProductState {
     SELLING,PAUSE,OVERTIME
 }

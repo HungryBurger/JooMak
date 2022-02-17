@@ -16,6 +16,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Getter
 @Builder
+@Entity
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
 public class Review {
@@ -23,7 +24,6 @@ public class Review {
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "reviewId")
     private Long id;
-
 
     //한 리뷰에 대해서 하나의 주문만 가능
     @OneToOne

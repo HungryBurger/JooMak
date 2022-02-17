@@ -1,44 +1,38 @@
-package com.joomak.backend.domain.member;
+package com.joomak.backend.domain.order;
 
 import com.joomak.backend.domain.common.BaseEntity;
-import com.joomak.backend.domain.common.YorN;
+import com.joomak.backend.domain.member.Member;
+import com.joomak.backend.domain.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
-
 @Entity
 @Getter
 @Builder
+@Table(name = "Orders")
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PACKAGE)
-public class MemberDeliveryAddress extends BaseEntity {
+public class Cart extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "memberDeliveryAddressId")
+    @Column(name="cartId")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "memberId")
+    @OneToOne
+    @JoinColumn(name ="memberId")
     private Member member;
 
-    private String parcelBasedAddress;
-
-    private String parcelBasedAddressDetail;
-
-    private String roadBasedAddress;
-
-    private String roadBasedAddressDetail;
-
-    private String postCode;
-
-    private YorN isMainDeliveryAddress;
+    @OneToMany
+    @JoinColumn(name ="menuId")
+    private List<Product> products;
 
 }
-

@@ -1,21 +1,14 @@
 package com.joomak.backend.domain.member;
 
 
-import com.joomak.backend.domain.common.BaseEntity;
-import com.joomak.backend.domain.common.Gender;
-import com.joomak.backend.domain.common.Grade;
-import com.joomak.backend.domain.common.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.joomak.backend.domain.common.*;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PACKAGE;
-import static lombok.AccessLevel.PROTECTED;
 
 /**
  * UserDetails를 Entity에서 구현할지 새로운 DTO를 만들어 구현할 지 결정.
@@ -23,7 +16,8 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = PROTECTED)
+@ToString
+@NoArgsConstructor
 @AllArgsConstructor(access = PACKAGE)
 //implements UserDetails
 public class Member extends BaseEntity {
@@ -42,13 +36,12 @@ public class Member extends BaseEntity {
     private Grade grade; //bronze, silver, gold, platinum, diamond
 
     private String loginId;
-
     private String nickName;
 
     @Enumerated(STRING)
     private Role role;  //USER, OWNER, ADMINISTRATOR
 
-    private char snsLoginYn;
+    private Boolean snsLoginYn;
 
     private LocalDateTime birth;
 
@@ -63,7 +56,7 @@ public class Member extends BaseEntity {
 
     private String uid;
 
-    private char bannedYn;
+    private Boolean bannedYn;
 
     private String password;
 
@@ -73,7 +66,8 @@ public class Member extends BaseEntity {
         this.nickName = nickName;
         return this;
     }
-    public Member updateMobile(String mobile){
+
+    public Member updateMobile(String mobile) {
         this.mobile = mobile;
         return this;
     }
