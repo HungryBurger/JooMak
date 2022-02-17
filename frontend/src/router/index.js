@@ -61,6 +61,12 @@ const routes = [
     name: "orderStatusPage",
     component: () => import("@/views/OrderStatusPage.vue"),
   },
+  // 주문 완료 페이지
+  {
+    path: "/order-complete",
+    name: "orderCompletePage",
+    component: () => import("@/views/OrderCompletePage.vue"),
+  },
   // 장바구니 페이지
   {
     path: "/cart",
