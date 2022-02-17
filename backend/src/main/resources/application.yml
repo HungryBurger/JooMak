@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 8080
 spring :
   datasource:
     url: jdbc:h2:~/joomak;
@@ -9,13 +9,13 @@ spring :
     
   jpa :
     hibernate :
-      ddl-auto : create
+      ddl-auto : update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties :
       hibernate :
         show_sql: true
         format_sql : true
+    database-platform:
 
-logging:
-  level:
-    org.hiberbate.SQL: debug
-    org.hibernate.type: trace
+
