@@ -233,8 +233,9 @@ export default {
 
     read(idx) {
       this.$axios
-        .get("https://reqres.in/api/users?page=" + idx)
+        .get(`/members/getMemberAll`)
         .then((res) => {
+          console.log(res);
           console.log("메뉴선택 페이지(매장 상세정보 열람용) axios 통신 성공");
         })
         .catch((err) => {
