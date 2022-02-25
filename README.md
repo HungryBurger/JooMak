@@ -2,12 +2,24 @@
 # Introduce
 간편 배달 웹 서비스 개발
 
+# Motivation
+E-commerce 의 대표적인 배달 도메인에 대해 고찰해보고,
+Spring Boot, JPA, Vue, JAVA11에 대한 이해도를 높이기 위함
 
-# Main Technique
+[PRD 운영] <br>
+http://joomak-delivery.com/ <br>
+[DEV 개발] <br>
+http://dev-joomak-delivery.s3-website.ap-northeast-2.amazonaws.com/ <br>
+
+
+# Main Tech
+  - JAVA 11
   - Spring Boot
+  - REST API
   - JPA
   - Vue
   - AWS
+  - Oracle Cloud Infrastructure
 
 # Member
 ### Front End
@@ -16,19 +28,10 @@
   
 - 박정우(park96100331@gmail.com)
   <br>> 역할 : 기획 & UI/UX <br>
-  
-- 송문정(songvely17@gmail.com)
-  <br>> 역할 : 기획 & UI/UX <br>
 
 ### Back End
 - 주형진(hjjooace24@gmail.com)
-  <br>> 역할 : 주문 & 아키텍처<br>
-  
-- 최예슬(seulshine@gmail.com)
-  <br>> 역할 : 주문<br>
-  
-- 조송이(fishsong2@gmail.com)
-  <br>> 역할 : 회원<br>
+  <br>> 역할 : 주문 & 아키텍처 <br>
   
 - 이기환(lgh95m@gamil.com)
   <br>> 역할 : 회원<br>
@@ -38,10 +41,9 @@
 
 - 이혜원(sdiverhyewon0103@gmail.com)
  <br>> 역할 : 상품<br>
-
-
+  
 ### Designer
-- 남상범
+- 남상범(instagram.com/sang_beom_e)
 
 
 ## OverView
@@ -57,19 +59,18 @@
 # Page Structure
 ![image](https://user-images.githubusercontent.com/75158094/126065725-af939d58-be0d-4572-a0a9-4b870b091e42.png)
 
-
-
-
 # ERD
-준비 중
 
 # Schedule
 ### 2021 
-- 6 ~ 7월 : 사용자 페이지 기획 및 아키텍처 구성
-- 8 ~ 12월 : 사용자 페이지 개발
-- 1 ~ 2월 : 점주 페이지 기획
-- 2 ~ 6월 : 점주 페이지 개발 
+- 8 ~ 11월 : 사용자 페이지 기획 
+- 11 ~ 12월 : ERD 설계
+
+### 2022
+- 1 ~ 2월 : 인프라 및 초기 셋팅
+- 3 ~ 4월 : API 개발
+- 4 ~ 5월 : Spring Security, Oauth 연결
 
 
 
-
+ 

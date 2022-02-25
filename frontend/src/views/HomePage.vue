@@ -8,6 +8,7 @@
       night: currentHomeCoords === 'night',
     }"
   >
+    <address-config-modal></address-config-modal>
     <div id="div-for-off-sticky" v-if="currentHomeCoords === 'footer'"></div>
     <div
       class="home_background-color"
@@ -80,13 +81,16 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import {
+  SET_CURRENT_PAGE,
   SET_ON_HOME,
   SET_CURRENT_HOME_COORDS,
 } from "@/store/modules/common.js";
+import AddressConfigModal from "@/components/client/common/home/pages/AddressConfigModal.vue";
 import HomePageCategory from "@/components/client/common/home/components/HomePageCategory.vue";
 
 export default {
   components: {
+    AddressConfigModal,
     HomePageCategory,
   },
   computed: {
@@ -143,7 +147,7 @@ export default {
           this.$store.commit(`common/${SET_CURRENT_HOME_COORDS}`, "footer");
         }
       }
-      console.log(this.currentHomeCoords);
+      // console.log(this.currentHomeCoords);
     },
     onClickSideNav(pageName) {
       switch (pageName) {
@@ -163,16 +167,19 @@ export default {
     },
   },
   created() {
+    if (this.currentPage !== "homePage") {
+      this.$store.commit(`common/${SET_CURRENT_PAGE}`, "homePage");
+    }
     this.$store.commit(`common/${SET_ON_HOME}`, true);
   },
   mounted() {
-    console.log(this.threeHomeCategories);
+    // console.log(this.threeHomeCategories);
     window.addEventListener("scroll", this.onScroll);
   },
   updated() {
-    console.log(this.threeHomeCategories);
+    // console.log(this.threeHomeCategories);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener("scroll", this.onScroll);
   },
 };
@@ -238,7 +245,7 @@ export default {
   box-sizing: border-box;
   width: 100%;
   height: 25%;
-  padding-right: 25%;
+  padding-right: 27%;
 }
 .home_side-nav_li:hover::after {
   content: "";
