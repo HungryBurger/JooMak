@@ -1,21 +1,23 @@
 server:
-  port: 8080
+  port: 8083
 spring :
   datasource:
-    url: jdbc:h2:~/joomak;
-    username : sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/joomak_db?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: root
+    password: TIGER
+    driver-class-name: com.mysql.cj.jdbc.Driver
     
   jpa :
     hibernate :
       ddl-auto : update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#      ddl-auto : create
     properties :
       hibernate :
+        globally_quoted_identifiers: true
         show_sql: true
         format_sql : true
-    database-platform:
+      generate-ddl: true
+      database: mysql
+      database-patform: org.hibernate.dialect.MySQL8Dialect
 
 

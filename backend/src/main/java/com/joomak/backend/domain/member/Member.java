@@ -71,6 +71,11 @@ public class Member extends BaseEntity {
         this.mobile = mobile;
         return this;
     }
+
+    public Member updateBanned(Boolean yn){
+        this.bannedYn=yn;
+        return this;
+    }
 //
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

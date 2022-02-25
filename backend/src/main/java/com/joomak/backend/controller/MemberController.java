@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +35,11 @@ public class MemberController {
     @PostMapping(value = "/member")
     public ResponseEntity<Member> save(Member member) {
         return ResponseEntity.ok(memberService.save(member));
+    }
+
+    // 특정 회원 밴 처리(악성유저처리)
+    @PutMapping(value = "/members/ban/{memberId}")
+    public ResponseEntity<Member> ban(@PathVariable Long memberId){
+        return ResponseEntity.ok(memberService.ban(memberId));
     }
 }
