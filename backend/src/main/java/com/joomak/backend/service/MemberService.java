@@ -40,6 +40,7 @@ public class MemberService {
         return saved;
     }
 
+    @Transactional
     public Member ban(Long memberId){
         Member member = memberRepository.findById(memberId).get();
         log.info("Member ban = {}", member);
