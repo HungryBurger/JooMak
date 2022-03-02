@@ -2,8 +2,6 @@ package com.joomak.backend.domain.member;
 
 
 import com.joomak.backend.domain.common.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +9,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.STRING;
-import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
 /**
@@ -19,9 +16,7 @@ import static lombok.AccessLevel.PROTECTED;
  */
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = PROTECTED)
-@AllArgsConstructor(access = PACKAGE)
 //implements UserDetails
 public class MemberDormant extends BaseEntity {
 
@@ -69,7 +64,29 @@ public class MemberDormant extends BaseEntity {
     private String password;
 
     private LocalDateTime loginFailCount;
-//
+
+    public MemberDormant(Long id, Member member, String memberName, MemberState memberState, Grade grade, String loginId, String nickName, Role role, YorN snsLoginYn, LocalDateTime birth, String email, Gender gender, String profileImagePath, String mobile, String uid, YorN bannedYn, String password, LocalDateTime loginFailCount) {
+        this.id = id;
+        this.member = member;
+        this.memberName = memberName;
+        this.memberState = memberState;
+        this.grade = grade;
+        this.loginId = loginId;
+        this.nickName = nickName;
+        this.role = role;
+        this.snsLoginYn = snsLoginYn;
+        this.birth = birth;
+        this.email = email;
+        this.gender = gender;
+        this.profileImagePath = profileImagePath;
+        this.mobile = mobile;
+        this.uid = uid;
+        this.bannedYn = bannedYn;
+        this.password = password;
+        this.loginFailCount = loginFailCount;
+    }
+
+    //
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return null;

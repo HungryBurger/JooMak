@@ -1,10 +1,7 @@
 package com.joomak.backend.domain.member;
 
 
-import com.joomak.backend.domain.common.BaseEntity;
-import com.joomak.backend.domain.common.Gender;
-import com.joomak.backend.domain.common.Grade;
-import com.joomak.backend.domain.common.Role;
+import com.joomak.backend.domain.common.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -7,7 +7,6 @@ import com.joomak.backend.domain.member.MemberDeliveryAddress;
 import com.joomak.backend.domain.member.Rider;
 import com.joomak.backend.domain.member.Store;
 import com.joomak.backend.domain.product.Review;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,15 +15,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@Builder
 @Table(name = "Orders")
 @NoArgsConstructor(access = PROTECTED)
-@AllArgsConstructor(access = PACKAGE)
 public class Order extends BaseEntity {
 
     @Id
@@ -65,5 +61,20 @@ public class Order extends BaseEntity {
     @JoinColumn(name="riderId")
     private Rider rider;
 
+    @Builder
 
+    public Order(Long id, Member member, Review review, List<OrderProductMapping> orderProductMappingList, MemberDeliveryAddress memberDeliveryAddress, OrderStatus orderStatus, LocalDateTime orderCompleteAt, LocalDateTime orderCancelAt, LocalDateTime orderDeliverAt, LocalDateTime orderDeliverCompleteAt, Store store, Rider rider) {
+        this.id = id;
+        this.member = member;
+        this.review = review;
+        this.orderProductMappingList = orderProductMappingList;
+        this.memberDeliveryAddress = memberDeliveryAddress;
+        this.orderStatus = orderStatus;
+        this.orderCompleteAt = orderCompleteAt;
+        this.orderCancelAt = orderCancelAt;
+        this.orderDeliverAt = orderDeliverAt;
+        this.orderDeliverCompleteAt = orderDeliverCompleteAt;
+        this.store = store;
+        this.rider = rider;
+    }
 }

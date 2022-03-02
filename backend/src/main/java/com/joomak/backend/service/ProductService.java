@@ -30,7 +30,7 @@ public class ProductService {
     
     public List<Product> findStoreProducts(Long storeId) {
         List<Product> storeProducts = new ArrayList<>();
-        productRepository.findByStore_Id(storeId).forEach(e -> storeProducts.add(e));
+        productRepository.findByStoreId(storeId).forEach(e -> storeProducts.add(e));
         return storeProducts;
     }
 
