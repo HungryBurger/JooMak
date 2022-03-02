@@ -1,24 +1,28 @@
 package com.joomak.backend.domain.member;
 
 
-import com.joomak.backend.domain.common.*;
-import lombok.*;
+import com.joomak.backend.domain.common.BaseEntity;
+import com.joomak.backend.domain.common.Gender;
+import com.joomak.backend.domain.common.Grade;
+import com.joomak.backend.domain.common.Role;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.STRING;
-import static lombok.AccessLevel.PACKAGE;
+import static lombok.AccessLevel.PROTECTED;
 
 /**
  * UserDetails를 Entity에서 구현할지 새로운 DTO를 만들어 구현할 지 결정.
  */
 @Entity
 @Getter
-@Builder
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor(access = PACKAGE)
+@NoArgsConstructor(access=PROTECTED)
 //implements UserDetails
 public class Member extends BaseEntity {
 
@@ -35,7 +39,6 @@ public class Member extends BaseEntity {
     @Enumerated(STRING)
     private Grade grade; //bronze, silver, gold, platinum, diamond
 
-    private String loginId;
     private String nickName;
 
     @Enumerated(STRING)
@@ -44,7 +47,7 @@ public class Member extends BaseEntity {
     private Boolean snsLoginYn;
 
     private LocalDateTime birth;
-
+    //Login ID 겸용
     private String email;
 
     @Enumerated(STRING)
@@ -71,7 +74,33 @@ public class Member extends BaseEntity {
         this.mobile = mobile;
         return this;
     }
-//
+
+    public Member updateBanned(Boolean yn){
+        this.bannedYn=yn;
+        return this;
+    }
+    @Builder
+    public Member(Long id, String memberName, MemberState memberState, Grade grade, String nickName, Role role, Boolean snsLoginYn, LocalDateTime birth, String email, Gender gender, String profileImagePath, String mobile, String uid, Boolean bannedYn, String password, LocalDateTime loginFailCount) {
+        this.id = id;
+        this.memberName = memberName;
+        this.memberState = memberState;
+        this.grade = grade;
+        this.nickName = nickName;
+        this.role = role;
+        this.snsLoginYn = snsLoginYn;
+        this.birth = birth;
+        this.email = email;
+        this.gender = gender;
+        this.profileImagePath = profileImagePath;
+        this.mobile = mobile;
+        this.uid = uid;
+        this.bannedYn = bannedYn;
+        this.password = password;
+        this.loginFailCount = loginFailCount;
+    }
+
+
+    //
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return null;
