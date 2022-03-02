@@ -14,9 +14,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = PROTECTED)
-@AllArgsConstructor(access = PACKAGE)
 public class StoreImage extends BaseEntity {
 
     @Id
@@ -36,4 +34,15 @@ public class StoreImage extends BaseEntity {
 
     private String storeProfileImg;
 
+
+    @Builder
+
+    public StoreImage(Long id, Store store, int displaySeq, YorN displayYn, String storeMainImage, String storeProfileImg) {
+        this.id = id;
+        this.store = store;
+        this.displaySeq = displaySeq;
+        this.displayYn = displayYn;
+        this.storeMainImage = storeMainImage;
+        this.storeProfileImg = storeProfileImg;
+    }
 }

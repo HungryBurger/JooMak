@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import static lombok.AccessLevel.PACKAGE;
+import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor(access = PACKAGE)
+@NoArgsConstructor(access = PROTECTED)
 public class Requirement extends BaseEntity {
 
     @Id
