@@ -21,9 +21,42 @@
         영업 정보
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="row justify-content-center">
+          <div class="col-5">
+            <div class="form-group row">
+              <label for="storeName" class="col-sm-3 col-form-label">상호명</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" id="storeName" value="교촌치킨 정자점">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="time" class="col-sm-3 col-form-label">운영 시간</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" id="time" value="매일 오전 11:00~ 밤 12:00 ">
+              </div>
+            </div>
+             <div class="form-group row">
+              <label for="phone" class="col-sm-3 col-form-label">전화 번호</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" id="phone" value="050-4831-3705">
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+             <div class="form-group row">
+              <label for="dayoff" class="col-sm-3 col-form-label">휴무일</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" id="dayoff" value="연중 무휴">
+              </div>
+            </div>
+             <div class="form-group row">
+              <label for="service" class="col-sm-3 col-form-label">포장/배달</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" id="service" value="포장/배달 가능">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card order-card">
@@ -31,8 +64,41 @@
         주문 현황
       </div>
       <div class="card-body">
-        <div class="card-text total-order">총 주문 횟수: </div>
-       <div class="card-text total-order-per-month">1달간주문 횟수: </div>
+        <div class="row justify-content-center">
+          <div class="col-5">
+            <div class="form-group row">
+              <label  class="col-sm-3 col-form-label"></label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="">
+              </div>
+            </div>
+             <div class="form-group row">
+              <label for="minOrderPrice" class="col-sm-3 col-form-label">최소 주문 금액 :</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" id="minOrderPrice" value="15000원">
+              </div>
+            </div>
+          </div>
+           <div class="col-5">
+            <div class="form-group row">
+              <label for="defaultFee" class="col-sm-3 col-form-label">기본 배달 요금</label>
+              <div class="col-sm-9">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="fee1" class="col-sm-5 col-form-label"> 30000원 ~ 50000원 미만</label>
+              <div class="col-sm-7">
+                <input type="text" readonly class="form-control-plaintext" id="fee1" value="1000원">
+              </div>
+            </div>
+             <div class="form-group row">
+              <label for="fee2" class="col-sm-5 col-form-label">15000원 ~ 30000원 미만</label>
+              <div class="col-sm-7">
+                <input type="text" readonly class="form-control-plaintext" id="fee2" value="2000원">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card">
@@ -40,9 +106,24 @@
         배달 요금
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div class="row justify-content-center">
+          <div class="col-5">
+            <div class="form-group row">
+              <label for="storeName" class="col-sm-3 col-form-label">총 주문 횟수:</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" id="storeName" value="교촌치킨 정자점">
+              </div>
+            </div>
+          </div>
+           <div class="col-5">
+            <div class="form-group row">
+              <label for="storeName" class="col-sm-3 col-form-label">1달 간 주문 횟수:</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" id="storeName" value="교촌치킨 정자점">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
      <div class="card">
@@ -50,9 +131,32 @@
         위치 정보
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+       <div class="row justify-content-center">
+         <div class="col-10">
+          <div class="form-group row">
+                <label for="address" class="col-sm-3 col-form-label">주소</label>
+                <div class="col-sm-9">
+                  <input type="text" readonly class="form-control-plaintext" id="address" value="경기도 성남시 분당구 정자동 17-5 1층일부(정자동, 시그마타워)">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="location" class="col-sm-3 col-form-label">배달 지역</label>
+                <div class="col-sm-9">
+                  <input type="text" readonly class="form-control-plaintext" id="location" value="정자동, 수내동, 금곡동">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="dest" class="col-sm-3 col-form-label">나와의 거리</label>
+                <div class="col-sm-9">
+                  <input type="text" readonly class="form-control-plaintext" id="dest" value="3.8 km">
+                </div>
+              </div>
+          </div>
+        <div class="col-10 m-4">
+          <div id="map" style="height:400px;">
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -60,7 +164,34 @@
 
 <script>
 export default {
-  methods: {},
+  methods: {
+     initMap () {
+      const container = document.getElementById('map');
+      const options = {
+        center: new kakao.maps.LatLng(35.19656853772262, 129.0807270648317),
+        level: 3
+      }
+      const map = new kakao.maps.Map(container, options)
+      // const markerPosition = new kakao.maps.LatLng(35.19656853772262, 129.0807270648317);
+
+      // const marker = new kakao.maps.Marker({
+      //   position: markerPosition
+      // });
+      // marker.setMap(map)
+  },
+  },
+   mounted() {
+     if (window.kakao && window.kakao.maps) {
+        this.initMap();
+      } else {
+        const script=document.createElement('script');
+        script.onload=()=>kakao.maps.load(this.initMap);
+        script.src =
+        'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b6cbac052860ed6350771411150f7480';
+        document.head.appendChild(script);
+      }
+  },
+  
 };
 </script>
 <style  scoped>
@@ -86,8 +217,5 @@ export default {
    margin-left: 15px;
     display: block;
 }
-.order-card .card-body {
-    display: flex;
-    justify-content: space-around;
-}
+
 </style>
