@@ -16,7 +16,7 @@ public class JoomakInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        for (int idx = 0; idx < 300; ++idx) {
+        for (int idx = 0; idx < 10; ++idx) {
             memberRepository.save(createMember(idx));
         }
     }
