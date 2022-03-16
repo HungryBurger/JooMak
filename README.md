@@ -39,7 +39,7 @@ http://dev-joomak-delivery.s3-website.ap-northeast-2.amazonaws.com/ <br>
 ## OverView
 
 ##Architecture
-![image](https://user-images.githubusercontent.com/75158094/158634627-d1f1582a-32f5-4df3-af3b-6d1cb57a0c7c.png)
+![image](https://user-images.githubusercontent.com/75158094/158636503-d35b9fbc-f127-4174-8fb7-2cacdc88343a.png)
 
 ## Used Tech in Front End
 ![image](https://user-images.githubusercontent.com/75158094/158634714-4f802782-7149-48c2-bb8a-fd5620159c05.png)
