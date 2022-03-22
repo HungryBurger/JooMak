@@ -23,15 +23,8 @@ public class MemberService {
 
     public Member findById(Long mbrId) {
         return memberRepository.findById(mbrId)
-                .orElseThrow();
+                .orElse(null);
     }
-//
-//    public void checkDuplicateEmail(String email) {
-//        memberRepository.findByEmail(email)
-//        .ifPresent((member) -> {
-//            throw new RuntimeException(member.getEmail() + ALREADY_EXISTS_MEMBER.getErrorMessage());
-//        });
-//    }
 
     @Transactional
     public Member save(Member member) {
@@ -48,5 +41,14 @@ public class MemberService {
         memberRepository.save(member);
         return member;
     }
+
+
+
+    //    public void checkDuplicateEmail(String email) {
+//        memberRepository.findByEmail(email)
+//        .ifPresent((member) -> {
+//            throw new RuntimeException(member.getEmail() + ALREADY_EXISTS_MEMBER.getErrorMessage());
+//        });
+//    }
 
 }
