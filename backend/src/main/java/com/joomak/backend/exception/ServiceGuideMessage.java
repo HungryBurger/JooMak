@@ -9,6 +9,7 @@ import org.springframework.boot.logging.LogLevel;
 public enum ServiceGuideMessage {
 
     NOT_EXIST_MEMBER(LogLevel.INFO, "해당 계정이 존재하지 않습니다" ),
+    INVALID_PASSWORD(LogLevel.INFO, "비밀번호가 틀렸습니다" ),
 
     REQUEST_SUCCESS(LogLevel.INFO, "요청이 성공했습니댜"),
 
