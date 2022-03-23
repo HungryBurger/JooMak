@@ -22,12 +22,17 @@ public class LoginService {
     private final MemberRepository memberRepository;
 
     public Member login(Member member) {
-        Member saved = Optional.ofNullable(memberService.findById(member.getId()))
+        Member saved = Optional.ofNullable(memberService.findByEmail(member.getEmail()))
                 .orElseThrow(() -> new ServiceGuideException(HttpStatus.BAD_REQUEST, ServiceGuideMessage.NOT_EXIST_MEMBER));
-        return saved;
+
+        if (checkIdPassword(member, saved)) {
+            return saved;
+        } else {
+            throw new ServiceGuideException(HttpStatus.BAD_REQUEST, ServiceGuideMessage.INVALID_PASSWORD);
+        }
     }
 
-    public static boolean checkIdPassword(Member member) {
-        return true;
+    public static boolean checkIdPassword(Member loginMember, Member savedMember) {
+        return loginMember.getPassword().equals(savedMember.getPassword());
     }
 }
