@@ -76,9 +76,9 @@ public class Member extends BaseEntity {
         this.bannedYn=yn;
         return this;
     }
+
     @Builder
-    public Member(Long id, String memberName, MemberState memberState, Grade grade, String nickName, Role role, Boolean snsLoginYn, LocalDateTime birth, String email, Gender gender, String profileImagePath, String mobile, String uid, Boolean bannedYn, String password, LocalDateTime loginFailCount) {
-        this.id = id;
+    public Member(String memberName, MemberState memberState, Grade grade, String nickName, Role role, Boolean snsLoginYn, LocalDateTime birth, String email, Gender gender, String profileImagePath, String mobile, String uid, Boolean bannedYn, String password, LocalDateTime loginFailCount) {
         this.memberName = memberName;
         this.memberState = memberState;
         this.grade = grade;
@@ -95,37 +95,4 @@ public class Member extends BaseEntity {
         this.password = password;
         this.loginFailCount = loginFailCount;
     }
-
-
-    //
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return null;
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return this.loginId;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
-
 }

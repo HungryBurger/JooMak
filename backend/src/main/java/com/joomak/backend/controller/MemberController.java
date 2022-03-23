@@ -35,7 +35,7 @@ public class MemberController {
      * HttpServletRequest가 아닌 Custom object를 파라미터로 받을것.
      */
     @PostMapping
-    public ResponseEntity<Member> save(Member member) {
+    public ResponseEntity<Member> save(@RequestBody Member member) {
         return ResponseEntity.ok(memberService.save(member));
     }
 
@@ -43,5 +43,10 @@ public class MemberController {
     @PutMapping(value = "ban/{memberId}")
     public ResponseEntity<Member> ban(@PathVariable Long memberId) {
         return ResponseEntity.ok(memberService.ban(memberId));
+    }
+    // 로그인
+    @PostMapping
+    public Member login(Member member){
+
     }
 }

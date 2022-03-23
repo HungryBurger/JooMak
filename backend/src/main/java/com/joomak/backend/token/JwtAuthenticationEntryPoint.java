@@ -2,7 +2,7 @@ package com.joomak.backend.token;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joomak.backend.exception.ErrorResponse;
-import com.joomak.backend.exception.UserGuideMessage;
+import com.joomak.backend.exception.ServiceGuideMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -29,7 +29,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setContentType(APPLICATION_JSON_VALUE);
 
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .message(UserGuideMessage.REQUIRED_LOGIN.getUserGuideMessage())
+                .message(ServiceGuideMessage.REQUIRED_LOGIN.getUserGuideMessage())
                 .build();
 
         OutputStream outputStream = response.getOutputStream();
