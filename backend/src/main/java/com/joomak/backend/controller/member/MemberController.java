@@ -1,11 +1,10 @@
-package com.joomak.backend.controller;
+package com.joomak.backend.controller.member;
 
 
-import com.joomak.backend.domain.member.Member;
+import com.joomak.backend.domain.member.entity.Member;
 import com.joomak.backend.service.LoginService;
 import com.joomak.backend.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,17 +25,13 @@ public class MemberController {
         Member member = memberService.findById(memberId);
         return ResponseEntity.ok(member);
     }
-
     // 모든 회원 조회
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<Member>> getAllMembers() {
         List<Member> member = memberService.findAll();
-        return new ResponseEntity<>(member, HttpStatus.OK);
+        return ResponseEntity.ok(member);
     }
 
-    /**
-     * HttpServletRequest가 아닌 Custom object를 파라미터로 받을것.
-     */
     @PostMapping
     public ResponseEntity<Member> save(@RequestBody Member member) {
         return ResponseEntity.ok(memberService.save(member));

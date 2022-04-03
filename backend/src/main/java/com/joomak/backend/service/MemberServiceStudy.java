@@ -1,6 +1,6 @@
 //package com.joomak.backend.service;
 //
-//import com.joomak.backend.domain.member.Member;
+//import com.joomak.backend.domain.member.entity.Member;
 //import com.joomak.backend.repository.MemberRepository;
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,5 @@
-package com.joomak.backend.domain.member;
+package com.joomak.backend.domain.order.entity;
+
 
 import com.joomak.backend.domain.common.BaseEntity;
 import com.joomak.backend.domain.product.Product;
@@ -12,26 +13,29 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
+@Table(name = "Orders")
 @NoArgsConstructor(access = PROTECTED)
-public class StoreGoodsMapping extends BaseEntity {
-
+public class OrderProductMapping extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "storeGoodsId")
+    @Column(name = "orderProductMappingId")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "storeId")
-    private Store store;
+    @JoinColumn(name = "orderId")
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "productId")
     private Product product;
 
+    private int productCount;
+
     @Builder
-    public StoreGoodsMapping(Long id, Store store, Product product) {
+    public OrderProductMapping(Long id, Order order, Product product, int productCount) {
         this.id = id;
-        this.store = store;
+        this.order = order;
         this.product = product;
+        this.productCount = productCount;
     }
 }

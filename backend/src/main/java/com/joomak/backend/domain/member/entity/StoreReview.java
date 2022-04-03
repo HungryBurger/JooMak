@@ -1,4 +1,4 @@
-package com.joomak.backend.domain.member;
+package com.joomak.backend.domain.member.entity;
 
 import com.joomak.backend.domain.common.BaseEntity;
 import com.joomak.backend.domain.common.YorN;
@@ -18,11 +18,11 @@ import static lombok.AccessLevel.PROTECTED;
 public class StoreReview extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "storeReviewId")
+    @Column(name = "store_review_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "store_id")
     private Store store;
 
     private String comment;

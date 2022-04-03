@@ -2,7 +2,7 @@ package com.joomak.backend.domain.product;
 
 
 import com.joomak.backend.domain.common.YorN;
-import com.joomak.backend.domain.member.Store;
+import com.joomak.backend.domain.member.entity.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,7 +29,7 @@ public class OptionGroup {
      * 맛, 크기 등등을 고려할 수 있기 때문이다.
      */
     @ManyToOne
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "store_id")
     private Store store;
 
     @ManyToOne

@@ -1,14 +1,11 @@
-package com.joomak.backend.domain.member;
+package com.joomak.backend.domain.member.entity;
 
 
 import com.joomak.backend.domain.common.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
-import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity

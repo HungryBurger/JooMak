@@ -1,7 +1,7 @@
 package com.joomak.backend.service;
 
-import com.joomak.backend.domain.member.Member;
-import com.joomak.backend.domain.common.MemberState;
+import com.joomak.backend.domain.member.entity.Member;
+import com.joomak.backend.domain.member.enums.MemberState;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

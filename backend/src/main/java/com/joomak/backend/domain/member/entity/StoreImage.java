@@ -1,15 +1,13 @@
-package com.joomak.backend.domain.member;
+package com.joomak.backend.domain.member.entity;
 
 import com.joomak.backend.domain.common.BaseEntity;
 import com.joomak.backend.domain.common.YorN;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
@@ -19,11 +17,11 @@ public class StoreImage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="storeImageId")
+    @Column(name="store_image_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="storeId")
+    @JoinColumn(name="store_id")
     private Store store;
 
     private int displaySeq;
