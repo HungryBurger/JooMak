@@ -1,7 +1,7 @@
 package com.joomak.backend;
 
-import com.joomak.backend.domain.member.Member;
-import com.joomak.backend.domain.common.MemberState;
+import com.joomak.backend.domain.member.entity.Member;
+import com.joomak.backend.domain.member.enums.MemberState;
 import com.joomak.backend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;

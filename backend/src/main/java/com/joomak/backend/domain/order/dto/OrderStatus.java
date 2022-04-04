@@ -1,4 +1,4 @@
-package com.joomak.backend.domain.common;
+package com.joomak.backend.domain.order.dto;
 
 
 public enum OrderStatus {

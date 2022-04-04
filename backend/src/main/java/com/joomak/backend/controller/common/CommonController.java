@@ -1,6 +1,5 @@
-package com.joomak.backend.controller;
+package com.joomak.backend.controller.common;
 
-import com.joomak.backend.domain.member.Member;
 import com.joomak.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

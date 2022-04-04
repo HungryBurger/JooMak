@@ -1,4 +1,4 @@
-package com.joomak.backend.domain.common;
+package com.joomak.backend.domain.member.enums;
 
 
 public enum Role {

@@ -1,4 +1,4 @@
-package com.joomak.backend.domain.member;
+package com.joomak.backend.domain.member.entity;
 
 import com.joomak.backend.domain.common.BaseEntity;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Rider extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="riderId")
+    @Column(name="rider_id")
     private Long id;
 
     private String name;

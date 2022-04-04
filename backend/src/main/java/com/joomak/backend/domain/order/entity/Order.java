@@ -1,11 +1,11 @@
-package com.joomak.backend.domain.order;
+package com.joomak.backend.domain.order.entity;
 
 import com.joomak.backend.domain.common.BaseEntity;
-import com.joomak.backend.domain.common.OrderStatus;
-import com.joomak.backend.domain.member.Member;
-import com.joomak.backend.domain.member.MemberDeliveryAddress;
-import com.joomak.backend.domain.member.Rider;
-import com.joomak.backend.domain.member.Store;
+import com.joomak.backend.domain.order.dto.OrderStatus;
+import com.joomak.backend.domain.member.entity.Member;
+import com.joomak.backend.domain.member.entity.MemberDeliveryAddress;
+import com.joomak.backend.domain.member.entity.Rider;
+import com.joomak.backend.domain.member.entity.Store;
 import com.joomak.backend.domain.product.Review;
 import lombok.Builder;
 import lombok.Getter;

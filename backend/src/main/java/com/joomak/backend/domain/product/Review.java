@@ -1,8 +1,8 @@
 package com.joomak.backend.domain.product;
 
 import com.joomak.backend.domain.common.YorN;
-import com.joomak.backend.domain.member.Store;
-import com.joomak.backend.domain.order.Order;
+import com.joomak.backend.domain.member.entity.Store;
+import com.joomak.backend.domain.order.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

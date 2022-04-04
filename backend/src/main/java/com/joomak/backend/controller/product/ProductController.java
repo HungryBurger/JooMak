@@ -1,4 +1,4 @@
-package com.joomak.backend.controller;
+package com.joomak.backend.controller.product;
 
 import com.joomak.backend.domain.product.Product;
 import com.joomak.backend.service.ProductService;
