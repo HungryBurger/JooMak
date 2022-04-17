@@ -1,7 +1,11 @@
-package com.joomak.backend.domain.member;
+package com.joomak.backend.domain.member.entity;
 
 
 import com.joomak.backend.domain.common.*;
+import com.joomak.backend.domain.member.enums.Gender;
+import com.joomak.backend.domain.member.enums.Grade;
+import com.joomak.backend.domain.member.enums.MemberState;
+import com.joomak.backend.domain.member.enums.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +29,7 @@ public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "memberId")
+    @Column(name = "member_id")
     private Long id;
 
     private String memberName;
