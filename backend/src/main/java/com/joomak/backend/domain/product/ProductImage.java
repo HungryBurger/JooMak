@@ -1,6 +1,7 @@
 package com.joomak.backend.domain.product;
 
 
+import com.joomak.backend.domain.common.Attachment;
 import com.joomak.backend.domain.common.BaseEntity;
 import com.joomak.backend.domain.common.YorN;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PROTECTED;
@@ -32,4 +36,6 @@ public class ProductImage extends BaseEntity {
 
     private YorN deleteYn;
 
+//    @OneToMany(mappedBy = "Member")
+//    private List<Attachment> attacheFiles = new ArrayList<>();
 }
