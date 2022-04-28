@@ -1,6 +1,6 @@
 package com.joomak.backend.service;
 
-import com.joomak.backend.domain.member.entity.Member;
+import com.joomak.backend.model.member.entity.Member;
 import com.joomak.backend.exception.ServiceGuideException;
 import com.joomak.backend.exception.ServiceGuideMessage;
 import com.joomak.backend.repository.MemberRepository;
@@ -34,6 +34,7 @@ public class MemberService {
 
     @Transactional
     public Member save(Member member) {
+        log.info("It will be Saved Member = {}", member);
         Member saved = memberRepository.save(member);
         log.info("Saved Member = {}", saved);
         return saved;

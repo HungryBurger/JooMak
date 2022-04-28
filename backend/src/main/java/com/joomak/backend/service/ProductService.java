@@ -1,6 +1,6 @@
 package com.joomak.backend.service;
 
-import com.joomak.backend.domain.product.Product;
+import com.joomak.backend.model.product.entity.Product;
 import com.joomak.backend.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

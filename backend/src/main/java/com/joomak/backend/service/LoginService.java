@@ -1,6 +1,6 @@
 package com.joomak.backend.service;
 
-import com.joomak.backend.domain.member.entity.Member;
+import com.joomak.backend.model.member.entity.Member;
 import com.joomak.backend.exception.ServiceGuideException;
 import com.joomak.backend.exception.ServiceGuideMessage;
 import com.joomak.backend.repository.MemberRepository;

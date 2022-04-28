@@ -1,8 +1,8 @@
 package com.joomak.backend.controller.common;
 
-import com.joomak.backend.domain.common.AttachmentRepository;
-import com.joomak.backend.domain.common.AttachmentType;
-import com.joomak.backend.domain.common.FileStore;
+import com.joomak.backend.model.common.AttachmentRepository;
+import com.joomak.backend.model.common.AttachmentType;
+import com.joomak.backend.model.common.FileStore;
 import com.joomak.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
