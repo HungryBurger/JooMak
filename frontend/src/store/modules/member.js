@@ -1,6 +1,7 @@
 export const SET_ADDRESS_DETAIL = "SET_ADDRESS_DETAIL";
 export const SET_CHANGE_MODE = "SET_CHANGE_MODE";
 export const SET_ADDRESS_SELECTED = "SET_ADDRESS_SELECTED";
+export const SIGN_UP = "SIGN_UP";
 
 export const member = {
   namespaced: true,

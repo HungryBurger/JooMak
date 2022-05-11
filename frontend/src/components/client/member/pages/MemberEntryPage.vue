@@ -93,18 +93,19 @@
             <div class="input-group mb-3">
               <input
                 type="text"
-                class="form-control"
+                class="email-form form-control"
                 placeholder="Username"
                 aria-label="Username"
+                id="email-front"
                 required
               />
               <span class="input-group-text">@</span>
-              <select id="email-back" class="form-select" required>
+              <select id="email-back" class="email-form form-select" required>
                 <option value="" selected>Choose...</option>
                 <option value="naver.com">naver.com</option>
                 <option value="gmail.com">gmail.com</option>
               </select>
-              <button class="input-button">인증번호 요청</button>
+              <button class="input-button" id="email-send-button" @click="handleSendEmail">인증번호 요청</button>
               <div class="invalid-feedback">
                 이메일을 입력하세요.
               </div>
@@ -116,10 +117,10 @@
                 id="email-confirm"
                 placeholder="인증번호 입력"
                 maxlength="10"
-                v-model="email_confrim"
+                v-model="email_authcode"
                 required
               />
-              <button class="input-button">인증번호 확인</button>
+              <button class="input-button" id="authcode-send-button" @click="handleSendAuthCode">인증번호 확인</button>
               <div class="invalid-feedback">
                 인증번호를 입력하세요.
               </div>
@@ -252,12 +253,12 @@ export default {
       password_confirm: "",
       name: "",
       email: "",
-      email_confirm: "",
+      email_authcode: "",
       phone: "",
       birth: "",
       nickname: "",
       gender: "",
-      passwordCheckFlag:true
+      passwordCheckFlag:true,
     };
   },
   methods: {
@@ -285,29 +286,71 @@ export default {
           this.passwordCheckFlag = false 
         }
     },
-     async handleSendEmail() {
+     handleSendEmail(e) {
+      e.preventDefault();
+          // 1. 이메일 전송 요청
+          const returnToken=true;
+       
+          // 2. Input 상태 변경
+          if(returnToken===true){
+            
+          
+          // 3. Button 상태 변경
+          const emailBtn = document.querySelector('#email-send-button') //id가 'btn'인 요소를 반환한다.
+          const emailInput = document.querySelector('.email-form') //id가 'btn'인 요소를 반환한다.
+            emailInput.disabled = true;
+          // 4. Button 텍스트 변경
+            emailBtn.innerText = '재전송'  // 텍스트를 unfollow로 변경
+          }
+          // 5. emit
+          
+    },
+    handleSendAuthCode(e) {
+      e.preventDefault();
+       // 1. 인증번호 확인전송 요청
+          const returnToken=true;
+       
+          // 2. Input 상태 변경
+          if(returnToken===true){
+            
+          
+          // 3. Button 상태 변경
+          const authcodeBtn = document.querySelector('#authcode-send-button') //id가 'btn'인 요소를 반환한다.
+          // 4. Button 텍스트 변경
+          const authcodeSuccessToken=true;
+          if(authcodeSuccessToken===true)
+            authcodeBtn.innerText = '인증완료'  // 텍스트를 unfollow로 변경
+          }
+
+    },
+    /*  async handleSendEmail() {
       try {
           // 1. 이메일 전송 요청
         axios
           .get("/verifyEmail?key=?",
           {
             email: this.email,
-            returnSecureToken: true,
+           // returnSecureToken: true,
           }) // 임시 url로 요청. 추후 수정 예정
           .then((res) => {
+          // 2. Input 상태 변경
+          if(res.returnToken===true){
+            
+          }
+          // 3. Button 상태 변경
+          emailSendSuccess=true;
+          // 4. Button 텍스트 변경
+          // 5. emit
             console.log(res);
           })
           .catch((err) => {
             console.log(err);
           });
-          // 2. Input 상태 변경
-          // 3. Button 상태 변경
-          // 4. Button 텍스트 변경
-          // 5. emit
+      
         } catch (error) {
           //...
       }
-    },
+    }, */
     signup(){
        const formData = {
           username: this.email,
@@ -315,7 +358,7 @@ export default {
           password_confirm: this.password_confirm,
           name: this.name,
           email: this.email,
-          email_confirm: this.email_confirm,
+          email_authcode: this.email_authcode,
           phone: this.phone,
           birth: this.birth,
           nickname: this.nickname,
