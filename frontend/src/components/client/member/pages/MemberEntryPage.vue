@@ -23,6 +23,7 @@
                 class="form-control"
                 id="username"
                 v-model="username"
+                maxlength="20"
                 required
               />
 
@@ -43,6 +44,7 @@
               class="form-control"
               id="password"
               v-model="password"
+              maxlength="20"
               required
             />
             <div class="invalid-feedback">
@@ -58,11 +60,15 @@
               class="form-control"
               id="password-confirm"
               v-model="password_confirm"
+              maxlength="20"
               required
+              @blur="checkPassword"
             />
             <div class="invalid-feedback">
               비밀번호를 입력하세요.
             </div>
+            <div class="custom-invalid " v-if="!passwordCheckFlag"> 비밀번호가 동일하지 않습니다. </div>
+
           </div>
           <div class="py-3">
             <label for="name" class="form-label"
@@ -73,6 +79,7 @@
               class="form-control"
               id="name"
               v-model="name"
+              maxlength="4"
               required
             />
             <div class="invalid-feedback">
@@ -80,24 +87,25 @@
             </div>
           </div>
           <div class="py-3">
-            <label for="email" class="form-label"
+            <label for="email" class="form-label"  maxlength="20"
               >이메일<span class="require-test">*</span></label
             >
             <div class="input-group mb-3">
               <input
                 type="text"
-                class="form-control"
+                class="email-form form-control"
                 placeholder="Username"
                 aria-label="Username"
+                id="email-front"
                 required
               />
               <span class="input-group-text">@</span>
-              <select id="email-back" class="form-select" required>
+              <select id="email-back" class="email-form form-select" required>
                 <option value="" selected>Choose...</option>
                 <option value="naver.com">naver.com</option>
                 <option value="gmail.com">gmail.com</option>
               </select>
-              <button class="input-button">인증번호 요청</button>
+              <button class="input-button" id="email-send-button" @click="handleSendEmail">인증번호 요청</button>
               <div class="invalid-feedback">
                 이메일을 입력하세요.
               </div>
@@ -108,10 +116,11 @@
                 class="form-control"
                 id="email-confirm"
                 placeholder="인증번호 입력"
-                v-model="email_confrim"
+                maxlength="10"
+                v-model="email_authcode"
                 required
               />
-              <button class="input-button">인증번호 확인</button>
+              <button class="input-button" id="authcode-send-button" @click="handleSendAuthCode">인증번호 확인</button>
               <div class="invalid-feedback">
                 인증번호를 입력하세요.
               </div>
@@ -127,6 +136,7 @@
                 id="phone-front"
                 class="form-control"
                 placeholder="010"
+                value="010"
                 required
               />
               <span class="input-group-text">-</span>
@@ -134,6 +144,7 @@
                 type="text"
                 class="form-control"
                 id="phone-middle"
+                maxlength="4"
                 required
               />
               <span class="input-group-text">-</span>
@@ -141,6 +152,7 @@
                 type="text"
                 class="form-control"
                 id="phone-back"
+                maxlength="4"
                 required
               />
               <div class="invalid-feedback">
@@ -241,11 +253,12 @@ export default {
       password_confirm: "",
       name: "",
       email: "",
-      email_confirm: "",
+      email_authcode: "",
       phone: "",
       birth: "",
       nickname: "",
       gender: "",
+      passwordCheckFlag:true,
     };
   },
   methods: {
@@ -262,7 +275,132 @@ export default {
       });
       scrollTo(0, 0);
     },
-    checkId(e) {},
+    checkId(id) {
+      //중복확인
+
+    },
+    checkPassword() {
+      if (this.password === this.password_confirm) {
+         this.passwordCheckFlag = true 
+      } else {
+          this.passwordCheckFlag = false 
+        }
+    },
+     handleSendEmail(e) {
+      e.preventDefault();
+          // 1. 이메일 전송 요청
+          const returnToken=true;
+       
+          // 2. Input 상태 변경
+          if(returnToken===true){
+            
+          
+          // 3. Button 상태 변경
+          const emailBtn = document.querySelector('#email-send-button') //id가 'btn'인 요소를 반환한다.
+          const emailInput = document.querySelector('.email-form') //id가 'btn'인 요소를 반환한다.
+            emailInput.disabled = true;
+          // 4. Button 텍스트 변경
+            emailBtn.innerText = '재전송'  // 텍스트를 unfollow로 변경
+          }
+          // 5. emit
+          
+    },
+    handleSendAuthCode(e) {
+      e.preventDefault();
+       // 1. 인증번호 확인전송 요청
+          const returnToken=true;
+       
+          // 2. Input 상태 변경
+          if(returnToken===true){
+            
+          
+          // 3. Button 상태 변경
+          const authcodeBtn = document.querySelector('#authcode-send-button') //id가 'btn'인 요소를 반환한다.
+          // 4. Button 텍스트 변경
+          const authcodeSuccessToken=true;
+          if(authcodeSuccessToken===true)
+            authcodeBtn.innerText = '인증완료'  // 텍스트를 unfollow로 변경
+          }
+
+    },
+    /*  async handleSendEmail() {
+      try {
+          // 1. 이메일 전송 요청
+        axios
+          .get("/verifyEmail?key=?",
+          {
+            email: this.email,
+           // returnSecureToken: true,
+          }) // 임시 url로 요청. 추후 수정 예정
+          .then((res) => {
+          // 2. Input 상태 변경
+          if(res.returnToken===true){
+            
+          }
+          // 3. Button 상태 변경
+          emailSendSuccess=true;
+          // 4. Button 텍스트 변경
+          // 5. emit
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      
+        } catch (error) {
+          //...
+      }
+    }, */
+    signup(){
+       const formData = {
+          username: this.email,
+          password: this.password,
+          password_confirm: this.password_confirm,
+          name: this.name,
+          email: this.email,
+          email_authcode: this.email_authcode,
+          phone: this.phone,
+          birth: this.birth,
+          nickname: this.nickname,
+          gender: this.gender,
+        }
+        console.log(formData)
+        this.$store.commit(`member/${SIGN_UP}`, {
+              index: i,
+              inputText: this.input,
+        });
+    }
+    
+   /*  async save() {
+      const validate = this.$refs.form.validate();
+      if (validate) {
+        if (confirm ('저장하시겠습니까?')) {
+          const params = {
+            user_id: this.user_id,
+            user_nm: this.user_nm,
+            user_pw: this.user_pw,
+            user_auth_code: this.user_auth.value,
+            user_auth_nm: this.user_auth.name,
+            user_desc: this.user_desc
+          }
+          if (this.state == 'upd') {
+            params._id = this.user_info._id;
+            params.user_mk_dt = this.user_info.user_mk_dt;
+  
+          }
+          try {
+            const url = (this.state == 'ins' ? 'setting/user/insertUser' : 'setting/user/updateUser');
+            const rs = await this.$store.dispatch(url, params);
+            if (rs.data.result.error == false) {
+              this.$store.dispatch('setting/user/initUserList');
+              this.close();
+            }
+          } catch (err) {
+            alert(err);
+          }
+        }
+      }
+    }, */
   },
 };
 </script>
@@ -351,5 +489,11 @@ input[type="radio"]:checked {
   /* text-decoration: underline #ffc463; */
   font-size: 18px;
   width: 55%;
+}
+.custom-invalid{
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: .875em;
+  color: #dc3545;
 }
 </style>
