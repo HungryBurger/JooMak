@@ -30,12 +30,12 @@
       </div>
       <div class="modal_right">
         <menu-select-tab-modal-option-box
-          v-for="singleOption in orderForm.options.singleOptionGroup"
+          v-for="singleOption in selectedItemForm.options.singleOptionGroup"
           :key="singleOption.optionGroupIdx"
           :singleOption="singleOption"
         ></menu-select-tab-modal-option-box>
         <menu-select-tab-modal-option-box
-          v-for="multiOption in orderForm.options.multiOptionGroup"
+          v-for="multiOption in selectedItemForm.options.multiOptionGroup"
           :key="multiOption.optionGroupIdx"
           :multiOption="multiOption"
         ></menu-select-tab-modal-option-box>
@@ -68,7 +68,9 @@
                   />
                 </svg>
               </div>
-              <span class="input-number">{{ orderForm.numberOfProduct }}</span>
+              <span class="input-number">{{
+                selectedItemForm.numberOfProduct
+              }}</span>
               <div class="number_plus number_btn" @click="onClickPlusBtn">
                 <svg
                   width="50"
@@ -115,33 +117,34 @@
           <div class="option-box_content selected-option">
             <ul>
               <li>
-                <span>{{ orderForm.name }}</span>
+                <span>{{ selectedItemForm.name }}</span>
                 <span>{{ productPrice }}</span>
               </li>
               <selected-single-option-li
-                v-for="singleOption in orderForm.options.singleOptionGroup"
+                v-for="singleOption in selectedItemForm.options
+                  .singleOptionGroup"
                 :key="singleOption.optionGroupIdx"
                 :singleOption="singleOption"
               ></selected-single-option-li>
               <selected-multi-option-li
-                v-for="multiOption in orderForm.options.multiOptionGroup"
+                v-for="multiOption in selectedItemForm.options.multiOptionGroup"
                 :key="multiOption.optionGroupIdx"
                 :multiOption="multiOption"
               ></selected-multi-option-li>
             </ul>
             <div class="selected-option_price">
               <number-with-comma-span
-                :num="orderFormPrice"
+                :num="selectedItemFormPrice"
                 textBack="&nbsp;원"
               ></number-with-comma-span>
             </div>
             <div class="selected-option_number">
               <span>수량</span>
-              <span>x {{ orderForm.numberOfProduct }}</span>
+              <span>x {{ selectedItemForm.numberOfProduct }}</span>
             </div>
             <div class="selected-option_total-price">
               <number-with-comma-span
-                :num="orderFormTotalPrice"
+                :num="selectedItemFormTotalPrice"
                 textFront="총&nbsp;&nbsp;"
                 textBack="&nbsp;원"
               ></number-with-comma-span>
@@ -171,7 +174,11 @@ import MenuSelectTabModalOptionBox from "./MenuSelectTabModalOptionBox.vue";
 import SelectedSingleOptionLi from "./SelectedSingleOptionLi.vue";
 import SelectedMultiOptionLi from "./SelectedMultiOptionLi.vue";
 import NumberWithCommaSpan from "@/components/client/common/share/components/NumberWithCommaSpan.vue";
-import { MINUS_PRODUCT_NUM, PLUS_PRODUCT_NUM } from "@/store/modules/order.js";
+import {
+  MINUS_PRODUCT_NUM,
+  PLUS_PRODUCT_NUM,
+  SET_ORDER_FORM_LIST,
+} from "@/store/modules/order.js";
 
 export default {
   components: {
@@ -184,8 +191,11 @@ export default {
   computed: {
     ...mapState("common", ["onModal"]),
     ...mapState("product", ["selectedProductBasicInfo"]),
-    ...mapState("order", ["orderForm"]),
-    ...mapGetters("order", ["orderFormPrice", "orderFormTotalPrice"]),
+    ...mapState("order", ["selectedItemForm"]),
+    ...mapGetters("order", [
+      "selectedItemFormPrice",
+      "selectedItemFormTotalPrice",
+    ]),
     detailInfoNextLine() {
       return this.selectedProductBasicInfo.detailInfo.replaceAll(
         "\n",
@@ -197,12 +207,16 @@ export default {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     productPrice() {
-      let num = this.orderForm.price;
+      let num = this.selectedItemForm.price;
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
   methods: {
-    ...mapActions("order", [MINUS_PRODUCT_NUM, PLUS_PRODUCT_NUM]),
+    ...mapActions("order", [
+      MINUS_PRODUCT_NUM,
+      PLUS_PRODUCT_NUM,
+      SET_ORDER_FORM_LIST,
+    ]),
     closeModal() {
       console.log("close event 발생");
     },
@@ -215,11 +229,16 @@ export default {
     onClickCartLink() {
       console.log("보따리 btn 클릭");
       // Axios post 로직
-      // this.orderForm 이용
+      // this.selectedItemForm 이용
     },
     onClickOrderLink() {
-      console.log("바로 주문 btn 클릭");
-      // this.orderForm 이용
+      let orderFormList = [];
+      Object.assign(this.selectedItemForm, {
+        selected: true,
+        img: this.selectedProductBasicInfo.img,
+      });
+      orderFormList.push(this.selectedItemForm);
+      this.SET_ORDER_FORM_LIST(orderFormList);
     },
   },
 };
