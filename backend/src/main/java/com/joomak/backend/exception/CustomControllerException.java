@@ -1,6 +1,6 @@
 package com.joomak.backend.exception;
 
-import com.joomak.backend.domain.common.CommonResponse;
+import com.joomak.backend.model.common.CommonResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

@@ -1,7 +1,7 @@
 package com.joomak.backend.controller.member;
 
 
-import com.joomak.backend.domain.member.entity.Member;
+import com.joomak.backend.model.member.entity.Member;
 import com.joomak.backend.service.LoginService;
 import com.joomak.backend.service.MemberService;
 import lombok.RequiredArgsConstructor;

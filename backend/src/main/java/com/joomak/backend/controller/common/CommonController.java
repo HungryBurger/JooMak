@@ -1,15 +1,23 @@
 package com.joomak.backend.controller.common;
 
+import com.joomak.backend.model.common.AttachmentRepository;
+import com.joomak.backend.model.common.AttachmentType;
+import com.joomak.backend.model.common.FileStore;
 import com.joomak.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/common")
 public class CommonController {
+
+    private final AttachmentRepository attachmentRepository;
+    private final FileStore fileStore;
 
     private final AuthService authService;
 
@@ -20,4 +28,17 @@ public class CommonController {
         int authNum = authService.getAuthNum(memberId);
         return authNum;
     }
+
+    @PostMapping(value = "/file")
+    public String fileSave(@RequestPart MultipartFile multipartFile, @RequestPart AttachmentType attachmentType) {
+        try {
+            System.out.println(multipartFile.getName());
+            fileStore.storeFile(multipartFile, attachmentType);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return multipartFile.getName();
+    }
+
+
 }
