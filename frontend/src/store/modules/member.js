@@ -1,6 +1,7 @@
 export const SET_ADDRESS_DETAIL = "SET_ADDRESS_DETAIL";
 export const SET_CHANGE_MODE = "SET_CHANGE_MODE";
 export const SET_ADDRESS_SELECTED = "SET_ADDRESS_SELECTED";
+export const SIGN_UP = "SIGN_UP";
 
 export const member = {
   namespaced: true,
@@ -66,7 +67,10 @@ export const member = {
   actions: {
     [SET_CHANGE_MODE]({ commit }, { indexToCancel, indexToEdit }) {
       if (indexToCancel !== -1) {
-        commit(SET_CHANGE_MODE, { index: indexToCancel, boolean: false });
+        commit(SET_CHANGE_MODE, {
+          index: indexToCancel,
+          boolean: false,
+        });
       }
       commit(SET_CHANGE_MODE, { index: indexToEdit, boolean: true });
     },
@@ -78,7 +82,10 @@ export const member = {
       const addressList = state.addressList;
       for (let i = 0; i < addressList.length; i++) {
         if (addressList[i].selected === true) {
-          commit(`${SET_ADDRESS_SELECTED}`, { index: i, boolean: false });
+          commit(`${SET_ADDRESS_SELECTED}`, {
+            index: i,
+            boolean: false,
+          });
           break;
         }
       }
@@ -90,6 +97,17 @@ export const member = {
           break;
         }
       }
+    },
+    [SIGN_UP]({ commit }, authData) {
+      axios
+        .post("/signupNewUser?key=AAAAAAAAAAAAAAAAAA-ccccccccccccccccccc", {
+          username: authData.username,
+          // email: authData.email,
+          password: authData.password,
+          returnSecureToken: true,
+        })
+        .then((res) => console.log(res))
+        .catch((error) => console.log(error));
     },
   },
 };
