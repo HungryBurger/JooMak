@@ -1,18 +1,14 @@
 package com.joomak.backend.service;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.joomak.backend.model.product.entity.Product;
+import com.joomak.backend.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.joomak.backend.domain.product.Product;
-import com.joomak.backend.repository.ProductRepository;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -34,7 +30,7 @@ public class ProductService {
     
     public List<Product> findStoreProducts(Long storeId) {
         List<Product> storeProducts = new ArrayList<>();
-        productRepository.findStoreProduct(storeId).forEach(e -> storeProducts.add(e));
+        productRepository.findByStoreId(storeId).forEach(e -> storeProducts.add(e));
         return storeProducts;
     }
 
