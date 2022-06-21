@@ -23,11 +23,23 @@ public class MemberDeliveryAddress extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @Column(name = "parcel_based_address")
     private String parcelBasedAddress;
+
+    @Column(name = "parcel_based_address_detail")
     private String parcelBasedAddressDetail;
+
+    @Column(name = "road_based_address")
     private String roadBasedAddress;
+
+    @Column(name = "road_based_address_detail")
     private String roadBasedAddressDetail;
+
+    @Column(name = "post_code")
     private String postCode;
+
+    @Column(name = "is_main_delivery_address")
     private YorN isMainDeliveryAddress;
 
     @Builder

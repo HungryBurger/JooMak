@@ -1,6 +1,6 @@
 package com.joomak.backend.domain.member.enums;
 
 
-public enum Role {
+public enum RoleType {
     USER, OWNER, ADMINISTRATOR
 }

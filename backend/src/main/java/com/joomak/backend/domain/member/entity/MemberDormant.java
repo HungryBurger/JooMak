@@ -5,7 +5,7 @@ import com.joomak.backend.domain.common.*;
 import com.joomak.backend.domain.member.enums.Gender;
 import com.joomak.backend.domain.member.enums.Grade;
 import com.joomak.backend.domain.member.enums.MemberState;
-import com.joomak.backend.domain.member.enums.Role;
+import com.joomak.backend.domain.member.enums.RoleType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -46,7 +46,7 @@ public class MemberDormant extends BaseEntity {
     private String nickName;
 
     @Enumerated(STRING)
-    private Role role;  //USER, OWNER, ADMINISTRATOR
+    private RoleType roleType;  //USER, OWNER, ADMINISTRATOR
 
     private YorN snsLoginYn;
 
@@ -69,7 +69,7 @@ public class MemberDormant extends BaseEntity {
 
     private LocalDateTime loginFailCount;
 
-    public MemberDormant(Long id, Member member, String memberName, MemberState memberState, Grade grade, String loginId, String nickName, Role role, YorN snsLoginYn, LocalDateTime birth, String email, Gender gender, String profileImagePath, String mobile, String uid, YorN bannedYn, String password, LocalDateTime loginFailCount) {
+    public MemberDormant(Long id, Member member, String memberName, MemberState memberState, Grade grade, String loginId, String nickName, RoleType roleType, YorN snsLoginYn, LocalDateTime birth, String email, Gender gender, String profileImagePath, String mobile, String uid, YorN bannedYn, String password, LocalDateTime loginFailCount) {
         this.id = id;
         this.member = member;
         this.memberName = memberName;
@@ -77,7 +77,7 @@ public class MemberDormant extends BaseEntity {
         this.grade = grade;
         this.loginId = loginId;
         this.nickName = nickName;
-        this.role = role;
+        this.roleType = roleType;
         this.snsLoginYn = snsLoginYn;
         this.birth = birth;
         this.email = email;

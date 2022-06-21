@@ -19,3 +19,8 @@ spring :
     database-platform:
 secret:
   key: joomak
+
+jwt:
+  secret: T3VyU2lkZVByb2plY3RJc0pvb21ha091clNpZGVQcm9qZWN0SXNKb29tYWtPdXJTaWRlUHJvamVjdElzSm9vbWFrT3VyU2lkZVByb2plY3RJc0pvb21ha091clNpZGVQcm9qZWN0SXNKb29tYWs=
+  key: authorities
+  token-validity-in-seconds: 86400
