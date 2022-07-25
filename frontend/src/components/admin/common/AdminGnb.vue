@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header id="admin-gnb">
     <div>
       <router-link to="/admin/main">
         <h2>Joomak 통합관리자</h2>

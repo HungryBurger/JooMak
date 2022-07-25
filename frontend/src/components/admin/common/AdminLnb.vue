@@ -1,15 +1,14 @@
 <template>
-  <nav>
-    <span>lnb 영역입니다</span>
-    <ul>
-      <li class="depth1">
-        <router-link to="/admin/member/memberAdmin">
-          <span>회원</span>
+  <nav id="admin-lnb">
+    <ul class="depth1">
+      <li>
+        <router-link to="/admin/member/memberAdmin" :class="{current: selectedDepth1 === 1}">
+          <h5>회원</h5>
         </router-link>
-        <div class="depth2">
-          <ul>
+        <div>
+          <ul class="depth2">
             <li>
-              <router-link to="/admin/member/memberAdmin">
+              <router-link to="/admin/member/memberAdmin" @click="onClickMenu(1)">
                 <span>회원 Mockup CRUD</span>
               </router-link>
             </li>
@@ -22,19 +21,19 @@
         </div>
       </li>
 
-      <li class="depth1">
-        <router-link to="/admin/product/storeAdmin">
-          <span>상품</span>
+      <li>
+        <router-link to="/admin/product/storeAdmin" :class="{current: selectedDepth1 === 2}">
+          <h5>상품</h5>
         </router-link>
-        <div class="depth2">
-          <ul>
+        <div>
+          <ul class="depth2">
             <li>
-              <router-link to="/admin/product/storeAdmin">
+              <router-link to="/admin/product/storeAdmin" @click="onClickMenu(2)">
                 <span>매장 Mockup CRUD</span>
               </router-link>
             </li>
             <li>
-              <router-link to="/admin/product/prodAdmin">
+              <router-link to="/admin/product/prodAdmin" @click="onClickMenu(2)">
                 <span>메뉴 Mockup CRUD</span>
               </router-link>
             </li>
@@ -47,7 +46,16 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      selectedDepth1: 0
+    }
+  },
+  methods: {
+    onClickMenu(menuNum) {
+      this.selectedDepth1 = menuNum
+    }
+  }
 }
 </script>
 

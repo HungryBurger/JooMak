@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import "./assets/styles/css/style.css";
+import "@/assets/styles/css/style.css";
 import HeaderComponent from "./components/client/common/share/pages/HeaderComponent.vue";
 import FooterComponent from "./components/client/common/share/pages/FooterComponent.vue";
 import { mapActions, mapState } from "vuex";
