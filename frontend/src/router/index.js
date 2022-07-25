@@ -80,6 +80,18 @@ const routes = [
     path: "/admin",
     name: "adminPage",
     component: () => import("@/views/AdminPage.vue"),
+    children: [
+      {
+        path: "main",
+        name: "adminMain",
+        component: () => import("@/components/admin/common/AdminMain.vue")
+      },
+      {
+        path: "member",
+        name: "adminMember",
+        component: () => import("@/components/admin/member/MemberAdmin.vue")
+      }
+    ]
   },
 ];
 

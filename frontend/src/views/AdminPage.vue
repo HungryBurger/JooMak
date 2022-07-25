@@ -1,10 +1,22 @@
 <template>
-  <div>관리자 페이지 입니다</div>
+  <div>
+    <AdminGnb />
+    <AdminLnb />
+    <main id="admin-main">
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 
 <script>
-export default {
+import AdminGnb from "@/components/admin/common/AdminGnb.vue";
+import AdminLnb from "@/components/admin/common/AdminLnb.vue";
 
+export default {
+  components: {
+    AdminGnb,
+    AdminLnb
+  }
 }
 </script>
 
