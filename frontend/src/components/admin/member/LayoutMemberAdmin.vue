@@ -1,5 +1,5 @@
 <template>
-  <div>어드민 메인 화면 입니다</div>
+  <router-view />
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>어드민 메인 화면 입니다</div>
+  <div>메뉴 관리 화면 입니다</div>
 </template>
 
 <script>

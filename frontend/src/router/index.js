@@ -88,8 +88,30 @@ const routes = [
       },
       {
         path: "member",
-        name: "adminMember",
-        component: () => import("@/components/admin/member/MemberAdmin.vue")
+        component: () => import("@/components/admin/member/LayoutMemberAdmin.vue"),
+        children: [
+          {
+            path: "memberAdmin",
+            name: "memberAdmin",
+            component: () => import("@/components/admin/member/MemberAdmin.vue")
+          }
+        ]
+      },
+      {
+        path: "product",
+        component: () => import("@/components/admin/product/LayoutProductAdmin.vue"),
+        children: [
+          {
+            path: "storeAdmin",
+            name: "storeAdmin",
+            component: () => import("@/components/admin/product/StoreAdmin.vue")
+          },
+          {
+            path: "prodAdmin",
+            name: "prodAdmin",
+            component: () => import("@/components/admin/product/ProdAdmin.vue")
+          }
+        ]
       }
     ]
   },
