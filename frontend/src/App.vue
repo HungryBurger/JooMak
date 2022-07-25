@@ -1,15 +1,17 @@
 <template>
-  <header-component></header-component>
-  <main
-    id="main"
-    :class="{
-      'padding-for-sticky': currentPage !== 'storeDetailPage',
-      'on-home': onHome,
-    }"
-  >
-    <router-view />
-  </main>
-  <footer-component></footer-component>
+  <div>
+    <header-component v-if="mode !== 'adminPage'"></header-component>
+    <main
+      id="main"
+      :class="{
+        'padding-for-sticky': mode !== 'adminPage' && currentPage !== 'storeDetailPage',
+        'on-home': mode !== 'adminPage' && onHome,
+      }"
+    >
+      <router-view />
+    </main>
+    <footer-component v-if="mode !== 'adminPage'"></footer-component>
+  </div>
 </template>
 
 <script>
@@ -23,6 +25,11 @@ export default {
   components: {
     HeaderComponent,
     FooterComponent,
+  },
+  data() {
+    return {
+      mode: ''
+    }
   },
   computed: {
     ...mapState("common", ["currentPage", "onHome"]),
@@ -59,6 +66,10 @@ export default {
       return currentPage;
     },
     setCurrentPageByRoute() {
+      console.log(this.$route)
+      if(this.$route.name === 'adminPage' && this.mode !== 'adminPage') {
+        this.mode = 'adminPage'
+      }
       const currentPage = this.getCurrentPageByRoute();
       this.SET_CURRENT_PAGE(currentPage);
       // console.log("load : " + this.currentPage);

@@ -73,6 +73,14 @@ const routes = [
     name: "cartPage",
     component: () => import("@/views/CartPage.vue"),
   },
+
+  /* Admin */
+  // Admin 페이지
+  {
+    path: "/admin",
+    name: "adminPage",
+    component: () => import("@/views/AdminPage.vue"),
+  },
 ];
 
 const router = createRouter({
