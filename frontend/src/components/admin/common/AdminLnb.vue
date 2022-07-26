@@ -1,7 +1,7 @@
 <template>
   <nav id="admin-lnb">
     <ul class="depth1">
-      <li>
+      <li :class="{current: selectedDepth1 === 1}">
         <router-link to="/admin/member/memberAdmin" :class="{current: selectedDepth1 === 1}">
           <h5>회원</h5>
         </router-link>
@@ -21,7 +21,7 @@
         </div>
       </li>
 
-      <li>
+      <li :class="{current: selectedDepth1 === 2}">
         <router-link to="/admin/product/storeAdmin" :class="{current: selectedDepth1 === 2}">
           <h5>상품</h5>
         </router-link>
@@ -58,7 +58,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

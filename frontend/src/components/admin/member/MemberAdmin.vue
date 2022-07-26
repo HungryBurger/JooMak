@@ -1,13 +1,18 @@
 <template>
-  <div>회원 관리 화면 입니다</div>
+  <div class="member-admin-container">
+    <member-create></member-create>
+    <member-read></member-read>
+  </div>
 </template>
 
 <script>
-export default {
+import MemberCreate from "@/components/admin/member/MemberCreate.vue"
+import MemberRead from "@/components/admin/member/MemberRead.vue"
 
+export default {
+  components: {
+    MemberCreate,
+    MemberRead
+  }
 }
 </script>
-
-<style>
-
-</style>

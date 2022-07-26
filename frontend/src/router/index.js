@@ -82,9 +82,9 @@ const routes = [
     component: () => import("@/views/AdminPage.vue"),
     children: [
       {
-        path: "main",
-        name: "adminMain",
-        component: () => import("@/components/admin/common/AdminMain.vue")
+        path: "home",
+        name: "adminHome",
+        component: () => import("@/components/admin/common/AdminHome.vue")
       },
       {
         path: "member",

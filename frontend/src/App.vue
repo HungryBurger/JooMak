@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      mode: 'adminPage'
+      mode: ''
     }
   },
   computed: {
@@ -67,7 +67,7 @@ export default {
     },
     setCurrentPageByRoute() {
       console.log(this.$route)
-      if(this.$route.path.startsWith('/admin') && this.mode === 'adminPage') {
+      if(this.$route.path.startsWith('/admin') && this.mode === '') {
         this.mode = 'adminPage'
       }
       const currentPage = this.getCurrentPageByRoute();
