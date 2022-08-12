@@ -1,9 +1,9 @@
 package com.joomak.backend.service;
 
-import com.joomak.backend.model.member.entity.Member;
+import com.joomak.backend.model.member.entity.User;
 import com.joomak.backend.exception.ServiceGuideException;
 import com.joomak.backend.exception.ServiceGuideMessage;
-import com.joomak.backend.repository.MemberRepository;
+import com.joomak.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,35 +18,34 @@ import java.util.List;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
-    private final MemberRepository memberRepository;
+    private final UserRepository memberRepository;
 
-    public List<Member> findAll() {
+    public List<User> findAll() {
         return new ArrayList<>(memberRepository.findAll());
     }
 
-    public Member findById(Long mbrId) {
+    public User findById(Long mbrId) {
         return memberRepository.findById(mbrId).orElse(null);
     }
 
-    public Member findByEmail(String email) {
+    public User findByEmail(String email) {
         return memberRepository.findByEmail(email).orElse(null);
     }
 
     @Transactional
-    public Member save(Member member) {
-        log.info("It will be Saved Member = {}", member);
-        Member saved = memberRepository.save(member);
+    public User save(User user) {
+        log.info("It will be Saved Member = {}", user);
+        User saved = memberRepository.save(user);
         log.info("Saved Member = {}", saved);
         return saved;
     }
 
     @Transactional
-    public Member ban(Long memberId) {
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new ServiceGuideException(HttpStatus.BAD_REQUEST, ServiceGuideMessage.NOT_EXIST_MEMBER));
-        log.info("Member ban = {}", member);
-        member.updateBanned(true);
-        memberRepository.save(member);
-        return member;
+    public User ban(Long memberId) {
+        User user = memberRepository.findById(memberId).orElseThrow(() -> new ServiceGuideException(HttpStatus.BAD_REQUEST, ServiceGuideMessage.NOT_EXIST_MEMBER));
+        log.info("Member ban = {}", user);
+        memberRepository.save(user);
+        return user;
     }
 
 

@@ -61,11 +61,59 @@ const routes = [
     name: "orderStatusPage",
     component: () => import("@/views/OrderStatusPage.vue"),
   },
+  // 주문 완료 페이지
+  {
+    path: "/order-complete",
+    name: "orderCompletePage",
+    component: () => import("@/views/OrderCompletePage.vue"),
+  },
   // 장바구니 페이지
   {
     path: "/cart",
     name: "cartPage",
     component: () => import("@/views/CartPage.vue"),
+  },
+
+  /* Admin */
+  // Admin 페이지
+  {
+    path: "/admin",
+    name: "adminPage",
+    component: () => import("@/views/AdminPage.vue"),
+    children: [
+      {
+        path: "home",
+        name: "adminHome",
+        component: () => import("@/components/admin/common/AdminHome.vue")
+      },
+      {
+        path: "member",
+        component: () => import("@/components/admin/member/LayoutMemberAdmin.vue"),
+        children: [
+          {
+            path: "memberAdmin",
+            name: "memberAdmin",
+            component: () => import("@/components/admin/member/MemberAdmin.vue")
+          }
+        ]
+      },
+      {
+        path: "product",
+        component: () => import("@/components/admin/product/LayoutProductAdmin.vue"),
+        children: [
+          {
+            path: "storeAdmin",
+            name: "storeAdmin",
+            component: () => import("@/components/admin/product/StoreAdmin.vue")
+          },
+          {
+            path: "prodAdmin",
+            name: "prodAdmin",
+            component: () => import("@/components/admin/product/ProdAdmin.vue")
+          }
+        ]
+      }
+    ]
   },
 ];
 

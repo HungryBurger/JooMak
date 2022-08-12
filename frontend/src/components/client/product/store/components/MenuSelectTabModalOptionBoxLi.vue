@@ -3,7 +3,12 @@
     <div
       class="option_li"
       @click="
-        onClickOptionLi({ optionInfo, singleOption, multiOption, orderForm })
+        onClickOptionLi({
+          optionInfo,
+          singleOption,
+          multiOption,
+          selectedItemForm,
+        })
       "
     >
       <div class="option_li_left">
@@ -47,7 +52,7 @@ import { TOGGLE_OPTION_LI } from "@/store/modules/order.js";
 export default {
   props: ["optionGroup", "optionInfo", "singleOption", "multiOption"],
   computed: {
-    ...mapState("order", ["orderForm"]),
+    ...mapState("order", ["selectedItemForm"]),
     imgPathSingleY() {
       return require("@/assets/images/icon_check-only_y.svg");
     },
@@ -71,12 +76,17 @@ export default {
   },
   methods: {
     ...mapActions("order", [TOGGLE_OPTION_LI]),
-    onClickOptionLi({ optionInfo, singleOption, multiOption, orderForm }) {
+    onClickOptionLi({
+      optionInfo,
+      singleOption,
+      multiOption,
+      selectedItemForm,
+    }) {
       this.TOGGLE_OPTION_LI({
         optionInfo,
         singleOption,
         multiOption,
-        orderForm,
+        selectedItemForm,
       });
     },
   },
