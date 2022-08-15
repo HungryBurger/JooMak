@@ -16,9 +16,7 @@ import java.util.List;
 @RequestMapping("/members")
 public class MemberController {
     private final MemberService memberService;
-
     private final LoginService loginService;
-
     // 회원번호로 한명의 회원 조회
     @GetMapping(value = "/{memberId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<User> getMember(@PathVariable("memberId") Long memberId) {

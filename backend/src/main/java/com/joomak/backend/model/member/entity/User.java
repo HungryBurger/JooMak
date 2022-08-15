@@ -13,6 +13,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PROTECTED;
@@ -32,6 +33,10 @@ public class User extends BaseEntity {
     private Long id;
 
     private String memberName;
+
+    @ElementCollection
+    @CollectionTable(name="delivery_address", joinColumns = @JoinColumn(name= "member_id"))
+    private List<Address> deliveryAddressList;
 
     @Enumerated(STRING)
     private MemberState memberState; //normal, standby ,banned, secession, dormant
@@ -55,6 +60,7 @@ public class User extends BaseEntity {
     private String password;
 
     private LocalDateTime lastLoginedAt;
+
     private LocalDateTime loginFailCount;
 
     public void setLastLoginedAt(LocalDateTime lastLoginedAt) {
@@ -86,8 +92,10 @@ public class User extends BaseEntity {
     }
 
     @Builder
-    public User(String memberName, MemberState memberState, Grade memberGrade, Role memberRole, LocalDateTime birth, Gender gender, String email, String profileImagePath, String mobile, String password, LocalDateTime lastLoginedAt, LocalDateTime loginFailCount) {
+    public User(Long id, String memberName, List<Address> deliveryAddressList, MemberState memberState, Grade memberGrade, Role memberRole, LocalDateTime birth, Gender gender, String email, String profileImagePath, String mobile, String password, LocalDateTime lastLoginedAt, LocalDateTime loginFailCount) {
+        this.id = id;
         this.memberName = memberName;
+        this.deliveryAddressList = deliveryAddressList;
         this.memberState = memberState;
         this.memberGrade = memberGrade;
         this.memberRole = memberRole;
