@@ -25,10 +25,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //@RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-//    private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
-
     private final JwtTokenProviderV2 jwtTokenProviderV2;
     private final JwtAuthenticationEntryPointV2 jwtAuthenticationEntryPointV2;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -40,8 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtTokenProviderV2 = jwtTokenProviderV2;
         this.jwtAuthenticationEntryPointV2 = jwtAuthenticationEntryPointV2;
         this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-
-        passwordEncoder = null;
     }
 
     @Bean

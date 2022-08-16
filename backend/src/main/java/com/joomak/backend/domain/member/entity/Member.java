@@ -54,8 +54,8 @@ public class Member extends BaseEntity {
     @Column(name = "sns_login_yn", nullable = false)
     private Boolean snsLoginYn;
 
-//    @Column(nullable = false)
-//    private LocalDateTime birth;
+    @Column(nullable = false)
+    private LocalDateTime birth;
     //Login ID 겸용
 
     @Column(nullable = false, unique = true)
@@ -108,7 +108,7 @@ public class Member extends BaseEntity {
         this.nickName = nickName;
         this.role = role;
         this.snsLoginYn = snsLoginYn;
-//        this.birth = birth;
+        this.birth = birth;
         this.email = email;
         this.gender = gender;
         this.profileImagePath = profileImagePath;

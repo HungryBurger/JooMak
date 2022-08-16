@@ -42,6 +42,9 @@ public class MemberService implements UserDetailsService {
         /*
         Database에서 Member 정보를 받아온 후 createUser Method를 통해 UserDetails를 상속한 MemberLoginDto Class로 변환해서 반환한다.
          */
+
+        log.info("=================================================== loadUserByUsername is called ...");
+
         return memberRepository.findByEmail(email)
             .map(member -> createUser(member))
             .orElseThrow(() -> new UsernameNotFoundException(email + " -> Database에서 찾을 수 없습니다."));
@@ -60,9 +63,11 @@ public class MemberService implements UserDetailsService {
         }
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        log.info("authorities: " + member.getRole().getRoleName());
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(member.getRole().getRoleName());
         authorities.add(grantedAuthority);
+
+        log.info("authorities: " + member.getRole().getRoleName());
+        log.info("email: " + member.getEmail() + ", password: " + member.getPassword());
 
         return MemberLoginDto.builder()
             .email(member.getEmail())

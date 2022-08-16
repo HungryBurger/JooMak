@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,10 +34,10 @@ public class JwtAuthenticationFilterV2 extends GenericFilterBean {
         log.info("JwtAuthenticationFilterV2 - doFilter method is called");
 
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
         // 1. Header의 Authorization에 할당되어있는 Token 값을 받아온다.
         String jwt = resolveToken(httpServletRequest);
-
         String requestUri = httpServletRequest.getRequestURI();
 
         // 2. Token을 검증
@@ -46,15 +47,11 @@ public class JwtAuthenticationFilterV2 extends GenericFilterBean {
             Authentication authentication = jwtTokenProviderV2.getAuthentication(jwt);
 
             // 4. Authentication 객체를 받아 SecurityContextHolder에 Setting한다.
-            /*
-                SecurityContextHolder : Request 일회성 Memory
-                SecurityContextRepository : 반영구 저장소
-                SecurityContext : Authentication Wrapper Class
-            */
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.info("Security Context에 '{}' 인증 정보를 저장했습니다. Uri : {}", authentication.getName(), requestUri);
         } else {
             log.info("유효한 Jwt 토큰이 없습니다, Uri : {}", requestUri);
+//            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Token");
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

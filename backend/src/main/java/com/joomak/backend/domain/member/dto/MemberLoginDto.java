@@ -21,7 +21,6 @@ public class MemberLoginDto implements UserDetails {
     private String password;
     private String memberName;
     private String nickName;
-
     private TokenDto tokenDto;
     private Collection<? extends GrantedAuthority> roles;
 

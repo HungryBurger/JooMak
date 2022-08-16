@@ -66,12 +66,14 @@ public class MemberController {
     @PostMapping(value="/login")
     public ResponseEntity<UserDetails> login(@RequestBody MemberLoginDto memberLoginDto){
         log.info("MemberController - login API is called");
+        log.info("email: " + memberLoginDto.getEmail() + ", password: " + memberLoginDto.getPassword());
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
             new UsernamePasswordAuthenticationToken(memberLoginDto.getEmail(), memberLoginDto.getPassword());
 
         // authenticate Method가 실행되면 UserDetailsService의 loadUserByUsername통해 Database에 있는 Member 정보를 받아와서 Setting 한다.
         // Default AuthenticationProvider에서는 authenticate Method 실행 시 사용자 id / pwd를 비교한다.
+        // 참고 : https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/dao-authentication-provider.html
         Authentication authentication = authenticationManagerBuilder
             .getObject()
             .authenticate(usernamePasswordAuthenticationToken);
