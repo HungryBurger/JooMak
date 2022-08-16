@@ -65,8 +65,6 @@ public class MemberController {
     // 로그인
     @PostMapping(value="/login")
     public ResponseEntity<UserDetails> login(@RequestBody MemberLoginDto memberLoginDto){
-        log.info("MemberController - login API is called");
-        log.info("email: " + memberLoginDto.getEmail() + ", password: " + memberLoginDto.getPassword());
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
             new UsernamePasswordAuthenticationToken(memberLoginDto.getEmail(), memberLoginDto.getPassword());

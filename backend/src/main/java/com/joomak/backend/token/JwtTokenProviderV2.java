@@ -74,8 +74,6 @@ public class JwtTokenProviderV2 implements InitializingBean {
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
 
-        log.info("authorities collect string: " + authorities);
-
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
@@ -102,10 +100,6 @@ public class JwtTokenProviderV2 implements InitializingBean {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-
-        // UserDetails Class를 상속한 User 객체를 생성한다. -> MemberLoginDto로 바꿔도 되나?
-        // Password도 넣어줘야 할 거 같은데?
-//        User principal = new User(claims.getSubject(), "", authorities);
 
         MemberLoginDto principal = MemberLoginDto.builder()
             .email(claims.getSubject())

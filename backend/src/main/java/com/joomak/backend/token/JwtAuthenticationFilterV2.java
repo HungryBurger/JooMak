@@ -34,7 +34,6 @@ public class JwtAuthenticationFilterV2 extends GenericFilterBean {
         log.info("JwtAuthenticationFilterV2 - doFilter method is called");
 
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
         // 1. Header의 Authorization에 할당되어있는 Token 값을 받아온다.
         String jwt = resolveToken(httpServletRequest);
@@ -51,7 +50,6 @@ public class JwtAuthenticationFilterV2 extends GenericFilterBean {
             log.info("Security Context에 '{}' 인증 정보를 저장했습니다. Uri : {}", authentication.getName(), requestUri);
         } else {
             log.info("유효한 Jwt 토큰이 없습니다, Uri : {}", requestUri);
-//            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Token");
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
