@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,11 +26,11 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @ToString
 @NoArgsConstructor(access = PROTECTED)
-public class User extends BaseEntity {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "member_id")
     private Long id;
 
     private String memberName;
@@ -39,14 +40,16 @@ public class User extends BaseEntity {
     private List<Address> deliveryAddressList;
 
     @Enumerated(STRING)
-    private MemberState memberState; //normal, standby ,banned, secession, dormant
+    private MemberState state; //normal, standby ,banned, secession, dormant
 
     @Enumerated(STRING)
-    private Grade memberGrade; //bronze, silver, gold, platinum, diamond
+    private Grade grade; //bronze, silver, gold, platinum, diamond
 
     @Enumerated(STRING)
-    private Role memberRole;  //USER, OWNER, ADMINISTRATOR
-    private LocalDateTime birth;
+    private Role role;  //USER, OWNER, ADMINISTRATOR
+    private LocalDate birth;
+
+    private String name;
 
     @Enumerated(STRING)
     private Gender gender;
@@ -61,22 +64,14 @@ public class User extends BaseEntity {
 
     private LocalDateTime lastLoginedAt;
 
-    private LocalDateTime loginFailCount;
+    private int loginFailCount;
 
     public void setLastLoginedAt(LocalDateTime lastLoginedAt) {
         this.lastLoginedAt = lastLoginedAt;
     }
 
-    public void setMemberGrade(Grade memberGrade) {
-        this.memberGrade = memberGrade;
-    }
-
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setMemberState(MemberState memberState) {
-        this.memberState = memberState;
     }
 
     public void setProfileImagePath(String profileImagePath) {
@@ -87,19 +82,20 @@ public class User extends BaseEntity {
         this.mobile = mobile;
     }
 
-    public void setLoginFailCount(LocalDateTime loginFailCount) {
+    public void setLoginFailCount(int loginFailCount) {
         this.loginFailCount = loginFailCount;
     }
 
     @Builder
-    public User(Long id, String memberName, List<Address> deliveryAddressList, MemberState memberState, Grade memberGrade, Role memberRole, LocalDateTime birth, Gender gender, String email, String profileImagePath, String mobile, String password, LocalDateTime lastLoginedAt, LocalDateTime loginFailCount) {
+    public Member(Long id, String memberName, List<Address> deliveryAddressList, MemberState state, Grade grade, Role role, LocalDate birth, String name, Gender gender, String email, String profileImagePath, String mobile, String password, LocalDateTime lastLoginedAt, int loginFailCount) {
         this.id = id;
         this.memberName = memberName;
         this.deliveryAddressList = deliveryAddressList;
-        this.memberState = memberState;
-        this.memberGrade = memberGrade;
-        this.memberRole = memberRole;
+        this.state = state;
+        this.grade = grade;
+        this.role = role;
         this.birth = birth;
+        this.name = name;
         this.gender = gender;
         this.email = email;
         this.profileImagePath = profileImagePath;
@@ -107,5 +103,9 @@ public class User extends BaseEntity {
         this.password = password;
         this.lastLoginedAt = lastLoginedAt;
         this.loginFailCount = loginFailCount;
+    }
+
+    public void setDeliveryAddressList(List<Address> addressList) {
+        this.deliveryAddressList = addressList;
     }
 }
