@@ -80,6 +80,7 @@ const routes = [
     path: "/admin",
     name: "adminPage",
     component: () => import("@/views/AdminPage.vue"),
+    redirect: "/admin/home",
     children: [
       {
         path: "home",
