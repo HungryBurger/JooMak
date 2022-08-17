@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,14 +42,18 @@ public class MemberCreateResponse {
 
     private String email;
 
+    private String profileImagePath;
+
     private Gender gender; //male female;
 
     private String mobile;
 
     private Integer loginFailCount;
 
+    private LocalDateTime lastLoginedAt;
+
     @Builder
-    public MemberCreateResponse(Long id, String name, String password, List<AddressInfo> addressInfoList, MemberState state, Grade grade, String nickname, Role role, Boolean snsLoginYn, LocalDate birth, String email, Gender gender, String mobile, Integer loginFailCount) {
+    public MemberCreateResponse(Long id, String name, String password, List<AddressInfo> addressInfoList, MemberState state, Grade grade, String nickname, Role role, Boolean snsLoginYn, LocalDate birth, String email, String profileImagePath, Gender gender, String mobile, Integer loginFailCount, LocalDateTime lastLoginedAt) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -60,9 +65,11 @@ public class MemberCreateResponse {
         this.snsLoginYn = snsLoginYn;
         this.birth = birth;
         this.email = email;
+        this.profileImagePath = profileImagePath;
         this.gender = gender;
         this.mobile = mobile;
         this.loginFailCount = loginFailCount;
+        this.lastLoginedAt = lastLoginedAt;
     }
 
     public void setAddressInfoList(List<AddressInfo> addressInfoList) {
@@ -83,6 +90,8 @@ public class MemberCreateResponse {
                 .name(member.getName())
                 .password(member.getPassword())
                 .role(member.getRole())
+                .loginFailCount(member.getLoginFailCount())
+                .lastLoginedAt(member.getLastLoginedAt())
                 .build();
 
         if(member.getDeliveryAddressList().isEmpty()){

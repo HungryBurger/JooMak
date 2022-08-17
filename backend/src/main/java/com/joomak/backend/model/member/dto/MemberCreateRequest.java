@@ -10,11 +10,14 @@ import com.joomak.backend.model.member.enums.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Time;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -44,12 +47,16 @@ public class MemberCreateRequest {
 
     private Gender gender; //male female;
 
+    private String profileImagePath;
+
     private String mobile;
 
     private Integer loginFailCount;
 
-    @Builder
-    public MemberCreateRequest(String name, String password, List<AddressInfo> addressCreateInfoList, MemberState state, Grade grade, String nickname, Role role, Boolean snsLoginYn, LocalDate birth, String email, Gender gender, String mobile, Integer loginFailCount) {
+    private LocalDateTime lastLoginedAt;
+
+
+    public MemberCreateRequest(String name, String password, List<AddressInfo> addressCreateInfoList, MemberState state, Grade grade, String nickname, Role role, Boolean snsLoginYn, LocalDate birth, String email, Gender gender, String profileImagePath, String mobile, Integer loginFailCount, LocalDateTime lastLoginedAt) {
         this.name = name;
         this.password = password;
         this.addressCreateInfoList = addressCreateInfoList;
@@ -61,9 +68,14 @@ public class MemberCreateRequest {
         this.birth = birth;
         this.email = email;
         this.gender = gender;
+        this.profileImagePath = profileImagePath;
         this.mobile = mobile;
         this.loginFailCount = loginFailCount;
+        this.lastLoginedAt = lastLoginedAt;
     }
+
+    @Builder
+
 
     public Member DtoToEntity(MemberCreateRequest memberCreateRequest) {
         Member member = Member.builder()
@@ -77,6 +89,8 @@ public class MemberCreateRequest {
                 .name(memberCreateRequest.getName())
                 .password(memberCreateRequest.getPassword())
                 .role(Role.USER)
+                .profileImagePath(memberCreateRequest.getProfileImagePath())
+                .lastLoginedAt(LocalDateTime.now())
                 .build();
 
         List<Address> addressList = new ArrayList<>();

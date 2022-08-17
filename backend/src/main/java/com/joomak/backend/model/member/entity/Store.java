@@ -82,3 +82,5 @@ public class Store extends BaseEntity {
         this.storeImagePath = storeImagePath;
     }
 }
+
+
