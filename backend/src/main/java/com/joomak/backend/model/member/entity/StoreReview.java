@@ -1,19 +1,18 @@
 package com.joomak.backend.model.member.entity;
 
+
 import com.joomak.backend.model.common.BaseEntity;
-import com.joomak.backend.model.common.YorN;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
-import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
+@ToString
 @NoArgsConstructor(access = PROTECTED)
 public class StoreReview extends BaseEntity {
     @Id
@@ -25,22 +24,26 @@ public class StoreReview extends BaseEntity {
     @JoinColumn(name = "store_id")
     private Store store;
 
-    private String comment;
+    private String reviewLoginId;
 
-    @Enumerated(STRING)
-    private YorN deleteYn;
+    private double reviewRate;
 
-    private LocalDateTime deleteAt;
+    private String reviewTitle;
 
-    private YorN secretYn;
+    private String reviewContents;
 
-    @Builder
-    public StoreReview(Long id, Store store, String comment, YorN deleteYn, LocalDateTime deleteAt, YorN secretYn) {
+    private int reviewLike;
+
+    private String reviewImagePath;
+
+    public StoreReview(Long id, Store store, String reviewLoginId, double reviewRate, String reviewTitle, String reviewContents, int reviewLike, String reviewImagePath) {
         this.id = id;
         this.store = store;
-        this.comment = comment;
-        this.deleteYn = deleteYn;
-        this.deleteAt = deleteAt;
-        this.secretYn = secretYn;
+        this.reviewLoginId = reviewLoginId;
+        this.reviewRate = reviewRate;
+        this.reviewTitle = reviewTitle;
+        this.reviewContents = reviewContents;
+        this.reviewLike = reviewLike;
+        this.reviewImagePath = reviewImagePath;
     }
 }

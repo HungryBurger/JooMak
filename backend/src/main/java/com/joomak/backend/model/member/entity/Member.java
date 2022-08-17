@@ -12,18 +12,20 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PROTECTED;
 
 /**
- * UserDetails를 Entity에서 구현할지 새로운 DTO를 만들어 구현할 지 결정.
+ * Email ID가 로그인 ID
  */
 @Entity
 @Getter
 @ToString
-@NoArgsConstructor(access=PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
 public class Member extends BaseEntity {
 
     @Id
@@ -33,69 +35,77 @@ public class Member extends BaseEntity {
 
     private String memberName;
 
+    @ElementCollection
+    @CollectionTable(name="delivery_address", joinColumns = @JoinColumn(name= "member_id"))
+    private List<Address> deliveryAddressList;
+
     @Enumerated(STRING)
-    private MemberState memberState; //normal, standby ,banned, secession, dormant
+    private MemberState state; //normal, standby ,banned, secession, dormant
 
     @Enumerated(STRING)
     private Grade grade; //bronze, silver, gold, platinum, diamond
 
-    private String nickName;
-
     @Enumerated(STRING)
     private Role role;  //USER, OWNER, ADMINISTRATOR
+    private LocalDate birth;
 
-    private Boolean snsLoginYn;
-
-    private LocalDateTime birth;
-    //Login ID 겸용
-    private String email;
+    private String name;
 
     @Enumerated(STRING)
-    private Gender gender; //male female;
+    private Gender gender;
+
+    private String email;
 
     private String profileImagePath;
 
     private String mobile;
 
-    private String uid;
-
-    private Boolean bannedYn;
-
     private String password;
 
-    private LocalDateTime loginFailCount;
+    private LocalDateTime lastLoginedAt;
 
-    public Member updateNickName(String nickName) {
-        this.nickName = nickName;
-        return this;
+    private int loginFailCount;
+
+    public void setLastLoginedAt(LocalDateTime lastLoginedAt) {
+        this.lastLoginedAt = lastLoginedAt;
     }
 
-    public Member updateMobile(String mobile) {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setProfileImagePath(String profileImagePath) {
+        this.profileImagePath = profileImagePath;
+    }
+
+    public void setMobile(String mobile) {
         this.mobile = mobile;
-        return this;
     }
 
-    public Member updateBanned(Boolean yn){
-        this.bannedYn=yn;
-        return this;
+    public void setLoginFailCount(int loginFailCount) {
+        this.loginFailCount = loginFailCount;
     }
 
     @Builder
-    public Member(String memberName, MemberState memberState, Grade grade, String nickName, Role role, Boolean snsLoginYn, LocalDateTime birth, String email, Gender gender, String profileImagePath, String mobile, String uid, Boolean bannedYn, String password, LocalDateTime loginFailCount) {
+    public Member(Long id, String memberName, List<Address> deliveryAddressList, MemberState state, Grade grade, Role role, LocalDate birth, String name, Gender gender, String email, String profileImagePath, String mobile, String password, LocalDateTime lastLoginedAt, int loginFailCount) {
+        this.id = id;
         this.memberName = memberName;
-        this.memberState = memberState;
+        this.deliveryAddressList = deliveryAddressList;
+        this.state = state;
         this.grade = grade;
-        this.nickName = nickName;
         this.role = role;
-        this.snsLoginYn = snsLoginYn;
         this.birth = birth;
-        this.email = email;
+        this.name = name;
         this.gender = gender;
+        this.email = email;
         this.profileImagePath = profileImagePath;
         this.mobile = mobile;
-        this.uid = uid;
-        this.bannedYn = bannedYn;
         this.password = password;
+        this.lastLoginedAt = lastLoginedAt;
         this.loginFailCount = loginFailCount;
+    }
+
+    public void setDeliveryAddressList(List<Address> addressList) {
+        this.deliveryAddressList = addressList;
     }
 }
