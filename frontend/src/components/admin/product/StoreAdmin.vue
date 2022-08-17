@@ -1,5 +1,5 @@
 <template>
-  <div>매장 관리 화면 입니다</div>
+  <div>매장 관리 화면 입니다.</div>
 </template>
 
 <script>
