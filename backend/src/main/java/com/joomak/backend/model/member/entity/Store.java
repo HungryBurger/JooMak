@@ -29,8 +29,8 @@ public class Store extends BaseEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ElementCollection
     @CollectionTable(name="address", joinColumns = @JoinColumn(name= "member_id"))
@@ -63,9 +63,9 @@ public class Store extends BaseEntity {
     private String storeImagePath;
 
     @Builder
-    public Store(Long id, User user, List<Address> addressList, String storeName, String storeState, double storeGrade, int pickCount, LocalDateTime birth, LocalDateTime businessStartHour, LocalDateTime businessEndHour, String email, String mobile, String storeMainComment, String storeSubComment, int averageDeliverTime, String storeImagePath) {
+    public Store(Long id, Member member, List<Address> addressList, String storeName, String storeState, double storeGrade, int pickCount, LocalDateTime birth, LocalDateTime businessStartHour, LocalDateTime businessEndHour, String email, String mobile, String storeMainComment, String storeSubComment, int averageDeliverTime, String storeImagePath) {
         this.id = id;
-        this.user = user;
+        this.member = member;
         this.addressList = addressList;
         this.storeName = storeName;
         this.storeState = storeState;
