@@ -109,14 +109,26 @@
   background-color: #fff;
   width: 100%;
   height: 100%;
-border-radius: 12px;
+  border-radius: 12px;
 }
 #admin-main .member-admin-container .member-create-container h6 {
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
 }
+#admin-main .member-admin-container .member-create-container .member-create-wrap form {
+  width: 100%;
+  height: calc(100% - 40px);
+}
+#admin-main .member-admin-container .member-create-container .member-create-wrap form ul {
+  overflow-y: scroll;
+  height: calc(100% - 63px);
+}
+#admin-main .member-admin-container .member-create-container .member-create-wrap form ul::-webkit-scrollbar {
+  background-color: white;
+}
 #admin-main .member-admin-container .member-create-container li {
+  width: calc(100% - 10px);
   margin-bottom: 10px;
 }
 #admin-main .member-admin-container .member-create-container li * {
@@ -125,6 +137,33 @@ border-radius: 12px;
 #admin-main .member-admin-container .member-create-container li > div {
   display: flex;
   flex-direction: column;
+}
+#admin-main .member-admin-container .member-create-container li .address-wrap .btn-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 6px;
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+#admin-main .member-admin-container .member-create-container li .address-wrap .btn-wrap button {
+  padding: 2px 14px;
+  border: 1px solid black;
+}
+#admin-main .member-admin-container .member-create-container li .address-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#admin-main .member-admin-container .member-create-container li .address-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background-color: #eeeeee;
+}
+#admin-main .member-admin-container .member-create-container li .address-input-box input {
+  width: 100%;
 }
 #admin-main .member-admin-container .member-create-container li .gender-input > div {
   display: flex;
@@ -139,8 +178,15 @@ border-radius: 12px;
   background-color: #ececec;
   border: 1px solid #666;
 }
-#admin-main .member-admin-container .member-create-container li .gender-input input {
+input[type="radio"] {
   cursor: pointer;
+}
+#admin-main .member-admin-container .member-create-container li .role-input > div > div,
+#admin-main .member-admin-container .member-create-container li .grade-input > div > div,
+#admin-main .member-admin-container .member-create-container li .state-input > div > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
 }
 #admin-main .member-admin-container .member-create-container .btn-wrap {
   margin-top: 30px;
