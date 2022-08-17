@@ -1,0 +1,209 @@
+#admin-container {
+  min-width: 1024px;
+  min-height: 500px;
+  width: 100%;
+  height: 100vh;
+}
+
+/* GNB */
+#admin-gnb {
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  width: 100%;
+  height: 60px;
+  background-color: #333;
+  font-weight: bold;
+  color: white;
+}
+#admin-gnb h2 {
+  font-size: 24px;
+  color: white;
+  margin: 0;
+}
+
+/* LNB */
+#admin-container > div {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 60px);
+}
+
+#admin-lnb {
+  padding-top: 24px;
+  width: 300px;
+  height: 100%;
+  background-color: #7353ff;
+}
+#admin-lnb * {
+  color: #eee;
+}
+#admin-lnb .router-link-active *{
+  font-weight: bold;
+}
+#admin-lnb .depth1 {
+  padding-left: 0;
+}
+#admin-lnb .depth1 h5 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+#admin-lnb .depth1 a.current h5{
+  font-weight: bold;
+}
+#admin-lnb .depth1 > li {
+  padding: 24px;
+}
+#admin-lnb .depth1 > li.current,
+#admin-lnb .depth1 > li:hover{
+  background-color: #876dfc;
+}
+#admin-lnb .depth2 {
+  padding-left: 0;
+}
+#admin-lnb .depth2 > li {
+  padding-left: 28px;
+  margin-bottom: 6px;
+}
+#admin-lnb .depth2 > li,
+#admin-lnb .depth2 > li a {
+  display: block;
+  width: 100%;
+}
+#admin-lnb .depth2 > li a:hover span{
+  font-weight: bold;
+}
+
+/****** Main ******/
+#admin-main {
+  width: calc(100% - 300px);
+  height: 100%;
+  /* padding: 20px; */
+}
+/* Main - 홈 화면 */
+#admin-main .admin-home-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#admin-main .admin-home-container h2{
+  margin: 0;
+}
+
+/* Main - 회원 */
+#admin-main .member-admin-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+#admin-main .member-admin-container .member-create-container {
+  padding: 20px;
+  width: 300px;
+  height: 100%;
+  background-color: #eee;
+}
+#admin-main .member-admin-container .member-create-container .member-create-wrap {
+  padding: 20px;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+border-radius: 12px;
+}
+#admin-main .member-admin-container .member-create-container h6 {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#admin-main .member-admin-container .member-create-container li {
+  margin-bottom: 10px;
+}
+#admin-main .member-admin-container .member-create-container li * {
+  font-size: 12px;
+}
+#admin-main .member-admin-container .member-create-container li > div {
+  display: flex;
+  flex-direction: column;
+}
+#admin-main .member-admin-container .member-create-container li .gender-input > div {
+  display: flex;
+  gap: 30px;
+}
+#admin-main .member-admin-container .member-create-container li .gender-input > div > div {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+#admin-main .member-admin-container .member-create-container li input:read-only {
+  background-color: #ececec;
+  border: 1px solid #666;
+}
+#admin-main .member-admin-container .member-create-container li .gender-input input {
+  cursor: pointer;
+}
+#admin-main .member-admin-container .member-create-container .btn-wrap {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+#admin-main .member-admin-container .member-create-container .btn-wrap button {
+  padding: 4px 24px;
+}
+
+#admin-main .member-admin-container .member-read-container {
+  width: calc(100% - 300px);
+  height: 100%;
+  padding: 20px;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  border: 1px solid #444;
+  border-radius: 8px;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .top h6 {
+  font-weight: bold;
+  margin: 0;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom {
+  width: 100%;
+  height: calc(100% - 60px);
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom table,
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom table thead,
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom table tbody {
+  min-width: 700px;
+  width: 100%;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom th,
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom td {
+  padding: 4px;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom th:nth-child(1),
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom td:nth-child(1) {
+  padding-left: 10px;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom th:nth-last-child(1),
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom td:nth-last-child(1) {
+  padding-right: 10px;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom th {
+  background-color: #333;
+  color: white;
+}
+#admin-main .member-admin-container .member-read-container .member-read-wrap .bottom tr:nth-child(even) {
+  background-color: #eee;
+}

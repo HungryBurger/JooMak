@@ -12,8 +12,13 @@
         </h1>
       </div>
       <div class="row justify-content-center">
-        <form class="col-6 g-3 needs-validation" novalidate>
-          <div class="py-3">
+        <form
+          class="col-6 g-3 needs-validation"
+          novalidate
+          action=""
+          @submit.prevent
+        >
+          <!-- <div class="py-3">
             <label for="username" class="form-label"
               >아이디<span class="require-test">*</span></label
             >
@@ -32,6 +37,47 @@
               </button>
               <div class="invalid-feedback">
                 아이디를 입력하세요.
+              </div>
+            </div>
+          </div> -->
+          <div class="py-3">
+            <label for="email" class="form-label"  maxlength="20"
+              >이메일<span class="require-test">*</span></label
+            >
+            <div class="input-group mb-3">
+              <input
+                v-model="emailFront"
+                type="text"
+                class="email-form form-control"
+                placeholder="Username"
+                aria-label="Username"
+                id="email-front"
+                required
+              />
+              <span class="input-group-text">@</span>
+              <select v-model="emailBack" id="email-back" class="email-form form-select" required>
+                <option value="" selected>Choose...</option>
+                <option value="naver.com">naver.com</option>
+                <option value="gmail.com">gmail.com</option>
+              </select>
+              <button class="input-button" id="email-send-button" @click="handleSendEmail">인증번호 요청</button>
+              <div class="invalid-feedback">
+                이메일을 입력하세요.
+              </div>
+            </div>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                id="email-confirm"
+                placeholder="인증번호 입력"
+                maxlength="10"
+                v-model="email_authcode"
+                required
+              />
+              <button class="input-button" id="authcode-send-button" @click="handleSendAuthCode">인증번호 확인</button>
+              <div class="invalid-feedback">
+                인증번호를 입력하세요.
               </div>
             </div>
           </div>
@@ -84,46 +130,6 @@
             />
             <div class="invalid-feedback">
               이름을 입력하세요.
-            </div>
-          </div>
-          <div class="py-3">
-            <label for="email" class="form-label"  maxlength="20"
-              >이메일<span class="require-test">*</span></label
-            >
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="email-form form-control"
-                placeholder="Username"
-                aria-label="Username"
-                id="email-front"
-                required
-              />
-              <span class="input-group-text">@</span>
-              <select id="email-back" class="email-form form-select" required>
-                <option value="" selected>Choose...</option>
-                <option value="naver.com">naver.com</option>
-                <option value="gmail.com">gmail.com</option>
-              </select>
-              <button class="input-button" id="email-send-button" @click="handleSendEmail">인증번호 요청</button>
-              <div class="invalid-feedback">
-                이메일을 입력하세요.
-              </div>
-            </div>
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                id="email-confirm"
-                placeholder="인증번호 입력"
-                maxlength="10"
-                v-model="email_authcode"
-                required
-              />
-              <button class="input-button" id="authcode-send-button" @click="handleSendAuthCode">인증번호 확인</button>
-              <div class="invalid-feedback">
-                인증번호를 입력하세요.
-              </div>
             </div>
           </div>
           <div class="py-3">
@@ -198,23 +204,25 @@
             <div class="input-group mb-3">
               <div class="form-check form-check-inline">
                 <input
+                  v-model="gender"
                   class="form-check-input"
                   type="radio"
                   name="inlineRadioOptions"
                   id="inlineRadio1"
-                  value="option1"
+                  value="MALE"
                 />
-                <label class="form-check-label" for="inlineRadio1">1</label>
+                <label class="form-check-label" for="inlineRadio1">남</label>
               </div>
               <div class="form-check form-check-inline">
                 <input
+                  v-model="gender"
                   class="form-check-input"
                   type="radio"
                   name="inlineRadioOptions"
                   id="inlineRadio2"
-                  value="option2"
+                  value="FEMALE"
                 />
-                <label class="form-check-label" for="inlineRadio2">2</label>
+                <label class="form-check-label" for="inlineRadio2">여</label>
               </div>
             </div>
           </div>
@@ -226,19 +234,30 @@
             </router-link>
             <button
               class="submit-button d-grid gap-3 col-6 mx-auto"
-              @click="checkForm"
+              @click.prevent="checkForm"
             >
               회원가입
             </button>
           </div>
         </form>
       </div>
+      <ConfirmModal
+        message="입력하신 정보로 회원가입 신청하시겠어요?"
+        :condition="showConfirmModalSignUp"
+        @confirm-yes="confirmYesSignUp"
+        @confirm-no="confirmNoSignUp"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import ConfirmModal from "@/components/client/common/share/components/ConfirmModal.vue";
+
 export default {
+  components: {
+    ConfirmModal
+  },
   data() {
     return {
       errors: {
@@ -252,32 +271,48 @@ export default {
       password: "",
       password_confirm: "",
       name: "",
-      email: "",
+      emailFront: "",
+      emailBack: "",
       email_authcode: "",
       phone: "",
       birth: "",
       nickname: "",
       gender: "",
       passwordCheckFlag:true,
+
+      showConfirmModalSignUp: false,
     };
   },
+  computed: {
+    email() {
+      return this.emailFront + '@' + this.emailBack;
+    },
+  },
+  async mounted() {
+    let res = await this.$axios.get('/members');
+    console.log(res);
+  },
   methods: {
-    checkForm(e) {
-      e.preventDefault();
+    checkForm() {
       var forms = document.querySelectorAll(".needs-validation");
       forms.forEach((form) => {
         console.log(form);
-        if (!form.checkValidity()) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
         form.classList.add("was-validated");
+        if (!form.checkValidity()) {
+          var inputNodeList = form.querySelectorAll("input");
+          var inputs = Object.values(inputNodeList);
+          var invalidInputs = inputs.filter((input) => !(input.validity.valid));
+          invalidInputs.forEach((el) => {
+            console.log(el);
+            // console.log(el.validity);
+          });
+          invalidInputs[0].focus;
+          var absoluteTop = window.pageYOffset + invalidInputs[0].getBoundingClientRect().top;
+          scrollTo(0, absoluteTop - window.innerHeight * 0.18);
+        } else {
+          this.showConfirmModalSignUp = true;
+        }
       });
-      scrollTo(0, 0);
-    },
-    checkId(id) {
-      //중복확인
-
     },
     checkPassword() {
       if (this.password === this.password_confirm) {
@@ -351,25 +386,54 @@ export default {
           //...
       }
     }, */
-    signup(){
-       const formData = {
-          username: this.email,
-          password: this.password,
-          password_confirm: this.password_confirm,
-          name: this.name,
-          email: this.email,
-          email_authcode: this.email_authcode,
-          phone: this.phone,
-          birth: this.birth,
-          nickname: this.nickname,
-          gender: this.gender,
+    async signup(){
+      const formData = {
+        // email_authcode: this.email_authcode,
+        // password_confirm: this.password_confirm,
+        // phone: this.phone,
+        bannedYn: null,
+        birth: this.birth,
+        creator: null,
+        email: this.email,
+        gender: this.gender,
+        grade: null,
+        id: null,
+        loginFailCount: null,
+        memberName: this.name,
+        memberState: null,
+        mobile: null,
+        nickName: this.nickname,
+        password: this.password,
+        profileImagePath: null,
+        role: null,
+        snsLoginYn: null,
+        sysRegAt: null,
+        sysUpdAt: null,
+        uid: null,
+        updater: null
+      }
+      console.log(formData)
+      // this.$store.commit(`member/${SIGN_UP}`, {
+      //       index: i,
+      //       inputText: this.input,
+      // });
+      let res = await this.$axios.post(
+        '/members',
+        formData, 
+        {
+          headers: { "Content-Type": `application/json`}
         }
-        console.log(formData)
-        this.$store.commit(`member/${SIGN_UP}`, {
-              index: i,
-              inputText: this.input,
-        });
-    }
+      );
+      console.log('회원가입 요청 결과');
+      console.log(res);
+    },
+    confirmYesSignUp() {
+      this.signup();
+      this.showConfirmModalSignUp = false;
+    },
+    confirmNoSignUp() {
+      this.showConfirmModalSignUp = false;
+    },
     
    /*  async save() {
       const validate = this.$refs.form.validate();

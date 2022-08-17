@@ -1,12 +1,11 @@
 package com.joomak.backend.service;
 
+import com.joomak.backend.model.member.dto.MemberCreateRequest;
+import com.joomak.backend.model.member.dto.MemberCreateResponse;
 import com.joomak.backend.model.member.entity.Member;
-import com.joomak.backend.exception.ServiceGuideException;
-import com.joomak.backend.exception.ServiceGuideMessage;
 import com.joomak.backend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,41 +19,30 @@ import java.util.List;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    public List<Member> findAll() {
+    public List<Member> getAllMembers() {
         return new ArrayList<>(memberRepository.findAll());
     }
 
-    public Member findById(Long mbrId) {
-        return memberRepository.findById(mbrId).orElse(null);
-    }
-
-    public Member findByEmail(String email) {
-        return memberRepository.findByEmail(email).orElse(null);
+    public Member getMember(Long mbrId) {
+        log.info("member id = {}", mbrId);
+        return memberRepository.findById(mbrId).orElseThrow();
     }
 
     @Transactional
-    public Member save(Member member) {
-        log.info("It will be Saved Member = {}", member);
-        Member saved = memberRepository.save(member);
-        log.info("Saved Member = {}", saved);
-        return saved;
-    }
+    public MemberCreateResponse createMember(MemberCreateRequest memberCreateRequest) {
+        //DTO -> Entity
+        Member member = memberCreateRequest.DtoToEntity(memberCreateRequest);
 
-    @Transactional
-    public Member ban(Long memberId) {
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new ServiceGuideException(HttpStatus.BAD_REQUEST, ServiceGuideMessage.NOT_EXIST_MEMBER));
-        log.info("Member ban = {}", member);
-        member.updateBanned(true);
+        //Member 호출
         memberRepository.save(member);
-        return member;
+
+        log.info("memberId = {}",member.getId().toString());
+
+        // Entity -> DTO
+        MemberCreateResponse memberCreateResponse = new MemberCreateResponse().EntityToDto(member);
+
+        //ID만 Return 해주면 될 것 같다
+        return memberCreateResponse;
     }
-
-
-    //    public void checkDuplicateEmail(String email) {
-//        memberRepository.findByEmail(email)
-//        .ifPresent((member) -> {
-//            throw new RuntimeException(member.getEmail() + ALREADY_EXISTS_MEMBER.getErrorMessage());
-//        });
-//    }
 
 }

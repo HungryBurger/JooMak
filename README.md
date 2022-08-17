@@ -21,13 +21,10 @@ http://dev-joomak-delivery.s3-website.ap-northeast-2.amazonaws.com/ <br>
 
 ### Back End
 - 주형진(hjjooace24@gmail.com)
-  <br>> 역할 : 주문 & 시스템 구축 <br>
+  <br>> 역할 : 주문 & 공통 <br>
   
-- 이기환(lgh95m@gamil.com)
+- 나준엽(nnjy1992@naver.com)
   <br>> 역할 : 회원 <br>
-
-- 조영선(whdudtjs5283@naver.com)
- <br>> 역할 : 상품 <br>
 
 - 이혜원(sdiverhyewon0103@gmail.com)
  <br>> 역할 : 상품 <br>
@@ -36,9 +33,13 @@ http://dev-joomak-delivery.s3-website.ap-northeast-2.amazonaws.com/ <br>
 - 남상범(instagram.com/sang_beom_e)
 
 
+### 도움을 주신 분들
+- 조영선, 이기환, 송문정, 조송이, 최예슬
+
+
 ## OverView
 
-##Architecture
+## Architecture
 ![image](https://user-images.githubusercontent.com/75158094/158636503-d35b9fbc-f127-4174-8fb7-2cacdc88343a.png)
 
 ## Used Tech in Front End
@@ -58,10 +59,6 @@ http://dev-joomak-delivery.s3-website.ap-northeast-2.amazonaws.com/ <br>
 - 11 ~ 12월 : ERD 설계
 
 ### 2022
-- 1 ~ 2월 : 인프라 및 초기 셋팅
-- 3 ~ 4월 : 1차 스프린트(API 개발)
-- 5 ~ 7월 : 2차 스프린트(API 개발, Spring Security, Oauth 연결)
-
-
-
- 
+- 1 ~ 3월 : 인프라 및 초기 셋팅
+- 4 ~ 8월 : 1차 스프린트(API 개발)
+- 9 ~ 12월 : 2차 스프린트(API 개발, Spring Security, Oauth 연결)
