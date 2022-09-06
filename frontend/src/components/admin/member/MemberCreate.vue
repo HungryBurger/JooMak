@@ -2,20 +2,8 @@
   <div class="member-create-container">
     <div class="member-create-wrap">
       <h6>회원 Mockup {{ mode === 'create' ? 'Create' : 'Update' }}</h6>
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent>
         <ul>
-          <li>
-            <div>
-              <label for="idxInit">Idx (id) 초기값</label>
-              <input type="text" name="idxInit" v-model="idx">
-            </div>
-          </li>
-          <li>
-            <div>
-              <label for="idx">Idx (id)</label>
-              <input type="text" name="idx" readonly :value="idx">
-            </div>
-          </li>
           <li>
             <div>
               <label for="email">E-Mail</label>
@@ -36,8 +24,39 @@
           </li>
           <li>
             <div>
-              <label for="nickName">닉네임 (nickName)</label>
-              <input type="text" name="nickName" v-model="nickName" placeholder="lovely철수">
+              <label for="nickname">닉네임 (nickname)</label>
+              <input type="text" name="nickname" v-model="nickname" placeholder="lovely철수">
+            </div>
+          </li>
+          <li>
+            <div class="address-wrap">
+              <span>주소 (addressCreateInfoList)</span>
+              <div class="btn-wrap">
+                <button @click="addAddressInfo">추가</button>
+                <button @click="removeAddressInfo">제거</button>
+              </div>
+              <div class="address-input">
+                <div v-for="(addressInfo, i) in addressCreateInfoList" :key="i" class="address-input-box">
+                  <div>
+                    <label :for="`city_${i}`">지역</label><br />
+                    <input type="text" :name="`city_${i}`" v-model="addressInfo.city" placeholder="서울특별시">
+                  </div>
+                  <div>
+                    <label :for="`postCode_${i}`">우편번호</label><br />
+                    <input type="number" :name="`postCode_${i}`" v-model="addressInfo.postCode" placeholder="12345">
+                  </div>
+                  <div>
+                    <label :for="`street_${i}`">상세주소</label><br />
+                    <input type="text" :name="`street_${i}`" v-model="addressInfo.street" placeholder="부흥로 123번길 2, 1동 101호">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <label for="birth">생일 (birth)</label>
+              <input type="text" name="birth" v-model="birth" placeholder="19970101">
             </div>
           </li>
           <li>
@@ -56,20 +75,80 @@
             </div>
           </li>
           <li>
-            <div>
-              <label for="birth">생일 (birth)</label>
-              <input type="text" name="birth" v-model="birth" placeholder="19970101">
+            <div class="snsLoginYn-input gender-input">
+              <span>SNS로그인 여부 (snsLoginYn)</span>
+              <div>
+                <div>
+                  <input type="radio" name="No" :value=false v-model="snsLoginYn">
+                  <label for="No">No</label>
+                </div>
+                <div>
+                  <input type="radio" name="Yes" :value=true v-model="snsLoginYn">
+                  <label for="Yes">Yes</label>
+                </div>
+              </div>
             </div>
           </li>
           <li>
-            <div>
-              <label for="grade">등급 (grade)</label>
-              <input type="text" name="grade" v-model="grade" placeholder="GOLD">
+            <div class="role-input">
+              <span>Member유형 (role)</span>
+              <div>
+                <div>
+                  <input type="radio" name="CUSTOMER" value="CUSTOMER" v-model="role">
+                  <label for="CUSTOMER">CUSTOMER</label>
+                </div>
+                <div>
+                  <input type="radio" name="OWNER" value="OWNER" v-model="role">
+                  <label for="OWNER">OWNER</label>
+                </div>
+                <div>
+                  <input type="radio" name="ADMINISTRATOR" value="ADMINISTRATOR" v-model="role">
+                  <label for="ADMINISTRATOR">ADMINISTRATOR</label>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="grade-input">
+              <span>등급 (grade)</span>
+              <div>
+                <div>
+                  <input type="radio" name="BRONZE" value="BRONZE" v-model="grade">
+                  <label for="BRONZE">BRONZE</label>
+                </div>
+                <div>
+                  <input type="radio" name="SILVER" value="SILVER" v-model="grade">
+                  <label for="SILVER">SILVER</label>
+                </div>
+                <div>
+                  <input type="radio" name="GOLD" value="GOLD" v-model="grade">
+                  <label for="GOLD">GOLD</label>
+                </div>
+                <div>
+                  <input type="radio" name="VIP" value="VIP" v-model="grade">
+                  <label for="VIP">VIP</label>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="state-input">
+              <span>회원 상태 (state)</span>
+              <div>
+                <div>
+                  <input type="radio" name="GENERAL" value="GENERAL" v-model="state">
+                  <label for="GENERAL">GENERAL</label>
+                </div>
+                <div>
+                  <input type="radio" name="BANNED" value="BANNED" v-model="state">
+                  <label for="BANNED">BANNED</label>
+                </div>
+              </div>
             </div>
           </li>
         </ul>
         <div class="btn-wrap">
-          <button type="submit">{{ mode === 'create' ? '생성' : '수정' }}</button>
+          <button @click="onSubmit" type="submit">{{ mode === 'create' ? '생성' : '수정' }}</button>
         </div>
       </form>
     </div>
@@ -81,28 +160,54 @@ export default {
   data() {
     return {
       mode: 'create',
-      idx: 0,
+      addressCreateInfoList: [{
+        city: '',
+        postCode: '00000',
+        street: ''
+      }],
       email: 'test@test.com',
       password: '',
       memberName: '',
-      nickName: '',
+      nickname: '',
       gender: 'MALE',
       birth: '19960726',
-      grade: 'BRONZE'
+      grade: 'BRONZE',
+      snsLoginYn: false,
+      role: 'CUSTOMER',
+      state: 'GENERAL'
     }
   },
   methods: {
+    addAddressInfo() {
+      if(this.addressCreateInfoList.length < 4) {
+        this.addressCreateInfoList.push({
+          city: '',
+          postCode: '00000',
+          street: ''
+        });
+      }
+    },
+    removeAddressInfo() {
+      if(this.addressCreateInfoList.length > 1) {
+        this.addressCreateInfoList.splice(this.addressCreateInfoList.length - 1, 1);
+      }
+    },
     async onSubmit() {
       console.log('제출')
       const params = {
-        id: this.idx,
-        email: this.email,
-        password: this.password,
-        memberName: this.memberName,
-        nickName: this.nickName,
-        gender: this.gender,
+        addressCreateInfoList: this.addressCreateInfoList,
         birth: this.birth,
-        grade: this.grade
+        email: this.email,
+        gender: this.gender,
+        grade: this.grade,
+        name: this.name,
+        nickname: this.nickname,
+        password: this.password,
+        role: this.role,
+        snsLoginYn: this.snsLoginYn,
+        state: this.state === 'BANNED' ? this.state : null,
+        loginFailCount: 0,
+        mobile: "m",
       };
 
       try {
