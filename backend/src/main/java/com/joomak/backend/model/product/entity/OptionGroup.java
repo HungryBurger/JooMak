@@ -11,32 +11,34 @@ import javax.persistence.*;
 @Entity
 @Table(name = "OptionGroup")
 @Getter
+//@Builder
 @EqualsAndHashCode(callSuper = false)
 public class OptionGroup extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "option_group_id")
-    private Long id;
+    @Column(name = "opt_grp_id")
+    private Integer optGrpId;
 
-    @Column(name = "option_group_name")
-    private String optionGroupName;
+    @Column(name = "store_id")
+    private Integer storeId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "option_group_type")
-    private OptionGroupType optionGroupType;
+    @Column(name = "menu_id")
+    private Integer menuId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "option_state")
-    private OptionState optionState;
+    @Column(name = "opt_grp_nm")
+    private String optGrpNm;
 
-    @Column(name = "option_max_selection")
-    private int optionMaxSelection;
+    @Column(name = "use_yn")
+    private String useYn;
 
-    @Column(name = "option_min_selection")
-    private int optionMinSelection;
+    @Column(name = "del_yn")
+    private String delYn;
 
-    @Column(name = "is_mandatory")
-    private Boolean isMandatory;
-    
+    @Column(name = "opt_req_yn")
+    private String optReqYn;
+
+    @Column(name = "opt_grp_srt")
+    private Integer optGrpSrt;
+
 }

@@ -16,32 +16,25 @@ public class Option extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "option_id", updatable = false)
-    private Long id;
+    @Column(name = "opt_id", updatable = false)
+    private Integer optId;
 
-    @Column(name = "option_group_id")
-    private Long optionGroupId;
+    @Column(name = "opt_grp_id")
+    private Integer optGrpId;
 
-    @Column(name = "product_id")
-    private Long productId;
+    @Column(name = "opt_nm")
+    private String optNm;
 
-    @Column(name = "option_name")
-    private String optionName;
+    @Column(name = "opt_price")
+    private Integer optPrice;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "option_state")
-    private OptionState optionState;
+    @Column(name = "opt_srt")
+    private Integer optSrt;
 
-    @Column(name = "option_max_selection")
-    private int optionMaxSelection;
+    @Column(name = "use_yn")
+    private String useYn;
 
-    @Column(name = "additional_price")
-    private Integer additionalPrice;
-
-    @Column(name = "option_min_selection")
-    private int optionMinSelection;
-
-    @Column(name = "is_mandatory")
-    private Boolean isMandatory;
+    @Column(name = "del_yn")
+    private String delYn;
 
 }
