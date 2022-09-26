@@ -1,8 +1,6 @@
 package com.joomak.backend.model.product.entity;
 
 import com.joomak.backend.model.common.BaseEntity;
-import com.joomak.backend.model.product.enums.OptionGroupType;
-import com.joomak.backend.model.product.enums.OptionState;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
