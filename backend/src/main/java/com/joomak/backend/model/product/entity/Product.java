@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "Product")
 @Getter
+//@Builder
 @EqualsAndHashCode(callSuper = false)
 public class Product extends BaseEntity {
 
@@ -55,15 +56,4 @@ public class Product extends BaseEntity {
     @Column(name = "max_order_quantity")
     private Integer maxOrderQuantity;
 
-    // TODO: 무분별한 Setter대신 Builder Pattern 사용하기
-    // TODO: 사용할 때 단점이나 장점에 대해 찾아보면서 사용하기
-    @Builder
-    public Product() {
-
-    }
-
-    // TODO: Setter 변경 가능한 애들만 직접 선언
-    
-    
-    // TODO: 도메인 주도 개발 vs 서비스 중심 개발
 }
