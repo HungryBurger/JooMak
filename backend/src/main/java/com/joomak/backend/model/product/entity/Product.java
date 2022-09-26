@@ -2,15 +2,17 @@ package com.joomak.backend.model.product.entity;
 
 import com.joomak.backend.model.common.BaseEntity;
 import com.joomak.backend.model.product.enums.ProductState;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Product")
-@Data
+@Getter
 @EqualsAndHashCode(callSuper = false)
 public class Product extends BaseEntity {
 
@@ -53,19 +55,15 @@ public class Product extends BaseEntity {
     @Column(name = "max_order_quantity")
     private Integer maxOrderQuantity;
 
-    // TODO: BaseEntity 의 내용을 그대로 사용할지 아래처럼 따로 선언할지 결정 필요
-    @Column(name = "sys_reg_id")
-    private Long sysRegId;
+    // TODO: 무분별한 Setter대신 Builder Pattern 사용하기
+    // TODO: 사용할 때 단점이나 장점에 대해 찾아보면서 사용하기
+    @Builder
+    public Product() {
 
-    @Column(name = "sys_reg_at")
-    private LocalDateTime sysRegAt;
+    }
 
-    @Column(name = "sys_upd_id")
-    private Long sysUpdId;
-
-    @Column(name = "sys_upd_at")
-    private LocalDateTime sysUpdAt;
-
-
-
+    // TODO: Setter 변경 가능한 애들만 직접 선언
+    
+    
+    // TODO: 도메인 주도 개발 vs 서비스 중심 개발
 }
