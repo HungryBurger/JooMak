@@ -1,69 +1,71 @@
 package com.joomak.backend.model.product.entity;
 
 import com.joomak.backend.model.common.BaseEntity;
-import com.joomak.backend.model.common.ProductState;
-import com.joomak.backend.model.common.YorN;
-import com.joomak.backend.model.member.entity.Store;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.joomak.backend.model.product.enums.ProductState;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-import static javax.persistence.GenerationType.IDENTITY;
-import static lombok.AccessLevel.PACKAGE;
-import static lombok.AccessLevel.PROTECTED;
-
 @Entity
-@Getter
-@Builder
-@NoArgsConstructor(access = PROTECTED)
-@AllArgsConstructor(access = PACKAGE)
+@Table(name = "Product")
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class Product extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "product_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id", updatable = false)
     private Long id;
 
+    @Column(name = "product_name")
     private String productName;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id")
-    private Store store;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "product_state")
+    private ProductState productState;
 
-    @Enumerated
-    private ProductState productState; // SELLING,PAUSE,OVERTIME
-
-    @OneToOne
-    @JoinColumn(name="product_image")
-    private ProductImage productImage;
-
-    private int price;
-
-    //물품 수량
-    private int productCnt;
-
+    @Column(name = "product_description")
     private String productDescription;
-    //대표 메뉴
-    private YorN mainYn;
 
-    //최대주문수량
-    private int maxOrderQuantity;
-    //최소주문수량
-    private int minOrderQuantity;
-    //옵션 사용 여부
-    private YorN optionYn;
+    @Column(name = "product_price")
+    private Integer productPrice;
 
-    private LocalDateTime salesStartAt;
+    @Column(name = "product_image_path")
+    private String productImagePath;
 
-    private LocalDateTime salesEndAt;
-    //원산지
-    private String countryId;
+    @Column(name = "is_sale")
+    private Boolean isSale;
 
-    private YorN useYn;
+    @Column(name = "is_show")
+    private Boolean isShow;
 
-    private YorN deleteYn;
+    @Column(name = "origin_place")
+    private String originPlace;
+
+    @Column(name = "stock")
+    private Integer stock;
+
+    @Column(name = "min_order_quantity")
+    private Integer minOrderQuantity;
+
+    @Column(name = "max_order_quantity")
+    private Integer maxOrderQuantity;
+
+    // TODO: BaseEntity 의 내용을 그대로 사용할지 아래처럼 따로 선언할지 결정 필요
+    @Column(name = "sys_reg_id")
+    private Long sysRegId;
+
+    @Column(name = "sys_reg_at")
+    private LocalDateTime sysRegAt;
+
+    @Column(name = "sys_upd_id")
+    private Long sysUpdId;
+
+    @Column(name = "sys_upd_at")
+    private LocalDateTime sysUpdAt;
+
+
+
 }
