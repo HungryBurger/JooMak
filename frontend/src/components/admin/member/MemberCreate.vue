@@ -18,8 +18,8 @@
           </li>
           <li>
             <div>
-              <label for="name">이름 (memberName)</label>
-              <input type="text" name="name" v-model="memberName" placeholder="김철수">
+              <label for="name">이름 (name)</label>
+              <input type="text" name="name" v-model="name" placeholder="김철수">
             </div>
           </li>
           <li>
@@ -167,13 +167,13 @@ export default {
       }],
       email: 'test@test.com',
       password: '',
-      memberName: '',
+      name: '',
       nickname: '',
       gender: 'MALE',
-      birth: '19960726',
+      birth: '1996-07-26',
       grade: 'BRONZE',
       snsLoginYn: false,
-      role: 'CUSTOMER',
+      role: 'OWNER',
       state: 'GENERAL'
     }
   },
@@ -195,19 +195,23 @@ export default {
     async onSubmit() {
       console.log('제출')
       const params = {
+        // addressCreateInfoList: this.addressCreateInfoList.map((v) => {return {...v, postCode: v.postCode.toString()}}),
         addressCreateInfoList: this.addressCreateInfoList,
-        birth: this.birth,
+        birth: this.birth,  // 1996-07-26 <-- 반드시 이 형식으로 입력
         email: this.email,
         gender: this.gender,
         grade: this.grade,
-        name: this.name,
-        nickname: this.nickname,
+        // lastLoginedAt: "2022-09-27T10:47:02.673Z",   // <-- 스웨거에서는 왼쪽의 폼으로 보내짐
+        lastLoginedAt: "",
+        name: this.name,  // 영어 안됨..
+        nickname: this.nickname,  // 영어 됨..뭐냐 진짜..
+        profileImagePath: "string",
         password: this.password,
-        role: this.role,
+        role: this.role,  // 현재 CUSTOMER 안됨!
         snsLoginYn: this.snsLoginYn,
         state: this.state === 'BANNED' ? this.state : null,
         loginFailCount: 0,
-        mobile: "m",
+        mobile: "M",
       };
 
       try {

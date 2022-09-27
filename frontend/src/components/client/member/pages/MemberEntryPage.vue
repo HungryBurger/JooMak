@@ -388,44 +388,47 @@ export default {
     }, */
     async signup(){
       const formData = {
-        // email_authcode: this.email_authcode,
-        // password_confirm: this.password_confirm,
-        // phone: this.phone,
-        bannedYn: null,
-        birth: this.birth,
-        creator: null,
+        addressCreateInfoList: [{
+          city: '',
+          postCode: '00000',
+          street: ''
+        }],
+        // birth: this.birth,  // 1996-07-26 <-- 반드시 이 형식으로 입력
+        birth: "1996-07-26",  // 1996-07-26 <-- 반드시 이 형식으로 입력
         email: this.email,
         gender: this.gender,
-        grade: null,
-        id: null,
-        loginFailCount: null,
-        memberName: this.name,
-        memberState: null,
-        mobile: null,
-        nickName: this.nickname,
+        // grade: "BRONZE",
+        // lastLoginedAt: "2022-09-27T10:47:02.673Z",   // <-- 스웨거에서는 왼쪽의 폼으로 보내짐
+        lastLoginedAt: "",
+        name: this.name,  // 영어 안됨..
+        nickname: this.nickname,  // 영어 됨..뭐냐 진짜..
+        profileImagePath: "string",
         password: this.password,
-        profileImagePath: null,
-        role: null,
-        snsLoginYn: null,
-        sysRegAt: null,
-        sysUpdAt: null,
-        uid: null,
-        updater: null
+        role: "ADMINISTRATOR",  // 현재 CUSTOMER 안됨!
+        snsLoginYn: this.snsLoginYn,
+        // state: this.state === 'BANNED' ? this.state : null,
+        // loginFailCount: 0,
+        // mobile: "M",
       }
       console.log(formData)
       // this.$store.commit(`member/${SIGN_UP}`, {
       //       index: i,
       //       inputText: this.input,
       // });
-      let res = await this.$axios.post(
-        '/members',
-        formData, 
-        {
-          headers: { "Content-Type": `application/json`}
-        }
-      );
-      console.log('회원가입 요청 결과');
-      console.log(res);
+      try {
+        let res = await this.$axios.post(
+          '/members',
+          formData, 
+          {
+            headers: { "Content-Type": `application/json`}
+          }
+        );
+        console.log('회원가입 요청 결과');
+        console.log(res);
+      } catch (e) {
+        console.error(e)
+      }
+      
     },
     confirmYesSignUp() {
       this.signup();
