@@ -30,10 +30,10 @@ public class OptionGroup extends BaseEntity {
     private OptionState optionState;
 
     @Column(name = "option_max_selection")
-    private Integer optionMaxSelection;
+    private int optionMaxSelection;
 
     @Column(name = "option_min_selection")
-    private Integer optionMinSelection;
+    private int optionMinSelection;
 
     @Column(name = "is_mandatory")
     private Boolean isMandatory;
