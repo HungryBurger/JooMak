@@ -1,6 +1,8 @@
 package com.joomak.backend.model.product.entity;
 
 import com.joomak.backend.model.common.BaseEntity;
+import com.joomak.backend.model.product.enums.OptionGroupType;
+import com.joomak.backend.model.product.enums.OptionState;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -16,27 +18,24 @@ public class OptionGroup extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "opt_grp_id")
-    private Integer optGrpId;
+    private Long id;
 
-    @Column(name = "store_id")
-    private Integer storeId;
+    @Column(name = "option_group_name")
+    private String optionGroupName;
 
-    @Column(name = "menu_id")
-    private Integer menuId;
+    @Column(name = "option_group_type")
+    private OptionGroupType optionGroupType;
 
-    @Column(name = "opt_grp_nm")
-    private String optGrpNm;
+    @Column(name = "option_state")
+    private OptionState optionState;
 
-    @Column(name = "use_yn")
-    private String useYn;
+    @Column(name = "option_max_selection")
+    private Integer optionMaxSelection;
 
-    @Column(name = "del_yn")
-    private String delYn;
+    @Column(name = "option_min_selection")
+    private Integer optionMinSelection;
 
-    @Column(name = "opt_req_yn")
-    private String optReqYn;
-
-    @Column(name = "opt_grp_srt")
-    private Integer optGrpSrt;
+    @Column(name = "is_mandatory")
+    private Boolean isMandatory;
 
 }
