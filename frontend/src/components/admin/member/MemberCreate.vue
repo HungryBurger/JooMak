@@ -178,8 +178,12 @@ export default {
     }
   },
   mounted() {
-    console.log('환경변수 확인');
-    console.log(process.env);
+    console.log('환경변수 확인 >>>>>');
+    if(process.env.NODE_ENV !== 'production') {
+      console.log(process.env);
+    } else {
+      console.log('현재 운영환경이므로 환경변수 확인 제한.')
+    }
   },
   methods: {
     addAddressInfo() {
