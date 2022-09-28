@@ -8,6 +8,7 @@ import org.springframework.security.config.web.servlet.headers.HeadersSecurityMa
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+//////////////Delete Entity?
 @Entity
 @Table(name = "MenuBase")
 @Getter

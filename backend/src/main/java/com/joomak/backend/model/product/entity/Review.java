@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Review")
+/////////////////Delete Entity?
 public class Review extends BaseEntity {
 
     @Id
