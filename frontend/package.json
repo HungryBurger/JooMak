@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "serve": "vue-cli-service serve --mode local",
+    "dev": "vue-cli-service serve --mode dev",
+    "prod": "vue-cli-service serve --mode prod",
+    "build:local": "vue-cli-service build --mode local",
+    "build:dev": "vue-cli-service build --mode dev",
+    "build": "vue-cli-service build --mode prod"
   },
   "dependencies": {
     "@popperjs/core": "^2.10.1",
