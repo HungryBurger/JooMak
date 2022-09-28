@@ -94,8 +94,8 @@
               <span>Member유형 (role)</span>
               <div>
                 <div>
-                  <input type="radio" name="CUSTOMER" value="CUSTOMER" v-model="role">
-                  <label for="CUSTOMER">CUSTOMER</label>
+                  <input type="radio" name="USER" value="USER" v-model="role">
+                  <label for="USER">USER</label>
                 </div>
                 <div>
                   <input type="radio" name="OWNER" value="OWNER" v-model="role">
@@ -173,17 +173,21 @@ export default {
       birth: '1996-07-26',
       grade: 'BRONZE',
       snsLoginYn: false,
-      role: 'OWNER',
+      role: 'USER',
       state: 'GENERAL'
     }
+  },
+  mounted() {
+    console.log('환경변수 확인');
+    console.log(process.env);
   },
   methods: {
     addAddressInfo() {
       if(this.addressCreateInfoList.length < 4) {
         this.addressCreateInfoList.push({
-          city: '',
+          city: '', // 현재 영문만 가능
           postCode: '00000',
-          street: ''
+          street: '' // 현재 영문만 가능
         });
       }
     },
