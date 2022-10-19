@@ -26,7 +26,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Build
-        run: npm run build
+        run: npm run build:dev
         working-directory: ./frontend
 
       - name: Transfer to S3 for serving static
