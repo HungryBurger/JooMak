@@ -6,6 +6,10 @@
 
 <script>
 export default {
-
+  mounted() {
+    console.log('환경변수 테스트')
+    console.log('NODE_ENV: '+ process.env.NODE_ENV)
+    console.log('VUE_APP_API_URL: '+ process.env.VUE_APP_API_URL)
+  }
 }
 </script>
