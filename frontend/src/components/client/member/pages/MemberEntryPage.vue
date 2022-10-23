@@ -2,11 +2,6 @@
   <div class="register-page">
     <div class="register-page-wrap">
       <div class="title">
-        <img
-          class="login-logo"
-          src="@/assets/images/JoomakLogo_login.svg"
-          alt="JoomakLogo"
-        />
         <h1>
           회원가입
         </h1>
@@ -15,217 +10,258 @@
         <form
           class="col-6 g-3 needs-validation"
           novalidate
-          action=""
           @submit.prevent
         >
-          <!-- <div class="py-3">
-            <label for="username" class="form-label"
-              >아이디<span class="require-test">*</span></label
-            >
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                id="username"
-                v-model="username"
-                maxlength="20"
-                required
-              />
-
-              <button class="input-button" @click="checkId">
-                &nbsp;&nbsp; 중복 체크 &nbsp;&nbsp;
-              </button>
-              <div class="invalid-feedback">
-                아이디를 입력하세요.
-              </div>
-            </div>
-          </div> -->
-          <div class="py-3">
-            <label for="email" class="form-label"  maxlength="20"
-              >이메일<span class="require-test">*</span></label
-            >
-            <div class="input-group mb-3">
-              <input
-                v-model="emailFront"
-                type="text"
-                class="email-form form-control"
-                placeholder="Username"
-                aria-label="Username"
-                id="email-front"
-                required
-              />
-              <span class="input-group-text">@</span>
-              <select v-model="emailBack" id="email-back" class="email-form form-select" required>
-                <option value="" selected>Choose...</option>
-                <option value="naver.com">naver.com</option>
-                <option value="gmail.com">gmail.com</option>
-              </select>
-              <button class="input-button" id="email-send-button" @click="handleSendEmail">인증번호 요청</button>
-              <div class="invalid-feedback">
-                이메일을 입력하세요.
-              </div>
-            </div>
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                id="email-confirm"
-                placeholder="인증번호 입력"
-                maxlength="10"
-                v-model="email_authcode"
-                required
-              />
-              <button class="input-button" id="authcode-send-button" @click="handleSendAuthCode">인증번호 확인</button>
-              <div class="invalid-feedback">
-                인증번호를 입력하세요.
-              </div>
-            </div>
-          </div>
-          <div class="py-3">
-            <label for="password" class="form-label"
-              >비밀번호<span class="require-test">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="password"
-              v-model="password"
-              maxlength="20"
-              required
-            />
-            <div class="invalid-feedback">
-              비밀번호를 입력하세요.
-            </div>
-          </div>
-          <div class="py-3">
-            <label for="password-confirm" class="form-label"
-              >비밀번호 확인<span class="require-test">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="password-confirm"
-              v-model="password_confirm"
-              maxlength="20"
-              required
-              @blur="checkPassword"
-            />
-            <div class="invalid-feedback">
-              비밀번호를 입력하세요.
-            </div>
-            <div class="custom-invalid " v-if="!passwordCheckFlag"> 비밀번호가 동일하지 않습니다. </div>
-
-          </div>
-          <div class="py-3">
-            <label for="name" class="form-label"
-              >이름<span class="require-test">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              v-model="name"
-              maxlength="4"
-              required
-            />
-            <div class="invalid-feedback">
-              이름을 입력하세요.
-            </div>
-          </div>
-          <div class="py-3">
-            <label for="phone" class="form-label"
-              >휴대폰 번호<span class="require-test">*</span></label
-            >
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                id="phone-front"
-                class="form-control"
-                placeholder="010"
-                value="010"
-                required
-              />
-              <span class="input-group-text">-</span>
-              <input
-                type="text"
-                class="form-control"
-                id="phone-middle"
-                maxlength="4"
-                required
-              />
-              <span class="input-group-text">-</span>
-              <input
-                type="text"
-                class="form-control"
-                id="phone-back"
-                maxlength="4"
-                required
-              />
-              <div class="invalid-feedback">
-                휴대폰 번호를 입력하세요.
-              </div>
-            </div>
-          </div>
-        </form>
-        <div class="additional py-3 mb-3">
-          추가 정보
-        </div>
-        <form class="col-6 g-3">
-          <div class="py-3">
-            <label for="name" class="form-label">생년월일</label>
-            <div class="input-group">
-              <select id="year" class="form-select" placeholder="2021">
-                <option selected>Choose...</option>
-              </select>
-              <span class="input-group-text">년</span>
-              <select id="month" class="form-select" placeholder="2021">
-                <option selected>Choose...</option>
-              </select>
-
-              <span class="input-group-text">월</span>
-              <select id="day" class="form-select" placeholder="2021">
-                <option selected>Choose...</option>
-              </select>
-
-              <span class="input-group-text">일</span>
-            </div>
-          </div>
-          <div class="py-3">
-            <label for="nickname" class="form-label">별명</label>
-            <input
-              type="text"
-              class="form-control"
-              id="nickname"
-              v-model="nickname"
-            />
-          </div>
-          <div class="py-3">
-            <label for="gender" class="form-label">성별</label>
-            <div class="input-group mb-3">
-              <div class="form-check form-check-inline">
+          <ul>
+            <li>
+              <div class="py-3">
+                <label for="name" class="form-label">
+                  이름<span class="require-test">*</span>
+                </label>
                 <input
-                  v-model="gender"
-                  class="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio1"
-                  value="MALE"
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  v-model="name"
+                  maxlength="6"
+                  required
                 />
-                <label class="form-check-label" for="inlineRadio1">남</label>
+                <div class="invalid-feedback">
+                  이름을 입력하세요.
+                </div>
               </div>
-              <div class="form-check form-check-inline">
+            </li>
+            <li>
+              <div class="py-3">
+                <label for="email" class="form-label"  maxlength="20">
+                  이메일<span class="require-test">*</span>
+                </label>
+                <div class="input-group mb-3">
+                  <input
+                    v-model="emailFront"
+                    type="text"
+                    class="email-form form-control"
+                    placeholder="joomo123"
+                    aria-label="Username"
+                    id="email-front"
+                    required
+                  />
+                  <span class="input-group-text">@</span>
+                  <select v-model="emailBack" id="email-back" class="email-form form-select" required>
+                    <option value="" selected>선택해주세요.</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                  </select>
+                  <!-- <button class="input-button" id="email-send-button" @click="handleSendEmail">인증번호 요청</button> -->
+                  <div class="invalid-feedback">
+                    이메일을 입력하세요.
+                  </div>
+                </div>
+                <!-- <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email-confirm"
+                    placeholder="인증번호 입력"
+                    maxlength="10"
+                    v-model="email_authcode"
+                    required
+                  />
+                  <button class="input-button" id="authcode-send-button" @click="handleSendAuthCode">인증번호 확인</button>
+                  <div class="invalid-feedback">
+                    인증번호를 입력하세요.
+                  </div>
+                </div> -->
+              </div>
+            </li>
+            <li>
+              <div class="py-3">
+                <label for="password" class="form-label"
+                  >비밀번호<span class="require-test">*</span></label
+                >
                 <input
-                  v-model="gender"
-                  class="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio2"
-                  value="FEMALE"
+                  type="text"
+                  class="form-control"
+                  id="password"
+                  v-model="password"
+                  maxlength="20"
+                  required
                 />
-                <label class="form-check-label" for="inlineRadio2">여</label>
+                <div class="invalid-feedback">
+                  비밀번호를 입력하세요.
+                </div>
               </div>
-            </div>
+            </li>
+            <li>
+              <div class="py-3">
+                <label for="password-confirm" class="form-label">
+                  비밀번호 확인<span class="require-test">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="password-confirm"
+                  v-model="passwordConfirm"
+                  maxlength="20"
+                  required
+                  @blur="checkPassword"
+                />
+                <div class="invalid-feedback">
+                  비밀번호를 입력하세요.
+                </div>
+                <div class="custom-invalid " v-if="!passwordCheckFlag">비밀번호가 동일하지 않습니다.</div>
+              </div>
+            </li>
+            <li>
+              <div class="py-3 address-wrap">
+                <label>주소<span class="require-test">*</span>
+                  <span>(최대 4개까지 추가 가능)</span>
+                </label>
+                <div class="btn-wrap">
+                  <button @click="addAddressInfo">추가</button>
+                  <button @click="removeAddressInfo">제거</button>
+                </div>
+                <div class="input-group mb-3">
+                  <div v-for="(addressInfo, i) in addressCreateInfoList" :key="i" class="address-input-box">
+                    <div>
+                      <label :for="`city_${i}`">지역</label><br />
+                      <input class="form-control" type="text" :name="`city_${i}`" v-model="addressInfo.city" placeholder="서울특별시">
+                    </div>
+                    <div>
+                      <label :for="`postCode_${i}`">우편번호</label><br />
+                      <input class="form-control" type="number" :name="`postCode_${i}`" v-model="addressInfo.postCode" placeholder="12345">
+                    </div>
+                    <div>
+                      <label :for="`street_${i}`">상세주소</label><br />
+                      <input class="form-control" type="text" :name="`street_${i}`" v-model="addressInfo.street" placeholder="부흥로 123번길 2, 1동 101호">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- <li>
+  
+              <div class="py-3">
+                <label for="phone" class="form-label"
+                  >휴대폰 번호<span class="require-test">*</span></label
+                >
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    id="phone-front"
+                    class="form-control"
+                    placeholder="010"
+                    value="010"
+                    required
+                  />
+                  <span class="input-group-text">-</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phone-middle"
+                    maxlength="4"
+                    required
+                  />
+                  <span class="input-group-text">-</span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phone-back"
+                    maxlength="4"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    휴대폰 번호를 입력하세요.
+                  </div>
+                </div>
+              </div>
+            </li> -->
+          </ul>
+
+          <div class="additional py-3 mb-3">
+            추가 정보
           </div>
+          <ul>
+            <li>
+              <div class="py-3">
+                <label class="form-label">생년월일
+    
+                </label>
+                <div class="input-group">
+                  <select v-model="chosenYear" id="year" class="form-select">
+                    <option disabled value="">Choose...</option>
+                    <option
+                      v-for="(year, idx) in years"
+                      :value="year"
+                      :key="idx"
+                    >{{ year }}</option>
+                  </select>
+                  <span class="input-group-text">년</span>
+    
+                  <select v-model="chosenMonth" id="month" class="form-select">
+                    <option disabled value="">Choose...</option>
+                    <option
+                      v-for="(month, idx2) in months"
+                      :value="month"
+                      :key="idx2"
+                    >{{ month }}</option>
+                  </select>
+                  <span class="input-group-text">월</span>
+    
+                  <select v-model="chosenDay" id="day" class="form-select">
+                    <option disabled value="">Choose...</option>
+                    <option
+                      v-for="(day, idx3) in days"
+                      :key="idx3"
+                      :value="day"
+                    >{{ day }}</option>
+                  </select>
+                  <span class="input-group-text">일</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="py-3">
+                <label for="nickname" class="form-label">닉네임</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nickname"
+                  v-model="nickname"
+                  placeholder="lovely철수"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="py-3">
+                <label for="gender" class="form-label">성별</label>
+                <div class="input-group mb-3">
+                  <div class="form-check form-check-inline">
+                    <input
+                      v-model="gender"
+                      class="form-check-input"
+                      type="radio"
+                      name="male"
+                      id="inlineRadio1"
+                      value="MALE"
+                    />
+                    <label class="form-check-label" for="male">남</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      v-model="gender"
+                      class="form-check-input"
+                      type="radio"
+                      name="female"
+                      id="inlineRadio2"
+                      value="FEMALE"
+                    />
+                    <label class="form-check-label" for="female">여</label>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
           <div class="d-grid gap-3 d-md-flex justify-content-md-center">
             <router-link
               class="back-button d-grid gap-3 col-6 mx-auto"
@@ -252,6 +288,7 @@
 </template>
 
 <script>
+import DateUtil from "@/utils/DateUtil.js";
 import ConfirmModal from "@/components/client/common/share/components/ConfirmModal.vue";
 
 export default {
@@ -263,36 +300,102 @@ export default {
       errors: {
         username: "",
         password: "",
-        password_confirm: "",
+        passwordConfirm: "",
         name: "",
         phone: "",
       },
       username: "",
-      password: "",
-      password_confirm: "",
       name: "",
       emailFront: "",
       emailBack: "",
-      email_authcode: "",
+      // email_authcode: "",
+      password: "",
+      passwordConfirm: "",
+      addressCreateInfoList: [{
+        city: '',
+        postCode: '00000',
+        street: ''
+      }],
       phone: "",
-      birth: "",
+      chosenYear: "",
+      chosenMonth: "",
+      chosenDay: "",
       nickname: "",
       gender: "",
       passwordCheckFlag:true,
 
       showConfirmModalSignUp: false,
+      years: [
+        '1990',
+        '1991',
+        '1992',
+        '1993',
+        '1994',
+        '1995',
+        '1996',
+        '1997',
+        '1998',
+        '1999',
+        '2000',
+        '2001',
+        '2002',
+        '2003',
+        '2004',
+        '2005',
+      ],
+      months: ['1','2','3','4','5','6','7','8','9','10','11','12']
     };
   },
   computed: {
     email() {
       return this.emailFront + '@' + this.emailBack;
     },
+    days() {
+      let days = []
+      if(this.chosenYear && this.chosenMonth) {
+        days = DateUtil.getDayListOfMonth(`${this.chosenYear}-${this.chosenMonth}`)
+      }
+      return days
+    },
+    birth() {
+      let birth = "";
+      if(this.chosenYear && this.chosenMonth && this.chosenDay) {
+        birth =
+          `${this.chosenYear}-${this.chosenMonth.length < 2 ? '0'+this.chosenMonth : this.chosenMonth}-${this.chosenDay}`
+      }
+      return birth
+    }
+  },
+  watch: {
+    chosenMonth(newVal, oldVal) {
+      if(newVal!=='' && !this.chosenYear) {
+        alert('먼저 연도를 선택해 주세요.');
+        this.chosenMonth = oldVal;
+      }
+    }
   },
   async mounted() {
     let res = await this.$axios.get('/members');
     console.log(res);
   },
   methods: {
+    getYMS(yms) {
+      return DateUtil.getYMS(yms)
+    },
+    addAddressInfo() {
+      if(this.addressCreateInfoList.length < 4) {
+        this.addressCreateInfoList.push({
+          city: '',
+          postCode: '00000',
+          street: ''
+        });
+      }
+    },
+    removeAddressInfo() {
+      if(this.addressCreateInfoList.length > 1) {
+        this.addressCreateInfoList.splice(this.addressCreateInfoList.length - 1, 1);
+      }
+    },
     checkForm() {
       var forms = document.querySelectorAll(".needs-validation");
       forms.forEach((form) => {
@@ -315,17 +418,17 @@ export default {
       });
     },
     checkPassword() {
-      if (this.password === this.password_confirm) {
-         this.passwordCheckFlag = true 
+      if (this.password === this.passwordConfirm) {
+        this.passwordCheckFlag = true 
       } else {
           this.passwordCheckFlag = false 
         }
     },
-     handleSendEmail(e) {
+    handleSendEmail(e) {
       e.preventDefault();
           // 1. 이메일 전송 요청
           const returnToken=true;
-       
+
           // 2. Input 상태 변경
           if(returnToken===true){
             
@@ -344,7 +447,7 @@ export default {
       e.preventDefault();
        // 1. 인증번호 확인전송 요청
           const returnToken=true;
-       
+
           // 2. Input 상태 변경
           if(returnToken===true){
             
@@ -393,28 +496,16 @@ export default {
           postCode: '00000',
           street: ''
         }],
-        // birth: this.birth,  // 1996-07-26 <-- 반드시 이 형식으로 입력
-        birth: "1996-07-26",  // 1996-07-26 <-- 반드시 이 형식으로 입력
+        name: this.name,
         email: this.email,
-        gender: this.gender,
-        // grade: "BRONZE",
-        // lastLoginedAt: "2022-09-27T10:47:02.673Z",   // <-- 스웨거에서는 왼쪽의 폼으로 보내짐
-        lastLoginedAt: "",
-        name: this.name,  // 영어 안됨..
-        nickname: this.nickname,  // 영어 됨..뭐냐 진짜..
-        profileImagePath: "string",
         password: this.password,
-        role: "ADMINISTRATOR",  // 현재 CUSTOMER 안됨!
-        snsLoginYn: this.snsLoginYn,
-        // state: this.state === 'BANNED' ? this.state : null,
-        // loginFailCount: 0,
-        // mobile: "M",
+        birth: this.birth,
+        nickname: this.nickname,
+        gender: this.gender,
+        role: "USER",
+        snsLoginYn: "N",
       }
-      console.log(formData)
-      // this.$store.commit(`member/${SIGN_UP}`, {
-      //       index: i,
-      //       inputText: this.input,
-      // });
+      
       try {
         let res = await this.$axios.post(
           '/members',
@@ -438,7 +529,7 @@ export default {
       this.showConfirmModalSignUp = false;
     },
     
-   /*  async save() {
+    /*  async save() {
       const validate = this.$refs.form.validate();
       if (validate) {
         if (confirm ('저장하시겠습니까?')) {
@@ -483,6 +574,26 @@ input[type="radio"]:checked {
   color: #ffc463;
   font-size: 18px;
   padding-left: 4px;
+}
+.input-group .address-input-box{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 10px 30px 10px;
+  background-color: #fff0b1;
+  width: 100%;
+}
+.address-wrap .btn-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 6px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.address-wrap .btn-wrap button {
+  padding: 2px 14px;
+  border: 1px solid black;
 }
 .input-button {
   text-transform: uppercase;
@@ -531,9 +642,9 @@ input[type="radio"]:checked {
 .register-page-wrap {
   z-index: 1;
   background: #ffffff;
-  height: 2000px;
-  margin: 0px 120px;
-  padding: 24px;
+  height: fit-content;
+  margin: 0 120px;
+  padding: 100px 24px 200px 24px;
 }
 .title {
   text-align: center;
@@ -555,7 +666,8 @@ input[type="radio"]:checked {
   border-bottom: 3px solid #ffc463;
   /* text-decoration: underline #ffc463; */
   font-size: 18px;
-  width: 55%;
+  width: 100%;
+  margin-top: 50px;
 }
 .custom-invalid{
   width: 100%;

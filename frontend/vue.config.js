@@ -8,7 +8,10 @@ module.exports = {
       },
     },
   },
-  devServer: {
-    proxy: "http://52.78.232.198:8080",
-  },
+  devServer: process.env.NODE_ENV == "local"
+    ?
+    {
+      proxy: "http://52.78.232.198:8080",
+    }
+    : {}
 };
