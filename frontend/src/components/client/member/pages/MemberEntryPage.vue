@@ -505,7 +505,7 @@ export default {
         loginFailCount: 0,
         mobile: "string",
         profileImagePath: "string",
-        state: "BANNED"
+        state: "NORMAL"
       }
       
       try {
