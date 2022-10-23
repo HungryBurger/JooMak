@@ -491,11 +491,7 @@ export default {
     }, */
     async signup(){
       const formData = {
-        addressCreateInfoList: [{
-          city: '',
-          postCode: '00000',
-          street: ''
-        }],
+        addressCreateInfoList: this.addressCreateInfoList,
         name: this.name,
         email: this.email,
         password: this.password,
@@ -503,7 +499,13 @@ export default {
         nickname: this.nickname,
         gender: this.gender,
         role: "USER",
-        snsLoginYn: "N",
+        snsLoginYn: false,
+        grade: "BRONZE",
+        lastLoginedAt: DateUtil.getUTCinSeoul().format().slice(0, -6), // 원래 마지막 로그인시간이 들어가야함. 임시로 현재시각 넣음
+        loginFailCount: 0,
+        mobile: "string",
+        profileImagePath: "string",
+        state: "BANNED"
       }
       
       try {

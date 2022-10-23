@@ -1,4 +1,9 @@
 import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export default class DateUtil {
   /**
@@ -25,7 +30,7 @@ export default class DateUtil {
    * @returns 
    */
   static getLastDayOfMonth(YM) {
-    return dayjs(YM + '-01').daysInMonth()
+    return dayjs(YM + '-01').daysInMonth();
   }
 
   /**
@@ -34,11 +39,15 @@ export default class DateUtil {
    * @returns 
    */
   static getDayListOfMonth(YM) {
-    const dayList = []
-    const lastDay = this.getLastDayOfMonth(YM)
+    const dayList = [];
+    const lastDay = this.getLastDayOfMonth(YM);
     for(let i=1; i<=lastDay; i++) {
-      dayList.push(i)
+      dayList.push(i);
     }
-    return dayList
+    return dayList;
+  }
+
+  static getUTCinSeoul() {
+    return dayjs().tz("Asia/Seoul");
   }
 }
