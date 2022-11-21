@@ -9,8 +9,9 @@
       <h1>
         Login
       </h1>
-      <form class="login-form">
+      <form class="login-form" @submit.prevent>
         <input
+          v-model="userId"
           class="form-control"
           id="username"
           type="text"
@@ -19,36 +20,21 @@
         />
 
         <input
+          v-model="userPwd"
           type="text"
           class="form-control"
           id="password"
           placeholder="password"
           required
         />
-        <button class="submit-button" type="submit">login</button>
+        <button class="submit-button" type="submit" @click="login()">login</button>
         <div class="row c-btn-group c-btn-group--block">
-          <router-link class="col-6 c-btn right-line" to="/member/entry"
-            >회원가입
+          <router-link class="col-6 c-btn right-line" to="/member/entry">
+            회원가입
           </router-link>
-
-          <a class="col-6 c-btn" type="button" @click="openModal"
-            >아이디/비밀번호 찾기</a
-          >
-          <ModalComponent @close="closeModal" v-if="onModal">
-            <template v-slot:header>
-              <h1>아이디/비밀번호 찾기</h1>
-              <hr />
-            </template>
-            <template v-slot:content>
-              <div class="find_modal_content">
-                <find-modal></find-modal>
-              </div>
-            </template>
-            <template v-slot:footer>
-              <div class="no-use"></div>
-            </template>
-          </ModalComponent>
-          <!-- <a class="c-btn" @click="openModal">비밀번호 찾기</a> -->
+          <a class="col-6 c-btn" type="button" @click.prevent="showFindPop = true">
+            아이디/비밀번호 찾기
+          </a>
         </div>
       </form>
       <div class="social-login-form">
@@ -59,26 +45,53 @@
         </div>
       </div>
     </div>
+
+    <modal-component v-if="showFindPop" @close="showFindPop = false">
+      <template v-slot:header>
+        <h1>아이디/비밀번호 찾기</h1>
+        <hr />
+      </template>
+      <template v-slot:content>
+        <div class="find_modal_content">
+          <find-modal></find-modal>
+        </div>
+      </template>
+      <template v-slot:footer>
+        <div class="no-use"></div>
+      </template>
+    </modal-component>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import FindModal from "./FindModal.vue";
 import ModalComponent from "@/components/client/common/share/pages/ModalComponent.vue";
-import { SET_ON_MODAL } from "@/store/modules/common.js";
 export default {
-  components: { FindModal, ModalComponent },
-  computed: {
-    ...mapState("common", ["onModal"]),
+  components: {FindModal, ModalComponent, ModalComponent},
+  data() {
+    return {
+      userId: '',
+      userPwd: '',
+      showFindPop: false
+    }
   },
   methods: {
-    openModal() {
-      this.$store.commit(`common/${SET_ON_MODAL}`, true); // 주6.
-    },
     closeModal() {
       console.log("close event 발생"); // 주7.
     },
+    login() {
+      if(!this.userId) {
+        alert('ID를 입력해 주세요.')
+        return
+      }
+      if(!this.userPwd) {
+        alert('비밀번호를 입력해 주세요.')
+        return
+      }
+      console.log('Login')
+      
+      // 이후 - 로그인 API 사용
+    }
   },
 };
 </script>

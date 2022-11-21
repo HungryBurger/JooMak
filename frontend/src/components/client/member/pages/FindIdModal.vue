@@ -1,16 +1,16 @@
 <template>
-  <form class="pt-3 g-3 needs-validation" novalidate>
+  <form @submit.prevent class="pt-3 g-3 needs-validation" novalidate>
     <div class="py-3 row">
       <label for="name" class="col-sm-2 col-form-label">이름</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" required />
+        <input v-model="localName" type="text" class="form-control" id="name" required />
       </div>
     </div>
     <div class="py-3 row">
       <label for="email" class="col-sm-2 col-form-label">이메일</label>
       <div class="col-sm-10">
         <div class="input-group">
-          <input type="text" class="form-control" id="email" required />
+          <input v-model="localEmail" type="text" class="form-control" id="email" required />
           <button class="input-button">인증번호 발송</button>
         </div>
       </div>
@@ -25,7 +25,7 @@
           class="form-control"
           id="email-confirm"
           placeholder="인증번호 입력"
-          v-model="email_confrim"
+          v-model="emailConfirmNum"
           required
         />
       </div>
@@ -33,7 +33,7 @@
     <div class="py-3 row d-grid gap-3 d-md-flex justify-content-md-center">
       <button
         class="submit-button d-grid gap-3 col-6 mx-auto"
-        @click="checkForm"
+        @click="checkForm()"
       >
         확인
       </button>
@@ -45,27 +45,30 @@
 export default {
   data() {
     return {
-      name: "",
+      localName: "",
+      localEmail: "",
+      emailConfirmNum: "",
       error: { name: [] },
     };
   },
-  mounted() {
-    console.log("FindIdModal");
-  },
   methods: {
-    checkForm(e) {
-      e.preventDefault();
+    checkForm() {
+      let flag = true
       var forms = document.querySelectorAll(".needs-validation");
       forms.forEach((form) => {
-        console.log(form);
-        if (!form.checkValidity()) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
         form.classList.add("was-validated");
-      });
-      scrollTo(0, 0);
+      })
+      if(!(this.localName && this.localEmail && this.emailConfirmNum)) {
+        scrollTo(0, 0);
+        flag = false
+      }
+      return flag
     },
+    submit() {
+      if(!this.checkForm()) return
+
+      // else --> ID찾기 API 사용
+    }
   },
 };
 </script>
