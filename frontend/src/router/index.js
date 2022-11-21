@@ -13,19 +13,32 @@ const routes = [
   {
     path: "/about",
     name: "aboutPage",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "@/views/AboutPage.vue"),
+    component: () => import( "@/views/AboutPage.vue"),
   },
 
   /* 회원 */
-  // 회원 공통
   {
-    path: "/member/:mode",
+    path: "/member",
     name: "memberPage",
     component: () => import("@/views/MemberPage.vue"),
+    redirect: "/member/login",
+    children: [
+      {
+        path: "login",
+        name: "memberLogin",
+        component: () => import("@/components/client/member/pages/LoginPage.vue")
+      },
+      {
+        path: "entry",
+        name: "memberEntry",
+        component: () => import("@/components/client/member/pages/MemberEntryPage.vue")
+      },
+      {
+        path: "entry-complete",
+        name: "memberEntryComplete",
+        component: () => import("@/components/client/member/pages/MemberEntryCompletePage.vue")
+      },
+    ]
   },
   // 마이 페이지 공통
   {
