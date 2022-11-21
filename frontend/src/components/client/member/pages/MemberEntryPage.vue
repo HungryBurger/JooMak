@@ -57,21 +57,6 @@
                     이메일을 입력하세요.
                   </div>
                 </div>
-                <!-- <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email-confirm"
-                    placeholder="인증번호 입력"
-                    maxlength="10"
-                    v-model="email_authcode"
-                    required
-                  />
-                  <button class="input-button" id="authcode-send-button" @click="handleSendAuthCode">인증번호 확인</button>
-                  <div class="invalid-feedback">
-                    인증번호를 입력하세요.
-                  </div>
-                </div> -->
               </div>
             </li>
             <li>
@@ -139,43 +124,6 @@
                 </div>
               </div>
             </li>
-            <!-- <li>
-  
-              <div class="py-3">
-                <label for="phone" class="form-label"
-                  >휴대폰 번호<span class="require-test">*</span></label
-                >
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    id="phone-front"
-                    class="form-control"
-                    placeholder="010"
-                    value="010"
-                    required
-                  />
-                  <span class="input-group-text">-</span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="phone-middle"
-                    maxlength="4"
-                    required
-                  />
-                  <span class="input-group-text">-</span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="phone-back"
-                    maxlength="4"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    휴대폰 번호를 입력하세요.
-                  </div>
-                </div>
-              </div>
-            </li> -->
           </ul>
 
           <div class="additional py-3 mb-3">
@@ -361,7 +309,7 @@ export default {
       let birth = "";
       if(this.chosenYear && this.chosenMonth && this.chosenDay) {
         birth =
-          `${this.chosenYear}-${this.chosenMonth.length < 2 ? '0'+this.chosenMonth : this.chosenMonth}-${this.chosenDay}`
+          `${this.chosenYear}-${this.chosenMonth.length < 2 ? '0'+this.chosenMonth : this.chosenMonth}-${this.chosenDay.length < 2 ? '0'+this.chosenDay : this.chosenDay}`
       }
       return birth
     }
@@ -490,7 +438,7 @@ export default {
       }
     }, */
     async signup(){
-      const formData = {
+      const params = {
         addressCreateInfoList: this.addressCreateInfoList,
         name: this.name,
         email: this.email,
@@ -509,19 +457,24 @@ export default {
       }
       
       try {
-        let res = await this.$axios.post(
+        const data = await this.$axios.post(
           '/members',
-          formData, 
+          params, 
           {
             headers: { "Content-Type": `application/json`}
           }
-        );
-        console.log('회원가입 요청 결과');
-        console.log(res);
+        )
+        console.log('회원가입 요청 결과: ', data)
+        if(!data) return
+        if(data.resultCd === 'S') {
+          this.$router.push({
+            path: 'entry-complete',
+            params: {userName: this.name}
+          })
+        }
       } catch (e) {
         console.error(e)
       }
-      
     },
     confirmYesSignUp() {
       this.signup();

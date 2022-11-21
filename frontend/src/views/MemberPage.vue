@@ -1,28 +1,19 @@
 <template>
-  <div v-if="currentMode === 'login'">
-    <login-page></login-page>
-  </div>
-  <div v-else-if="currentMode === 'entry'">
-    <member-entry-page></member-entry-page>
+  <div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import LoginPage from "../components/client/member/pages/LoginPage.vue";
 import MemberEntryPage from "../components/client/member/pages/MemberEntryPage.vue";
+import MemberEntryCompletePage from "../components/client/member/pages/MemberEntryCompletePage.vue";
 
 export default {
-  computed: {
-    currentMode() {
-      return this.$route.params.mode;
-    },
-  },
   components: {
     LoginPage,
     MemberEntryPage,
+    MemberEntryCompletePage
   },
-  // created() {
-  //   console.log(this.currentMode);
-  // },
 };
 </script>
