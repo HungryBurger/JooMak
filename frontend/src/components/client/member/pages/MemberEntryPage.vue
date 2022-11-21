@@ -238,6 +238,7 @@
 <script>
 import DateUtil from "@/utils/DateUtil.js";
 import ConfirmModal from "@/components/client/common/share/components/ConfirmModal.vue";
+import {getMembers, memberEntry} from "@/api/mbrm/index.js";
 
 export default {
   components: {
@@ -322,11 +323,14 @@ export default {
       }
     }
   },
-  async mounted() {
-    let res = await this.$axios.get('/members');
-    console.log(res);
+  created() {
+    this.getAllMembers()  // Test. 모든회원 조회.
   },
   methods: {
+    async getAllMembers() {
+      const data = await getMembers();
+      console.log(data);
+    },
     getYMS(yms) {
       return DateUtil.getYMS(yms)
     },
@@ -457,13 +461,7 @@ export default {
       }
       
       try {
-        const data = await this.$axios.post(
-          '/members',
-          params, 
-          {
-            headers: { "Content-Type": `application/json`}
-          }
-        )
+        const data = await memberEntry(params)
         console.log('회원가입 요청 결과: ', data)
         if(!data) return
         if(data.resultCd === 'S') {
