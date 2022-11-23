@@ -3,6 +3,7 @@ package com.joomak.backend.model.member.entity;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.joomak.backend.model.common.BaseEntity;
 import com.joomak.backend.model.member.enums.Grade;
+import com.joomak.backend.model.member.enums.StoreState;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,13 +33,12 @@ public class Store extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ElementCollection
-    @CollectionTable(name="address", joinColumns = @JoinColumn(name= "member_id"))
-    private List<Address> addressList;
+    @Embedded
+    private Address address;
 
     private String storeName;
 
-    private String storeState;
+    private StoreState storeState;
 
     private double storeGrade;
 
@@ -63,10 +63,10 @@ public class Store extends BaseEntity {
     private String storeImagePath;
 
     @Builder
-    public Store(Long id, Member member, List<Address> addressList, String storeName, String storeState, double storeGrade, int pickCount, LocalDateTime birth, LocalDateTime businessStartHour, LocalDateTime businessEndHour, String email, String mobile, String storeMainComment, String storeSubComment, int averageDeliverTime, String storeImagePath) {
+    public Store(Long id, Member member, Address address, String storeName, StoreState storeState, double storeGrade, int pickCount, LocalDateTime birth, LocalDateTime businessStartHour, LocalDateTime businessEndHour, String email, String mobile, String storeMainComment, String storeSubComment, int averageDeliverTime, String storeImagePath) {
         this.id = id;
         this.member = member;
-        this.addressList = addressList;
+        this.address = address;
         this.storeName = storeName;
         this.storeState = storeState;
         this.storeGrade = storeGrade;
@@ -80,6 +80,10 @@ public class Store extends BaseEntity {
         this.storeSubComment = storeSubComment;
         this.averageDeliverTime = averageDeliverTime;
         this.storeImagePath = storeImagePath;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }
 
