@@ -34,19 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/*/**").permitAll();
         http.headers().frameOptions().disable();
-//        http.authorizeRequests()
-//                .antMatchers("swagger-ui/*").permitAll()
-//                .and()
-//                .csrf().disable();
-//                .anyRequest().authenticated()
-//                .and()
-//                .csrf().disable()
-//                .formLogin().disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                .and()
-//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }
