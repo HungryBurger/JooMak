@@ -1,9 +1,6 @@
 package com.joomak.backend.exception;
 
 import org.springframework.http.HttpStatus;
-
-import java.util.function.Supplier;
-
 public class ServiceGuideException extends RuntimeException{
 
     private HttpStatus httpStatus = HttpStatus.OK;

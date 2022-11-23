@@ -15,7 +15,4 @@ public class CustomControllerException {
                 .message(ErrorMessage.NOT_ENOUGH_STOCK.getErrorMessage())
                 .build();
     }
-
-    // 리팩토링 하는 법 알려주기
-
 }
