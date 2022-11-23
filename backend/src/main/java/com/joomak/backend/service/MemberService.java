@@ -1,8 +1,10 @@
 package com.joomak.backend.service;
 
 import com.joomak.backend.domain.member.dto.MemberLoginDto;
+import com.joomak.backend.domain.member.dto.MemberSignUpDto;
 import com.joomak.backend.domain.member.entity.Member;
 import com.joomak.backend.domain.member.enums.MemberState;
+import com.joomak.backend.domain.member.mapper.MemberSignUpMapper;
 import com.joomak.backend.exception.ServiceGuideException;
 import com.joomak.backend.exception.ServiceGuideMessage;
 import com.joomak.backend.repository.MemberRepository;
@@ -16,6 +18,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +31,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final MemberSignUpMapper memberSignUpMapper;
 
     public List<Member> findAll() {
         return new ArrayList<>(memberRepository.findAll());
@@ -45,6 +50,7 @@ public class MemberService implements UserDetailsService {
 
         log.info("=================================================== loadUserByUsername is called ...");
 
+        // todo: Member -> DTO로 변환해서 써야할 듯?
         return memberRepository.findByEmail(email)
             .map(member -> createUser(member))
             .orElseThrow(() -> new UsernameNotFoundException(email + " -> Database에서 찾을 수 없습니다."));
@@ -86,9 +92,17 @@ public class MemberService implements UserDetailsService {
 
     @Transactional
     public Member save(Member member) {
-        Member saved = memberRepository.save(member);
-        log.info("Saved Member = {}", saved);
-        return saved;
+
+        return memberRepository.save(member);
+    }
+
+    public MemberSignUpDto signUp(MemberSignUpDto memberSignUpDto) {
+        memberSignUpDto.setPassword(passwordEncoder.encode(memberSignUpDto.getPassword()));
+
+        Member member = memberSignUpMapper.toMemberEntity(memberSignUpDto);
+        Member result = memberRepository.save(member);
+
+        return memberSignUpMapper.toMemberSignUpDto(result);
     }
 
     @Transactional

@@ -43,12 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService)
-//                .passwordEncoder(passwordEncoder);
-//    }
-
     @Override
     public void configure(WebSecurity web) {
         web
@@ -62,48 +56,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-
+            .csrf()
+                .disable()
             .exceptionHandling()
-            .authenticationEntryPoint(jwtAuthenticationEntryPointV2)
-            .accessDeniedHandler(jwtAccessDeniedHandler)
-
+                .authenticationEntryPoint(jwtAuthenticationEntryPointV2)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
             .and()
-            .headers()
-            .frameOptions()
-            .sameOrigin()
-
+                .headers()
+                    .frameOptions()
+                    .sameOrigin()
             .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .authorizeRequests()
-            .antMatchers("/swagger-ui/*").permitAll()
-//            .anyRequest().authenticated()
-
+                .authorizeRequests()
+                    .antMatchers("/swagger-ui/*").permitAll()
             .and()
-            .apply(new JwtSecurityConfig(jwtTokenProviderV2));
-
-//        http
-//            .authorizeRequests()
-//                .antMatchers("/swagger-ui/*").permitAll()
-//            .and()
-//            .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and()
-//            .csrf().disable();
-//
-//        http.headers().frameOptions().disable(); // 배포 시 주석 지우기
-//                .anyRequest().authenticated()
-//                .and()
-//                .csrf().disable()
-//                .formLogin().disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                .and()
-//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .apply(new JwtSecurityConfig(jwtTokenProviderV2));
     }
 
 }

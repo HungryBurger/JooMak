@@ -23,16 +23,18 @@ public class MemberLoginDto implements UserDetails {
     private String nickName;
     private TokenDto tokenDto;
     private Collection<? extends GrantedAuthority> roles;
+    private boolean isAutoLogin;
 
     @Builder
     public MemberLoginDto(String email, String password, String memberName, String nickName,
-        TokenDto tokenDto, Collection<? extends GrantedAuthority> roles) {
+        TokenDto tokenDto, Collection<? extends GrantedAuthority> roles, boolean isAutoLogin) {
         this.email = email;
         this.password = password;
         this.memberName = memberName;
         this.nickName = nickName;
         this.tokenDto = tokenDto;
         this.roles = roles;
+        this.isAutoLogin = isAutoLogin;
     }
 
     @Override

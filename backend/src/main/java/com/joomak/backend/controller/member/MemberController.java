@@ -2,6 +2,7 @@ package com.joomak.backend.controller.member;
 
 
 import com.joomak.backend.domain.member.dto.MemberLoginDto;
+import com.joomak.backend.domain.member.dto.MemberSignUpDto;
 import com.joomak.backend.domain.member.dto.TokenDto;
 import com.joomak.backend.domain.member.entity.Member;
 import com.joomak.backend.service.MemberService;
@@ -52,9 +53,10 @@ public class MemberController {
     }
 
     @PostMapping(value = "/sign-up")
-    public ResponseEntity<UserDetails> signUp() {
-
-        return null;
+    public ResponseEntity<MemberSignUpDto> signUp(
+        @RequestBody MemberSignUpDto memberSignUpDto
+    ) {
+        return ResponseEntity.ok(memberService.signUp(memberSignUpDto));
     }
 
     // 특정 회원 밴 처리(악성유저처리)
@@ -64,8 +66,9 @@ public class MemberController {
     }
     // 로그인
     @PostMapping(value="/login")
-    public ResponseEntity<UserDetails> login(@RequestBody MemberLoginDto memberLoginDto){
-
+    public ResponseEntity<UserDetails> login(
+        @RequestBody MemberLoginDto memberLoginDto
+    ) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
             new UsernamePasswordAuthenticationToken(memberLoginDto.getEmail(), memberLoginDto.getPassword());
 
@@ -76,14 +79,24 @@ public class MemberController {
             .getObject()
             .authenticate(usernamePasswordAuthenticationToken);
 
-        String jwt = tokenProvider.createToken(authentication);
+        var member = (MemberLoginDto)authentication.getPrincipal();
+
+        log.info("============================= " + member.getEmail() + ", " + member.getPassword() + ", " + member.getMemberName() + ", " + member.getNickName());
+
+        String accessToken = tokenProvider.createToken(authentication);
+        String refreshToken = null;
+
+        if (memberLoginDto.isAutoLogin()) {
+//            refreshToken = tokenProvider.createRefreshToken(authentication);
+        }
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JwtAuthenticationFilterV2.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        httpHeaders.add(JwtAuthenticationFilterV2.AUTHORIZATION_HEADER, "Bearer " + accessToken);
 
         memberLoginDto.setTokenDto(
             TokenDto.builder()
-                .token(jwt)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build()
         );
 

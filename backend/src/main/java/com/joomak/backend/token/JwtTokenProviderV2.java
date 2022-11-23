@@ -69,6 +69,8 @@ public class JwtTokenProviderV2 implements InitializingBean {
     }
 
     public String createToken(Authentication authentication) {
+        var a = (MemberLoginDto)authentication.getPrincipal();
+
         // Member에서 받아온 Authority는 GrantedAuthority를 상속하고 있지 않기 때문에 변환하는 작업을 거친다.
         String authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
