@@ -310,7 +310,7 @@ export default {
       let birth = "";
       if(this.chosenYear && this.chosenMonth && this.chosenDay) {
         birth =
-          `${this.chosenYear}-${this.chosenMonth.length < 2 ? '0'+this.chosenMonth : this.chosenMonth}-${this.chosenDay.length < 2 ? '0'+this.chosenDay : this.chosenDay}`
+          `${this.chosenYear}-${this.chosenMonth.length < 2 ? '0'+this.chosenMonth : this.chosenMonth}-${String(this.chosenDay).length < 2 ? '0'+this.chosenDay : this.chosenDay}`
       }
       return birth
     }
@@ -464,12 +464,10 @@ export default {
         const data = await memberEntry(params)
         console.log('회원가입 요청 결과: ', data)
         if(!data) return
-        if(data.resultCd === 'S') {
-          this.$router.push({
-            path: 'entry-complete',
-            params: {userName: this.name}
-          })
-        }
+        this.$router.push({
+          path: 'entry-complete',
+          params: {userName: this.name}
+        })
       } catch (e) {
         console.error(e)
       }

@@ -11,14 +11,14 @@ export const login = () => {
  * 모든회원 조회
  */
 export const getMembers = () => {
-  axios.post.get('/members')
+  axios.get('/members')
 }
 
 /**
  * 회원가입 요청
  */
 export const memberEntry = (params) => {
-  axios.post.post('/members', params, {
+  axios.post('/members', params, {
     headers: { "Content-Type": `application/json`}
   })
 }
