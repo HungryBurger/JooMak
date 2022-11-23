@@ -7,11 +7,5 @@ module.exports = {
         "@": path.join(__dirname, "src/"),
       },
     },
-  },
-  devServer: process.env.NODE_ENV == "local"
-    ?
-    {
-      proxy: "http://52.78.232.198:8080",
-    }
-    : {}
+  }
 };
