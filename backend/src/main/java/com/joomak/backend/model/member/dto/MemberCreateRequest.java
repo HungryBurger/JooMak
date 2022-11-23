@@ -55,7 +55,7 @@ public class MemberCreateRequest {
 
     private LocalDateTime lastLoginedAt;
 
-
+    @Builder
     public MemberCreateRequest(String name, String password, List<AddressInfo> addressCreateInfoList, MemberState state, Grade grade, String nickname, Role role, Boolean snsLoginYn, LocalDate birth, String email, Gender gender, String profileImagePath, String mobile, Integer loginFailCount, LocalDateTime lastLoginedAt) {
         this.name = name;
         this.password = password;
@@ -73,9 +73,6 @@ public class MemberCreateRequest {
         this.loginFailCount = loginFailCount;
         this.lastLoginedAt = lastLoginedAt;
     }
-
-    @Builder
-
 
     public Member DtoToEntity(MemberCreateRequest memberCreateRequest) {
         Member member = Member.builder()

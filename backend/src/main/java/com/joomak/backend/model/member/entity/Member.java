@@ -51,6 +51,8 @@ public class Member extends BaseEntity {
 
     private String name;
 
+    private String nickname;
+
     @Enumerated(STRING)
     private Gender gender;
 

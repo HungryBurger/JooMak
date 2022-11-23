@@ -90,7 +90,7 @@ public class MemberCreateResponse {
                 .name(member.getName())
                 .password(member.getPassword())
                 .role(member.getRole())
-                .loginFailCount(member.getLoginFailCount())
+                .nickname(member.getNickname())
                 .lastLoginedAt(member.getLastLoginedAt())
                 .build();
 
